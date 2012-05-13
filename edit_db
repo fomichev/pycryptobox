@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+
+import tempfile
+import subprocess
+import os
+import getpass
+
+import lib.crypto
+import lib.cfg
+
+if __name__ == "__main__":
+    password = getpass.getpass()
+
+    plaintext = lib.crypto.dec_db(password, lib.cfg.path_db, lib.cfg.path_db_hmac)
+
+    f = tempfile.NamedTemporaryFile()
+    EDITOR = os.environ.get('EDITOR', lib.cfg.editor)
+
+    with tempfile.NamedTemporaryFile() as f:
+        f.write(plaintext)
+        f.flush()
+
+        mtime_begin = os.stat(f.name).st_mtime
+        subprocess.call([EDITOR, f.name])
+        mtime_end = os.stat(f.name).st_mtime
+
+        if mtime_begin != mtime_end:
+            lib.crypto.enc_db(password, f.name, lib.cfg.path_db, lib.cfg.path_db_hmac)

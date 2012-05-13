@@ -1,0 +1,17 @@
+.hidden { display: none; }
+.unhidden { display: block; }
+
+.password_box_hidden {
+	display: none;
+}
+
+.password_box_unhidden {
+	position: absolute;
+	left: 180;
+	top: 25;
+	z-index: 10;
+	display: block;
+	background-color: #aaaaaa;
+	width: 300;
+	height: 300;
+}

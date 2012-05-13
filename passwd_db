@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+
+import getpass
+import sys
+
+import lib.crypto
+import lib.cfg
+
+if __name__ == "__main__":
+    password = getpass.getpass()
+
+    print "New"
+    new_password = getpass.getpass()
+    print "Retype"
+    new_password2 = getpass.getpass()
+
+    if new_password != new_password2:
+        print "Your password doesn't match!"
+        sys.exit(0)
+
+    plaintext = lib.crypto.dec_db(password, lib.cfg.path_db, lib.cfg.path_db_hmac)
+    lib.crypto.enc_plaintext(new_password, plaintext, lib.cfg.path_db, lib.cfg.path_db_hmac)

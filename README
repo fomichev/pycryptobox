@@ -1,0 +1,7 @@
+TODO:
+- install pip
+	easy_install pip
+- install https://www.dlitz.net/software/python-pbkdf2/
+	pip install pbkdf2
+- install https://www.dlitz.net/software/pycrypto/
+	pip install pycrypto

@@ -1,0 +1,12 @@
+{
+	"type": "ccard",
+	"name": "$name",
+
+	"data":
+	{
+		"cardholder" : "$cardholder",
+		"number": "$number",
+		"pin": "$pin",
+		"cvv2": "$cvv2"
+	}
+}

@@ -1,0 +1,114 @@
+<html>
+	<head>
+		<title>My Password Database</title>
+		<link rel="stylesheet" type="text/css" href="../template/css/style.css" />
+
+		<script type="text/javascript" src="../template/bookmarklet/generate.js"></script>
+
+		<script type="text/javascript" src="../template/js/open.js"></script>
+		<script type="text/javascript" src="../template/js/view.js"></script>
+
+		<script type="text/javascript" src="../template/js/seedrandom.js"></script>
+
+		<script type="text/javascript" src="../template/js/cjs/crypto/crypto.js"></script>
+		<script type="text/javascript" src="../template/js/cjs/blockmodes/blockmodes.js"></script>
+		<script type="text/javascript" src="../template/js/cjs/aes/aes.js"></script>
+		<script type="text/javascript" src="../template/js/cjs/hmac/hmac.js"></script>
+		<script type="text/javascript" src="../template/js/cjs/sha1/sha1.js"></script>
+		<script type="text/javascript" src="../template/js/cjs/pbkdf2/pbkdf2.js"></script>
+
+		<script type="text/javascript" src="./cfg.js"></script>
+		<script type="text/javascript" src="../template/js/crypto.js"></script>
+		<script type="text/javascript">
+function doUnlock() {
+	try {
+		unlock(document.getElementById("pwd").value);
+	} catch(e) {
+		alert("Incorrect password!");
+		return;
+	}
+
+	document.getElementById("pwd").value = "";
+	document.getElementById("unlock").className = "hidden";
+	document.getElementById("lock").className = "unhidden";
+}
+
+function doLock() {
+	lock();
+	document.getElementById("unlock").className = "unhidden";
+	document.getElementById("lock").className = "hidden";
+}
+
+function doShowPasswordBox() {
+	var box = document.getElementById("password_box");
+
+	if (box.className == "password_box_hidden") {
+		box.className = "password_box_unhidden";
+	} else {
+		box.className = "password_box_hidden";
+	}
+}
+
+function doGeneratePassword() {
+	var length = document.getElementById("pwdLength").value;
+	var includeNumbers = document.getElementById("includeNumbers").checked;
+	var includePunc = document.getElementById("includePunc").checked;
+	var includeUc = document.getElementById("includeUc").checked;
+	var pronounceable = document.getElementById("pronounceable").checked;
+
+	generatePassword(length, includeNumbers, includePunc, includeUc, pronounceable);
+}
+
+		</script>
+	</head>
+	<body>
+		<noscript>
+			Sorry, this thing heavily depends on JavaScript.
+		</noscript>
+
+		<div id="unlock" class="unhidden">
+			<input id="pwd" />
+			<a href="#" onClick='javascript:doUnlock();'>Unlock</a>
+		</div>
+
+		<div id="lock" class="hidden">
+			<a href="#" onClick='javascript:doLock();'>Lock</a>
+		</div>
+
+		<div>
+			<a href="#" onClick='javascript:doShowPasswordBox();'>Gen password</a>
+		</div>
+
+
+
+		<hr/>
+		<div id="links"></div>
+		<hr/>
+		<div id="cipher"></div>
+
+
+
+		<div id="password_box" class="password_box_hidden">
+
+			<form>
+				<input type="text" id="pwdLength" value="16">Password length<br />
+				<input type="checkbox" id="includeNumbers" checked>Include numbers<br />
+				<input type="checkbox" id="includePunc" checked>Include punctuation<br />
+				<input type="checkbox" id="includeUc" checked>Include upper case<br />
+				<input type="checkbox" id="pronounceable">Make pronounceable<br />
+			</form>
+
+			Generated password: <div id="pwd2"></div>
+
+			<a href="javascript:doGeneratePassword();">Generate Password</a>
+
+			<a href="#" onClick='javascript:doShowPasswordBox();'>Close</a>
+		</div>
+
+
+
+		<hr />
+		Bookmarklet:
+		<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='http://dl.dropbox.com/u/19154462/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse Form</a>
+	</body>
+</html>

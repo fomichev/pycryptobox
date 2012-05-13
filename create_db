@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+import getpass
+import sys
+import os
+
+import lib.crypto
+import lib.cfg
+
+if __name__ == "__main__":
+    if os.path.exists(lib.cfg.path_db):
+        ans = raw_input("File '%s' already exist, do you want to overwrite it? [y|n]: " % lib.cfg.path_db)
+
+        if not ans in ['Y', 'y']:
+            sys.exit(0)
+
+    password = getpass.getpass()
+    print "Retype"
+    password2 = getpass.getpass()
+
+    if password != password2:
+        print "Your password doesn't match!"
+        sys.exit(0)
+
+    lib.crypto.enc_plaintext(password, "# Lines started with # are comments", lib.cfg.path_db, lib.cfg.path_db_hmac)
