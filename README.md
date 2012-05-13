@@ -53,3 +53,24 @@
 - Random Seed http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html (BSD)
 
 	template/js/seedrandom.js
+
+# Database example
+
+	site/dropbox.com:
+		username=qwe@qwe.qwe
+		password=pwd
+
+	site/gmail.com:
+		username=qwe@qwe.qwe
+		password=pwd
+
+	card:
+		name=bank
+		cardholder=Jonh Smith
+		n=1234 5678 9012 3456
+		pin=1234
+		cvv=123
+
+	note:
+		name=note
+		text=with body
