@@ -22,8 +22,20 @@ function createNote(name, text) {
 	return r;
 }
 
+function withToken(form) {
+	for (var key in form.fields) {
+		var value = form.fields[key];
+
+		if (value == "@token")
+			return key;
+	}
+
+	return "";
+}
+
 function createLink(name, address, form, username, password) {
 	var url = form.action;
+	var title = name + " (" + username + ")"
 
 	var k = "";
 	var v = "";
@@ -31,6 +43,9 @@ function createLink(name, address, form, username, password) {
 	var r = "";
 
 	for (var key in form.fields) {
+		if (form.fields[key] == "@token")
+			continue;
+
 		if (k == "") {
 			k = "new Array(\"" + key +"\"";
 			v = "new Array(\"" + form.fields[key] +"\"";
@@ -43,10 +58,18 @@ function createLink(name, address, form, username, password) {
 	v += ")"
 
 	r += "<h1>";
-	if (form.method == "post")
-		r += "<a href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ");'>" + name + " (" + username + ")</a>"
-	else
-		r += "GET METHOD FOR " + name + "IS NOT IMPLEMENTED"
+
+	var token = withToken(form);
+	if (token != "") {
+		r += "<a href='#' onClick='javascript:openPostWithToken(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ", \"" + token + "\"); return false;'>" + title + "</a>"
+		r += ' - <a href="' + address + '" target="_blank">Obtain token</a>';
+	} else {
+		if (form.method == "post")
+			r += "<a href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + "); return false;'>" + title + "</a>"
+		else
+			r += "GET METHOD FOR " + name + "IS NOT IMPLEMENTED"
+
+	}
 	r += "</h1>";
 
 

@@ -1,5 +1,18 @@
-function openPost(url, name, keys, values)
-{
+function openPostWithToken(url, name, keys, values, token) {
+	var token_value = prompt("Enter token", "");
+	if (token_value == "")
+		return;
+
+	keys.push(token);
+	values.push(token_value);
+
+	alert(keys);
+	alert(values);
+
+	openPost(url, name, keys, values);
+}
+
+function openPost(url, name, keys, values) {
 	var newWindow = window.open(url, name);
 	if (!newWindow)
 		return false;

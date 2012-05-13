@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"authenticity_token": "@AUTH_TOKEN",
+			"authenticity_token": "@token",
 			"login": "$username",
 			"password": "$password",
 			"commit": "Log in"
