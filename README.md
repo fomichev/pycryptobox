@@ -11,6 +11,9 @@
 
 	$ pip install pycrypto
 
+- install http://www.crummy.com/software/BeautifulSoup/
+	$ pip install beautifulsoup4
+
 # Usage
 
 - create database
