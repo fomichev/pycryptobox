@@ -6,9 +6,6 @@ function openPostWithToken(url, name, keys, values, token) {
 	keys.push(token);
 	values.push(token_value);
 
-	alert(keys);
-	alert(values);
-
 	openPost(url, name, keys, values);
 }
 
