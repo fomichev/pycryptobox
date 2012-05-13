@@ -28,3 +28,24 @@
 - update html page
 
 	$ ./update_html
+
+# Used components
+
+## Python
+
+- PBKDF2 http://www.dlitz.net/software/python-pbkdf2/ (MIT)
+
+- AES https://www.dlitz.net/software/pycrypto/ (Public Domain)
+
+- HMAC (MD5)
+
+## JavaScript
+
+- PBKDF2, AES https://code.google.com/p/crypto-js/ (New BSD License)
+
+	template/js/CryptoJS
+	template/js/cjs
+
+- Random Seed http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html (BSD)
+
+	template/js/seedrandom.js
