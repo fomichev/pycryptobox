@@ -1,6 +1,6 @@
 {
 	"type":"site",
-	"name": "Fab.com ($username)",
+	"name": "Fab.com",
 	"address": "http://fab.com/",
 	"form":
 	{

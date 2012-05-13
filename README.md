@@ -80,3 +80,5 @@
 - Chrome
 
 - iPhone
+
+- Safari

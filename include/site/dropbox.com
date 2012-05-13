@@ -1,6 +1,6 @@
 {
 	"type": "site",
-	"name": "Dropbox ($username)",
+	"name": "Dropbox",
 	"address": "https://www.dropbox.com/",
 	"form":
 	{

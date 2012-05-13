@@ -1,6 +1,6 @@
 {
 	"type":"site",
-	"name": "GitHub ($username)",
+	"name": "GitHub",
 	"address": "https://github.com/login",
 	"form":
 	{

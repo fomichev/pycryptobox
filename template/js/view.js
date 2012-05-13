@@ -44,12 +44,13 @@ function createLink(name, address, form, username, password) {
 
 	r += "<h1>";
 	if (form.method == "post")
-		r += "<a href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ");'>" + name + "</a>"
+		r += "<a href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ");'>" + name + " (" + username + ")</a>"
 	else
 		r += "GET METHOD FOR " + name + "IS NOT IMPLEMENTED"
 	r += "</h1>";
 
 
+	r += '<p><a href="' + address + '" target="_blank">Go to site</a></p>';
 	r += '<p>' + createHiddenOnClick("Username: ********", username) + '</p>';
 	r += '<p>' + createHiddenOnClick("Password: ********", password) + '</p>';
 

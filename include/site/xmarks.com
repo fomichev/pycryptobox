@@ -1,6 +1,6 @@
 {
 	"type":"site",
-	"name": "Xmarks ($username)",
+	"name": "Xmarks",
 	"address": "https://login.xmarks.com/?referrer=https%3A%2F%2Fwww.xmarks.com%2F&mode=",
 	"form":
 	{
