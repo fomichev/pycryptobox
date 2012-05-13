@@ -8,7 +8,7 @@ function createCard(name, cardholder, cvv2, number, pin) {
 	var r = "";
 
 	r += "<h1>" + name + "</h1>";
-	r += '<p>' + createHiddenOnClick("Show detailed data", d) + '</p>';
+	r += '<p>' + createHiddenOnClick("Detailed data", d) + '</p>';
 
 	return r;
 }
@@ -17,7 +17,7 @@ function createNote(name, text) {
 	var r = "";
 
 	r += "<h1>" + name + "</h1>";
-	r += '<p>' + createHiddenOnClick("Show note", text) + '</p>';
+	r += '<p>' + createHiddenOnClick("Detailed data", text) + '</p>';
 
 	return r;
 }
@@ -50,14 +50,14 @@ function createLink(name, address, form, username, password) {
 	r += "</h1>";
 
 
-	r += '<p>' + createHiddenOnClick("Show username", username) + '</p>';
-	r += '<p>' + createHiddenOnClick("Show password", password) + '</p>';
+	r += '<p>' + createHiddenOnClick("Username: ********", username) + '</p>';
+	r += '<p>' + createHiddenOnClick("Password: ********", password) + '</p>';
 
 	return r;
 }
 
 var hocid = 0;
-function createHiddenOnClick(visible, invisible) {
+function createHiddenOnClick(name, value) {
 	var id = "hoc" + hocid;
 	var id_h = id + "_h";
 
@@ -65,8 +65,14 @@ function createHiddenOnClick(visible, invisible) {
 
 	var ret = "";
 	
-	ret += "<div id=\"" + id + "\" onClick='javascript:document.getElementById(\"" + id_h + "\").className=\"unhidden\";this.className=\"hidden\"'>" + visible + "</div>";
-	ret += "<div class=\"hidden\" id=\"" + id_h + "\" onClick='javascript:document.getElementById(\"" + id + "\").className=\"unhidden\";this.className=\"hidden\"'>" + invisible + "</div>";
+	ret += '<div id="' + id + '">' + name + ' ';
+	ret += '<a href="#" onClick="javascript:document.getElementById(\'' + id_h + '\').className=\'unhidden\';document.getElementById(\'' + id + '\').className=\'hidden\';return false;"> (Reveal)</a>';
+	ret += '</div>';
+
+
+	ret += '<div id="' + id_h + '" class="hidden">' + value + ' ';
+	ret += '<a href="#" onClick="javascript:document.getElementById(\'' + id + '\').className=\'unhidden\';document.getElementById(\'' + id_h + '\').className=\'hidden\';return false;"> (Hide)</a>';
+	ret += '</div>';
 
 	return ret;
 }

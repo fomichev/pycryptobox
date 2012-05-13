@@ -16,19 +16,19 @@
 
 # Usage
 
-- create database
+- create database (creates empty private/cryptobox and private/cryptobox.hmac)
 
 	$ ./create_db
 
-- edit your database
+- edit your database (it will also update html page at private/cryptobox.html)
 
 	$ ./edit_db
 
-- change password
+- change password (every couple months)
 
 	$ ./password_db
 
-- update html page
+- update html page (perform html page update without update to database - for development)
 
 	$ ./update_html
 
@@ -40,15 +40,15 @@
 
 - AES https://www.dlitz.net/software/pycrypto/ (Public Domain)
 
-- HMAC (MD5)
+- HMAC - MD5 (Python builtin)
 
 ## JavaScript
 
 - PBKDF2, AES https://code.google.com/p/crypto-js/ (New BSD License)
 
-	template/js/CryptoJS
+	template/js/CryptoJS (v3)
 
-	template/js/cjs
+	template/js/cjs (v2.5)
 
 - Random Seed http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html (BSD)
 
@@ -74,3 +74,9 @@
 	note:
 		name=note
 		text=with body
+
+# Works on
+
+- Chrome
+
+- iPhone

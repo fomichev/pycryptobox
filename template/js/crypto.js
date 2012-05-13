@@ -9,7 +9,7 @@ function decrypt(pass, salt, cipher) {
 function unlock(pwd) {
 	var text=decrypt(pwd, _cfg_salt, _cfg_cipher);
 
-	document.getElementById("cipher").innerHTML=createHiddenOnClick("Show JSON", text);
+	document.getElementById("cipher").innerHTML=createHiddenOnClick("JSON", text);
 
 	var data = eval(text);
 

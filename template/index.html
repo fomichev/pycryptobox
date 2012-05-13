@@ -28,14 +28,14 @@ function doUnlock() {
 	}
 
 	document.getElementById("pwd").value = "";
-	document.getElementById("unlock").className = "hidden";
-	document.getElementById("lock").className = "unhidden";
+	document.getElementById("layoutLocked").className = "hidden";
+	document.getElementById("layoutUnlocked").className = "unhidden";
 }
 
 function doLock() {
 	lock();
-	document.getElementById("unlock").className = "unhidden";
-	document.getElementById("lock").className = "hidden";
+	document.getElementById("layoutLocked").className = "unhidden";
+	document.getElementById("layoutUnlocked").className = "hidden";
 }
 
 function doShowPasswordBox() {
@@ -58,6 +58,39 @@ function doGeneratePassword() {
 	generatePassword(length, includeNumbers, includePunc, includeUc, pronounceable);
 }
 
+
+
+
+
+
+function ProcessRequest() {
+}
+
+function test() {
+	/*
+	Url = "https://github.com/login"
+	xmlHttp = new XMLHttpRequest(); 
+	xmlHttp.onreadystatechange = ProcessRequest;
+	xmlHttp.open( "GET", Url, true );
+	xmlHttp.send( null );
+
+	return;
+	*/
+
+	/*
+	var newWindow = window.open("https://github.com", "Read authenticity token",
+			"status = no, toolbar = no, location = no, left = 9999, top = 9999, width = 1, height = 1");
+
+	alert(newWindow.document.getElementsByName("authenticity_token")[0].value);
+
+
+
+	newWindow.close();
+	*/
+
+//	updatepage("hello");
+}
+
 		</script>
 	</head>
 	<body>
@@ -65,47 +98,66 @@ function doGeneratePassword() {
 			Sorry, this thing heavily depends on JavaScript.
 		</noscript>
 
-		<div id="unlock" class="unhidden">
-			<input type="password" id="pwd" />
-			<a href="#" onClick='javascript:doUnlock();'>Unlock</a>
+		<div id="layoutLocked" class="unhidden">
+			<div id="wrapper">
+				<div id="container">
+
+					<!--
+					<iframe id="ifr" src="https://github.com/login"></iframe>
+					<div id="result"></div>
+
+					<a href="#" onclick="javascript:test();">text</a>
+					-->
+
+					<form onsubmit="javascript:doUnlock();return false;">
+					<h1>Enter password to unlock</h1>
+					<p><input type="password" id="pwd" /></p>
+					<p><input type="submit" value="Unlock" /></p>
+					</form>
+
+				</div>
+			</div>
 		</div>
 
-		<div id="lock" class="hidden">
-			<a href="#" onClick='javascript:doLock();'>Lock</a>
+		<div id="layoutUnlocked" class="hidden">
+
+			<div>
+				<a href="#" onClick='javascript:doLock();'>Lock</a>
+			</div>
+
+			<div>
+				<a href="#" onClick='javascript:doShowPasswordBox();'>Gen password</a>
+			</div>
+
+
+
+			<hr/>
+			<div id="links"></div>
+			<hr/>
+			<div id="cipher"></div>
+
+
+
+			<div id="password_box" class="password_box_hidden">
+
+				<form>
+					<input type="text" id="pwdLength" value="16">Password length<br />
+					<input type="checkbox" id="includeNumbers" checked>Include numbers<br />
+					<input type="checkbox" id="includePunc" checked>Include punctuation<br />
+					<input type="checkbox" id="includeUc" checked>Include upper case<br />
+					<input type="checkbox" id="pronounceable">Make pronounceable<br />
+				</form>
+
+				Generated password: <div id="pwd2"></div>
+
+				<a href="javascript:doGeneratePassword();">Generate Password</a>
+
+				<a href="#" onClick='javascript:doShowPasswordBox();'>Close</a>
+			</div>
+
+			<hr />
+			Bookmarklet:
+			<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse Form</a>
 		</div>
-
-		<div>
-			<a href="#" onClick='javascript:doShowPasswordBox();'>Gen password</a>
-		</div>
-
-
-
-		<hr/>
-		<div id="links"></div>
-		<hr/>
-		<div id="cipher"></div>
-
-
-
-		<div id="password_box" class="password_box_hidden">
-
-			<form>
-				<input type="text" id="pwdLength" value="16">Password length<br />
-				<input type="checkbox" id="includeNumbers" checked>Include numbers<br />
-				<input type="checkbox" id="includePunc" checked>Include punctuation<br />
-				<input type="checkbox" id="includeUc" checked>Include upper case<br />
-				<input type="checkbox" id="pronounceable">Make pronounceable<br />
-			</form>
-
-			Generated password: <div id="pwd2"></div>
-
-			<a href="javascript:doGeneratePassword();">Generate Password</a>
-
-			<a href="#" onClick='javascript:doShowPasswordBox();'>Close</a>
-		</div>
-
-		<hr />
-		Bookmarklet:
-		<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse Form</a>
 	</body>
 </html>

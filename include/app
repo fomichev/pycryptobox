@@ -1,0 +1,9 @@
+{
+	"type": "app",
+	"name": "$name",
+
+	"data":
+	{
+		"key" : "$key"
+	}
+}
