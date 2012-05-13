@@ -1,0 +1,1 @@
+- use CryptoJS version 3 instead of 2.5 (need to figure out how to use AES correctly)
