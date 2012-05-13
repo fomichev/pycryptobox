@@ -9,23 +9,21 @@ function decrypt(pass, salt, cipher) {
 function unlock(pwd) {
 	var text=decrypt(pwd, _cfg_salt, _cfg_cipher);
 
-	document.getElementById("cipher").innerHTML=text;
+	document.getElementById("cipher").innerHTML=createHiddenOnClick("Show JSON", text);
 
 	var data = eval(text);
 
 	var text = "";
 	for (var i = 0; i < data.length; i++) {
 		var el = data[i];
-		var link = createLink(el.name, el.address, el.form);
 
-		var showUsername = createHiddenOnClick("Show username", el.vars.username);
-		var showPassword = createHiddenOnClick("Show password", el.vars.password);
-		var showJson = createHiddenOnClick("Show JSON", JSON.stringify(el));
-
-		text += '<h1>' + link + '</h1>';
-		text += '<p>' + showUsername + '</p>';
-		text += '<p>' + showPassword + '</p>';
-		text += '<p>' + showJson + '</p>';
+		if (el.type == 'site') {
+			text += createLink(el.name, el.address, el.form, el.vars.username, el.vars.password);
+		} else if (el.type == 'card') {
+			text += createCard(el.name, el.data.cardholder, el.data.cvv2, el.data.number, el.data.pin);
+		} else if (el.type == 'note') {
+			text += createNote(el.name, el.data.text);
+		}
 	}
 
 	document.getElementById("links").innerHTML=text;

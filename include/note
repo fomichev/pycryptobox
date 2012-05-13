@@ -1,0 +1,9 @@
+{
+	"type": "note",
+	"name": "$name",
+
+	"data":
+	{
+		"text" : "$text"
+	}
+}

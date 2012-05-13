@@ -44,6 +44,7 @@
 - PBKDF2, AES https://code.google.com/p/crypto-js/ (New BSD License)
 
 	template/js/CryptoJS
+
 	template/js/cjs
 
 - Random Seed http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html (BSD)

@@ -41,8 +41,23 @@ def set_vars(obj, v):
         for i in obj:
             set_vars(i, v);
 
+
+def flatten_node(prefix, tp, v):
+    print "Read " + prefix + tp
+
+    data = open(prefix + tp, "r").read()
+    data = cgi.escape(data)
+
+    jdata = json.loads(data)
+    set_vars(jdata, v)
+    jdata['vars'] = v
+
+    return jdata
+
 def flatten(lines, prefix):
     logins = []
+    tp = None
+    v = {}
     for line in lines:
         line = line.strip()
 
@@ -56,19 +71,19 @@ def flatten(lines, prefix):
             # handle groups?!
             continue
 
-        tp = line.split()[0]
+        if line[len(line) - 1] == ':':
+            if tp:
+                logins.append(flatten_node(prefix, tp, v))
+                v = {}
 
-        data = open(prefix + tp, "r").read()
-        data = cgi.escape(data)
+            tp = line[:-1]
 
-        jdata = json.loads(data)
-        v = get_vars(line)
-        set_vars(jdata, v)
+        keyval = line.split('=')
+        if len(keyval) == 2:
+            v[keyval[0]] = keyval[1]
 
-        jdata['vars'] = v
+    if tp:
+        logins.append(flatten_node(prefix, tp, v))
 
-        logins.append(jdata)
-
-        padding = "                " # somehow JS decrypt eats fist 16 symbols
-
+    padding = "                " # somehow JS decrypt eats fist 16 symbols
     return padding + json.dumps(logins, sort_keys=True, indent=4)

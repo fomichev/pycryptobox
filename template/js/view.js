@@ -1,8 +1,34 @@
-function createLink(name, address, form) {
+function createCard(name, cardholder, cvv2, number, pin) {
+	var d = "";
+	d += "<p>Cardholder=" + cardholder + "</p>";
+	d += "<p>Number=" + number + "</p>";
+	d += "<p>CVV2=" + cvv2 + "</p>";
+	d += "<p>PIN=" + pin + "</p>";
+
+	var r = "";
+
+	r += "<h1>" + name + "</h1>";
+	r += '<p>' + createHiddenOnClick("Show detailed data", d) + '</p>';
+
+	return r;
+}
+
+function createNote(name, text) {
+	var r = "";
+
+	r += "<h1>" + name + "</h1>";
+	r += '<p>' + createHiddenOnClick("Show note", text) + '</p>';
+
+	return r;
+}
+
+function createLink(name, address, form, username, password) {
 	var url = form.action;
 
 	var k = "";
 	var v = "";
+
+	var r = "";
 
 	for (var key in form.fields) {
 		if (k == "") {
@@ -16,10 +42,18 @@ function createLink(name, address, form) {
 	k += ")"
 	v += ")"
 
+	r += "<h1>";
 	if (form.method == "post")
-		return "<a href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ");'>" + name + "</a>"
+		r += "<a href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ");'>" + name + "</a>"
 	else
-		return "GET METHOD FOR " + name + "IS NOT IMPLEMENTED"
+		r += "GET METHOD FOR " + name + "IS NOT IMPLEMENTED"
+	r += "</h1>";
+
+
+	r += '<p>' + createHiddenOnClick("Show username", username) + '</p>';
+	r += '<p>' + createHiddenOnClick("Show password", password) + '</p>';
+
+	return r;
 }
 
 var hocid = 0;

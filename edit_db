@@ -26,3 +26,5 @@ if __name__ == "__main__":
 
         if mtime_begin != mtime_end:
             lib.crypto.enc_db(password, f.name, lib.cfg.path_db, lib.cfg.path_db_hmac)
+        else:
+            print "No update to database"
