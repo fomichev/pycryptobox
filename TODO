@@ -1,2 +1,3 @@
 - use CryptoJS version 3 instead of 2.5 (need to figure out how to use AES correctly)
-- implement some AJAX to deal with forms authenticity tokens
+- add support for HERE DOCUMENT in the db (to be possible to enter multiline values)
+- simplify usage of token based authentication

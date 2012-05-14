@@ -1,3 +1,4 @@
+import platform
 from Crypto.Cipher import AES
 
 pbkdf2_salt = "somesalt" # 64-bit
@@ -12,4 +13,7 @@ path_tmp = "tmp"
 path_include = "include"
 path_template = "template"
 
-editor = "vim"
+if platform.system() == 'Windows':
+    editor = "gvim"
+else:
+    editor = "vim"

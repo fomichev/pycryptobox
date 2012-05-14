@@ -1,0 +1,9 @@
+{
+	"type": "bookmark",
+	"name": "$name",
+
+	"data":
+	{
+		"url" : "$url"
+	}
+}

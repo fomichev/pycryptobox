@@ -1,4 +1,10 @@
+# Overview
+
+TODO: Put some info about architecture here...
+
+
 # Required python modules:
+
 - install pip
 
 	$ easy_install pip
@@ -12,6 +18,7 @@
 	$ pip install pycrypto
 
 - install http://www.crummy.com/software/BeautifulSoup/
+
 	$ pip install beautifulsoup4
 
 # Usage

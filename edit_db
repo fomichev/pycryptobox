@@ -14,19 +14,21 @@ if __name__ == "__main__":
 
     plaintext = lib.crypto.dec_db(password, lib.cfg.path_db, lib.cfg.path_db_hmac)
 
-    f = tempfile.NamedTemporaryFile()
     EDITOR = os.environ.get('EDITOR', lib.cfg.editor)
 
-    with tempfile.NamedTemporaryFile() as f:
+    with tempfile.NamedTemporaryFile(delete=False) as f:
+        file_name = f.name
         f.write(plaintext)
         f.flush()
 
-        mtime_begin = os.stat(f.name).st_mtime
-        subprocess.call([EDITOR, f.name])
-        mtime_end = os.stat(f.name).st_mtime
+    mtime_begin = os.stat(file_name).st_mtime
+    subprocess.call([EDITOR, "--", file_name])
+    mtime_end = os.stat(file_name).st_mtime
 
-        if mtime_begin != mtime_end:
-            lib.crypto.enc_db(password, f.name, lib.cfg.path_db, lib.cfg.path_db_hmac)
-            lib.html.update(password)
-        else:
-            print "No update to database"
+    if mtime_begin != mtime_end:
+        lib.crypto.enc_db(password, file_name, lib.cfg.path_db, lib.cfg.path_db_hmac)
+        lib.html.update(password)
+    else:
+        print "No update to database"
+
+    os.remove(file_name)
