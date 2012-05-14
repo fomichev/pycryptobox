@@ -6,12 +6,26 @@ from bs4 import BeautifulSoup, Tag
 import os
 import re
 
+def getimg(path):
+    data = "".join(open(path, "rb").read().encode('base64').split("\n"))
+    return "data:image/png;base64," + data
+
 def embed(index, output):
     soup = BeautifulSoup(open(index).read().decode('utf-8'))
 
+    print "Embed stylesheets"
     stylesheets = ""
     for s in soup.find_all("link", rel="stylesheet"):
-        stylesheets += open(s['href']).read()
+        contents = open(s['href']).read()
+
+        print "Embed images in " + s['href']
+        urls_re = re.compile(r'url\(([^)]*)\)*')
+        urls = [url.group(1) for url in urls_re.finditer(contents)]
+
+        for url in urls:
+            contents = contents.replace(url, getimg(os.path.dirname(s['href']) + "/" + url))
+
+        stylesheets += contents
         s.replace_with("")
 
     tag = soup.new_tag("style", media="screen", type="text/css");
@@ -19,6 +33,7 @@ def embed(index, output):
 
     soup.head.insert(1, tag)
 
+    print "Embed scripts"
     scripts = ""
     for s in soup.find_all("script", type="text/javascript"):
         try:
@@ -28,13 +43,16 @@ def embed(index, output):
 
         s.replace_with("")
 
-    # remove comments
+    print "Remove comments scripts"
     scripts = re.compile(r'\s//.*$', re.MULTILINE).sub('', scripts)
 
-    tag = soup.new_tag("script", type="text/javascript");
+    tag = soup.new_tag("script", type="text/javascript")
     tag.string = scripts
 
     soup.head.insert(2, tag)
+
+
+
 
     result = soup.prettify(formatter=None)
     open(output, "w").write(result.encode('utf-8'))
