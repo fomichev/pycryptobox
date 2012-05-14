@@ -7,7 +7,7 @@ import os
 import re
 
 def embed(index, output):
-    soup = BeautifulSoup(open(index).read())
+    soup = BeautifulSoup(open(index).read().decode('utf-8'))
 
     stylesheets = ""
     for s in soup.find_all("link", rel="stylesheet"):
@@ -37,4 +37,4 @@ def embed(index, output):
     soup.head.insert(2, tag)
 
     result = soup.prettify(formatter=None)
-    open(output, "w").write(result)
+    open(output, "w").write(result.encode('utf-8'))

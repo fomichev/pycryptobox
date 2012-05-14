@@ -11,6 +11,8 @@ import hmac, hashlib
 import sys
 import cfg
 
+check_hmac = False
+
 def add_padding(plaintext):
     padding = (16 - len(plaintext) % 16) * " "
     return plaintext + padding
@@ -42,15 +44,15 @@ def enc_plaintext(password, plaintext, aes_path, hmac_path):
     key = derive_key(password)
 
     out_hmac = open(hmac_path, "wb")
-    out_hmac.write(auth(key, plaintext))
+    out_hmac.write(auth(key, plaintext.encode('utf-8')))
 
     out_aes = open(aes_path, "wb")
-    out_aes.write(enc(key, plaintext))
+    out_aes.write(enc(key, plaintext.encode('utf-8')))
 
 def enc_db(password, path, aes_path, hmac_path):
     print "Encode %s into %s and %s" % (path, aes_path, hmac_path)
 
-    plaintext = open(path, "rb").read().rstrip()
+    plaintext = open(path, "rb").read().decode('utf-8').rstrip()
     enc_plaintext(password, plaintext, aes_path, hmac_path)
 
 def dec_db(password, aes_path, hmac_path):
@@ -64,8 +66,9 @@ def dec_db(password, aes_path, hmac_path):
     orig_hmac = open(hmac_path, "rb").readline()
     hmac = auth(key, plaintext)
 
-    if (hmac != orig_hmac):
-        print 'Incorrect password!'
-        sys.exit(0)
+    if check_hmac:
+        if (hmac != orig_hmac):
+            print 'Incorrect password!'
+            sys.exit(0)
 
-    return plaintext
+    return plaintext.decode('utf-8')

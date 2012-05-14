@@ -18,7 +18,6 @@ function isVowel(c) {
 function generatePassword(length, includeNumbers, includePunc, includeUc, pronounceable) {
 	Math.seedrandom();
 
-//	length = parseInt(length);
 	var pass = "";
 
 	if (pronounceable) {
@@ -78,5 +77,5 @@ function generatePassword(length, includeNumbers, includePunc, includeUc, pronou
 		i++;
 	}
 
-	document.getElementById("pwd2").innerHTML = pass;
+	return pass;
 }

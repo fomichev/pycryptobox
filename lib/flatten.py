@@ -45,7 +45,7 @@ def set_vars(obj, v):
 def flatten_node(prefix, tp, v):
     print "Read " + prefix + tp
 
-    data = open(prefix + tp, "r").read()
+    data = open(prefix + tp, "r").read().decode('utf-8')
     data = cgi.escape(data)
 
     jdata = json.loads(data)

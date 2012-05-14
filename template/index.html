@@ -1,8 +1,13 @@
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
 		<title>Cryptobox</title>
 		<link rel="stylesheet" type="text/css" href="../template/css/style.css" />
-		<link rel="stylesheet" type="text/css" href="../template/css/theme/default.css" />
+		<link rel="stylesheet" type="text/css" href="../template/css/theme/jquery-ui-1.8.20.custom.css" />
+
+		<script type="text/javascript" src="../template/js/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="../template/js/jquery-ui-1.8.20.custom.min.js"></script>
 
 		<script type="text/javascript" src="../template/js/open.js"></script>
 		<script type="text/javascript" src="../template/js/view.js"></script>
@@ -19,56 +24,70 @@
 
 		<script type="text/javascript" src="./cfg.js"></script>
 		<script type="text/javascript" src="../template/js/crypto.js"></script>
+
 		<script type="text/javascript">
-function doUnlock() {
-	try {
-		unlock(document.getElementById("pwd").value);
-	} catch(e) {
-		alert("Incorrect password!");
-		return;
-	}
 
-	document.getElementById("pwd").value = "";
-	document.getElementById("layoutLocked").className = "hidden";
-	document.getElementById("layoutUnlocked").className = "unhidden";
-}
+$(document).ready(function() {
+	$("#divUnlocked").hide();
+	$("#divLocked").show();
 
-function doLock() {
-	lock();
-	document.getElementById("layoutLocked").className = "unhidden";
-	document.getElementById("layoutUnlocked").className = "hidden";
-}
+	$("#tabs").tabs();
 
-function doShowPasswordBox() {
-	var box = document.getElementById("password_box");
+	$("#inputUnlock").button();
 
-	if (box.className == "password_box_hidden") {
-		box.className = "password_box_unhidden";
-	} else {
-		box.className = "password_box_hidden";
-	}
-}
+	/*
+	$("#bookmarkletForm").button();
+	$("#bookmarkletToken").button();
+	*/
 
-function doGeneratePassword() {
-	var length = document.getElementById("pwdLength").value;
-	var includeNumbers = document.getElementById("includeNumbers").checked;
-	var includePunc = document.getElementById("includePunc").checked;
-	var includeUc = document.getElementById("includeUc").checked;
-	var pronounceable = document.getElementById("pronounceable").checked;
+	$("#formUnlock").submit(function(event) {
+		event.preventDefault();
 
-	generatePassword(length, includeNumbers, includePunc, includeUc, pronounceable);
-}
+		try {
+			unlock($("#inputPassword").val());
+			$("#inputPassword").val("");
+			$("#divLocked").hide();
+			$("#divUnlocked").show();
 
-function doEnableMenu(name) {
-	document.getElementById("site").className = "hidden";
-	document.getElementById("app").className = "hidden";
-	document.getElementById("bookmark").className = "hidden";
-	document.getElementById("card").className = "hidden";
-	document.getElementById("note").className = "hidden";
+			$("#divGenerate").hide();
+		} catch(e) {
+			alert("Incorrect password! " + e);
+			return;
+		}
 
-	document.getElementById(name).className = "unhidden";
-}
+	});
 
+	$("#buttonLock").button();
+	$("#buttonLock").click(function(event) {
+		event.preventDefault();
+		$("#divLocked").show();
+		$("#divUnlocked").hide();
+	});
+
+	$("#buttonGenerateShow").button();
+	$("#buttonGenerateShow").click(function(event) {
+		event.preventDefault();
+		$("#divGenerate").show();
+	});
+
+	$("#buttonGenerateClose").button();
+	$("#buttonGenerateClose").click(function(event) {
+		event.preventDefault();
+		$("#divGenerate").hide();
+	});
+
+	$("#buttonGenerate").button();
+	$("#buttonGenerate").click(function(event) {
+		$("#divGeneratedPassword").html(generatePassword(
+			$("#inputPasswordLength").val(),
+			$("#inputIncludeNum").is(":checked"),
+			$("#inputIncludePunc").is(":checked"),
+			$("#inputIncludeUc").is(":checked"),
+			$("#inputPronounceable").is(":checked")));
+	});
+
+	$("#inputPassword").focus();
+});
 		</script>
 	</head>
 	<body>
@@ -76,77 +95,65 @@ function doEnableMenu(name) {
 			Sorry, this thing heavily depends on JavaScript.
 		</noscript>
 
-		<div id="layoutLocked" class="unhidden">
+		<div id="divLocked">
 			<div id="wrapper">
 				<div id="container">
-					<form onSubmit="javascript:doUnlock();return false;">
+					<form id="formUnlock">
 						<h1>Enter password to unlock</h1>
-						<p><input type="password" id="pwd" /></p>
-						<p><input type="submit" value="Unlock" /></p>
+						<p><input id="inputPassword" type="password" /></p>
+						<p><input id="inputUnlock" type="submit" value="Unlock" /></p>
 					</form>
 
 				</div>
 			</div>
 		</div>
 
-		<div id="layoutUnlocked" class="hidden">
+		<div id="divUnlocked">
 			<div id="header">
-				<a href="#" onClick='javascript:doLock();return false;'>(Lock)</a>
-				<a href="#" onClick='javascript:doShowPasswordBox();return false;'>(Generate password)</a>
+				<button id="buttonGenerateShow">Generate password</button>
+				<button id="buttonLock">Lock</button>
 			</div>
 
-			<hr/>
+			<div id="tabs">
+				<ul>
+					<li><a href="#site">Sites</a></li>
+					<li><a href="#app">Apps</a></li>
+					<li><a href="#bookmark">Bookmarks</a></li>
+					<li><a href="#card">Cards</a></li>
+					<li><a href="#note">Notes</a></li>
+					<li><a href="#plaintext">JSON</a></li>
+					<li><a href="#bookmarklet">Bookmarklets</a></li>
+				</ul>
 
-			<div id="menu">
-				<a href="#" onClick='javascript:doEnableMenu("site");return false;'>Sites</a>
-				|
-				<a href="#" onClick='javascript:doEnableMenu("app");return false;'>Apps</a>
-				|
-				<a href="#" onClick='javascript:doEnableMenu("bookmark");return false;'>Bookmarks</a>
-				|
-				<a href="#" onClick='javascript:doEnableMenu("card");return false;'>Cards</a>
-				|
-				<a href="#" onClick='javascript:doEnableMenu("note");return false;'>Notes</a>
-			</div>
-
-			<div id="secret">
-				<hr/>
 				<div id="site"></div>
-				<div id="app" class="hidden"></div>
-				<div id="bookmark" class="hidden"></div>
-				<div id="card" class="hidden"></div>
-				<div id="note" class="hidden"></div>
-				<hr/>
+				<div id="app"></div>
+				<div id="bookmark"></div>
+				<div id="card"></div>
+				<div id="note"></div>
 				<div id="plaintext"></div>
+				<div id="bookmarklet">
+					<p><a id="bookmarkletForm" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a></p>
+
+					<p><a id="bookmarkletToken" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/token.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Get token</a></p>
+				</div>
 			</div>
 
-
-
-			<div id="password_box" class="password_box_hidden">
-
+			<div id="divGenerate" class="password_box">
 				<form>
-					<input type="text" id="pwdLength" value="16">Password length<br />
-					<input type="checkbox" id="includeNumbers" checked>Include numbers<br />
-					<input type="checkbox" id="includePunc" checked>Include punctuation<br />
-					<input type="checkbox" id="includeUc" checked>Include upper case<br />
-					<input type="checkbox" id="pronounceable">Make pronounceable<br />
+					<input type="text" id="inputPasswordLength" value="16">Password length<br />
+					<input type="checkbox" id="inputIncludeNum" checked>Include numbers<br />
+					<input type="checkbox" id="inputIncludePunc" checked>Include punctuation<br />
+					<input type="checkbox" id="inputIncludeUc" checked>Include upper case<br />
+					<input type="checkbox" id="inputPronounceable">Make pronounceable<br />
 				</form>
 
-				Generated password: <div id="pwd2"></div>
+				Generated password: <div id="divGeneratedPassword"></div>
 
-				<a href="#" onClick="javascript:doGeneratePassword();return false;">Generate Password</a>
-
-				<a href="#" onClick='javascript:doShowPasswordBox();return false;'>Close</a>
+				<a href="#" id="buttonGenerate">Generate</a>
+				<a href="#" id="buttonGenerateClose">Close</a>
 			</div>
 
-			<hr />
-			<div id="bookmarklets">
-				Bookmarklet:
-
-				(<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a>)
-
-				(<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/token.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Get token</a>)
-			</div>
+			<div id="copyright"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a>, 2012</p></div>
 		</div>
 	</body>
 </html>

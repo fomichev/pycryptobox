@@ -8,7 +8,8 @@ import cfg
 import generate
 import embed
 
-debug = False
+debug_db = False
+debug_html = False
 
 def update(password):
     try:
@@ -20,15 +21,15 @@ def update(password):
     db_plaintext = crypto.dec_db(password, cfg.path_db, cfg.path_db_hmac)
 
     json_plaintext = flatten.flatten(db_plaintext.split("\n"), cfg.path_include + "/")
-    if debug:
+    if debug_db:
         open(cfg.path_tmp + "/_json_plaintext", "w").write(json_plaintext)
 
     aes_base64 = crypto.enc(key, json_plaintext).encode("base64")
-    if debug:
+    if debug_db:
         open(cfg.path_tmp + "/_aes_base64", "w").write(aes_base64)
 
     aes_base64_nonl = "".join(aes_base64.split("\n"))
-    if debug:
+    if debug_db:
         open(cfg.path_tmp + "/_aes_base64_nonl", "w").write(aes_base64_nonl)
 
     index_html = generate.html(cfg.path_template + "/index.html")
@@ -40,6 +41,6 @@ def update(password):
     os.chdir(cfg.path_tmp)
     embed.embed("index.html", "../" + cfg.path_db_html)
 
-    if debug == False:
+    if debug_html == False:
         os.chdir("..")
         shutil.rmtree(cfg.path_tmp)

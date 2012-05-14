@@ -1,11 +1,7 @@
 .hidden { display: none; }
 .unhidden { display: block; }
 
-.password_box_hidden {
-	display: none;
-}
-
-.password_box_unhidden {
+.password_box {
 	position: absolute;
 	left: 180;
 	top: 25;
@@ -16,6 +12,13 @@
 	height: 300;
 }
 
+#copyright {
+	text-align: center;
+}
+
+#header {
+	text-align: right;
+}
 
 #wrapper {
 	position: absolute;

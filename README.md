@@ -64,6 +64,16 @@ TODO: Describe why and what they do...
 
 	template/js/seedrandom.js
 
+- jQuery http://jquery.com (MIT)
+
+	template/js/jquery-1.7.2.js
+
+- jQueryUi http://jqueryui.com/download
+
+	template/js/jquery-ui-1.8.20.custom.min.js
+
+	template/css/theme/jquery-ui-1.8.20.custom.min.js
+
 # Database example
 
 	site/dropbox.com:

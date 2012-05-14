@@ -9,7 +9,6 @@ function decrypt(pass, salt, cipher) {
 function unlock(pwd) {
 	var text = decrypt(pwd, _cfg_salt, _cfg_cipher);
 	var data = eval(text);
-	text = "";
 
 	var site = "";
 	var app = "";
@@ -40,7 +39,7 @@ function unlock(pwd) {
 	document.getElementById("card").innerHTML = card;
 	document.getElementById("note").innerHTML = note;
 
-	document.getElementById("plaintext").innerHTML = createHiddenOnClick("JSON", text);
+	document.getElementById("plaintext").innerHTML = createHiddenOnClick("JSON", '<pre>' + text + '</pre>');
 }
 
 function lock() {
