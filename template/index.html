@@ -27,35 +27,35 @@
 		<script type="text/javascript">
 
 $(document).ready(function() {
-	$("#divUnlocked").hide();
-	$("#divLocked").show();
+	$("#div-unlocked").hide();
+	$("#div-locked").show();
 
 	$(".button").button();
 
-	$("#buttonUnlock").button({ icons: { primary: "ui-icon-unlocked" } });
-	$("#buttonLock").button({ icons: { primary: "ui-icon-locked" } });
-	$("#buttonGenerateShow").button({ icons: { primary: "ui-icon-gear" } });
+	$("#button-unlock").button({ icons: { primary: "ui-icon-unlocked" } });
+	$("#button-lock").button({ icons: { primary: "ui-icon-locked" } });
+	$("#button-generate-show").button({ icons: { primary: "ui-icon-gear" } });
 
-	$("#formUnlock").submit(function(event) {
+	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
 		try {
-			map = unlock($("#inputPassword").val());
+			map = unlock($("#input-password").val());
 			$("#site").html(map.site);
 			$("#app").html(map.app);
 			$("#bookmark").html(map.bookmark);
 			$("#card").html(map.card);
 			$("#note").html(map.note);
 
-			$("#inputPassword").val("");
-			$("#divLocked").hide();
-			$("#divUnlocked").show();
+			$("#input-password").val("");
+			$("#div-locked").hide();
+			$("#div-unlocked").show();
 
-			$("#divGenerate").hide();
+			$("#div-generate").hide();
 
 			$(".button").button();
-			$(".buttonToken").button({ icons: { primary: "ui-icon-lightbulb" } });
-			$(".buttonGoto").button({ icons: { primary: "ui-icon-newwin" } });
-			$(".buttonLogin").button({ icons: { primary: "ui-icon-key" } });
+			$(".button-token").button({ icons: { primary: "ui-icon-lightbulb" } });
+			$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
+			$(".button-login").button({ icons: { primary: "ui-icon-key" } });
 			$(".accordion").accordion({
 				autoHeight: false,
 				navigation: false,
@@ -74,10 +74,10 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#buttonLock").click(function(event) {
+	$("#button-lock").click(function(event) {
 		event.preventDefault();
-		$("#divLocked").show();
-		$("#divUnlocked").hide();
+		$("#div-locked").show();
+		$("#div-unlocked").hide();
 
 		$("#site").html("");
 		$("#app").html("");
@@ -86,32 +86,32 @@ $(document).ready(function() {
 		$("#note").html("");
 	});
 
-	$("#buttonGenerateShow").click(function(event) {
+	$("#button-generate-show").click(function(event) {
 		event.preventDefault();
-		$("#divGenerate").dialog();
+		$("#div-generate").dialog();
 	});
 
-	$("#buttonGenerate").click(function(event) {
+	$("#button-generate").click(function(event) {
 		event.preventDefault();
-		$("#inputGeneratedPassword").val(generatePassword(
-			$("#inputPasswordLength").val(),
-			$("#inputIncludeNum").is(":checked"),
-			$("#inputIncludePunc").is(":checked"),
-			$("#inputIncludeUc").is(":checked"),
-			$("#inputPronounceable").is(":checked")));
+		$("#intput-generated-password").val(generatePassword(
+			$("#input-password-length").val(),
+			$("#input-include-num").is(":checked"),
+			$("#input-include-punc").is(":checked"),
+			$("#input-include-uc").is(":checked"),
+			$("#input-pronounceable").is(":checked")));
 	});
 
-	$("#inputPronounceable").click(function(event) {
-		if ($("#inputPronounceable").is(":checked")) {
-			$("#inputIncludeNum").attr("disabled", true);
-			$("#inputIncludePunc").attr("disabled", true);
+	$("#input-pronounceable").click(function(event) {
+		if ($("#input-pronounceable").is(":checked")) {
+			$("#input-include-num").attr("disabled", true);
+			$("#input-include-punc").attr("disabled", true);
 		} else {
-			$("#inputIncludeNum").removeAttr("disabled");
-			$("#inputIncludePunc").removeAttr("disabled");
+			$("#input-include-num").removeAttr("disabled");
+			$("#input-include-punc").removeAttr("disabled");
 		}
 	});
 
-	$("#inputPassword").focus();
+	$("#input-password").focus();
 });
 		</script>
 	</head>
@@ -120,18 +120,18 @@ $(document).ready(function() {
 			Sorry, this thing heavily depends on JavaScript.
 		</noscript>
 
-		<div id="divLocked">
-			<form id="formUnlock">
+		<div id="div-locked">
+			<form id="form-unlock">
 				<h1>Enter password to unlock</h1>
-				<p><input id="inputPassword" type="password" /></p>
-				<p><button type="submit" id="buttonUnlock">Unlock</button></p>
+				<p><input id="input-password" type="password" /></p>
+				<p><button type="submit" id="button-unlock">Unlock</button></p>
 			</form>
 		</div>
 
-		<div id="divUnlocked">
-			<div id="divHeader">
-				<button id="buttonGenerateShow">Generate password</button>
-				<button id="buttonLock">Lock</button>
+		<div id="div-unlocked">
+			<div id="div-header">
+				<button id="button-generate-show">Generate password</button>
+				<button id="button-lock">Lock</button>
 			</div>
 
 			<div id="tabs">
@@ -163,23 +163,23 @@ $(document).ready(function() {
 				</div>
 			</div>
 
-			<div id="divGenerate" title="Generate password">
+			<div id="div-generate" title="Generate password">
 				<form>
-					<input type="text" id="inputPasswordLength" value="16" size="4" />Length<br />
-					<input type="checkbox" id="inputIncludeNum" checked />Include numbers<br />
-					<input type="checkbox" id="inputIncludePunc" checked />Include punctuation<br />
-					<input type="checkbox" id="inputIncludeUc" checked />Include upper case<br />
-					<input type="checkbox" id="inputPronounceable" />Make pronounceable<br />
+					<input type="text" id="input-password-length" value="16" size="4" />Length<br />
+					<input type="checkbox" id="input-include-num" checked />Include numbers<br />
+					<input type="checkbox" id="input-include-punc" checked />Include punctuation<br />
+					<input type="checkbox" id="input-include-uc" checked />Include upper case<br />
+					<input type="checkbox" id="input-pronounceable" />Make pronounceable<br />
 				</form>
 
 				Generated password:
 				<form>
-					<p><input type="text" id="inputGeneratedPassword" size="30" /></p>
-					<p><input type="submit" id="buttonGenerate" class="button" value="Generate" /></p>
+					<p><input type="text" id="intput-generated-password" size="30" /></p>
+					<p><input type="submit" id="button-generate" class="button" value="Generate" /></p>
 				</form>
 			</div>
 
-			<div id="divCopyright"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a>, 2012</p></div>
+			<div id="div-copyright" class="ui-widget"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a>, 2012</p></div>
 		</div>
 	</body>
 </html>

@@ -3,14 +3,14 @@ body {
 
 }
 
-#divCopyright {
+#div-copyright {
 	text-align: center;
 }
 
-#divHeader {
+#div-header {
 	text-align: right;
 }
 
-#divLocked {
+#div-locked {
 	text-align: center;
 }

@@ -45,18 +45,18 @@ function createLink(name, address, form, username, password) {
 
 	var token = withToken(form);
 	if (token != "") {
-		r += '<a class="buttonToken" href="' + address + '" target="_blank">Get token</a>';
-		r += "<a class=\"buttonLogin\" href='#' onClick='javascript:openPostWithToken(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ", \"" + token + "\"); return false;'>Login</a>"
+		r += '<a class="button-token" href="' + address + '" target="_blank">Get token</a>';
+		r += "<a class=\"button-login\" href='#' onClick='javascript:openPostWithToken(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ", \"" + token + "\"); return false;'>Login</a>"
 	} else {
 		if (form.method == "post")
-			r += "<a class=\"buttonLogin\" href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + "); return false;'>Login</a>"
+			r += "<a class=\"button-login\" href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + "); return false;'>Login</a>"
 		else
 			r += "GET METHOD FOR " + name + "IS NOT IMPLEMENTED"
 
 	}
 
 
-	r += '<a class="buttonGoto" href="' + address + '" target="_blank">Go to site</a>';
+	r += '<a class="button-goto" href="' + address + '" target="_blank">Go to site</a>';
 	r += '<p>' + createHiddenOnClick("Username", username) + '</p>';
 	r += '<p>' + createHiddenOnClick("Password", password) + '</p>';
 
@@ -68,7 +68,7 @@ function createApp(name, key) {
 }
 
 function createBookmark(name, url, comment) {
-	return accordionItem(name, '<a class="buttonGoto" href="' + url + '" target="_blank">Go to site</a><p>' + comment + '</p>');
+	return accordionItem(name, '<a class="button-goto" href="' + url + '" target="_blank">Go to site</a><p>' + comment + '</p>');
 }
 
 function createCard(name, cardholder, cvv2, number, pin) {

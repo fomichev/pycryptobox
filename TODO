@@ -7,3 +7,4 @@
 - use external repositories when possible (jQuery, CryproJS)
 - use https://developers.google.com/closure/compiler/ to compress js
 - add lock timeout (and make it configurable via cfg.py)
+- add support for get forms
