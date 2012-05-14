@@ -91,6 +91,9 @@ function unlock(pwd) {
 	var data = eval(text);
 	var map = {};
 
+	if (data[0].type != "magic" || data[0].value != "270389")
+		throw "Wrong magic number";
+
 	map.site = "";
 	map.app = "";
 	map.bookmark = "";

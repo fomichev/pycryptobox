@@ -56,6 +56,8 @@ def flatten_node(prefix, tp, v):
 
 def flatten(lines, prefix):
     logins = []
+    logins.append({ "type" : "magic", "value": "270389" })
+
     tp = None
     v = {}
     for line in lines:

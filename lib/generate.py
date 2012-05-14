@@ -9,8 +9,8 @@ def html(index):
     res += open(index, "r").read()
     return res
 
-def config(data):
+def config(cipher):
     res = ""
     res += "_cfg_salt = \"%s\";" % (cfg.pbkdf2_salt)
-    res += "_cfg_cipher = \"%s\";" % (data)
+    res += "_cfg_cipher = \"%s\";" % (cipher)
     return res

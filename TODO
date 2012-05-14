@@ -1,9 +1,15 @@
+Optimizations:
 - use http://jqueryui.com/download to build distribution with only required components
 - use CryptoJS version 3 instead of 2.5 (need to figure out how to use AES correctly)
-- add support for HERE DOCUMENT in the db (to be possible to enter multiline values)
-- simplify usage of token based authentication
-- add .cryptoboxrc support
-- add HMAC support to HTML
 - use external repositories when possible (jQuery, CryproJS)
 - use https://developers.google.com/closure/compiler/ to compress js
+
+Features:
+- add support for HERE DOCUMENT in the db (to be possible to enter multiline values)
 - add lock timeout (and make it configurable via cfg.py)
+
+Noncritical features:
+- add .cryptoboxrc support
+
+Someday:
+- simplify usage of token based authentication
