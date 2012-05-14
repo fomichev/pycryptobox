@@ -4,25 +4,24 @@
 
 		<title>Cryptobox</title>
 		<link rel="stylesheet" type="text/css" href="../template/css/style.css" />
-		<link rel="stylesheet" type="text/css" href="../template/css/theme/jquery-ui-1.8.20.custom.css" />
+		<link rel="stylesheet" type="text/css" href="../template/extern/jquery-ui/css/jquery-ui-1.8.20.custom.css" />
 
-		<script type="text/javascript" src="../template/js/jquery-1.7.2.js"></script>
-		<script type="text/javascript" src="../template/js/jquery-ui-1.8.20.custom.min.js"></script>
+		<script type="text/javascript" src="../template/extern/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="../template/extern/jquery-ui/js/jquery-ui-1.8.20.custom.min.js"></script>
 
+		<script type="text/javascript" src="../template/extern/seedrandom.js"></script>
+
+		<script type="text/javascript" src="../template/extern/cjs/crypto/crypto.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/blockmodes/blockmodes.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/aes/aes.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/hmac/hmac.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/sha1/sha1.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/pbkdf2/pbkdf2.js"></script>
+
+		<script type="text/javascript" src="./cfg.js"></script>
 		<script type="text/javascript" src="../template/js/open.js"></script>
 		<script type="text/javascript" src="../template/js/view.js"></script>
 		<script type="text/javascript" src="../template/js/password.js"></script>
-
-		<script type="text/javascript" src="../template/js/seedrandom.js"></script>
-
-		<script type="text/javascript" src="../template/js/cjs/crypto/crypto.js"></script>
-		<script type="text/javascript" src="../template/js/cjs/blockmodes/blockmodes.js"></script>
-		<script type="text/javascript" src="../template/js/cjs/aes/aes.js"></script>
-		<script type="text/javascript" src="../template/js/cjs/hmac/hmac.js"></script>
-		<script type="text/javascript" src="../template/js/cjs/sha1/sha1.js"></script>
-		<script type="text/javascript" src="../template/js/cjs/pbkdf2/pbkdf2.js"></script>
-
-		<script type="text/javascript" src="./cfg.js"></script>
 		<script type="text/javascript" src="../template/js/crypto.js"></script>
 
 		<script type="text/javascript">
@@ -58,6 +57,10 @@ $(document).ready(function() {
 				active: false,
 				collapsible: true
 			});
+			$('.expand').click(function() {
+				event.preventDefault();
+				$(this).next().toggle();
+			}).next().hide();
 
 			$("#tabs").tabs();
 		} catch(e) {

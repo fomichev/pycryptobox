@@ -56,23 +56,21 @@ TODO: Describe why and what they do...
 
 - PBKDF2, AES https://code.google.com/p/crypto-js/ (New BSD License)
 
-	template/js/CryptoJS (v3)
+	template/extern/CryptoJS (v3)
 
-	template/js/cjs (v2.5)
+	template/extern/cjs (v2.5)
 
 - Random Seed http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html (BSD)
 
-	template/js/seedrandom.js
+	template/extern/seedrandom.js
 
 - jQuery http://jquery.com (MIT)
 
-	template/js/jquery-1.7.2.js
+	template/extern/jquery-1.7.2.js
 
 - jQueryUi http://jqueryui.com/download
 
-	template/js/jquery-ui-1.8.20.custom.min.js
-
-	template/css/theme/jquery-ui-1.8.20.custom.min.js
+	template/extern/jquery-ui
 
 # Database example
 

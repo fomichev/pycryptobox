@@ -5,29 +5,7 @@ function accordionItem(header, body) {
 function createLink(name, address, form, username, password) {
 	var hocid = 0;
 	function createHiddenOnClick(name, value) {
-		var id = "hoc" + hocid;
-		var id_h = id + "_h";
-
-		hocid++;
-
-		var ret = "";
-
-		/*
-		ret += '<div id="' + id '">';
-		ret += '<h3><a href="#">' + name + '</a></h3>';
-		ret += '<div>' + value + '</div>';
-		*/
-
-		ret += '<div id="' + id + '">' + name + ' ';
-		ret += '<a class="buttonSmall" href="#" onClick="javascript:document.getElementById(\'' + id_h + '\').className=\'unhidden\';document.getElementById(\'' + id + '\').className=\'hidden\';return false;">Reveal</a>';
-		ret += '</div>';
-
-
-		ret += '<div id="' + id_h + '" class="hidden">' + value + ' ';
-		ret += '<a class="buttonSmall" href="#" onClick="javascript:document.getElementById(\'' + id + '\').className=\'unhidden\';document.getElementById(\'' + id_h + '\').className=\'hidden\';return false;">Hide</a>';
-		ret += '</div>';
-
-		return ret;
+		return '<div class="expand"><strong>' + name + '</strong> (click to expand/collapse)</div><div>' + value + '</div>';
 	}
 
 	function withToken(form) {
@@ -90,7 +68,7 @@ function createApp(name, key) {
 }
 
 function createBookmark(name, url, comment) {
-	return accordionItem(name, '<a href="' + url + '" target="_blank">Go!</a><p>' + comment + '</p>');
+	return accordionItem(name, '<a class="buttonSmall" href="' + url + '" target="_blank">Go to site</a><p>' + comment + '</p>');
 }
 
 function createCard(name, cardholder, cvv2, number, pin) {
@@ -111,6 +89,12 @@ function unlock(pwd) {
 	var text = decrypt(pwd, _cfg_salt, _cfg_cipher);
 	var data = eval(text);
 	var map = {};
+
+	map.site = "";
+	map.app = "";
+	map.bookmark = "";
+	map.card = "";
+	map.note = "";
 
 	for (var i = 0; i < data.length; i++) {
 		var el = data[i];
