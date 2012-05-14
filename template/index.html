@@ -51,6 +51,7 @@ $(document).ready(function() {
 			$("#div-unlocked").show();
 
 			$("#div-generate").hide();
+			$("#div-token").hide();
 
 			$(".button").button();
 			$(".button-token").button({ icons: { primary: "ui-icon-lightbulb" } });
@@ -101,7 +102,7 @@ $(document).ready(function() {
 			$("#input-pronounceable").is(":checked")));
 	});
 
-	$("#input-pronounceable").click(function(event) {
+	$("#input-pronounceable").click(function() {
 		if ($("#input-pronounceable").is(":checked")) {
 			$("#input-include-num").attr("disabled", true);
 			$("#input-include-punc").attr("disabled", true);
@@ -177,6 +178,10 @@ $(document).ready(function() {
 					<p><input type="text" id="intput-generated-password" size="30" /></p>
 					<p><input type="submit" id="button-generate" class="button" value="Generate" /></p>
 				</form>
+			</div>
+
+			<div id="div-token" title="Enter token">
+				<input type="text" id="input-token" size="32" />
 			</div>
 
 			<div id="div-copyright" class="ui-widget"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a>, 2012</p></div>

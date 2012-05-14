@@ -1,12 +1,25 @@
 function openPostWithToken(url, name, keys, values, token) {
-	var token_value = prompt("Enter token", "");
-	if (token_value == "")
-		return;
+	$("#div-token").dialog({
+		height: 140,
+		width: 280,
+		modal: true,
+		buttons: {
+			"Login": function() {
+				var token_value = $("#input-token").val();
 
-	keys.push(token);
-	values.push(token_value);
+				if (!token_value || token_value == "")
+					return;
 
-	openPost(url, name, keys, values);
+				keys.push(token);
+				values.push(token_value);
+
+				$("#input-token").val("");
+				$(this).dialog('close');
+				openPost(url, name, keys, values);
+			},
+			"Cancel": function() { $(this).dialog('close'); }
+		}
+	});
 }
 
 function openPost(url, name, keys, values) {
@@ -26,8 +39,6 @@ function openPost(url, name, keys, values) {
 			/* &lt;/script&gt; screws everything up after embedding,
 			 * so split it into multiple lines */
 			html += "cript></body></html>";
-
-/*	alert(html); */
 
 	newWindow.document.write(html);
 	return newWindow;

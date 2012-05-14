@@ -46,12 +46,12 @@ function createLink(name, address, form, username, password) {
 	var token = withToken(form);
 	if (token != "") {
 		r += '<a class="button-token" href="' + address + '" target="_blank">Get token</a>';
-		r += "<a class=\"button-login\" href='#' onClick='javascript:openPostWithToken(\"" + url + "\", \"" + name + "\", " + k + ", " + v + ", \"" + token + "\"); return false;'>Login</a>"
+		r += '<a class="button-login" href="#" onClick=\'javascript:openPostWithToken("' + url + '", "' + name + '", ' + k + ', ' + v + ', "' + token + '"); return false;\'>Login</a>';
 	} else {
 		if (form.method == "post")
-			r += "<a class=\"button-login\" href='#' onClick='javascript:openPost(\"" + url + "\", \"" + name + "\", " + k + ", " + v + "); return false;'>Login</a>"
+			r += '<a class="button-login" href="#" onClick=\'javascript:openPost("' + url + '", "' + name + '", ' + k + ', ' + v + '); return false;\'>Login</a>';
 		else
-			r += "GET METHOD FOR " + name + "IS NOT IMPLEMENTED"
+			r += "GET METHOD FOR " + name + "IS NOT IMPLEMENTED";
 
 	}
 
