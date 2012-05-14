@@ -43,16 +43,13 @@ def embed(index, output):
 
         s.replace_with("")
 
-    print "Remove comments scripts"
+    print "Remove comments from scripts"
     scripts = re.compile(r'\s//.*$', re.MULTILINE).sub('', scripts)
 
     tag = soup.new_tag("script", type="text/javascript")
     tag.string = scripts
 
     soup.head.insert(2, tag)
-
-
-
 
     result = soup.prettify(formatter=None)
     open(output, "w").write(result.encode('utf-8'))

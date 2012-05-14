@@ -1,10 +1,6 @@
-/* TEMP { */
-.hidden { display: none; }
-.unhidden { display: block; }
-/* TEMP } */
+body {
+	font-size: 12px;
 
-.buttonSmall {
-	font-size: .6em !important;
 }
 
 #divCopyright {
