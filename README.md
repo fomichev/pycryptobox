@@ -2,6 +2,9 @@
 
 TODO: Put some info about architecture here...
 
+## Bookmarklets
+
+TODO: Describe why and what they do...
 
 # Required python modules:
 

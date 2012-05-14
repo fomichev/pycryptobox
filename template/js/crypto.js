@@ -7,29 +7,48 @@ function decrypt(pass, salt, cipher) {
 }
 
 function unlock(pwd) {
-	var text=decrypt(pwd, _cfg_salt, _cfg_cipher);
-
-	document.getElementById("cipher").innerHTML=createHiddenOnClick("JSON", text);
-
+	var text = decrypt(pwd, _cfg_salt, _cfg_cipher);
 	var data = eval(text);
+	text = "";
 
-	var text = "";
+	var site = "";
+	var app = "";
+	var bookmark = "";
+	var card = "";
+	var note = "";
+
+
 	for (var i = 0; i < data.length; i++) {
 		var el = data[i];
 
 		if (el.type == 'site') {
-			text += createLink(el.name, el.address, el.form, el.vars.username, el.vars.password);
+			site += createLink(el.name, el.address, el.form, el.vars.username, el.vars.password);
+		} else if (el.type == 'app') {
+			app += createApp(el.name, el.data.key);
+		} else if (el.type == 'bookmark') {
+			bookmark += createBookmark(el.name, el.data.url);
 		} else if (el.type == 'card') {
-			text += createCard(el.name, el.data.cardholder, el.data.cvv2, el.data.number, el.data.pin);
+			card += createCard(el.name, el.data.cardholder, el.data.cvv2, el.data.number, el.data.pin);
 		} else if (el.type == 'note') {
-			text += createNote(el.name, el.data.text);
+			note += createNote(el.name, el.data.text);
 		}
 	}
 
-	document.getElementById("links").innerHTML=text;
+	document.getElementById("site").innerHTML = site;
+	document.getElementById("app").innerHTML = app;
+	document.getElementById("bookmark").innerHTML = bookmark;
+	document.getElementById("card").innerHTML = card;
+	document.getElementById("note").innerHTML = note;
+
+	document.getElementById("plaintext").innerHTML = createHiddenOnClick("JSON", text);
 }
 
 function lock() {
-	document.getElementById("cipher").innerHTML="";
-	document.getElementById("links").innerHTML="";
+	document.getElementById("site").innerHTML = "";
+	document.getElementById("app").innerHTML = "";
+	document.getElementById("bookmark").innerHTML = "";
+	document.getElementById("card").innerHTML = "";
+	document.getElementById("note").innerHTML = "";
+
+	document.getElementById("plaintext").innerHTML = "";
 }

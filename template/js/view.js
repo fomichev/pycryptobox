@@ -33,6 +33,23 @@ function withToken(form) {
 	return "";
 }
 
+function createApp(name, key) {
+	var r = "";
+
+	r += "<h1>" + name + "</h1>";
+	r += '<p>' + createHiddenOnClick("Detailed data", key) + '</p>';
+
+	return r;
+}
+
+function createBookmark(name, url) {
+	var r = "";
+
+	r += "<h1><a href=\"" + url + "\" target=\"_blank\">" + name + "</a></h1>";
+
+	return r;
+}
+
 function createLink(name, address, form, username, password) {
 	var url = form.action;
 	var title = name + " (" + username + ")"

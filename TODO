@@ -2,3 +2,4 @@
 - add support for HERE DOCUMENT in the db (to be possible to enter multiline values)
 - simplify usage of token based authentication
 - add .cryptoboxrc support
+- add HMAC support to HTML

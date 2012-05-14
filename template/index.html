@@ -1,7 +1,8 @@
 <html>
 	<head>
-		<title>My Password Database</title>
+		<title>Cryptobox</title>
 		<link rel="stylesheet" type="text/css" href="../template/css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../template/css/theme/default.css" />
 
 		<script type="text/javascript" src="../template/js/open.js"></script>
 		<script type="text/javascript" src="../template/js/view.js"></script>
@@ -58,37 +59,14 @@ function doGeneratePassword() {
 	generatePassword(length, includeNumbers, includePunc, includeUc, pronounceable);
 }
 
+function doEnableMenu(name) {
+	document.getElementById("site").className = "hidden";
+	document.getElementById("app").className = "hidden";
+	document.getElementById("bookmark").className = "hidden";
+	document.getElementById("card").className = "hidden";
+	document.getElementById("note").className = "hidden";
 
-
-
-
-
-function ProcessRequest() {
-}
-
-function test() {
-	/*
-	Url = "https://github.com/login"
-	xmlHttp = new XMLHttpRequest(); 
-	xmlHttp.onreadystatechange = ProcessRequest;
-	xmlHttp.open( "GET", Url, true );
-	xmlHttp.send( null );
-
-	return;
-	*/
-
-	/*
-	var newWindow = window.open("https://github.com", "Read authenticity token",
-			"status = no, toolbar = no, location = no, left = 9999, top = 9999, width = 1, height = 1");
-
-	alert(newWindow.document.getElementsByName("authenticity_token")[0].value);
-
-
-
-	newWindow.close();
-	*/
-
-//	updatepage("hello");
+	document.getElementById(name).className = "unhidden";
 }
 
 		</script>
@@ -101,18 +79,10 @@ function test() {
 		<div id="layoutLocked" class="unhidden">
 			<div id="wrapper">
 				<div id="container">
-
-					<!--
-					<iframe id="ifr" src="https://github.com/login"></iframe>
-					<div id="result"></div>
-
-					<a href="#" onclick="javascript:test();">text</a>
-					-->
-
-					<form onsubmit="javascript:doUnlock();return false;">
-					<h1>Enter password to unlock</h1>
-					<p><input type="password" id="pwd" /></p>
-					<p><input type="submit" value="Unlock" /></p>
+					<form onSubmit="javascript:doUnlock();return false;">
+						<h1>Enter password to unlock</h1>
+						<p><input type="password" id="pwd" /></p>
+						<p><input type="submit" value="Unlock" /></p>
 					</form>
 
 				</div>
@@ -120,21 +90,35 @@ function test() {
 		</div>
 
 		<div id="layoutUnlocked" class="hidden">
-
-			<div>
-				<a href="#" onClick='javascript:doLock();'>Lock</a>
+			<div id="header">
+				<a href="#" onClick='javascript:doLock();return false;'>(Lock)</a>
+				<a href="#" onClick='javascript:doShowPasswordBox();return false;'>(Generate password)</a>
 			</div>
 
-			<div>
-				<a href="#" onClick='javascript:doShowPasswordBox();'>Gen password</a>
+			<hr/>
+
+			<div id="menu">
+				<a href="#" onClick='javascript:doEnableMenu("site");return false;'>Sites</a>
+				|
+				<a href="#" onClick='javascript:doEnableMenu("app");return false;'>Apps</a>
+				|
+				<a href="#" onClick='javascript:doEnableMenu("bookmark");return false;'>Bookmarks</a>
+				|
+				<a href="#" onClick='javascript:doEnableMenu("card");return false;'>Cards</a>
+				|
+				<a href="#" onClick='javascript:doEnableMenu("note");return false;'>Notes</a>
 			</div>
 
-
-
-			<hr/>
-			<div id="links"></div>
-			<hr/>
-			<div id="cipher"></div>
+			<div id="secret">
+				<hr/>
+				<div id="site"></div>
+				<div id="app" class="hidden"></div>
+				<div id="bookmark" class="hidden"></div>
+				<div id="card" class="hidden"></div>
+				<div id="note" class="hidden"></div>
+				<hr/>
+				<div id="plaintext"></div>
+			</div>
 
 
 
@@ -150,16 +134,19 @@ function test() {
 
 				Generated password: <div id="pwd2"></div>
 
-				<a href="javascript:doGeneratePassword();">Generate Password</a>
+				<a href="#" onClick="javascript:doGeneratePassword();return false;">Generate Password</a>
 
-				<a href="#" onClick='javascript:doShowPasswordBox();'>Close</a>
+				<a href="#" onClick='javascript:doShowPasswordBox();return false;'>Close</a>
 			</div>
 
 			<hr />
-			Bookmarklet:
-			<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a>
+			<div id="bookmarklets">
+				Bookmarklet:
 
-			<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/token.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Get token</a>
+				(<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a>)
+
+				(<a href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/token.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Get token</a>)
+			</div>
 		</div>
 	</body>
 </html>
