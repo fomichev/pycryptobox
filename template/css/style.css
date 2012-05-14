@@ -1,38 +1,20 @@
+/* TEMP { */
 .hidden { display: none; }
 .unhidden { display: block; }
+/* TEMP } */
 
-.password_box {
-	position: absolute;
-	left: 180;
-	top: 25;
-	z-index: 10;
-	display: block;
-	background-color: #aaaaaa;
-	width: 300;
-	height: 300;
+.buttonSmall {
+	font-size: .6em !important;
 }
 
-#copyright {
+#divCopyright {
 	text-align: center;
 }
 
-#header {
+#divHeader {
 	text-align: right;
 }
 
-#wrapper {
-	position: absolute;
-	bottom: 50%;
-	right: 50%;
-	height: 200px;
-	width: 400px;
+#divLocked {
 	text-align: center;
-
-	/*background-color: #cccccc;*/
-}
-#container {
-	position: relative;
-	left: 50%;
-	top: 50%;
-	/*background-color: #77cccc;*/
 }
