@@ -25,19 +25,19 @@ TODO: Put some info about architecture here...
 
 - create database (creates empty private/cryptobox and private/cryptobox.hmac)
 
-	$ ./create_db
+	$ ./cbcreate
 
 - edit your database (it will also update html page at private/cryptobox.html)
 
-	$ ./edit_db
+	$ ./cbedit
 
 - change password (every couple months)
 
-	$ ./password_db
+	$ ./cbpasswd
 
 - update html page (perform html page update without update to database - for development)
 
-	$ ./update_html
+	$ ./cbhtml
 
 # Used components
 
@@ -82,10 +82,27 @@ TODO: Put some info about architecture here...
 		name=note
 		text=with body
 
-# Works on
+	app:
+		name=Photoshop
+		key=secret
+
+	bookmark:
+		name=Google
+		url=http://google.com
+
+# Works on (where it has been testes)
+
+## Mac OS X
 
 - Chrome
 
+- Safari
+
+## Windows XP
+
+- Chrome
+
+## iOS
+
 - iPhone
 
-- Safari
