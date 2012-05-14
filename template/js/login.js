@@ -1,4 +1,4 @@
-function openPostWithToken(url, name, keys, values, token) {
+function loginWithToken(url, name, keys, values, token) {
 	$("#div-token").dialog({
 		height: 140,
 		width: 280,
@@ -15,20 +15,20 @@ function openPostWithToken(url, name, keys, values, token) {
 
 				$("#input-token").val("");
 				$(this).dialog('close');
-				openPost(url, name, keys, values);
+				login(url, name, keys, values);
 			},
 			"Cancel": function() { $(this).dialog('close'); }
 		}
 	});
 }
 
-function openPost(url, name, keys, values) {
+function login(method, url, name, keys, values) {
 	var newWindow = window.open(url, name);
 	if (!newWindow)
 		return false;
 
 	var html = "";
-	html += "<html><head></head><body><form id='formid' method='post' action='";
+	html += "<html><head></head><body><form id='formid' method='" + method + "' action='";
 	html +=url;
 	html += "'>";
 
