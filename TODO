@@ -6,4 +6,4 @@
 - add HMAC support to HTML
 - use external repositories when possible (jQuery, CryproJS)
 - use https://developers.google.com/closure/compiler/ to compress js
-- remote JSON tab from non-debug builds
+- add lock timeout (and make it configurable via cfg.py)

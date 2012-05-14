@@ -40,12 +40,11 @@ $(document).ready(function() {
 		event.preventDefault();
 		try {
 			map = unlock($("#inputPassword").val());
-			$("#accordion_site").html(map.site);
-			$("#accordion_app").html(map.app);
-			$("#accordion_bookmark").html(map.bookmark);
-			$("#accordion_card").html(map.card);
-			$("#accordion_note").html(map.note);
-			$("#accordion_json").html(map.json);
+			$("#site").html(map.site);
+			$("#app").html(map.app);
+			$("#bookmark").html(map.bookmark);
+			$("#card").html(map.card);
+			$("#note").html(map.note);
 
 			$("#inputPassword").val("");
 			$("#divLocked").hide();
@@ -80,12 +79,11 @@ $(document).ready(function() {
 		$("#divLocked").show();
 		$("#divUnlocked").hide();
 
-		$("#accordion_site").html("");
-		$("#accordion_app").html("");
-		$("#accordion_bookmark").html("");
-		$("#accordion_card").html("");
-		$("#accordion_note").html("");
-		$("#accordion_json").html("");
+		$("#site").html("");
+		$("#app").html("");
+		$("#bookmark").html("");
+		$("#card").html("");
+		$("#note").html("");
 	});
 
 	$("#buttonGenerateShow").click(function(event) {
@@ -143,29 +141,20 @@ $(document).ready(function() {
 					<li><a href="#bookmark">Bookmarks</a></li>
 					<li><a href="#card">Cards</a></li>
 					<li><a href="#note">Notes</a></li>
-					<li><a href="#json">JSON</a></li>
-					<li><a href="#bookmarklet">Bookmarklets</a></li>
+					<li><a href="#help">Help</a></li>
 				</ul>
 
-				<div id="site">
-					<div class="accordion" id="accordion_site"></div>
-				</div>
-				<div id="app">
-					<div class="accordion" id="accordion_app"></div>
-				</div>
-				<div id="bookmark">
-					<div class="accordion" id="accordion_bookmark"></div>
-				</div>
-				<div id="card">
-					<div class="accordion" id="accordion_card"></div>
-				</div>
-				<div id="note">
-					<div class="accordion" id="accordion_note"></div>
-				</div>
-				<div id="json">
-					<div class="accordion" id="accordion_json"></div>
-				</div>
-				<div id="bookmarklet">
+				<div id="site"></div>
+				<div id="app"></div>
+				<div id="bookmark"></div>
+				<div id="card"></div>
+				<div id="note"></div>
+				<div id="help">
+					<h2>Help</h2>
+					<p>There will be user documentation... Someday...</p>
+
+					<h2>Bookmarklets</h2>
+
 					<h3><a id="bookmarkletForm" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='https://raw.github.com/fomichev/cryptobox/master/template/bookmarklet/form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a></h3>
 					<p>Use this bookmarklet to obtain form data from the new sites.</p>
 

@@ -85,6 +85,10 @@ function createNote(name, text) {
 	return accordionItem(name, text);
 }
 
+function accordion(text) {
+	return '<div class="accordion">' + text + '</div>';
+}
+
 function unlock(pwd) {
 	var text = decrypt(pwd, _cfg_salt, _cfg_cipher);
 	var data = eval(text);
@@ -112,7 +116,11 @@ function unlock(pwd) {
 		}
 	}
 
-	map.json = accordionItem("JSON", '<pre>' + text + '</pre>');
+	map.site = accordion(map.site);
+	map.app = accordion(map.app);
+	map.bookmark = accordion(map.bookmark);
+	map.card = accordion(map.card);
+	map.note = accordion(map.note);
 
 	return map;
 }
