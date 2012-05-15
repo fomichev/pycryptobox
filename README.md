@@ -30,15 +30,15 @@ TODO: Describe why and what they do...
 
 	$ ./cbcreate
 
-- edit your database (it will also update html page at private/cryptobox.html)
+- edit your database (it will also update html page at private/html/cryptobox.html and at private/html/m.cryptobox.html)
 
 	$ ./cbedit
 
-- change password (every couple months)
+- change password (every couple of months)
 
 	$ ./cbpasswd
 
-- update html page (perform html page update without update to database - for development)
+- update html page (perform html page update without update to database - only for development)
 
 	$ ./cbhtml
 
@@ -115,17 +115,10 @@ TODO: Describe why and what they do...
 
 # Works on (where it has been tested)
 
-## Mac OS X
-
-- Chrome
+- Chrome 18
 
 - Safari
 
-## Windows XP
+- Firefox 11, 12
 
-- Chrome
-
-## iOS
-
-- iPhone
-
+- iPhone (iOS 5)
