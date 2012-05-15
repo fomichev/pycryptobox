@@ -2,10 +2,6 @@ function accordionItem(header, body) {
 	return '<h3><a href="#">' + header + '</a></h3><div>' + body + '</div>';
 }
 
-function createList(id, name) {
-	return "";
-}
-
 function createLink(id, name, address, form, username, password) {
 	var hocid = 0;
 	function collapsible(name, value) {
@@ -54,6 +50,32 @@ function createNote(name, text) {
 	return accordionItem(name, text);
 }
 
-function accordion(text) {
-	return '<div class="generated"><div class="accordion">' + text + '</div></div>';
+function viewCreatePage(id, type, data) {
+	if (type == 'site')
+		return createLink(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
+	else if (type == 'app')
+		return createApp(id, data.name, data.data.key);
+	else if (type == 'bookmark')
+		return createBookmark(data.name, data.data.url, data.data.comment);
+	else if (type == 'card')
+		return createCard(data.name, data.data.cardholder, data.data.cvv2, data.data.number, data.data.pin);
+	else if (type == 'note')
+		return createNote(data.name, data.data.text);
+}
+
+function viewCreateList(id, type, data) {
+	return "";
+}
+
+function viewWrapTag(tag, text) {
+	if (tag != '__default__')
+		tag = '<h4>' + tag + '</h4>';
+	else
+		tag = '';
+
+	return tag + '<div class="generated"><div class="accordion">' + text + '</div></div>';
+}
+
+function viewWrapPage(text) {
+	return text;
 }

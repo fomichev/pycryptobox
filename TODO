@@ -4,10 +4,12 @@ Optimizations:
 - use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small)
 
 Features:
-- remove token.js bookmarklet and use (modified) get form to parse out token
 - add support for HERE DOCUMENT in the db (to be possible to enter multiline values)
 - add support for include/ directory under private/
 - add some validation for DB and include/
+- add support for multiple tokens
+- add support for db tags (@tag)
+- add tags support
 
 Noncritical features:
 - add .cryptoboxrc support

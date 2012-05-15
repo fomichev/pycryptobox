@@ -42,7 +42,7 @@ def set_vars(obj, v):
             set_vars(i, v);
 
 
-def flatten_node(prefix, tp, v):
+def flatten_node(prefix, tp, v, tag):
     print "Read " + prefix + tp
 
     data = open(prefix + tp, "r").read().decode('utf-8')
@@ -52,6 +52,11 @@ def flatten_node(prefix, tp, v):
     set_vars(jdata, v)
     jdata['vars'] = v
 
+    if len(tag) == 0:
+        jdata['tag'] = '__default__'
+    else:
+        jdata['tag'] = tag
+
     return jdata
 
 def flatten(lines, prefix):
@@ -59,23 +64,24 @@ def flatten(lines, prefix):
     logins.append({ "type" : "magic", "value": "270389" })
 
     tp = None
+    tag = ''
     v = {}
     for line in lines:
         line = line.strip()
 
-        if len(line) <= 1:
+        if len(line) == 0:
             continue
 
         if line[0] == '#':
             continue
 
         if line[0] == '@':
-            # handle groups?!
+            tag = line[1:].strip()
             continue
 
         if line[len(line) - 1] == ':':
             if tp:
-                logins.append(flatten_node(prefix, tp, v))
+                logins.append(flatten_node(prefix, tp, v, tag))
                 v = {}
 
             tp = line[:-1]
@@ -85,7 +91,7 @@ def flatten(lines, prefix):
             v[keyval[0]] = keyval[1]
 
     if tp:
-        logins.append(flatten_node(prefix, tp, v))
+        logins.append(flatten_node(prefix, tp, v, tag))
 
     padding = "                " # somehow JS decrypt eats fist 16 symbols
     return padding + json.dumps(logins, sort_keys=True, indent=4)

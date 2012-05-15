@@ -16,7 +16,6 @@ function loginWithToken(url, name, keys, values, token) {
 					for (var field in data[i].form.fields) {
 						if (field == token) {
 							token_value = data[i].form.fields[field];
-							break;
 						}
 					}
 				}

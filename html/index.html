@@ -70,15 +70,15 @@ $(document).ready(function() {
 
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
-		try {
 			map = unlock($("#input-password").val());
+		try {
 			$("#input-password").val("");
 
-			$("#site").html(map.site);
-			$("#app").html(map.app);
-			$("#bookmark").html(map.bookmark);
-			$("#card").html(map.card);
-			$("#note").html(map.note);
+			$("#site").html(map.page.site);
+			$("#app").html(map.page.app);
+			$("#bookmark").html(map.page.bookmark);
+			$("#card").html(map.page.card);
+			$("#note").html(map.page.note);
 
 			$("#div-locked").hide();
 			$("#div-unlocked").show();
