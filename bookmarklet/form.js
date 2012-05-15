@@ -39,10 +39,10 @@ for (var i = 0; i < document.forms.length; i++) {
 	if (text == "")
 		text += '[\n';
 	else
-		text += '\n,\n';
+		text += ',\n';
 	text += '{\n\t"type":"site",\n\t"name": "' + name + '",\n\t"address": "' + address + '",\n\t"form":\n\t{\n' + form_text + '\n\t}\n}\n';
 }
 
-text += "\n]";
+text += "]";
 
 openPre(text);
