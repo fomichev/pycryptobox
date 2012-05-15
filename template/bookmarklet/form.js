@@ -19,11 +19,9 @@ var body = document.getElementsByTagName("body")[0];
 var text = "";
 
 for (var i = 0; i < document.forms.length; i++) {
-	var form = document.forms[i];
-
-	var form_elements =  "len = " + form.elements.length;
-	for (var j = 0; j < form.elements.length; j++) {
-		var el = form.elements[j];
+	var form_elements =  "len = " + document.forms[i].elements.length;
+	for (var j = 0; j < document.forms[i].elements.length; j++) {
+		var el = document.forms[i].elements[j];
 
 		if (el.name != "") {
 			if (form_elements == "")
@@ -35,7 +33,7 @@ for (var i = 0; i < document.forms.length; i++) {
 		}
 	}
 
-	var form_text = '\t\t"action": "' + form.action + '",\n\t\t"method": "' + form.method + '",\n\t\t"fields":\n\t\t{\n' + form_elements + '\n\t\t}';
+	var form_text = '\t\t"action": "' + document.forms[i].action + '",\n\t\t"method": "' + document.forms[i].method + '",\n\t\t"fields":\n\t\t{\n' + form_elements + '\n\t\t}';
 	text += '{\n\t"type":"site",\n\t"name": "' + name + '",\n\t"address": "' + address + '",\n\t"form":\n\t{\n' + form_text + '\n\t}\n}\n';
 }
 
