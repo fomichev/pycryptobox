@@ -113,7 +113,7 @@ TODO: Describe why and what they do...
 		name=Google
 		url=http://google.com
 
-# Works on (where it has been testes)
+# Works on (where it has been tested)
 
 ## Mac OS X
 

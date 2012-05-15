@@ -116,17 +116,20 @@ $(document).ready(function() {
 
 	$("#button-generate-show").click(function(event) {
 		event.preventDefault();
-		$("#div-generate").dialog();
-	});
-
-	$("#button-generate").click(function(event) {
-		event.preventDefault();
-		$("#intput-generated-password").val(generatePassword(
-			$("#input-password-length").val(),
-			$("#input-include-num").is(":checked"),
-			$("#input-include-punc").is(":checked"),
-			$("#input-include-uc").is(":checked"),
-			$("#input-pronounceable").is(":checked")));
+		$("#div-generate").dialog({
+			resizable: false,
+			buttons: {
+				"Generate": function() {
+					$("#intput-generated-password").val(generatePassword(
+						$("#input-password-length").val(),
+						$("#input-include-num").is(":checked"),
+						$("#input-include-punc").is(":checked"),
+						$("#input-include-uc").is(":checked"),
+						$("#input-pronounceable").is(":checked")));
+				},
+				"Cancel": function() { $(this).dialog('close'); }
+			}
+		});
 	});
 
 	$("#input-pronounceable").click(function() {
@@ -199,12 +202,8 @@ $(document).ready(function() {
 					<input type="checkbox" id="input-include-punc" checked />Include punctuation<br />
 					<input type="checkbox" id="input-include-uc" checked />Include upper case<br />
 					<input type="checkbox" id="input-pronounceable" />Make pronounceable<br />
-				</form>
-
-				Generated password:
-				<form>
+					<p>Generated password:</p>
 					<p><input type="text" id="intput-generated-password" size="30" /></p>
-					<p><input type="submit" id="button-generate" class="button" value="Generate" /></p>
 				</form>
 			</div>
 
