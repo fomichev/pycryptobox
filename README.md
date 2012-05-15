@@ -2,8 +2,8 @@
 
 Cryptobox is a bunch of python scripts that will help you manage your
 passwords database. The idea is simple: you have some encrypted file
-(private/cryptobox) where you store your sensitive information. To edit
-it you use special script (cbedit) which will open your favorite editor
+(`private/cryptobox`) where you store your sensitive information. To edit
+it you use special script (`cbedit`) which will open your favorite editor
 and let you update passwords/bookmarks/notes/etc. When the editor is
 closed, `cbedit` will create beautiful and easy to navigate HTML page with
 all your sensitive information (encrypted). This HTML page will also
@@ -14,7 +14,7 @@ password.
 
 ## Guts
 
-Your sensitive information is stored in the private/cryptobox file,
+Your sensitive information is stored in the `private/cryptobox` file,
 encrypted via AES; key is derived from your password using PBKDF2.
 
 When `cbedit` generates HTML, it parses your data, merges it with JSON
@@ -122,7 +122,7 @@ TODO: Describe why and what they do...
 	card:
 		name=bank
 		cardholder=Jonh Smith
-		n=1234 5678 9012 3456
+		number=1234 5678 9012 3456
 		pin=1234
 		cvv=123
 
