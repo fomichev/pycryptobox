@@ -25,13 +25,14 @@ for (var i = 0; i < document.forms.length; i++) {
 	for (var j = 0; j < form.elements.length; j++) {
 		var el = form.elements[j];
 
-		if (el.name == "")
-			continue;
-
-		if (form_elements == "")
-			form_elements = '\t\t\t"' + el.name + '": "' + el.value + '"';
-		else
-			form_elements += ',\n\t\t\t"' + el.name + '": "' + el.value + '"';
+		if (el.name != "") {
+			if (form_elements == "")
+				form_elements = '\t\t\t"' + el.name + '": "' + el.value + '"';
+			else
+				form_elements += ',\n\t\t\t"' + el.name + '": "' + el.value + '"';
+		} else {
+				form_elements = '((((' + el.id + '))))';
+		}
 	}
 
 	var form_text = '\t\t"action": "' + form.action + '",\n\t\t"method": "' + form.method + '",\n\t\t"fields":\n\t\t{\n' + form_elements + '\n\t\t}';
