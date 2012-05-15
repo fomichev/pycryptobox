@@ -10,7 +10,7 @@ def getimg(path):
     data = "".join(open(path, "rb").read().encode('base64').split("\n"))
     return "data:image/png;base64," + data
 
-def embed(index, output):
+def embed(index, output, cfg):
     soup = BeautifulSoup(open(index).read().decode('utf-8'))
 
     print "Embed stylesheets"
@@ -51,7 +51,7 @@ def embed(index, output):
     scripts = re.compile(r'\s//.*$', re.MULTILINE).sub('', scripts)
 
     tag = soup.new_tag("script", type="text/javascript")
-    tag.string = scripts
+    tag.string = cfg + scripts
 
     soup.head.insert(2, tag)
 

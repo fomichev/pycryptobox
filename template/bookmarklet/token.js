@@ -27,7 +27,7 @@ for (var i = 0; i < document.forms.length; i++) {
 		if (el.name == "")
 			continue;
 
-		if (el.name.match("token")) {
+		if (el.name.match("token") || el.name.match("__VIEWSTATE")) {
 			text += el.name + ": " + el.value;
 		}
 	}

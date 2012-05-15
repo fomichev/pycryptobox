@@ -8,6 +8,10 @@
 		"method": "post",
 		"fields":
 		{
+			"__EVENTTARGET": "",
+			"__EVENTARGUMENT": "",
+			"__VIEWSTATE": "@token",
+			"__VIEWSTATEENCRYPTED": "",
 			"ctl00$right$RightPanelLogin$vtcUserName": "$username",
 			"ctl00$right$RightPanelLogin$vtcPassword": "$password",
 			"ctl00$right$RightPanelLogin$btnLogin": "Войти"
