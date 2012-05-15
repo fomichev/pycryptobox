@@ -1,3 +1,20 @@
+function copyToClipboard(text) {
+	var t = '';
+	var pathToClippy = 'clippy.swf';
+
+        t += '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="110" height="14">';
+        t += '<param name="movie" value="' + pathToClippy + '"/>';
+        t += '<param name="allowScriptAccess" value="always" />';
+        t += '<param name="quality" value="high" />';
+        t += '<param name="scale" value="noscale" />';
+        t += '<param NAME="FlashVars" value="text=#' + text + '">';
+        t += '<param name="bgcolor" value="#fff">';
+        t += '<embed src="' + pathToClippy + '" width="110" height="14" name="clippy" quality="high" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="text=' + text + '" bgcolor="#fff" />';
+        t += '</object>';
+
+	return t;
+}
+
 function withToken(form) {
 	for (var key in form.fields) {
 		var value = form.fields[key];

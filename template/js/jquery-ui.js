@@ -9,7 +9,7 @@ function createList(id, name) {
 function createLink(id, name, address, form, username, password) {
 	var hocid = 0;
 	function collapsible(name, value) {
-		return '<div class="expand"><strong>' + name + '</strong> (click to expand/collapse)</div><div>' + value + '</div>';
+		return '<div class="expand"><a href="#" onClick="javascript:return false;"><strong>' + name + '</strong> (click to expand/collapse)</a></div><div>' + value + '</div>';
 	}
 
 	var title = name + " (" + username + ")"
@@ -23,13 +23,11 @@ function createLink(id, name, address, form, username, password) {
 		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', "' + token + '"); return false;\'>Login</a>';
 	} else {
 		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>Login</a>';
-
 	}
 
-
 	r += '<a class="button-goto" href="' + address + '" target="_blank">Go to site</a>';
-	r += '<p>' + collapsible("Username", username) + '</p>';
-	r += '<p>' + collapsible("Password", password) + '</p>';
+	r += '<p>' + collapsible("Username", username + ' ' + copyToClipboard(username)) + '</p>';
+	r += '<p>' + collapsible("Password", password + ' ' + copyToClipboard(password)) + '</p>';
 
 	return accordionItem(title, r);
 }

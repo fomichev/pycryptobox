@@ -12,4 +12,4 @@ Noncritical features:
 - add .cryptoboxrc support
 
 Someday:
-- simplify usage of token based authentication
+- simplify usage of token based authentication (maybe find another way around this crappy forms?!)

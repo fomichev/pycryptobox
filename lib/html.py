@@ -54,6 +54,9 @@ def update(password):
 
     print "> cryptobox.html"
     embed.embed(path_tmp_index, path_index, cfg_js)
+    print "Copy clippy.swf"
+    shutil.copyfile(cfg.path_clippy, os.path.dirname(path_index) + "/clippy.swf")
+
     print "> m.cryptobox.html"
     embed.embed(path_tmp_mobile_index, path_mobile_index, cfg_js)
 

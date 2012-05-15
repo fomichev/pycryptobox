@@ -76,6 +76,14 @@ TODO: Describe why and what they do...
 
 	template/extern/jquery-mobile
 
+
+- Clippy https://github.com/mojombo/clippy (MIT)
+
+	template/extern/clippy
+
+	private/html/clippy.swf
+
+
 # Database example
 
 	site/dropbox.com:
