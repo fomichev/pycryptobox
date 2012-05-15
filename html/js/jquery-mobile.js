@@ -9,6 +9,7 @@ function page(id, header, data) {
 	t += '<div data-role="header">';
 	t += '<h1>' + header + '</h1>';
 	t += '<a data-rel="back" href="#">Back</a>';
+	t += '<a class="button-lock" href="#" data-icon="delete">Lock</a>';
 	t += '</div>';
 	t += '<div data-role="content">';
 	t += data;
@@ -29,10 +30,9 @@ function createLink(id, name, address, form, username, password) {
 		
 		t += '\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
 		t += 'data-role="button">Login</a>';
-	} else {
-		t += '<p>No one click login for forms with tokens!</p>';
 	}
 
+	t += '<a href="' + address + '" data-role="button">Go to site</a>';
 	t += collapsible("Show username", username);
 	t += collapsible("Show password", password);
 
@@ -86,9 +86,13 @@ function viewWrapPageTag(tag, text) {
 
 function viewWrapListTag(tag, text) {
 	if (tag != '__default__')
-		tag = '<h4>' + tag + '</h4>';
+		tag = '<li data-role="list-divider">' + tag + '</li>';
 	else
 		tag = '';
 
-	return tag + '<ul data-role="listview" data-inset="true">' + text + '</ul>';
+	return tag + text;
+}
+
+function viewWrapList(text) {
+	return '<ul data-role="listview" data-inset="true" data-filter="true">' + text + '</ul>';
 }

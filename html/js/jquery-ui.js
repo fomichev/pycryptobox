@@ -81,3 +81,7 @@ function viewWrapPageTag(tag, text) {
 function viewWrapListTag(tag, text) {
 	return text;
 }
+
+function viewWrapList(text) {
+	return text;
+}

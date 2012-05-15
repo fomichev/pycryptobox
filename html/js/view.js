@@ -98,7 +98,7 @@ function unlock(pwd) {
 		}
 
 		map.page[page] = text;
-		map.list[page] = list;
+		map.list[page] = viewWrapList(list);
 	}
 
 	return map;
