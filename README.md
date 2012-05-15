@@ -1,10 +1,35 @@
 # Overview
 
-TODO: Put some info about architecture here...
+Cryptobox is a bunch of python scripts that will help you manage your
+passwords database. The idea is simple: you have some encrypted file
+(private/cryptobox) where you store your sensitive information. To edit
+it you use special script (cbedit) which will open your favorite editor
+and let you update passwords/bookmarks/notes/etc. When the editor is
+closed, `cbedit` will create beautiful and easy to navigate HTML page with
+all your sensitive information (encrypted). This HTML page will also
+contain JavaScript code which can decrypt your data when given correct
+password.
+
+... go on ...
+
+## Guts
+
+Your sensitive information is stored in the private/cryptobox file,
+encrypted via AES; key is derived from your password using PBKDF2.
+
+When `cbedit` generates HTML, it parses your data, merges it with JSON
+patterns from include/ directory (more on this later), encrypts it using
+AES/PBKDF2 and puts this information into HTML page. Later on, when you
+open it in the browser, it will ask your password and decrypt attached
+database on the fly.
+
+... go on ...
 
 ## Bookmarklets
 
 TODO: Describe why and what they do...
+
+## Extending / Adding new site
 
 # Required python modules:
 
