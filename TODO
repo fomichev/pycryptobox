@@ -7,6 +7,7 @@ Features:
 - remove token.js bookmarklet and use (modified) get form to parse out token
 - add support for HERE DOCUMENT in the db (to be possible to enter multiline values)
 - add support for include/ directory under private/
+- add some validation for DB and include/
 
 Noncritical features:
 - add .cryptoboxrc support

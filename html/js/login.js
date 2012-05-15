@@ -5,15 +5,31 @@ function loginWithToken(url, name, keys, values, token) {
 		modal: true,
 		buttons: {
 			"Login": function() {
-				var token_value = $("#input-token").val();
+				var form_json = $("#input-json").val();
+				var token_value = "";
 
-				if (!token_value || token_value == "")
+				if (!form_json || form_json == "")
 					return;
+
+				var data = eval(form_json);
+				for (var i = 0; i < data.length; i++) {
+					for (var field in data[i].form.fields) {
+						if (field == token) {
+							token_value = data[i].form.fields[field];
+							break;
+						}
+					}
+				}
+
+				if (token_value == "") {
+					alert("Token value not found! Make sure form layout didn't change!");
+					return;
+				}
 
 				keys.push(token);
 				values.push(token_value);
 
-				$("#input-token").val("");
+				$("#input-json").val("");
 				$(this).dialog('close');
 				login("post", url, name, keys, values);
 			},

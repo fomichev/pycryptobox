@@ -185,13 +185,10 @@ $(document).ready(function() {
 					<h2>Help</h2>
 					<p>There will be user documentation... Someday...</p>
 
-					<h2>Bookmarklets</h2>
+					<h2>Bookmarklet</h2>
 
 					<h3><a id="bookmarkletForm" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a></h3>
 					<p>Use this bookmarklet to obtain form data from the new sites.</p>
-
-					<h3><a id="bookmarkletToken" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>token.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Get token</a></h3>
-					<p>Use this bookmarklet to search for security token.</p>
 				</div>
 			</div>
 
@@ -208,7 +205,7 @@ $(document).ready(function() {
 			</div>
 
 			<div id="div-token" title="Enter token">
-				<input type="text" id="input-token" size="32" />
+				<input type="text" id="input-json" size="32" />
 			</div>
 
 			<div id="div-copyright" class="ui-widget"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a>, 2012</p></div>
