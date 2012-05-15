@@ -37,9 +37,13 @@ def embed(index, output):
     scripts = ""
     for s in soup.find_all("script", type="text/javascript"):
         try:
-            scripts += open(s['src']).read()
+            print "Embed " + s['src']
+            scripts += open(s['src']).read().decode('utf-8')
         except:
-            scripts += s.string
+            try:
+                scripts += s.string
+            except:
+                print "! Script or tag seem to be empty"
 
         s.replace_with("")
 

@@ -35,11 +35,16 @@ def update(password):
     index_html = generate.html(cfg.path_template + "/index.html")
     open(cfg.path_tmp + "/index.html", "w").write(index_html)
 
+    m_index_html = generate.html(cfg.path_template + "/m.index.html")
+    open(cfg.path_tmp + "/m.index.html", "w").write(m_index_html)
+
+
     cfg_js = generate.config(aes_base64_nonl)
     open(cfg.path_tmp + "/cfg.js", "w").write(cfg_js)
 
     os.chdir(cfg.path_tmp)
     embed.embed("index.html", "../" + cfg.path_db_html)
+    embed.embed("m.index.html", "../" + cfg.path_db_mobile_html)
 
     if debug_html == False:
         os.chdir("..")

@@ -15,7 +15,7 @@ function loginWithToken(url, name, keys, values, token) {
 
 				$("#input-token").val("");
 				$(this).dialog('close');
-				login(url, name, keys, values);
+				login("post", url, name, keys, values);
 			},
 			"Cancel": function() { $(this).dialog('close'); }
 		}

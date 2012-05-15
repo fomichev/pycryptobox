@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>Cryptobox Mobile</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" type="text/css" href="../template/extern/jquery-mobile/jquery.mobile-1.1.0.css" />
+
+		<script type="text/javascript" src="../template/extern/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="../template/extern/jquery-mobile/jquery.mobile-1.1.0.js"></script>
+
+		<script type="text/javascript" src="../template/extern/cjs/crypto/crypto.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/blockmodes/blockmodes.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/aes/aes.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/hmac/hmac.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/sha1/sha1.js"></script>
+		<script type="text/javascript" src="../template/extern/cjs/pbkdf2/pbkdf2.js"></script>
+
+		<script type="text/javascript" src="./cfg.js"></script>
+		<script type="text/javascript" src="../template/js/login.js"></script>
+		<script type="text/javascript" src="../template/js/jquery-mobile.js"></script>
+		<script type="text/javascript" src="../template/js/view.js"></script>
+		<script type="text/javascript" src="../template/js/crypto.js"></script>
+
+		<script type="text/javascript">
+$(document).ready(function() {
+
+	$("#form-unlock").submit(function(event) {
+		event.preventDefault();
+
+		try {
+			map = unlock($("#input-password").val());
+			$("#input-password").val("");
+
+			$("#list-site").html(map.listSite);
+			$("body").append(map.site);
+
+			$("#list-app").html(map.listApp);
+			$("body").append(map.app);
+		} catch(e) {
+			alert("Incorrect password! " + e);
+			return;
+		}
+
+		$.mobile.changePage("#main", "slideup");
+	});
+
+	$(".button-lock").click(function () {
+		$(".generated").remove();
+		$.mobile.changePage("#login", "slideup");
+	});
+
+	$("#input-password").focus();
+});
+
+		</script>
+</head>
+<body>
+	<div data-role="page" id="login">
+		<div data-role="header">
+			<h1>Login</h1>
+		</div>
+
+		<div data-role="content">
+			<form id="form-unlock" action="#main" method="get" data-ajax="false">
+				<label for="input-password">Password:</label>
+				<input type="password" id="input-password" value=""  />
+				<input type="submit" value="Unlock"  />
+			</form>
+		</div>
+	</div>
+
+	<div data-role="page" id="main">
+		<div data-role="header">
+			<h1>Cryptobox</h1>
+			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
+			<a class="button-lock" href="#" data-icon="delete">Lock</a>
+		</div>
+
+		<div data-role="content">
+			<ul data-role="listview" data-inset="true">
+				<li><a href="#site">Sites</a></li>
+				<li><a href="#app">Apps</a></li>
+				<li><a href="#bookmark">Bookmarks</a></li>
+				<li><a href="#card">Cards</a></li>
+				<li><a href="#note">Notes</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-role="page" id="site">
+		<div data-role="header">
+			<h1>Sites</h1>
+			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
+			<a class="button-lock" href="#" data-icon="delete">Lock</a>
+		</div>
+
+		<div data-role="content">
+			<div class="content-primary">
+			<ul id="list-site" data-role="listview" data-inset="true"></ul>
+			</div>
+		</div>
+	</div>
+
+	<div data-role="page" id="app">
+		<div data-role="header">
+			<h1>Apps</h1>
+			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
+			<a class="button-lock" href="#" data-icon="delete">Lock</a>
+		</div>
+
+		<div data-role="content">
+			<div class="content-primary">
+			<ul id="list-app" data-role="listview" data-inset="true"></ul>
+			</div>
+		</div>
+	</div>
+
+	<div data-role="page" id="bookmark">
+		<div data-role="header">
+			<h1>Bookmarks</h1>
+			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
+			<a class="button-lock" href="#" data-icon="delete">Lock</a>
+		</div>
+
+		<div data-role="content">
+			<div class="content-primary">
+			<ul id="list-bookmark" data-role="listview" data-inset="true"></ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

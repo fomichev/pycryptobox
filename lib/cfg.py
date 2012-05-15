@@ -9,6 +9,7 @@ aes_mode = AES.MODE_CFB
 path_db = "private/cryptobox"
 path_db_hmac = "private/cryptobox.hmac"
 path_db_html = "private/cryptobox.html"
+path_db_mobile_html = "private/m.cryptobox.html"
 path_tmp = "tmp"
 path_include = "include"
 path_template = "template"

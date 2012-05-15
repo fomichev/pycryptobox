@@ -1,89 +1,38 @@
-function accordionItem(header, body) {
-	return '<h3><a href="#">' + header + '</a></h3><div>' + body + '</div>';
+function withToken(form) {
+	for (var key in form.fields) {
+		var value = form.fields[key];
+
+		if (value == "@token")
+			return key;
+	}
+
+	return "";
 }
 
-function createLink(name, address, form, username, password) {
-	var hocid = 0;
-	function createHiddenOnClick(name, value) {
-		return '<div class="expand"><strong>' + name + '</strong> (click to expand/collapse)</div><div>' + value + '</div>';
-	}
-
-	function withToken(form) {
-		for (var key in form.fields) {
-			var value = form.fields[key];
-
-			if (value == "@token")
-				return key;
-		}
-
-		return "";
-	}
-
-	var url = form.action;
-	var title = name + " (" + username + ")"
-
+function flattenMap(map) {
 	var k = "";
 	var v = "";
 
-	var r = "";
-
-	for (var key in form.fields) {
-		if (form.fields[key] == "@token")
+	for (var key in map) {
+		if (map[key] == "@token")
 			continue;
 
 		if (k == "") {
 			k = "new Array(\"" + key +"\"";
-			v = "new Array(\"" + form.fields[key] +"\"";
+			v = "new Array(\"" + map[key] +"\"";
 		} else {
 			k += ", \"" + key +"\"";
-			v += ", \"" + form.fields[key] +"\"";
+			v += ", \"" + map[key] +"\"";
 		}
 	}
 	k += ")"
 	v += ")"
 
+	var r = {};
+	r.k = k;
+	r.v = v;
 
-	var token = withToken(form);
-	if (token != "") {
-		r += '<a class="button-token" href="' + address + '" target="_blank">Get token</a>';
-		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + url + '", "' + name + '", ' + k + ', ' + v + ', "' + token + '"); return false;\'>Login</a>';
-	} else {
-		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + url + '", "' + name + '", ' + k + ', ' + v + '); return false;\'>Login</a>';
-
-	}
-
-
-	r += '<a class="button-goto" href="' + address + '" target="_blank">Go to site</a>';
-	r += '<p>' + createHiddenOnClick("Username", username) + '</p>';
-	r += '<p>' + createHiddenOnClick("Password", password) + '</p>';
-
-	return accordionItem(title, r);
-}
-
-function createApp(name, key) {
-	return accordionItem(name, key);
-}
-
-function createBookmark(name, url, comment) {
-	return accordionItem(name, '<a class="button-goto" href="' + url + '" target="_blank">Go to site</a><p>' + comment + '</p>');
-}
-
-function createCard(name, cardholder, cvv2, number, pin) {
-	var d = "";
-	d += "<p>Cardholder=" + cardholder + "</p>";
-	d += "<p>Number=" + number + "</p>";
-	d += "<p>CVV2=" + cvv2 + "</p>";
-	d += "<p>PIN=" + pin + "</p>";
-
-	return accordionItem(name, d);
-}
-
-function createNote(name, text) {
-	return accordionItem(name, text);
-}
-
-function accordion(text) {
-	return '<div class="accordion">' + text + '</div>';
+	return r;
 }
 
 function unlock(pwd) {
@@ -93,6 +42,9 @@ function unlock(pwd) {
 
 	if (data[0].type != "magic" || data[0].value != "270389")
 		throw "Wrong magic number";
+
+	map.listSite = "";
+	map.listApp = "";
 
 	map.site = "";
 	map.app = "";
@@ -104,9 +56,11 @@ function unlock(pwd) {
 		var el = data[i];
 
 		if (el.type == 'site') {
-			map.site += createLink(el.name, el.address, el.form, el.vars.username, el.vars.password);
+			map.listSite += createList("site_" + i, el.name + ' (' + el.vars.username + ')');
+			map.site += createLink("site_" + i, el.name, el.address, el.form, el.vars.username, el.vars.password);
 		} else if (el.type == 'app') {
-			map.app += createApp(el.name, el.data.key);
+			map.listApp += createList("app_" + i, el.name);
+			map.app += createApp("app_" + i, el.name, el.data.key);
 		} else if (el.type == 'bookmark') {
 			map.bookmark += createBookmark(el.name, el.data.url, el.data.comment);
 		} else if (el.type == 'card') {

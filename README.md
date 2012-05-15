@@ -68,9 +68,13 @@ TODO: Describe why and what they do...
 
 	template/extern/jquery-1.7.2.js
 
-- jQueryUi http://jqueryui.com/download
+- jQuery UI http://jqueryui.com/download (MIT)
 
 	template/extern/jquery-ui
+
+- jQuery Mobile http://jquerymobile.com (MIT)
+
+	template/extern/jquery-mobile
 
 # Database example
 

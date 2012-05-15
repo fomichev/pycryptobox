@@ -20,12 +20,12 @@
 
 		<script type="text/javascript" src="./cfg.js"></script>
 		<script type="text/javascript" src="../template/js/login.js"></script>
+		<script type="text/javascript" src="../template/js/jquery-ui.js"></script>
 		<script type="text/javascript" src="../template/js/view.js"></script>
 		<script type="text/javascript" src="../template/js/password.js"></script>
 		<script type="text/javascript" src="../template/js/crypto.js"></script>
 
 		<script type="text/javascript">
-
 $(document).ready(function() {
 	$("#div-unlocked").hide();
 	$("#div-locked").show();
@@ -40,13 +40,14 @@ $(document).ready(function() {
 		event.preventDefault();
 		try {
 			map = unlock($("#input-password").val());
+			$("#input-password").val("");
+
 			$("#site").html(map.site);
 			$("#app").html(map.app);
 			$("#bookmark").html(map.bookmark);
 			$("#card").html(map.card);
 			$("#note").html(map.note);
 
-			$("#input-password").val("");
 			$("#div-locked").hide();
 			$("#div-unlocked").show();
 
@@ -80,11 +81,7 @@ $(document).ready(function() {
 		$("#div-locked").show();
 		$("#div-unlocked").hide();
 
-		$("#site").html("");
-		$("#app").html("");
-		$("#bookmark").html("");
-		$("#card").html("");
-		$("#note").html("");
+		$("div.generated").remove();
 	});
 
 	$("#button-generate-show").click(function(event) {
