@@ -35,7 +35,14 @@ for (var i = 0; i < document.forms.length; i++) {
 	}
 
 	var form_text = '\t\t"action": "' + form.action + '",\n\t\t"method": "' + form.method + '",\n\t\t"fields":\n\t\t{\n' + form_elements + '\n\t\t}';
+
+	if (text == "")
+		text += '[\n';
+	else
+		text += '\n,\n';
 	text += '{\n\t"type":"site",\n\t"name": "' + name + '",\n\t"address": "' + address + '",\n\t"form":\n\t{\n' + form_text + '\n\t}\n}\n';
 }
+
+text += "\n]";
 
 openPre(text);
