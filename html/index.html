@@ -49,6 +49,9 @@ function lockTimeoutStop() {
 function lock() {
 	lockTimeoutStop();
 
+	$("#div-generate").dialog('close');
+	$("#div-token").dialog('close');
+
 	$("#div-locked").show();
 	$("#div-unlocked").hide();
 
