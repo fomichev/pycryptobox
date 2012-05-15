@@ -9,7 +9,6 @@ Features:
 - add some validation for DB and include/
 - add support for multiple tokens
 - add support for db tags (@tag)
-- add tags support
 
 Noncritical features:
 - add .cryptoboxrc support

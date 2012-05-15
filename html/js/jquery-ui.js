@@ -50,7 +50,7 @@ function createNote(name, text) {
 	return accordionItem(name, text);
 }
 
-function viewCreatePage(id, type, data) {
+function viewCreatePageEntry(id, type, data) {
 	if (type == 'site')
 		return createLink(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
 	else if (type == 'app')
@@ -61,13 +61,15 @@ function viewCreatePage(id, type, data) {
 		return createCard(data.name, data.data.cardholder, data.data.cvv2, data.data.number, data.data.pin);
 	else if (type == 'note')
 		return createNote(data.name, data.data.text);
+	else
+		return '';
 }
 
-function viewCreateList(id, type, data) {
+function viewCreateListEntry(id, type, data) {
 	return "";
 }
 
-function viewWrapTag(tag, text) {
+function viewWrapPageTag(tag, text) {
 	if (tag != '__default__')
 		tag = '<h4>' + tag + '</h4>';
 	else
@@ -76,6 +78,6 @@ function viewWrapTag(tag, text) {
 	return tag + '<div class="generated"><div class="accordion">' + text + '</div></div>';
 }
 
-function viewWrapPage(text) {
+function viewWrapListTag(tag, text) {
 	return text;
 }

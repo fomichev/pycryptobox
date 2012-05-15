@@ -67,31 +67,38 @@ function unlock(pwd) {
 		var el = data[i];
 		var id = "u_" + i;
 
+		if (el.type == 'magic')
+			continue;
+
 		if (!map.list[el.type]) {
 			map.list[el.type] = {};
 			map.page[el.type] = {};
 		}
-		if (!map.list[el.type][el.tag]) {
+		if (map.list[el.type][el.tag] == undefined) {
 			map.list[el.type][el.tag] = "";
 			map.page[el.type][el.tag] = "";
 		}
 
-		map.list[el.type][el.tag] += viewCreateList(id, el.type, el);
-		map.page[el.type][el.tag] += viewCreatePage(id, el.type, el);
+		map.list[el.type][el.tag] += viewCreateListEntry(id, el.type, el);
+		map.page[el.type][el.tag] += viewCreatePageEntry(id, el.type, el);
 	}
 
 	for (var page in map.page) {
 		var text = "";
+		var list = "";
 
 		var tags = new Array();
 		for (tag in map.page[page])
 		     tags.push(tag);
 		tags.sort();
 
-		for (var i = 0; i < tags.length; i++)
-		     text += viewWrapTag(tags[i], map.page[page][tags[i]]);
+		for (var i = 0; i < tags.length; i++) {
+		     text += viewWrapPageTag(tags[i], map.page[page][tags[i]]);
+		     list += viewWrapListTag(tags[i], map.list[page][tags[i]]);
+		}
 
-		map.page[page] = viewWrapPage(text);
+		map.page[page] = text;
+		map.list[page] = list;
 	}
 
 	return map;

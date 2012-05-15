@@ -18,10 +18,6 @@ function page(id, header, data) {
 	return t;
 }
 
-function createList(id, name) {
-	return '<li><a href="#' + id + '" class="generated">' + name + '</a></li>';
-}
-
 function createLink(id, name, address, form, username, password) {
 	var flat = flattenMap(form.fields);
 
@@ -47,18 +43,52 @@ function createApp(id, name, key) {
 	return page(id, name, key);
 }
 
-function createBookmark(name, url, comment) {
-	return "";
+function createBookmark(id, name, url, comment) {
+	return page(id, name, '<a class="button-goto" href="' + url + '" target="_blank">Go to site</a><p>' + comment + '</p>');
 }
 
-function createCard(name, cardholder, cvv2, number, pin) {
-	return "";
+function createCard(id, name, cardholder, cvv2, number, pin) {
+	var d = "";
+	d += "<p>Cardholder=" + cardholder + "</p>";
+	d += "<p>Number=" + number + "</p>";
+	d += "<p>CVV2=" + cvv2 + "</p>";
+	d += "<p>PIN=" + pin + "</p>";
+
+	return page(id, name, d);
 }
 
-function createNote(name, text) {
-	return "";
+function createNote(id, name, text) {
+	return page(id, name, text);
 }
 
-function accordion(text) {
+function viewCreatePageEntry(id, type, data) {
+	if (type == 'site')
+		return createLink(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
+	else if (type == 'app')
+		return createApp(id, data.name, data.data.key);
+	else if (type == 'bookmark')
+		return createBookmark(id, data.name, data.data.url, data.data.comment);
+	else if (type == 'card')
+		return createCard(id, data.name, data.data.cardholder, data.data.cvv2, data.data.number, data.data.pin);
+	else if (type == 'note')
+		return createNote(id, data.name, data.data.text);
+	else
+		return '';
+}
+
+function viewCreateListEntry(id, type, data) {
+	return '<li><a href="#' + id + '" class="generated">' + data.name + '</a></li>';
+}
+
+function viewWrapPageTag(tag, text) {
 	return text;
+}
+
+function viewWrapListTag(tag, text) {
+	if (tag != '__default__')
+		tag = '<h4>' + tag + '</h4>';
+	else
+		tag = '';
+
+	return tag + '<ul data-role="listview" data-inset="true">' + text + '</ul>';
 }

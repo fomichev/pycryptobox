@@ -32,11 +32,10 @@ $(document).ready(function() {
 			map = unlock($("#input-password").val());
 			$("#input-password").val("");
 
-			$("#list-site").html(map.listSite);
-			$("body").append(map.site);
-
-			$("#list-app").html(map.listApp);
-			$("body").append(map.app);
+			for (var key in map.list) {
+				$("#div-" + key).html(map.list[key]);
+				$("body").append(map.page[key]);
+			}
 		} catch(e) {
 			alert("Incorrect password! " + e);
 			return;
@@ -96,9 +95,7 @@ $(document).ready(function() {
 		</div>
 
 		<div data-role="content">
-			<div class="content-primary">
-			<ul id="list-site" data-role="listview" data-inset="true"></ul>
-			</div>
+			<div class="content-primary" id="div-site"></div>
 		</div>
 	</div>
 
@@ -110,9 +107,7 @@ $(document).ready(function() {
 		</div>
 
 		<div data-role="content">
-			<div class="content-primary">
-			<ul id="list-app" data-role="listview" data-inset="true"></ul>
-			</div>
+			<div class="content-primary" id="div-app"></div>
 		</div>
 	</div>
 
@@ -124,9 +119,31 @@ $(document).ready(function() {
 		</div>
 
 		<div data-role="content">
-			<div class="content-primary">
-			<ul id="list-bookmark" data-role="listview" data-inset="true"></ul>
-			</div>
+			<div class="content-primary" id="div-bookmark"></div>
+		</div>
+	</div>
+
+	<div data-role="page" id="card">
+		<div data-role="header">
+			<h1>Cards</h1>
+			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
+			<a class="button-lock" href="#" data-icon="delete">Lock</a>
+		</div>
+
+		<div data-role="content">
+			<div class="content-primary" id="div-card"></div>
+		</div>
+	</div>
+
+	<div data-role="page" id="note">
+		<div data-role="header">
+			<h1>Notes</h1>
+			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
+			<a class="button-lock" href="#" data-icon="delete">Lock</a>
+		</div>
+
+		<div data-role="content">
+			<div class="content-primary" id="div-note"></div>
 		</div>
 	</div>
 </body>

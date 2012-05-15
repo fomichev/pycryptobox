@@ -70,15 +70,15 @@ $(document).ready(function() {
 
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
-			map = unlock($("#input-password").val());
 		try {
+			map = unlock($("#input-password").val());
 			$("#input-password").val("");
 
-			$("#site").html(map.page.site);
-			$("#app").html(map.page.app);
-			$("#bookmark").html(map.page.bookmark);
-			$("#card").html(map.page.card);
-			$("#note").html(map.page.note);
+			$("#div-site").html(map.page.site);
+			$("#div-app").html(map.page.app);
+			$("#div-bookmark").html(map.page.bookmark);
+			$("#div-card").html(map.page.card);
+			$("#div-note").html(map.page.note);
 
 			$("#div-locked").hide();
 			$("#div-unlocked").show();
@@ -171,20 +171,20 @@ $(document).ready(function() {
 
 			<div id="tabs">
 				<ul>
-					<li><a href="#site">Sites</a></li>
-					<li><a href="#app">Apps</a></li>
-					<li><a href="#bookmark">Bookmarks</a></li>
-					<li><a href="#card">Cards</a></li>
-					<li><a href="#note">Notes</a></li>
-					<li><a href="#help">Help</a></li>
+					<li><a href="#div-site">Sites</a></li>
+					<li><a href="#div-app">Apps</a></li>
+					<li><a href="#div-bookmark">Bookmarks</a></li>
+					<li><a href="#div-card">Cards</a></li>
+					<li><a href="#div-note">Notes</a></li>
+					<li><a href="#div-help">Help</a></li>
 				</ul>
 
-				<div id="site"></div>
-				<div id="app"></div>
-				<div id="bookmark"></div>
-				<div id="card"></div>
-				<div id="note"></div>
-				<div id="help">
+				<div id="div-site"></div>
+				<div id="div-app"></div>
+				<div id="div-bookmark"></div>
+				<div id="div-card"></div>
+				<div id="div-note"></div>
+				<div id="div-help">
 					<h2>Help</h2>
 					<p>There will be user documentation... Someday...</p>
 
