@@ -7,6 +7,8 @@ pbkdf2_iterations = 1000
 aes_mode = AES.MODE_CFB
 #aes_iv = "0123456890123456" # 128-bit
 
+lock_timeout_minutes = 5
+
 prefix = ""
 path_db = prefix + "private/cryptobox"
 path_db_hmac = prefix + "private/cryptobox.hmac"

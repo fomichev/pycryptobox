@@ -13,4 +13,5 @@ def config(cipher):
     res = ""
     res += "_cfg_salt = \"%s\";" % (cfg.pbkdf2_salt)
     res += "_cfg_cipher = \"%s\";" % (cipher)
+    res += "_cfg_lockTimeout = %s;" % (cfg.lock_timeout_minutes)
     return res

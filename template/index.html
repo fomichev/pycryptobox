@@ -25,6 +25,36 @@
 		<script type="text/javascript" src="../template/js/crypto.js"></script>
 
 		<script type="text/javascript">
+var lockTimeout;
+var lockTimeoutId;
+
+function lockTimeoutStart() {
+	lockTimeout = _cfg_lockTimeout;
+	lockTimeoutId = window.setInterval(function() {
+		lockTimeout--;
+
+		if (lockTimeout <= 0)
+			lock();
+	}, 1000 * 60);
+}
+
+function lockTimeoutUpdate() {
+	lockTimeout = _cfg_lockTimeout;
+}
+
+function lockTimeoutStop() {
+		clearInterval(lockTimeoutId);
+}
+
+function lock() {
+	lockTimeoutStop();
+
+	$("#div-locked").show();
+	$("#div-unlocked").hide();
+
+	$("div.generated").remove();
+}
+
 $(document).ready(function() {
 	$("#div-unlocked").hide();
 	$("#div-locked").show();
@@ -68,6 +98,8 @@ $(document).ready(function() {
 				$(this).next().toggle();
 			}).next().hide();
 
+			lockTimeoutStart();
+
 			$("#tabs").tabs();
 		} catch(e) {
 			alert("Incorrect password! " + e);
@@ -75,12 +107,11 @@ $(document).ready(function() {
 		}
 	});
 
+	$("body").mousemove(function() { lockTimeoutUpdate(); });
+
 	$("#button-lock").click(function(event) {
 		event.preventDefault();
-		$("#div-locked").show();
-		$("#div-unlocked").hide();
-
-		$("div.generated").remove();
+		lock();
 	});
 
 	$("#button-generate-show").click(function(event) {
@@ -107,6 +138,7 @@ $(document).ready(function() {
 			$("#input-include-punc").removeAttr("disabled");
 		}
 	});
+
 
 	$("#input-password").focus();
 });

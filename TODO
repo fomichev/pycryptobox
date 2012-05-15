@@ -6,7 +6,6 @@ Optimizations:
 
 Features:
 - add support for HERE DOCUMENT in the db (to be possible to enter multiline values)
-- add lock timeout (and make it configurable via cfg.py)
 
 Noncritical features:
 - add .cryptoboxrc support
