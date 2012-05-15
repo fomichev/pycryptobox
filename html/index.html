@@ -187,10 +187,10 @@ $(document).ready(function() {
 
 					<h2>Bookmarklets</h2>
 
-					<h3><a id="bookmarkletForm" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src=_cfg_pathBookmarklets + 'form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a></h3>
+					<h3><a id="bookmarkletForm" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a></h3>
 					<p>Use this bookmarklet to obtain form data from the new sites.</p>
 
-					<h3><a id="bookmarkletToken" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src=_cfg_pathBookmarklets + 'token.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Get token</a></h3>
+					<h3><a id="bookmarkletToken" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>token.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Get token</a></h3>
 					<p>Use this bookmarklet to search for security token.</p>
 				</div>
 			</div>

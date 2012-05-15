@@ -5,12 +5,13 @@
 from bs4 import BeautifulSoup, Tag
 import os
 import re
+import cfg
 
 def getimg(path):
     data = "".join(open(path, "rb").read().encode('base64').split("\n"))
     return "data:image/png;base64," + data
 
-def embed(index, output, cfg):
+def embed(index, output, jscfg):
     soup = BeautifulSoup(open(index).read().decode('utf-8'))
 
     print "Embed stylesheets"
@@ -51,9 +52,12 @@ def embed(index, output, cfg):
     scripts = re.compile(r'\s//.*$', re.MULTILINE).sub('', scripts)
 
     tag = soup.new_tag("script", type="text/javascript")
-    tag.string = cfg + scripts
+    tag.string = jscfg + scripts
 
     soup.head.insert(2, tag)
 
     result = soup.prettify(formatter=None)
+    print "Set bootkmarklets path"
+    result = result.replace("<?path_bookmarklets?>", cfg.path_bookmarklets)
+
     open(output, "w").write(result.encode('utf-8'))
