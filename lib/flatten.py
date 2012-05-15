@@ -6,25 +6,6 @@
 import json
 import cgi
 
-def get_vars(s):
-    v = {}
-
-    first = True
-    for var in s.split():
-        keyval = var.split('=')
-
-        if len(keyval) != 2:
-            if first:
-                first = False
-                continue
-            else:
-                print "SOMETHING IS WRONG WITH DB"
-                return {}
-
-        v[keyval[0]] = keyval[1]
-
-    return v
-
 def set_vars(obj, v):
     if type(obj) == type(dict()):
         for k in obj.keys():
@@ -59,15 +40,25 @@ def flatten_node(prefix, tp, v, tag):
 
     return jdata
 
+def here_doc(val):
+    try:
+        if val[0] == '<' and val[1] == '<':
+            return val[2:]
+    except:
+        return ""
+
+    return ""
+
 def flatten(lines, prefix):
     logins = []
     logins.append({ "type" : "magic", "value": "270389" })
+    lines.reverse()
 
     tp = None
     tag = ''
     v = {}
-    for line in lines:
-        line = line.strip()
+    while lines:
+        line = lines.pop().strip()
 
         if len(line) == 0:
             continue
@@ -76,6 +67,10 @@ def flatten(lines, prefix):
             continue
 
         if line[0] == '@':
+            if tp:
+                logins.append(flatten_node(prefix, tp, v, tag))
+                tp = None
+
             tag = line[1:].strip()
             continue
 
@@ -86,12 +81,33 @@ def flatten(lines, prefix):
 
             tp = line[:-1]
 
+            continue
+
         keyval = line.split('=')
         if len(keyval) == 2:
-            v[keyval[0]] = keyval[1]
+            keyval[0] = keyval[0].strip()
+            keyval[1] = keyval[1].strip()
+
+            hdoc = here_doc(keyval[1])
+            if hdoc != "":
+                print "hdoc="+hdoc
+                value = ""
+
+                while lines:
+                    hline = lines.pop()
+                    print "hline="+hline
+                    if hline.strip() == hdoc:
+                        break
+                    value += hline + "\n"
+
+                print "value="+value
+                v[keyval[0]] = value
+            else:
+                v[keyval[0]] = keyval[1]
 
     if tp:
         logins.append(flatten_node(prefix, tp, v, tag))
+        tp = None
 
     padding = "                " # somehow JS decrypt eats fist 16 symbols
     return padding + json.dumps(logins, sort_keys=True, indent=4)

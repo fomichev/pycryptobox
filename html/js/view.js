@@ -15,6 +15,10 @@ function copyToClipboard(text) {
 	return t;
 }
 
+function addBr(text) {
+	return text.replace(/\n/g, '<br />');
+}
+
 function withToken(form) {
 	for (var key in form.fields) {
 		var value = form.fields[key];
@@ -89,8 +93,14 @@ function unlock(pwd) {
 
 		var tags = new Array();
 		for (tag in map.page[page])
-		     tags.push(tag);
+			if (tag != '__default__')
+			     tags.push(tag);
 		tags.sort();
+
+		if (map.page[page]['__default__'] != undefined) {
+		     text += viewWrapPageTag('__default__', map.page[page]['__default__']);
+		     list += viewWrapListTag('__default__', map.list[page]['__default__']);
+		}
 
 		for (var i = 0; i < tags.length; i++) {
 		     text += viewWrapPageTag(tags[i], map.page[page][tags[i]]);

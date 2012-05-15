@@ -67,11 +67,11 @@ function viewCreatePageEntry(id, type, data) {
 	else if (type == 'app')
 		return createApp(id, data.name, data.data.key);
 	else if (type == 'bookmark')
-		return createBookmark(id, data.name, data.data.url, data.data.comment);
+		return createBookmark(id, data.name, data.data.url, addBr(data.data.comment));
 	else if (type == 'card')
 		return createCard(id, data.name, data.data.cardholder, data.data.cvv2, data.data.number, data.data.pin);
 	else if (type == 'note')
-		return createNote(id, data.name, data.data.text);
+		return createNote(id, data.name, addBr(data.data.text));
 	else
 		return '';
 }

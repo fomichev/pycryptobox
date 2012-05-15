@@ -138,6 +138,14 @@ TODO: Describe why and what they do...
 		name=Google
 		url=http://google.com
 
+	note:
+		name=Multiline Note
+		text=<<<YOUR_MARKER
+	line1
+
+	line2
+	YOUR_MARKER
+
 # Works on (where it has been tested)
 
 - Chrome 18
