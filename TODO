@@ -1,8 +1,7 @@
 Optimizations:
-- use http://jqueryui.com/download to build distribution with only required components
 - use CryptoJS version 3 instead of 2.5 (need to figure out how to use AES correctly)
 - use external repositories when possible (jQuery, CryproJS)
-- use https://developers.google.com/closure/compiler/ to compress js
+- use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small)
 
 Features:
 - add support for HERE DOCUMENT in the db (to be possible to enter multiline values)

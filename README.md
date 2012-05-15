@@ -66,11 +66,11 @@ TODO: Describe why and what they do...
 
 - jQuery http://jquery.com (MIT)
 
-	template/extern/jquery-1.7.2.js
+	template/extern/jquery
 
 - jQuery UI http://jqueryui.com/download (MIT)
 
-	template/extern/jquery-ui
+	template/extern/jquery-ui (Dialog, Tabs, Accordion, Button)
 
 - jQuery Mobile http://jquerymobile.com (MIT)
 
