@@ -21,7 +21,7 @@ var text = "";
 for (var i = 0; i < document.forms.length; i++) {
 	var form = document.forms[i];
 
-	var form_elements =  "";
+	var form_elements =  "len = " + form.elements.length;
 	for (var j = 0; j < form.elements.length; j++) {
 		var el = form.elements[j];
 
@@ -31,7 +31,7 @@ for (var i = 0; i < document.forms.length; i++) {
 			else
 				form_elements += ',\n\t\t\t"' + el.name + '": "' + el.value + '"';
 		} else {
-				form_elements = '((((' + el.id + '))))';
+				form_elements += '((((' + el.id + '))))';
 		}
 	}
 
