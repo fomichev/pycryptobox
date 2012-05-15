@@ -56,30 +56,30 @@ TODO: Describe why and what they do...
 
 - PBKDF2, AES https://code.google.com/p/crypto-js/ (New BSD License)
 
-	template/extern/CryptoJS (v3)
+	html/extern/CryptoJS (v3)
 
-	template/extern/cjs (v2.5)
+	html/extern/cjs (v2.5)
 
 - Random Seed http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html (BSD)
 
-	template/extern/seedrandom.js
+	html/extern/seedrandom.js
 
 - jQuery http://jquery.com (MIT)
 
-	template/extern/jquery
+	html/extern/jquery
 
 - jQuery UI http://jqueryui.com/download (MIT)
 
-	template/extern/jquery-ui (Dialog, Tabs, Accordion, Button)
+	html/extern/jquery-ui (Dialog, Tabs, Accordion, Button)
 
 - jQuery Mobile http://jquerymobile.com (MIT)
 
-	template/extern/jquery-mobile
+	html/extern/jquery-mobile
 
 
 - Clippy https://github.com/mojombo/clippy (MIT)
 
-	template/extern/clippy
+	html/extern/clippy
 
 	private/html/clippy.swf
 

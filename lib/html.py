@@ -38,10 +38,10 @@ def update(password):
     if debug_db:
         open(cfg.path_tmp + "/_aes_base64_nonl", "w").write(aes_base64_nonl)
 
-    index_html = generate.html(cfg.path_template + "/index.html")
+    index_html = generate.html(cfg.path_html + "/index.html")
     open(path_tmp_index, "w").write(index_html)
 
-    m_index_html = generate.html(cfg.path_template + "/m.index.html")
+    m_index_html = generate.html(cfg.path_html + "/m.index.html")
     open(path_tmp_mobile_index, "w").write(m_index_html)
 
 
@@ -50,7 +50,7 @@ def update(password):
         open(cfg.path_tmp + "/cfg.js", "w").write(cfg_js)
 
     saved_cwd = os.getcwd()
-    os.chdir(cfg.path_template)
+    os.chdir(cfg.path_html)
 
     print "> cryptobox.html"
     embed.embed(path_tmp_index, path_index, cfg_js)

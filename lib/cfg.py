@@ -17,8 +17,11 @@ path_db_mobile_html = prefix + "private/html/m.cryptobox.html"
 path_tmp = prefix + "private/tmp"
 
 path_include = os.getcwd() + "/include"
-path_template = os.getcwd() + "/template"
-path_clippy = path_template + "/extern/clippy/build/clippy.swf"
+path_html = os.getcwd() + "/html"
+
+path_clippy = path_html + "/extern/clippy/build/clippy.swf"
+
+path_bookmarklets = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
 
 if platform.system() == 'Windows':
     editor = "gvim"
