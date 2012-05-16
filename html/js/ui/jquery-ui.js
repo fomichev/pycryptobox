@@ -63,17 +63,27 @@ function viewWrapList(text) {
 function lock() {
 	lockTimeoutStop();
 
-	$("#div-generate").dialog('close');
-	$("#div-token").dialog('close');
+	if ($("#div-locked").is(":visible") && $("#div-unlocked").is(":visible")) {
+		$("#div-generate").hide();
+		$("#div-token").hide();
+		$("#div-unlocked").hide();
+	} else {
+		$("#div-generate").dialog('close');
+		$("#div-token").dialog('close');
 
-	$("#div-locked").slideDown();
-	$("#div-unlocked").fadeOut();
+		$("#div-locked").fadeIn();
+		$("#div-unlocked").hide();
+	}
 
-	$("div.generated").remove();
+	$(".generated").remove();
+	$("#tabs").html('');
+	$("#tabs").removeClass();
+
+	$("#input-password").focus();
 }
 
 $(document).ready(function() {
-	$("#div-unlocked").hide();
+	lock();
 
 	$(".button").button();
 
@@ -81,6 +91,8 @@ $(document).ready(function() {
 	$("#button-lock").button({ icons: { primary: "ui-icon-locked" } });
 	$("#button-generate-show").button({ icons: { primary: "ui-icon-gear" } });
 	$(".button-bookmark").button({ icons: { primary: "ui-icon-contact" } });
+	$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
+	$(".button-login").button({ icons: { primary: "ui-icon-key" } });
 
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
@@ -95,15 +107,9 @@ $(document).ready(function() {
 				tabs += '<div id="div-' + key +'" class="generated">' + map.page[key] + '</div>';
 			}
 
-			$("#tabs").html('<ul class="generated">' + tabs_list + '</ul>' + tabs);
-
-			$("#div-generate").hide();
-			$("#div-token").hide();
+			$("#div-tabs").html('<div id="tabs"><ul class="generated">' + tabs_list + '</ul>' + tabs + '</div>');
 
 			$(".button").button();
-			$(".button-bookmark").button({ icons: { primary: "ui-icon-contact" } });
-			$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
-			$(".button-login").button({ icons: { primary: "ui-icon-key" } });
 			$(".accordion").accordion({
 				autoHeight: false,
 				navigation: false,
@@ -119,7 +125,7 @@ $(document).ready(function() {
 
 			$("#tabs").tabs();
 
-			$("#div-locked").slideUp();
+			$("#div-locked").hide();
 			$("#div-unlocked").fadeIn();
 		} catch(e) {
 			alert("Incorrect password! " + e);
@@ -161,7 +167,4 @@ $(document).ready(function() {
 			$("#input-include-punc").removeAttr("disabled");
 		}
 	});
-
-
-	$("#input-password").focus();
 });
