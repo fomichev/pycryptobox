@@ -4,10 +4,10 @@ Optimizations:
 - use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small)
 
 Features:
-- add accounts support (generic, ftp)
-  add support for bash like ${asdfasd:xvxcxv} to be able to do optional fields (see account/mail)
+- add support for bash like ${asdfasd:xvxcxv} to be able to do optional fields (see account/mail)
   i.e. embedding user supplied vars into
 - add some validation for DB and include/
+- add AES input vector support
 
 Noncritical features:
 - add .cryptoboxrc support

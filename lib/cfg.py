@@ -1,5 +1,8 @@
 import platform
 import os
+import datetime
+import subprocess
+
 from Crypto.Cipher import AES
 
 # Don't switch it! Your data will be exposed in private/tmp/
@@ -28,6 +31,14 @@ path_clippy = path_html + "/extern/clippy/build/clippy.swf"
 html = {}
 html['jquery_ui_theme'] = 'flick'
 html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
+html['version'] = '0.1'
+html['date'] = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
+
+try:
+    cs = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip()
+    html['version'] += '.' + cs
+except:
+    pass
 
 if platform.system() == 'Windows':
     editor = "gvim"
