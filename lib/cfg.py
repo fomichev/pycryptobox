@@ -26,7 +26,8 @@ path_html = os.getcwd() + "/html"
 path_clippy = path_html + "/extern/clippy/build/clippy.swf"
 
 html = {}
-html['jquery_ui_theme'] = 'flick'
+html['jquery_ui_theme'] = 'pepper-grinder'
+#html['jquery_ui_theme'] = 'flick'
 html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
 
 if platform.system() == 'Windows':
