@@ -2,7 +2,7 @@ function accordionItem(header, body) {
 	return '<h3><a href="#">' + header + '</a></h3><div>' + body + '</div>';
 }
 
-function createLink(id, name, address, form, username, password) {
+function createLogin(id, name, address, form, username, password) {
 	var hocid = 0;
 	function collapsible(name, value) {
 		return '<div class="expand"><a href="#" onClick="javascript:return false;"><strong>' + name + '</strong> (click to expand/collapse)</a></div><div>' + value + '</div>';
@@ -16,9 +16,9 @@ function createLink(id, name, address, form, username, password) {
 	var token = withToken(form);
 	if (token != "") {
 		r += '<a class="button-token" href="' + address + '" target="_blank">Get token</a>';
-		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'>Login</a>';
+		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'>Log in</a>';
 	} else {
-		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>Login</a>';
+		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>Log in</a>';
 	}
 
 	r += '<a class="button-goto" href="' + address + '" target="_blank">Go to site</a>';
@@ -51,8 +51,8 @@ function createNote(name, text) {
 }
 
 function viewCreatePageEntry(id, type, data) {
-	if (type == 'site')
-		return createLink(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
+	if (type == 'login')
+		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
 	else if (type == 'app')
 		return createApp(id, data.name, data.vars.key);
 	else if (type == 'bookmark')

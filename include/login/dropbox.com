@@ -1,5 +1,5 @@
 {
-	"type": "site",
+	"type": "login",
 	"name": "Dropbox",
 	"address": "https://www.dropbox.com/",
 	"form":

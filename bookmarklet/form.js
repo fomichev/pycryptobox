@@ -40,7 +40,7 @@ for (var i = 0; i < document.forms.length; i++) {
 		text += '[\n';
 	else
 		text += ',\n';
-	text += '{\n\t"type":"site",\n\t"name": "' + name + '",\n\t"address": "' + address + '",\n\t"form":\n\t{\n' + form_text + '\n\t}\n}\n';
+	text += '{\n\t"type":"login",\n\t"name": "' + name + '",\n\t"address": "' + address + '",\n\t"form":\n\t{\n' + form_text + '\n\t}\n}\n';
 }
 
 text += "]";

@@ -54,7 +54,7 @@ $(document).ready(function() {
 			map = unlock($("#input-password").val());
 			$("#input-password").val("");
 
-			$("#div-site").html(map.page.site);
+			$("#div-login").html(map.page.login);
 			$("#div-app").html(map.page.app);
 			$("#div-bookmark").html(map.page.bookmark);
 			$("#div-card").html(map.page.card);
@@ -151,7 +151,7 @@ $(document).ready(function() {
 
 			<div id="tabs">
 				<ul>
-					<li><a href="#div-site">Sites</a></li>
+					<li><a href="#div-login">Logins</a></li>
 					<li><a href="#div-app">Apps</a></li>
 					<li><a href="#div-bookmark">Bookmarks</a></li>
 					<li><a href="#div-card">Cards</a></li>
@@ -159,7 +159,7 @@ $(document).ready(function() {
 					<li><a href="#div-help">Help</a></li>
 				</ul>
 
-				<div id="div-site"></div>
+				<div id="div-login"></div>
 				<div id="div-app"></div>
 				<div id="div-bookmark"></div>
 				<div id="div-card"></div>

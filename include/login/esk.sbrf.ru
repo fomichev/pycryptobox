@@ -1,5 +1,5 @@
 {
-	"type":"site",
+	"type":"login",
 	"name": "Сбербанк",
 	"address": "https://esk.sbrf.ru/esClient/_logon/LogonContent.aspx",
 	"form":

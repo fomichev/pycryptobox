@@ -1,5 +1,5 @@
 {
-	"type":"site",
+	"type":"login",
 	"name": "GitHub",
 	"address": "https://github.com/login",
 	"form":

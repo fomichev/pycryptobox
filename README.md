@@ -28,7 +28,7 @@ plain text.
 ... go on ...
 
 
-## Extending / Adding new site (includes)
+## Extending / Adding new login (includes)
 
 ## Bookmarklets
 
@@ -123,11 +123,11 @@ t.b.d.
 
 # Database example
 
-	site/dropbox.com:
+	login/dropbox.com:
 		username=qwe@qwe.qwe
 		password=pwd
 
-	site/gmail.com:
+	login/gmail.com:
 		username=qwe@qwe.qwe
 		password=pwd
 
