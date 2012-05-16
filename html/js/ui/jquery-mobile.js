@@ -27,7 +27,6 @@ function createLink(id, name, address, form, username, password) {
 
 	if (withToken(form) == "") {
 		t += '<a href="#todo" onClick=';
-		
 		t += '\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
 		t += 'data-role="button">Login</a>';
 	}

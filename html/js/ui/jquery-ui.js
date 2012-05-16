@@ -16,7 +16,7 @@ function createLink(id, name, address, form, username, password) {
 	var token = withToken(form);
 	if (token != "") {
 		r += '<a class="button-token" href="' + address + '" target="_blank">Get token</a>';
-		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', "' + token + '"); return false;\'>Login</a>';
+		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'>Login</a>';
 	} else {
 		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>Login</a>';
 	}

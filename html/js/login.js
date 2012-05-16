@@ -1,4 +1,4 @@
-function loginWithToken(url, name, keys, values, token) {
+function loginWithToken(url, name, keys, values, tokens) {
 	$("#div-token").dialog({
 		height: 140,
 		width: 280,
@@ -6,7 +6,6 @@ function loginWithToken(url, name, keys, values, token) {
 		buttons: {
 			"Login": function() {
 				var form_json = $("#input-json").val();
-				var token_value = "";
 
 				if (!form_json || form_json == "")
 					return;
@@ -14,19 +13,12 @@ function loginWithToken(url, name, keys, values, token) {
 				var data = eval(form_json);
 				for (var i = 0; i < data.length; i++) {
 					for (var field in data[i].form.fields) {
-						if (field == token) {
-							token_value = data[i].form.fields[field];
+						if (tokens.indexOf(field) >= 0) {
+							keys.push(field);
+							values.push(data[i].form.fields[field]);
 						}
 					}
 				}
-
-				if (token_value == "") {
-					alert("Token value not found! Make sure form layout didn't change!");
-					return;
-				}
-
-				keys.push(token);
-				values.push(token_value);
 
 				$("#input-json").val("");
 				$(this).dialog('close');

@@ -20,14 +20,20 @@ function addBr(text) {
 }
 
 function withToken(form) {
+	var tokens = "";
+
 	for (var key in form.fields) {
 		var value = form.fields[key];
 
-		if (value == "@token")
-			return key;
+		if (value == "@token") {
+			if (tokens == "")
+				tokens = '"' + key + '"';
+			else
+				tokens += ', "' + key + '"';
+		}
 	}
 
-	return "";
+	return tokens;
 }
 
 function flattenMap(map) {
