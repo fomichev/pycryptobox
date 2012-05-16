@@ -31,5 +31,7 @@ html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bo
 
 if platform.system() == 'Windows':
     editor = "gvim"
+#    editor = "c:/Program Files/Sublime Text 2/sublime_text.exe"
+#    editor = "c:/Program Files/Notepad++/notepad++.exe"
 else:
     editor = "vim"
