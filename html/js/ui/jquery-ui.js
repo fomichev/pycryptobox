@@ -90,9 +90,6 @@ $(document).ready(function() {
 	$("#button-unlock").button({ icons: { primary: "ui-icon-unlocked" } });
 	$("#button-lock").button({ icons: { primary: "ui-icon-locked" } });
 	$("#button-generate-show").button({ icons: { primary: "ui-icon-gear" } });
-	$(".button-bookmark").button({ icons: { primary: "ui-icon-contact" } });
-	$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
-	$(".button-login").button({ icons: { primary: "ui-icon-key" } });
 
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
@@ -121,9 +118,13 @@ $(document).ready(function() {
 				$(this).next().toggle();
 			}).next().hide();
 
-			lockTimeoutStart();
-
 			$("#tabs").tabs();
+
+			$(".button-bookmark").button({ icons: { primary: "ui-icon-contact" } });
+			$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
+			$(".button-login").button({ icons: { primary: "ui-icon-key" } });
+
+			lockTimeoutStart();
 
 			$("#div-locked").hide();
 			$("#div-unlocked").fadeIn();
