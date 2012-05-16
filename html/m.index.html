@@ -20,9 +20,16 @@
 		<script type="text/javascript" src="../html/js/login.js"></script>
 		<script type="text/javascript" src="../html/js/view.js"></script>
 		<script type="text/javascript" src="../html/js/crypto.js"></script>
+		<script type="text/javascript" src="../html/js/lock.js"></script>
 		<script type="text/javascript" src="../html/js/ui/jquery-mobile.js"></script>
 
 		<script type="text/javascript">
+function lock() {
+	lockTimeoutStop();
+
+	$(".generated").remove();
+	$.mobile.changePage("#login", "slideup");
+}
 $(document).ready(function() {
 
 	$("#form-unlock").submit(function(event) {
@@ -36,6 +43,8 @@ $(document).ready(function() {
 				$("#div-" + key).html(map.list[key]);
 				$("body").append(map.page[key]);
 			}
+
+			lockTimeoutStart();
 		} catch(e) {
 			alert("Incorrect password! " + e);
 			return;
@@ -45,8 +54,7 @@ $(document).ready(function() {
 	});
 
 	$(".button-lock").click(function () {
-		$(".generated").remove();
-		$.mobile.changePage("#login", "slideup");
+		lock();
 	});
 
 	$("#input-password").focus();

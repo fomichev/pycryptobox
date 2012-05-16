@@ -4,7 +4,7 @@
 
 		<title>Cryptobox</title>
 		<link rel="stylesheet" type="text/css" href="../html/css/style.css" />
-		<link rel="stylesheet" type="text/css" href="../html/extern/jquery-ui/css/flick/jquery-ui-1.8.20.custom.css" />
+		<link rel="stylesheet" type="text/css" href="../html/extern/jquery-ui/css/<?jquery_ui_theme?>/jquery-ui-1.8.20.custom.css" />
 
 		<script type="text/javascript" src="../html/extern/jquery/jquery-1.7.2.min.js"></script>
 		<script type="text/javascript" src="../html/extern/jquery-ui/js/jquery-ui-1.8.20.custom.min.js"></script>
@@ -22,30 +22,10 @@
 		<script type="text/javascript" src="../html/js/view.js"></script>
 		<script type="text/javascript" src="../html/js/password.js"></script>
 		<script type="text/javascript" src="../html/js/crypto.js"></script>
+		<script type="text/javascript" src="../html/js/lock.js"></script>
 		<script type="text/javascript" src="../html/js/ui/jquery-ui.js"></script>
 
 		<script type="text/javascript">
-var lockTimeout;
-var lockTimeoutId;
-
-function lockTimeoutStart() {
-	lockTimeout = _cfg_lockTimeout;
-	lockTimeoutId = window.setInterval(function() {
-		lockTimeout--;
-
-		if (lockTimeout <= 0)
-			lock();
-	}, 1000 * 60);
-}
-
-function lockTimeoutUpdate() {
-	lockTimeout = _cfg_lockTimeout;
-}
-
-function lockTimeoutStop() {
-		clearInterval(lockTimeoutId);
-}
-
 function lock() {
 	lockTimeoutStop();
 
@@ -211,7 +191,7 @@ $(document).ready(function() {
 				<input type="text" id="input-json" size="32" />
 			</div>
 
-			<div id="div-copyright" class="ui-widget"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a>, 2012</p></div>
+			<div id="div-copyright" class="ui-widget"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a> 2012</p></div>
 		</div>
 	</body>
 </html>

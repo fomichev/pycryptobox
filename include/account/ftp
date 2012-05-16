@@ -1,0 +1,9 @@
+{
+	"type": "account",
+	"name": "$name",
+
+	"vars":
+	{
+		"text": "Hostname: $hostname\nUsername: $username\nPassword: $password";
+	}
+}

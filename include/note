@@ -4,6 +4,6 @@
 
 	"vars":
 	{
-		"text" : "$text"
+		"text" : "Every note now starts with its '$name' name\n$text"
 	}
 }

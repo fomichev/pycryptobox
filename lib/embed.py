@@ -12,7 +12,13 @@ def getimg(path):
     return "data:image/png;base64," + data
 
 def embed(index, output, jscfg):
-    soup = BeautifulSoup(open(index).read().decode('utf-8'))
+    data = open(index).read().decode('utf-8')
+
+    print "Set HTML variables"
+    for key in cfg.html.keys():
+        data = data.replace("<?" + key + "?>", cfg.html[key])
+
+    soup = BeautifulSoup(data)
 
     print "Embed stylesheets"
     stylesheets = ""
@@ -57,7 +63,5 @@ def embed(index, output, jscfg):
     soup.head.insert(2, tag)
 
     result = soup.prettify(formatter=None)
-    print "Set bootkmarklets path"
-    result = result.replace("<?path_bookmarklets?>", cfg.path_bookmarklets)
 
     open(output, "w").write(result.encode('utf-8'))
