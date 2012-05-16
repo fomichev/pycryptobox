@@ -22,45 +22,6 @@
 		<script type="text/javascript" src="../html/js/crypto.js"></script>
 		<script type="text/javascript" src="../html/js/lock.js"></script>
 		<script type="text/javascript" src="../html/js/ui/jquery-mobile.js"></script>
-
-		<script type="text/javascript">
-function lock() {
-	lockTimeoutStop();
-
-	$(".generated").remove();
-	$.mobile.changePage("#login", "slideup");
-}
-$(document).ready(function() {
-
-	$("#form-unlock").submit(function(event) {
-		event.preventDefault();
-
-		try {
-			map = unlock($("#input-password").val());
-			$("#input-password").val("");
-
-			for (var key in map.list) {
-				$("#div-" + key).html(map.list[key]);
-				$("body").append(map.page[key]);
-			}
-
-			lockTimeoutStart();
-		} catch(e) {
-			alert("Incorrect password! " + e);
-			return;
-		}
-
-		$.mobile.changePage("#main", "slideup");
-	});
-
-	$(".button-lock").click(function () {
-		lock();
-	});
-
-	$("#input-password").focus();
-});
-
-		</script>
 </head>
 <body>
 	<div data-role="page" id="login">
@@ -85,73 +46,7 @@ $(document).ready(function() {
 		</div>
 
 		<div data-role="content">
-			<ul data-role="listview" data-inset="true">
-				<li><a href="#login">Logins</a></li>
-				<li><a href="#app">Apps</a></li>
-				<li><a href="#bookmark">Bookmarks</a></li>
-				<li><a href="#card">Cards</a></li>
-				<li><a href="#note">Notes</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div data-role="page" id="login">
-		<div data-role="header">
-			<h1>Sites</h1>
-			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
-			<a class="button-lock" href="#" data-icon="delete">Lock</a>
-		</div>
-
-		<div data-role="content">
-			<div class="content-primary" id="div-login"></div>
-		</div>
-	</div>
-
-	<div data-role="page" id="app">
-		<div data-role="header">
-			<h1>Apps</h1>
-			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
-			<a class="button-lock" href="#" data-icon="delete">Lock</a>
-		</div>
-
-		<div data-role="content">
-			<div class="content-primary" id="div-app"></div>
-		</div>
-	</div>
-
-	<div data-role="page" id="bookmark">
-		<div data-role="header">
-			<h1>Bookmarks</h1>
-			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
-			<a class="button-lock" href="#" data-icon="delete">Lock</a>
-		</div>
-
-		<div data-role="content">
-			<div class="content-primary" id="div-bookmark"></div>
-		</div>
-	</div>
-
-	<div data-role="page" id="card">
-		<div data-role="header">
-			<h1>Cards</h1>
-			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
-			<a class="button-lock" href="#" data-icon="delete">Lock</a>
-		</div>
-
-		<div data-role="content">
-			<div class="content-primary" id="div-card"></div>
-		</div>
-	</div>
-
-	<div data-role="page" id="note">
-		<div data-role="header">
-			<h1>Notes</h1>
-			<a data-rel="back" href="#" data-icon="arrow-l">Back</a>
-			<a class="button-lock" href="#" data-icon="delete">Lock</a>
-		</div>
-
-		<div data-role="content">
-			<div class="content-primary" id="div-note"></div>
+			<ul id="ul-pages-list" data-role="listview" data-inset="true"></ul>
 		</div>
 	</div>
 </body>

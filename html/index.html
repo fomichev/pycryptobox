@@ -24,111 +24,6 @@
 		<script type="text/javascript" src="../html/js/crypto.js"></script>
 		<script type="text/javascript" src="../html/js/lock.js"></script>
 		<script type="text/javascript" src="../html/js/ui/jquery-ui.js"></script>
-
-		<script type="text/javascript">
-function lock() {
-	lockTimeoutStop();
-
-	$("#div-generate").dialog('close');
-	$("#div-token").dialog('close');
-
-	$("#div-locked").show();
-	$("#div-unlocked").hide();
-
-	$("div.generated").remove();
-}
-
-$(document).ready(function() {
-	$("#div-unlocked").hide();
-	$("#div-locked").show();
-
-	$(".button").button();
-
-	$("#button-unlock").button({ icons: { primary: "ui-icon-unlocked" } });
-	$("#button-lock").button({ icons: { primary: "ui-icon-locked" } });
-	$("#button-generate-show").button({ icons: { primary: "ui-icon-gear" } });
-
-	$("#form-unlock").submit(function(event) {
-		event.preventDefault();
-		try {
-			map = unlock($("#input-password").val());
-			$("#input-password").val("");
-
-			$("#div-login").html(map.page.login);
-			$("#div-app").html(map.page.app);
-			$("#div-bookmark").html(map.page.bookmark);
-			$("#div-card").html(map.page.card);
-			$("#div-note").html(map.page.note);
-
-			$("#div-locked").hide();
-			$("#div-unlocked").show();
-
-			$("#div-generate").hide();
-			$("#div-token").hide();
-
-			$(".button").button();
-			$(".button-token").button({ icons: { primary: "ui-icon-lightbulb" } });
-			$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
-			$(".button-login").button({ icons: { primary: "ui-icon-key" } });
-			$(".accordion").accordion({
-				autoHeight: false,
-				navigation: false,
-				active: false,
-				collapsible: true
-			});
-			$('.expand').click(function() {
-				event.preventDefault();
-				$(this).next().toggle();
-			}).next().hide();
-
-			lockTimeoutStart();
-
-			$("#tabs").tabs();
-		} catch(e) {
-			alert("Incorrect password! " + e);
-			return;
-		}
-	});
-
-	$("body").mousemove(function() { lockTimeoutUpdate(); });
-
-	$("#button-lock").click(function(event) {
-		event.preventDefault();
-		lock();
-	});
-
-	$("#button-generate-show").click(function(event) {
-		event.preventDefault();
-		$("#div-generate").dialog({
-			resizable: false,
-			buttons: {
-				"Generate": function() {
-					$("#intput-generated-password").val(generatePassword(
-						$("#input-password-length").val(),
-						$("#input-include-num").is(":checked"),
-						$("#input-include-punc").is(":checked"),
-						$("#input-include-uc").is(":checked"),
-						$("#input-pronounceable").is(":checked")));
-				},
-				"Cancel": function() { $(this).dialog('close'); }
-			}
-		});
-	});
-
-	$("#input-pronounceable").click(function() {
-		if ($("#input-pronounceable").is(":checked")) {
-			$("#input-include-num").attr("disabled", true);
-			$("#input-include-punc").attr("disabled", true);
-		} else {
-			$("#input-include-num").removeAttr("disabled");
-			$("#input-include-punc").removeAttr("disabled");
-		}
-	});
-
-
-	$("#input-password").focus();
-});
-		</script>
 	</head>
 	<body>
 		<noscript>
@@ -145,35 +40,12 @@ $(document).ready(function() {
 
 		<div id="div-unlocked">
 			<div id="div-header">
+				<a class="button-bookmark" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Form bookmarklet</a>
 				<button id="button-generate-show">Generate password</button>
 				<button id="button-lock">Lock</button>
 			</div>
 
-			<div id="tabs">
-				<ul>
-					<li><a href="#div-login">Logins</a></li>
-					<li><a href="#div-app">Apps</a></li>
-					<li><a href="#div-bookmark">Bookmarks</a></li>
-					<li><a href="#div-card">Cards</a></li>
-					<li><a href="#div-note">Notes</a></li>
-					<li><a href="#div-help">Help</a></li>
-				</ul>
-
-				<div id="div-login"></div>
-				<div id="div-app"></div>
-				<div id="div-bookmark"></div>
-				<div id="div-card"></div>
-				<div id="div-note"></div>
-				<div id="div-help">
-					<h2>Help</h2>
-					<p>There will be user documentation... Someday...</p>
-
-					<h2>Bookmarklet</h2>
-
-					<h3><a id="bookmarkletForm" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Parse form</a></h3>
-					<p>Use this bookmarklet to obtain form data from the new sites.</p>
-				</div>
-			</div>
+			<div id="tabs"></div>
 
 			<div id="div-generate" title="Generate password">
 				<form>
@@ -191,7 +63,9 @@ $(document).ready(function() {
 				<input type="text" id="input-json" size="32" />
 			</div>
 
-			<div id="div-copyright" class="ui-widget"><p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a> 2012</p></div>
+			<div id="div-copyright" class="ui-widget">
+				<p>&copy; <a href="mailto:s@fomichev.me">Stanislav Fomichev</a> 2012</p>
+			</div>
 		</div>
 	</body>
 </html>

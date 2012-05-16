@@ -38,41 +38,15 @@ function createLogin(id, name, address, form, username, password) {
 	return page(id, title, t);
 }
 
-function createApp(id, name, key) {
-	return page(id, name, key);
-}
-
-function createBookmark(id, name, url, comment) {
-	return page(id, name, '<a class="button-goto" href="' + url + '" target="_blank">Go to site</a><p>' + comment + '</p>');
-}
-
-function createCard(id, name, cardholder, cvv2, number, pin) {
-	var d = "";
-	d += "<p>Cardholder=" + cardholder + "</p>";
-	d += "<p>Number=" + number + "</p>";
-	d += "<p>CVV2=" + cvv2 + "</p>";
-	d += "<p>PIN=" + pin + "</p>";
-
-	return page(id, name, d);
-}
-
-function createNote(id, name, text) {
-	return page(id, name, text);
-}
-
 function viewCreatePageEntry(id, type, data) {
-	if (type == 'login')
+	if (type == 'Logins')
 		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
-	else if (type == 'app')
-		return createApp(id, data.name, data.vars.key);
-	else if (type == 'bookmark')
-		return createBookmark(id, data.name, data.vars.url, addBr(data.vars.comment));
-	else if (type == 'card')
-		return createCard(id, data.name, data.vars.cardholder, data.vars.cvv2, data.vars.number, data.vars.pin);
-	else if (type == 'note')
-		return createNote(id, data.name, addBr(data.vars.text));
-	else
-		return '';
+	else {
+		if (data.mtext != undefined)
+			return page(id, data.name, addBr(data.mtext));
+		else
+			return page(id, data.name, addBr(data.text));
+	}
 }
 
 function viewCreateListEntry(id, type, data) {
@@ -99,3 +73,48 @@ function viewWrapPage(text) {
 function viewWrapList(text) {
 	return '<ul data-role="listview" data-inset="true" data-filter="true">' + text + '</ul>';
 }
+
+function lock() {
+	lockTimeoutStop();
+
+	$(".generated").remove();
+	$.mobile.changePage("#login", "slideup");
+}
+$(document).ready(function() {
+
+	$("#form-unlock").submit(function(event) {
+		event.preventDefault();
+
+		try {
+			var map = unlock($("#input-password").val());
+			$("#input-password").val("");
+
+			for (var key in map.list) {
+
+				var pages_list = '';
+				var pages = "";
+				for (var key in map.page) {
+					pages_list += '<li><a href="#' + key + '">' + key + '</a></li>'
+					pages += page(key, key, map.list[key]);
+					pages += map.page[key];
+				}
+
+				$("#ul-pages-list").html(pages_list);
+				$("body").append(pages);
+			}
+
+			lockTimeoutStart();
+		} catch(e) {
+			alert("Incorrect password! " + e);
+			return;
+		}
+
+		$.mobile.changePage("#main", "slideup");
+	});
+
+	$(".button-lock").click(function () {
+		lock();
+	});
+
+	$("#input-password").focus();
+});

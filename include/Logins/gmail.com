@@ -1,5 +1,4 @@
 {
-	"type":"login",
 	"name": "Gmail",
 	"address": "https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/&ss=1&scc=1<mpl=default<mplcache=2",
 	"form":

@@ -1,9 +1,0 @@
-{
-	"type": "note",
-	"name": "$name",
-
-	"vars":
-	{
-		"text" : "Every note now starts with its '$name' name\n$text"
-	}
-}

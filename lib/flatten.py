@@ -35,15 +35,16 @@ def flatten_node(search_paths, tp, v, tag):
             continue
 
         print "Read " + path + tp
-
-        data = cgi.escape(data)
+#        data = cgi.escape(data)
         try:
             jdata = json.loads(data)
         except Exception as e:
             raise Exception("Invalid JSON data in '" + path + tp + "':\n" + str(e))
 
+        jdata['type'] = tp.split('/')[0]
+
         set_vars(jdata, v)
-        if not 'vars' in  jdata:
+        if jdata['type'] == 'Logins':
             jdata['vars'] = v
 
         if len(tag) == 0:

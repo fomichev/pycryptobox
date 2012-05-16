@@ -15,7 +15,7 @@ function createLogin(id, name, address, form, username, password) {
 
 	var token = withToken(form);
 	if (token != "") {
-		r += '<a class="button-token" href="' + address + '" target="_blank">Get token</a>';
+		r += '<a class="button-bookmark" href="' + address + '" target="_blank">Get token</a>';
 		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'>Log in</a>';
 	} else {
 		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>Log in</a>';
@@ -28,41 +28,11 @@ function createLogin(id, name, address, form, username, password) {
 	return accordionItem(title, r);
 }
 
-function createApp(id, name, key) {
-	return accordionItem(name, key);
-}
-
-function createBookmark(name, url, comment) {
-	return accordionItem(name, '<a class="button-goto" href="' + url + '" target="_blank">Go to site</a><p>' + comment + '</p>');
-}
-
-function createCard(name, cardholder, cvv2, number, pin) {
-	var d = "";
-	d += "<p>Cardholder=" + cardholder + "</p>";
-	d += "<p>Number=" + number + "</p>";
-	d += "<p>CVV2=" + cvv2 + "</p>";
-	d += "<p>PIN=" + pin + "</p>";
-
-	return accordionItem(name, d);
-}
-
-function createNote(name, text) {
-	return accordionItem(name, text);
-}
-
 function viewCreatePageEntry(id, type, data) {
-	if (type == 'login')
+	if (type == 'Logins')
 		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
-	else if (type == 'app')
-		return createApp(id, data.name, data.vars.key);
-	else if (type == 'bookmark')
-		return createBookmark(data.name, data.vars.url, addBr(data.vars.comment));
-	else if (type == 'card')
-		return createCard(data.name, data.vars.cardholder, data.vars.cvv2, data.vars.number, data.vars.pin);
-	else if (type == 'note')
-		return createNote(data.name, addBr(data.vars.text));
 	else
-		return '';
+		return accordionItem(data.name, addBr(data.text));
 }
 
 function viewCreateListEntry(id, type, data) {
@@ -89,3 +59,109 @@ function viewWrapPage(text) {
 function viewWrapList(text) {
 	return text;
 }
+
+function lock() {
+	lockTimeoutStop();
+
+	$("#div-generate").dialog('close');
+	$("#div-token").dialog('close');
+
+	$("#div-locked").slideDown();
+	$("#div-unlocked").fadeOut();
+
+	$("div.generated").remove();
+}
+
+$(document).ready(function() {
+	$("#div-unlocked").hide();
+
+	$(".button").button();
+
+	$("#button-unlock").button({ icons: { primary: "ui-icon-unlocked" } });
+	$("#button-lock").button({ icons: { primary: "ui-icon-locked" } });
+	$("#button-generate-show").button({ icons: { primary: "ui-icon-gear" } });
+	$(".button-bookmark").button({ icons: { primary: "ui-icon-contact" } });
+
+	$("#form-unlock").submit(function(event) {
+		event.preventDefault();
+		try {
+			var map = unlock($("#input-password").val());
+			$("#input-password").val("");
+
+			var tabs_list = '';
+			var tabs = "";
+			for (var key in map.page) {
+				tabs_list += '<li><a href="#div-' + key + '">' + key + '</a></li>';
+				tabs += '<div id="div-' + key +'" class="generated">' + map.page[key] + '</div>';
+			}
+
+			$("#tabs").html('<ul class="generated">' + tabs_list + '</ul>' + tabs);
+
+			$("#div-generate").hide();
+			$("#div-token").hide();
+
+			$(".button").button();
+			$(".button-bookmark").button({ icons: { primary: "ui-icon-contact" } });
+			$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
+			$(".button-login").button({ icons: { primary: "ui-icon-key" } });
+			$(".accordion").accordion({
+				autoHeight: false,
+				navigation: false,
+				active: false,
+				collapsible: true
+			});
+			$('.expand').click(function() {
+				event.preventDefault();
+				$(this).next().toggle();
+			}).next().hide();
+
+			lockTimeoutStart();
+
+			$("#tabs").tabs();
+
+			$("#div-locked").slideUp();
+			$("#div-unlocked").fadeIn();
+		} catch(e) {
+			alert("Incorrect password! " + e);
+			return;
+		}
+	});
+
+	$("body").mousemove(function() { lockTimeoutUpdate(); });
+
+	$("#button-lock").click(function(event) {
+		event.preventDefault();
+		lock();
+	});
+
+	$("#button-generate-show").click(function(event) {
+		event.preventDefault();
+		$("#div-generate").dialog({
+			resizable: false,
+			buttons: {
+				"Generate": function() {
+					$("#intput-generated-password").val(generatePassword(
+						$("#input-password-length").val(),
+						$("#input-include-num").is(":checked"),
+						$("#input-include-punc").is(":checked"),
+						$("#input-include-uc").is(":checked"),
+						$("#input-pronounceable").is(":checked")));
+				},
+				"Cancel": function() { $(this).dialog('close'); }
+			}
+		});
+	});
+
+	$("#input-pronounceable").click(function() {
+		if ($("#input-pronounceable").is(":checked")) {
+			$("#input-include-num").attr("disabled", true);
+			$("#input-include-punc").attr("disabled", true);
+		} else {
+			$("#input-include-num").removeAttr("disabled");
+			$("#input-include-punc").removeAttr("disabled");
+		}
+	});
+
+
+	$("#input-password").focus();
+});

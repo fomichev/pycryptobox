@@ -1,9 +1,0 @@
-{
-	"type": "app",
-	"name": "$name",
-
-	"vars":
-	{
-		"key" : "$key"
-	}
-}

@@ -1,5 +1,4 @@
 {
-	"type":"login",
 	"name": "Fab.com",
 	"address": "http://fab.com/",
 	"form":

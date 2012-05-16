@@ -16,7 +16,10 @@ function copyToClipboard(text) {
 }
 
 function addBr(text) {
-	return text.replace(/\n/g, '<br />');
+	if (text)
+		return text.replace(/\n/g, '<br />');
+	else
+		return "";
 }
 
 function withToken(form) {
