@@ -107,7 +107,7 @@ function unlock(pwd) {
 		     list += viewWrapListTag(tags[i], map.list[page][tags[i]]);
 		}
 
-		map.page[page] = text;
+		map.page[page] = viewWrapPage(text);
 		map.list[page] = viewWrapList(list);
 	}
 
