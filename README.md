@@ -44,13 +44,13 @@ plain text.
 
 The steps `cbedit` does are:
 
-* Read `private/cryptobox` and decrypt it
-* For each type of entry in this file, read appropriate JSON file from
-`include/` and merge it with entry's variables (username, password, etc)
-* Merge all JSON entries into one string and encrypt it with AES
-* Embed this encrypted data into pre-baked HTML page (look at `html/` for
+* Reads `private/cryptobox` and decrypts it
+* For each type of entry in this file, reads appropriate JSON file from
+`include/` and merges it with entry's variables (username, password, etc)
+* Merges all JSON entries into one string and encrypts it with AES
+* Embeds this encrypted data into pre-baked HTML page (look at `html/` for
 more details)
-* Embed JavaScript and CSS (along with images) into HTML page and store it
+* Embeds JavaScript and CSS (along with images) into HTML page and stores it
 under `private/cryptobox/html` directory (cryptobox.html - is a desktop
 version; m.cryptobox.html - is a mobile one)
 
