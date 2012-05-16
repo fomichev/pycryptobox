@@ -17,20 +17,22 @@ password.
 Your sensitive information is stored in the `private/cryptobox` file,
 encrypted via AES; key is derived from your password using PBKDF2.
 
-When `cbedit` generates HTML, it parses your data, merges it with JSON
-patterns from include/ directory (more on this later), encrypts it using
+When `cbedit` generates HTML, it asks your password, decrypts
+`private/cryptbox`file and merges it with JSON
+patterns from `include/` directory (more on this later), encrypts it using
 AES/PBKDF2 and puts this information into HTML page. Later on, when you
 open it in the browser, it will ask your password and decrypt attached
-database on the fly.
+database on the fly. So, your sensitive information is never exposed in
+plain text.
 
 ... go on ...
+
+
+## Extending / Adding new site (includes)
 
 ## Bookmarklets
 
 TODO: Describe why and what they do...
-
-## Extending / Adding new site
-
 # Required python modules:
 
 - install pip
@@ -48,6 +50,18 @@ TODO: Describe why and what they do...
 - install http://www.crummy.com/software/BeautifulSoup/
 
 	$ pip install beautifulsoup4
+
+## Installation on Windows
+
+t.b.d.
+
+## Installation on Mac OS X
+
+t.b.d.
+
+## Installation on Linux
+
+t.b.d.
 
 # Usage
 
@@ -101,13 +115,11 @@ TODO: Describe why and what they do...
 
 	html/extern/jquery-mobile
 
-
 - Clippy https://github.com/mojombo/clippy (MIT)
 
 	html/extern/clippy
 
 	private/html/clippy.swf
-
 
 # Database example
 
@@ -150,7 +162,7 @@ TODO: Describe why and what they do...
 
 - Chrome 18
 
-- Safari
+- Safari 5
 
 - Firefox 11, 12
 

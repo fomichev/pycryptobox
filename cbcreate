@@ -14,9 +14,8 @@ if __name__ == "__main__":
         if not ans in ['Y', 'y']:
             sys.exit(0)
 
-    password = getpass.getpass()
-    print "Retype"
-    password2 = getpass.getpass()
+    password = getpass.getpass('Password: ')
+    password2 = getpass.getpass('Retype password: ')
 
     if password != password2:
         print "Your password doesn't match!"

@@ -66,20 +66,17 @@ def flatten(lines, prefix):
         if line[0] == '#':
             continue
 
-        if line[0] == '@':
-            if tp:
-                logins.append(flatten_node(prefix, tp, v, tag))
-                tp = None
-
-            tag = line[1:].strip()
-            continue
-
         if line[len(line) - 1] == ':':
             if tp:
                 logins.append(flatten_node(prefix, tp, v, tag))
                 v = {}
 
             tp = line[:-1]
+            try:
+                tag = tp.split('@')[1].strip()
+                tp = tp.split('@')[0].strip()
+            except:
+                tag = ''
 
             continue
 

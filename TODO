@@ -4,10 +4,10 @@ Optimizations:
 - use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small)
 
 Features:
-- add proper quoting for the db
+- get rid on data duplication in data.var and data.data (store only in data.var)
+- add proper quoting for the db (in the tag and vals)
 - add support for include/ directory under private/
 - add some validation for DB and include/
-- add support for multiple tokens
 
 Noncritical features:
 - add .cryptoboxrc support

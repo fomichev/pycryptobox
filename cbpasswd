@@ -7,12 +7,10 @@ import lib.crypto
 import lib.cfg
 
 if __name__ == "__main__":
-    password = getpass.getpass()
+    password = getpass.getpass('Current password: ')
 
-    print "New"
-    new_password = getpass.getpass()
-    print "Retype"
-    new_password2 = getpass.getpass()
+    new_password = getpass.getpass('New password: ')
+    new_password2 = getpass.getpass('Retype new password: ')
 
     if new_password != new_password2:
         print "Your password doesn't match!"
