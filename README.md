@@ -13,7 +13,7 @@ when given correct password.
 Your sensitive information is never exposed; it's never stored on the disk
 in the plain text and exists in the HTML page only in the encrypted form.
 
-## Features:
+## Features
 
 * Secure storage of sensitive information
 * Desktop and mobile HTML pages for ease of use
