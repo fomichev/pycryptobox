@@ -2,7 +2,7 @@
 	"type": "note",
 	"name": "$name",
 
-	"data":
+	"vars":
 	{
 		"text" : "$text"
 	}

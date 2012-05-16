@@ -54,13 +54,13 @@ function viewCreatePageEntry(id, type, data) {
 	if (type == 'site')
 		return createLink(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
 	else if (type == 'app')
-		return createApp(id, data.name, data.data.key);
+		return createApp(id, data.name, data.vars.key);
 	else if (type == 'bookmark')
-		return createBookmark(data.name, data.data.url, addBr(data.data.comment));
+		return createBookmark(data.name, data.vars.url, addBr(data.vars.comment));
 	else if (type == 'card')
-		return createCard(data.name, data.data.cardholder, data.data.cvv2, data.data.number, data.data.pin);
+		return createCard(data.name, data.vars.cardholder, data.vars.cvv2, data.vars.number, data.vars.pin);
 	else if (type == 'note')
-		return createNote(data.name, addBr(data.data.text));
+		return createNote(data.name, addBr(data.vars.text));
 	else
 		return '';
 }

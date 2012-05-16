@@ -2,7 +2,7 @@
 	"type": "bookmark",
 	"name": "$name",
 
-	"data":
+	"vars":
 	{
 		"comment" : "$comment",
 		"url" : "$url"

@@ -2,7 +2,7 @@
 	"type": "card",
 	"name": "$name",
 
-	"data":
+	"vars":
 	{
 		"cardholder" : "$cardholder",
 		"number": "$number",

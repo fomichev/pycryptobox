@@ -31,7 +31,8 @@ def flatten_node(prefix, tp, v, tag):
 
     jdata = json.loads(data)
     set_vars(jdata, v)
-    jdata['vars'] = v
+    if not 'vars' in  jdata:
+        jdata['vars'] = v
 
     if len(tag) == 0:
         jdata['tag'] = '__default__'
