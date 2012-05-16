@@ -79,9 +79,10 @@ function lock() {
 
 	$(".generated").remove();
 	$.mobile.changePage("#login", "slideup");
+
+	$("#input-password").focus();
 }
 $(document).ready(function() {
-
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
 
@@ -90,7 +91,6 @@ $(document).ready(function() {
 			$("#input-password").val("");
 
 			for (var key in map.list) {
-
 				var pages_list = '';
 				var pages = "";
 				for (var key in map.page) {

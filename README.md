@@ -103,6 +103,9 @@ t.b.d.
 
 	html/extern/seedrandom.js
 
+	html/extern/seedrandom.min.js (via http://closure-compiler.appspot.com/home)
+
+
 - jQuery http://jquery.com (MIT)
 
 	html/extern/jquery
@@ -123,34 +126,34 @@ t.b.d.
 
 # Database example
 
-	login/dropbox.com:
+	Logins/dropbox.com:
 		username=qwe@qwe.qwe
 		password=pwd
 
-	login/gmail.com:
+	Logins/gmail.com:
 		username=qwe@qwe.qwe
 		password=pwd
 
-	card:
+	Cards:
 		name=bank
 		cardholder=Jonh Smith
 		number=1234 5678 9012 3456
 		pin=1234
 		cvv=123
 
-	note:
+	Notes:
 		name=note
 		text=with body
 
-	app:
+	Applications:
 		name=Photoshop
 		key=secret
 
-	bookmark:
+	Bookmarks:
 		name=Google
 		url=http://google.com
 
-	note:
+	Notes:
 		name=Multiline Note
 		text=<<<YOUR_MARKER
 	line1

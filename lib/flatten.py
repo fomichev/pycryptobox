@@ -8,6 +8,8 @@ import cgi
 
 import cfg
 
+#re_subst = re.compile(r'\$\{([^\}]*)\?([^}]*)\}')
+
 def set_vars(obj, v):
     if type(obj) == type(dict()):
         for k in obj.keys():
@@ -19,7 +21,6 @@ def set_vars(obj, v):
                 for vk in v.keys():
                     obj[k] = obj[k].replace("${" + vk + "}", v[vk])
                     obj[k] = obj[k].replace("$" + vk, v[vk])
-
     elif type(obj) == type(list()):
         for i in obj:
             set_vars(i, v);

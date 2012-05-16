@@ -1,9 +1,4 @@
 {
-	"type": "account",
 	"name": "$name",
-
-	"vars":
-	{
-		"text": "Hostname: $hostname\nSMTP: $smtp\nUsername: $username\nPassword: $password";
-	}
+	"text": "Hostname: $hostname\n${smtp?SMTP: $smtp\n}Username: $username\nPassword: $password"
 }
