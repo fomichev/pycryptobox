@@ -88,17 +88,14 @@ def flatten(lines, prefix):
 
             hdoc = here_doc(keyval[1])
             if hdoc != "":
-                print "hdoc="+hdoc
                 value = ""
 
                 while lines:
                     hline = lines.pop()
-                    print "hline="+hline
                     if hline.strip() == hdoc:
                         break
                     value += hline + "\n"
 
-                print "value="+value
                 v[keyval[0]] = value
             else:
                 v[keyval[0]] = keyval[1]
