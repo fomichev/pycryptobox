@@ -5,7 +5,7 @@ function accordionItem(header, body) {
 function createLogin(id, name, address, form, username, password) {
 	var hocid = 0;
 	function collapsible(name, value) {
-		return '<div class="expand"><a href="#" onClick="javascript:return false;"><strong>' + name + '</strong> (click to expand/collapse)</a></div><div>' + value + '</div>';
+		return '<div class="expand"><span style="float:left;" class="ui-icon ui-icon-circlesmall-plus"></span><a href="#" onClick="javascript:return false;"><strong>' + name + '</strong></a>&nbsp;' + copyToClipboard(value) + '</div><div>' + value + '</div>';
 	}
 
 	var title = name + " (" + username + ")"
@@ -22,8 +22,8 @@ function createLogin(id, name, address, form, username, password) {
 	}
 
 	r += '<a class="button-goto" href="' + address + '" target="_blank">Go to site</a>';
-	r += '<p>' + collapsible("Username", username + ' ' + copyToClipboard(username)) + '</p>';
-	r += '<p>' + collapsible("Password", password + ' ' + copyToClipboard(password)) + '</p>';
+	r += '<p>' + collapsible("Username", username) + '</p>';
+	r += '<p>' + collapsible("Password", password) + '</p>';
 
 	return accordionItem(title, r);
 }
@@ -115,10 +115,13 @@ $(document).ready(function() {
 			});
 			$('.expand').click(function() {
 				event.preventDefault();
+
+				$(this).children().toggleClass('ui-icon-circlesmall-plus ui-icon-circlesmall-minus');
 				$(this).next().toggle();
 			}).next().hide();
 
 			$("#tabs").tabs();
+			$("#tabs").tabs('select', 0);
 
 			$(".button-bookmark").button({ icons: { primary: "ui-icon-contact" } });
 			$(".button-goto").button({ icons: { primary: "ui-icon-newwin" } });
