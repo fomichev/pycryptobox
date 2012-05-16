@@ -6,6 +6,8 @@
 import json
 import cgi
 
+import cfg
+
 def set_vars(obj, v):
     if type(obj) == type(dict()):
         for k in obj.keys():
@@ -23,23 +25,35 @@ def set_vars(obj, v):
             set_vars(i, v);
 
 
-def flatten_node(prefix, tp, v, tag):
-    print "Read " + prefix + tp
+def flatten_node(search_paths, tp, v, tag):
+    for path in search_paths:
+        try:
+            data = open(path + tp, "r").read().decode('utf-8')
+        except:
+            if cfg.debug:
+                print "Tried " + path + tp
+            continue
 
-    data = open(prefix + tp, "r").read().decode('utf-8')
-    data = cgi.escape(data)
+        print "Read " + path + tp
 
-    jdata = json.loads(data)
-    set_vars(jdata, v)
-    if not 'vars' in  jdata:
-        jdata['vars'] = v
+        data = cgi.escape(data)
+        try:
+            jdata = json.loads(data)
+        except Exception as e:
+            raise Exception("Invalid JSON data in '" + path + tp + "':\n" + str(e))
 
-    if len(tag) == 0:
-        jdata['tag'] = '__default__'
-    else:
-        jdata['tag'] = tag
+        set_vars(jdata, v)
+        if not 'vars' in  jdata:
+            jdata['vars'] = v
 
-    return jdata
+        if len(tag) == 0:
+            jdata['tag'] = '__default__'
+        else:
+            jdata['tag'] = tag
+
+        return jdata
+
+    raise Exception("Not found entry type '%s'" % tp)
 
 def here_doc(val):
     try:
@@ -50,7 +64,7 @@ def here_doc(val):
 
     return ""
 
-def flatten(lines, prefix):
+def flatten(lines, search_paths):
     logins = []
     logins.append({ "type" : "magic", "value": "270389" })
     lines.reverse()
@@ -69,7 +83,7 @@ def flatten(lines, prefix):
 
         if line[len(line) - 1] == ':':
             if tp:
-                logins.append(flatten_node(prefix, tp, v, tag))
+                logins.append(flatten_node(search_paths, tp, v, tag))
                 v = {}
 
             tp = line[:-1]
@@ -101,8 +115,12 @@ def flatten(lines, prefix):
                 v[keyval[0]] = keyval[1]
 
     if tp:
-        logins.append(flatten_node(prefix, tp, v, tag))
+        logins.append(flatten_node(search_paths, tp, v, tag))
         tp = None
 
     padding = "                " # somehow JS decrypt eats fist 16 symbols
-    return padding + json.dumps(logins, sort_keys=True, indent=4)
+
+    if cfg.debug:
+        return padding + json.dumps(logins, indent=4)
+    else:
+        return padding + json.dumps(logins)

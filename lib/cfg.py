@@ -2,6 +2,9 @@ import platform
 import os
 from Crypto.Cipher import AES
 
+# Don't switch it! Your data will be exposed in private/tmp/
+debug = False
+
 pbkdf2_salt = "somesalt" # 64-bit
 pbkdf2_iterations = 1000
 aes_mode = AES.MODE_CFB
@@ -14,6 +17,7 @@ path_db = prefix + "private/cryptobox"
 path_db_hmac = prefix + "private/cryptobox.hmac"
 path_db_html = prefix + "private/html/cryptobox.html"
 path_db_mobile_html = prefix + "private/html/m.cryptobox.html"
+path_db_include = prefix + "private/include"
 path_tmp = prefix + "private/tmp"
 
 path_include = os.getcwd() + "/include"

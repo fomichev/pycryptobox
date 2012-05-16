@@ -4,7 +4,6 @@ Optimizations:
 - use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small)
 
 Features:
-- add support for include/ directory under private/
 - add some validation for DB and include/
 
 Noncritical features:
