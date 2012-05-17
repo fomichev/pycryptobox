@@ -34,6 +34,13 @@ html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bo
 html['version'] = '0.1'
 html['date'] = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
 
+js = {}
+js['_cfg_salt'] = pbkdf2_salt
+js['_cfg_lockTimeout'] = lock_timeout_minutes
+js['_cfg_pbkdb2Iterations'] = pbkdf2_iterations
+js['_cfg_aesMode'] = aes_mode
+#js['_cfg_aesIv'] = aes_iv
+
 try:
     cs = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip()
     html['version'] += '.' + cs

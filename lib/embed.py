@@ -11,7 +11,7 @@ def getimg(path):
     data = "".join(open(path, "rb").read().encode('base64').split("\n"))
     return "data:image/png;base64," + data
 
-def embed(index, output, jscfg):
+def embed(index, output, cfg_js):
     data = open(index).read().decode('utf-8')
 
     print "Set HTML variables"
@@ -58,7 +58,7 @@ def embed(index, output, jscfg):
     scripts = re.compile(r'\s//.*$', re.MULTILINE).sub('', scripts)
 
     tag = soup.new_tag("script", type="text/javascript")
-    tag.string = jscfg + scripts
+    tag.string = scripts + cfg_js
 
     soup.head.insert(2, tag)
 

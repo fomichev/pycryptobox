@@ -2,6 +2,8 @@
 
 # generate JavaScript files containing cipher setup and cipher text
 
+from Crypto.Cipher import AES
+
 import cfg
 
 def html(index):
@@ -11,7 +13,20 @@ def html(index):
 
 def config(cipher):
     res = ""
-    res += "_cfg_salt = \"%s\";" % (cfg.pbkdf2_salt)
+
+    for v in cfg.js.keys():
+        if type(cfg.js[v]) == type(int()):
+            if v == '_cfg_aesMode':
+                if cfg.js[v] == AES.MODE_CFB:
+                    res += "_cfg_aesMode = new Crypto.mode.CFB;"
+                else:
+                    raise Exception("Unknown AES mode")
+            else:
+                res += "%s = %s;" % (v, cfg.js[v])
+        elif type(cfg.js[v] == type(str())):
+            res += "%s = \"%s\";" % (v, cfg.js[v])
+        else:
+            raise Exception("Unknown type of JavaScript variable")
+
     res += "_cfg_cipher = \"%s\";" % (cipher)
-    res += "_cfg_lockTimeout = %s;" % (cfg.lock_timeout_minutes)
     return res

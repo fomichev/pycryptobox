@@ -224,7 +224,7 @@ required modules.
 	line2
 	YOUR_MARKER
 
-## Import
+## Import database
 
 No, there is probably no easy way to automate it (taking into account the
 number of existing formats); you have to create (or use pre-created) JSON
@@ -233,7 +233,7 @@ and then add entry with your username/password to `private/cryptobox` manually.
 
 I'm not telling its impossible; I just see no need to implement it myself.
 
-## Export
+## Export database
 
 No, there is no reasons to switch from cryptobox :-) But if you have strong
 reasons, you can always implement `private/cryptobox` parser yourself; the
