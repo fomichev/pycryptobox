@@ -1,4 +1,5 @@
-# Overview
+Overview
+========
 
 Cryptobox is a bunch of python scripts that will help you manage your
 passwords database and other sensitive data. The idea is simple: there is
@@ -13,7 +14,8 @@ when given correct password.
 Your sensitive information is never exposed; it's never stored on the disk
 in the plain text and exists in the HTML page only in the encrypted form.
 
-## Features
+Features
+--------
 
 * Secure storage of sensitive information
 * Desktop and mobile HTML pages for ease of use
@@ -24,7 +26,8 @@ saves you from manually copy-pasting your passwords)
 or two (to feel good that your data is safe)
 * Works on every platform where you have browser (everywhere)
 
-## Guts
+Guts
+----
 
 All information is stored in the `private/cryptobox` file,
 encrypted via [AES](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard);
@@ -60,7 +63,8 @@ all data from the aforementioned steps will be stored in the `private/tmp/`
 directory. You can also change cipher parameters (e.g. PBKDF2 salt) and
 entryped data file path in the `lib/cfg.py` file.
 
-## Bookmarklet
+Bookmarklet
+-----------
 
 Some sites use authenticity token which they place into the HTML you get;
 the login form along the username and password fields contains hidden field
@@ -78,7 +82,8 @@ should set token field value to `@token`; that will lead to pop-up dialog
 box on login asking you to provide form data (you may have multiple tokens
 within forms).
 
-## Extending / Adding new login (includes)
+Extending / Adding new login (includes)
+---------------------------------------
 
 ... tell more about `include/` directory; what's stored there, in what format
 and how user should add data there ...
@@ -90,7 +95,8 @@ JSON and place `$username` and `$password` into appropriate form fields (look
 for other logins JSON data in `include/Logins`, it will become clear from
 the example what to do).
 
-# Required python modules:
+Required python modules
+=======================
 
 If your operation system of choice is Windows (sigh), then it's required to
 have the following path in your PATH environment variable -
@@ -112,22 +118,26 @@ have the following path in your PATH environment variable -
 
 	$ pip install beautifulsoup4
 
-## Installation on Windows
+Installation on Windows
+-----------------------
 
 Get python 2.6 and install all required modules from the previous section.
 Also don't forget to add `c:\Python26\Scripts\` to your PATH environment
 variable.
 
-## Installation on Mac OS X
+Installation on Mac OS X
+------------------------
 
 Use `brew` to get python 2.7 and then install required modules.
 
-## Installation on Linux
+Installation on Linux
+---------------------
 
-You'll already have python 2.6 or 2.7 on a linux machine; just install the
-required modules.
+Chances are, you'll already have python 2.6 or 2.7 on a Linux machine;
+so just install the required modules.
 
-# Usage
+Usage
+=====
 
 - Create database (creates empty `private/cryptobox` and
 `private/cryptobox.hmac`)
@@ -147,9 +157,11 @@ required modules.
 
 	$ ./cbhtml
 
-# Used components
+Used components
+===============
 
-## Python
+Python
+------
 
 - [PBKDF2](http://www.dlitz.net/software/python-pbkdf2/) - MIT
 
@@ -159,7 +171,8 @@ required modules.
 
 - [HMAC-MD5](http://docs.python.org/library/hmac.html) - Python
 
-## JavaScript
+JavaScript
+----------
 
 - [PBKDF2, AES](https://code.google.com/p/crypto-js/) - New BSD License
 
@@ -192,7 +205,8 @@ required modules.
 
 	private/html/clippy.swf
 
-# Database example
+Database example
+================
 
 	Logins/dropbox.com:
 		username=qwe@qwe.qwe
@@ -229,7 +243,8 @@ required modules.
 	line2
 	YOUR_MARKER
 
-## Import database
+Import database
+---------------
 
 No, there is probably no easy way to automate it (taking into account the
 number of existing formats); you have to create (or use pre-created) JSON
@@ -238,19 +253,21 @@ and then add entry with your username/password to `private/cryptobox` manually.
 
 I'm not telling its impossible; I just see no need to implement it myself.
 
-## Export database
+Export database
+---------------
 
 No, there is no reasons to switch from cryptobox :-) But if you have strong
 reasons, you can always implement `private/cryptobox` parser yourself; the
 format is very easy to parse and all routines that decrypt data are waiting
 for you in the `lib/` directory.
 
-# Works on (where it has been tested)
+Works on (where it has been tested)
+===================================
 
 - Chrome 18, 19
 
-- Safari 5
-
 - Firefox 11, 12
+
+- Safari 5
 
 - iPhone (iOS 5)

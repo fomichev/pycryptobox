@@ -2,10 +2,6 @@
 
 import getpass
 
-import lib.flatten
-import lib.crypto
-import lib.generate
-import lib.embed
 import lib.html
 
 if __name__ == "__main__":

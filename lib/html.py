@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+
+# Concatenate all pieces into one HTML page
+
 import sys
 import os
 import shutil

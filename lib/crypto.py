@@ -34,9 +34,6 @@ def dec(secret, ciphertext):
 def derive_key(password):
     return PBKDF2(password, cfg.pbkdf2_salt, cfg.pbkdf2_iterations).read(32) # 256-bit key
 
-def derive_keyhex(password):
-    return PBKDF2(password, cfg.pbkdf2_salt).hexread(32) # 256-bit key
-
 def auth(secret, plaintext):
     return hmac.new(key=secret, msg=plaintext, digestmod=hashlib.md5).hexdigest()
 

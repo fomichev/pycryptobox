@@ -13,7 +13,7 @@ if __name__ == "__main__":
     new_password2 = getpass.getpass('Retype new password: ')
 
     if new_password != new_password2:
-        print "Your password doesn't match!"
+        print "Your passwords don't match!"
         sys.exit(0)
 
     plaintext = lib.crypto.dec_db(password, lib.cfg.path_db, lib.cfg.path_db_hmac)
