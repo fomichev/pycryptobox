@@ -22,17 +22,15 @@ def strip_padding(plaintext):
 
 def enc(secret, plaintext):
     plaintext = add_padding(plaintext)
-    cipher = AES.new(secret, cfg.aes_mode, segment_size=128)
-#    cipher = AES.new(secret, cfg.aes_mode, aes_iv, segment_size=128)
+    cipher = AES.new(secret, cfg.aes_mode, cfg.aes_iv.decode('hex'), segment_size=128)
     return cipher.encrypt(plaintext)
 
 def dec(secret, ciphertext):
-    cipher = AES.new(secret, cfg.aes_mode, segment_size=128)
-#    cipher = AES.new(secret, cfg.aes_mode, aes_iv, segment_size=128)
+    cipher = AES.new(secret, cfg.aes_mode, cfg.aes_iv.decode('hex'), segment_size=128)
     return strip_padding(cipher.decrypt(ciphertext))
 
 def derive_key(password):
-    return PBKDF2(password, cfg.pbkdf2_salt, cfg.pbkdf2_iterations).read(32) # 256-bit key
+    return PBKDF2(password, cfg.pbkdf2_salt.decode('hex'), cfg.pbkdf2_iterations).read(32) # 256-bit key
 
 def auth(secret, plaintext):
     return hmac.new(key=secret, msg=plaintext, digestmod=hashlib.md5).hexdigest()

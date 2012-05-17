@@ -5,7 +5,6 @@ Optimizations:
 
 Features:
 - add some validation for DB and include/
-- add AES input vector support
 
 Noncritical features:
 - add .cryptoboxrc support

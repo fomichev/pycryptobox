@@ -21,10 +21,10 @@ except:
 # Don't switch it! Your data will be exposed in private/tmp/
 debug = False
 
-pbkdf2_salt = "somesalt" # 64-bit
+pbkdf2_salt = "somesalt".encode('hex') # 64-bit
 pbkdf2_iterations = 1000
 aes_mode = AES.MODE_CFB
-#aes_iv = "0123456890123456" # 128-bit
+aes_iv = "0123456890123456".encode('hex') # 128-bit
 
 lock_timeout_minutes = 5
 
@@ -53,7 +53,7 @@ js['_cfg_lockTimeout'] = lock_timeout_minutes
 js['_cfg_pbkdb2Iterations'] = pbkdf2_iterations
 js['_cfg_aesMode'] = aes_mode
 js['_cfg_pages'] = json.dumps(lang.types)
-#js['_cfg_aesIv'] = aes_iv
+js['_cfg_aesIv'] = aes_iv
 
 if platform.system() == 'Windows':
     editor = "gvim"
