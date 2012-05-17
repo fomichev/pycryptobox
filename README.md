@@ -105,6 +105,10 @@ have the following path in your PATH environment variable -
 
 	$ pip install beautifulsoup4
 
+- Install argparse (only for Python < 2.7)
+
+	$ pip install argparse
+
 Installation on Windows
 -----------------------
 

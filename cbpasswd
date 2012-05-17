@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 
 import getpass
+import argparse
 import sys
 
 import lib.crypto
 import lib.cfg
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Change master password')
+    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + lib.cfg.version)
+    parser.parse_args()
+
     password = getpass.getpass('Current password: ')
 
     new_password = getpass.getpass('New password: ')

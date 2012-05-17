@@ -4,12 +4,17 @@ import tempfile
 import subprocess
 import os
 import getpass
+import argparse
 
 import lib.crypto
 import lib.cfg
 import lib.html
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Edit cryptobox database')
+    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + lib.cfg.version)
+    parser.parse_args()
+
     password = getpass.getpass()
 
     plaintext = lib.crypto.dec_db(password, lib.cfg.path_db, lib.cfg.path_db_hmac)

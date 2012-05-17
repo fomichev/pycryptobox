@@ -6,8 +6,6 @@ Optimizations:
 Features:
 - add some validation for DB and include/
 - add AES input vector support
-- add help and version information to all python tools
-- ? use from lib.cfg import cfg (and for other modules)
 
 Noncritical features:
 - add .cryptoboxrc support

@@ -4,10 +4,19 @@ import datetime
 import subprocess
 import json
 
+import argparse
+
 from Crypto.Cipher import AES
 
 import lang.en as lang
 #import lang.ru as lang
+
+version = '0.1'
+try:
+    cs = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip()
+    version += '-' + cs
+except:
+    pass
 
 # Don't switch it! Your data will be exposed in private/tmp/
 debug = False
@@ -35,7 +44,7 @@ path_clippy = path_html + "/extern/clippy/build/clippy.swf"
 html = lang.text
 html['jquery_ui_theme'] = 'flick'
 html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
-html['version'] = '0.1'
+html['version'] = version
 html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
 
 js = {}
@@ -45,12 +54,6 @@ js['_cfg_pbkdb2Iterations'] = pbkdf2_iterations
 js['_cfg_aesMode'] = aes_mode
 js['_cfg_pages'] = json.dumps(lang.types)
 #js['_cfg_aesIv'] = aes_iv
-
-try:
-    cs = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip()
-    html['version'] += '-' + cs
-except:
-    pass
 
 if platform.system() == 'Windows':
     editor = "gvim"
