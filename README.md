@@ -69,9 +69,9 @@ feature with such sites. But there is a solution!
 
 There is a bookmarklet that you can run on a login page; it will parse the form
 data and will let you copy it in JSON format. Then, when you press 'Log in'
-button for token based sites, you'll be asked this data. After you paste it
+button for token based sites, you'll be asked for this data. After you paste it
 and press 'OK' you'll be automatically logged in (using provided authenticity
-token).
+token and your username/password).
 
 When you're adding such form to the logins storage (`include/Logins`), you
 should set token field value to `@token`; that will lead to pop-up dialog
@@ -79,6 +79,9 @@ box on login asking you to provide form data (you may have multiple tokens
 within forms).
 
 ## Extending / Adding new login (includes)
+
+... tell more about `include/` directory; what's stored there, in what format
+and how user should add data there ...
 
 I think it's pretty straightforward. You can use aforesaid bookmarklet on
 your target site. The only caveat is that it can have multiple forms on one
@@ -93,19 +96,19 @@ If your operation system of choice is Windows (sigh), then it's required to
 have the following path in your PATH environment variable -
 `c:\Python26\Scripts\` (assuming default python installation).
 
-- install pip
+- Install pip
 
 	$ easy_install pip
 
-- install https://www.dlitz.net/software/python-pbkdf2/
+- Install [PBKDF2](https://www.dlitz.net/software/python-pbkdf2/)
 
 	$ pip install pbkdf2
 
-- install https://www.dlitz.net/software/pycrypto/
+- Install [PyCrypto](https://www.dlitz.net/software/pycrypto/)
 
 	$ pip install pycrypto
 
-- install http://www.crummy.com/software/BeautifulSoup/
+- Install [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
 
 	$ pip install beautifulsoup4
 
@@ -126,21 +129,21 @@ required modules.
 
 # Usage
 
-- create database (creates empty `private/cryptobox` and
+- Create database (creates empty `private/cryptobox` and
 `private/cryptobox.hmac`)
 
 	$ ./cbcreate
 
-- edit your database (it will also update html page at
+- Edit your database (it will also update html page at
 `private/html/cryptobox.html` and at `private/html/m.cryptobox.html`)
 
 	$ ./cbedit
 
-- change password (every couple of months)
+- Change password (every couple of months)
 
 	$ ./cbpasswd
 
-- update html page (perform html page update without update to database - only for development)
+- Update HTML page (perform HTML page update without update to database - only for development)
 
 	$ ./cbhtml
 
@@ -152,7 +155,9 @@ required modules.
 
 - [AES](https://www.dlitz.net/software/pycrypto/) - Public Domain
 
-- HMAC-MD5 - Python builtin
+- [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/) - Python
+
+- [HMAC-MD5](http://docs.python.org/library/hmac.html) - Python
 
 ## JavaScript
 
