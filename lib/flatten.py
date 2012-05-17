@@ -5,10 +5,28 @@
 
 import json
 import cgi
+import re
 
 import cfg
 
-#re_subst = re.compile(r'\$\{([^\}]*)\?([^}]*)\}')
+re_subst = re.compile(r'\$\{([^\}]*)\?([^}]*)\}')
+
+def clear_unset(obj):
+    if type(obj) == type(dict()):
+        for k in obj.keys():
+            if type(obj[k]) == type(dict()):
+                clear_unset(obj[k])
+            elif type(obj[k]) == type(list()):
+                clear_unset(obj[k])
+            else:
+                r = re_subst.search(obj[k])
+                while r:
+                    obj[k] = obj[k].replace(r.group(0), "")
+                    r = re_subst.search(obj[k])
+
+    elif type(obj) == type(list()):
+        for i in obj:
+            clear_unset(i, v);
 
 def set_vars(obj, v):
     if type(obj) == type(dict()):
@@ -19,12 +37,14 @@ def set_vars(obj, v):
                 set_vars(obj[k], v)
             else:
                 for vk in v.keys():
-                    obj[k] = obj[k].replace("${" + vk + "}", v[vk])
+                    r = re_subst.search(obj[k])
+                    if r and r.group(1) == vk:
+                        obj[k] = obj[k].replace(r.group(0), r.group(2))
+
                     obj[k] = obj[k].replace("$" + vk, v[vk])
     elif type(obj) == type(list()):
         for i in obj:
             set_vars(i, v);
-
 
 def flatten_node(search_paths, tp, v, tag):
     for path in search_paths:
@@ -45,6 +65,7 @@ def flatten_node(search_paths, tp, v, tag):
         jdata['type'] = tp.split('/')[0]
 
         set_vars(jdata, v)
+        clear_unset(jdata)
         if jdata['type'] == 'Logins':
             jdata['vars'] = v
 
