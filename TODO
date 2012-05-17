@@ -5,7 +5,6 @@ Optimizations:
 
 Features:
 - add some validation for DB and include/
-- make 'enter' work in login with token dialog
 - add AES input vector support
 
 Noncritical features:

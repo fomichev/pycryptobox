@@ -82,6 +82,15 @@ function lock() {
 	$("#input-password").focus();
 }
 
+function dialogGenerateSubmit() {
+	$("#intput-generated-password").val(generatePassword(
+		$("#input-password-length").val(),
+		$("#input-include-num").is(":checked"),
+		$("#input-include-punc").is(":checked"),
+		$("#input-include-uc").is(":checked"),
+		$("#input-pronounceable").is(":checked")));
+}
+
 $(document).ready(function() {
 	lock();
 
@@ -149,15 +158,13 @@ $(document).ready(function() {
 		$("#div-generate").dialog({
 			resizable: false,
 			buttons: {
-				"Generate": function() {
-					$("#intput-generated-password").val(generatePassword(
-						$("#input-password-length").val(),
-						$("#input-include-num").is(":checked"),
-						$("#input-include-punc").is(":checked"),
-						$("#input-include-uc").is(":checked"),
-						$("#input-pronounceable").is(":checked")));
-				},
+				"Generate": function() { dialogGenerateSubmit(); },
 				"Cancel": function() { $(this).dialog('close'); }
+			}
+		});
+		$("#div-generate").keydown(function(event) {
+			if (event.keyCode == $.ui.keyCode.ENTER) {
+				dialogGenerateSubmit();
 			}
 		});
 	});

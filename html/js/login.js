@@ -1,30 +1,43 @@
+function dialogLoginSubmit(url, name, keys, values, tokens) {
+	var form_json = $("#input-json").val();
+
+	if (!form_json || form_json == "")
+		return;
+
+	$("#input-json").val("");
+	$("#div-token").dialog('close');
+
+	try {
+		var data = eval(form_json);
+		for (var i = 0; i < data.length; i++) {
+			for (var field in data[i].form.fields) {
+				if (tokens.indexOf(field) >= 0) {
+					keys.push(field);
+					values.push(data[i].form.fields[field]);
+				}
+			}
+		}
+	} catch(e) {
+		return
+	}
+
+	login("post", url, name, keys, values);
+}
+
 function loginWithToken(url, name, keys, values, tokens) {
 	$("#div-token").dialog({
 		height: 140,
 		width: 280,
 		modal: true,
 		buttons: {
-			"Login": function() {
-				var form_json = $("#input-json").val();
-
-				if (!form_json || form_json == "")
-					return;
-
-				var data = eval(form_json);
-				for (var i = 0; i < data.length; i++) {
-					for (var field in data[i].form.fields) {
-						if (tokens.indexOf(field) >= 0) {
-							keys.push(field);
-							values.push(data[i].form.fields[field]);
-						}
-					}
-				}
-
-				$("#input-json").val("");
-				$(this).dialog('close');
-				login("post", url, name, keys, values);
-			},
+			"Login": function() { dialogLoginSubmit(url, name, keys, values, tokens); },
 			"Cancel": function() { $(this).dialog('close'); }
+		}
+	});
+
+	$("#div-token").keydown(function(event) {
+		if (event.keyCode == $.ui.keyCode.ENTER) {
+			dialogLoginSubmit(url, name, keys, values, tokens);
 		}
 	});
 }
