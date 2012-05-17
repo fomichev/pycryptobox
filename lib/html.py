@@ -31,7 +31,7 @@ def update(password):
     if cfg.debug:
         open(cfg.path_tmp + "/_json_plaintext", "w").write(json_plaintext)
 
-    aes_base64 = crypto.enc(key, json_plaintext).encode("base64")
+    aes_base64 = crypto.enc(key, json_plaintext)
     if cfg.debug:
         open(cfg.path_tmp + "/_aes_base64", "w").write(aes_base64)
 
@@ -52,6 +52,11 @@ def update(password):
 
     saved_cwd = os.getcwd()
     os.chdir(cfg.path_html)
+
+    try:
+        os.mkdir(os.path.dirname(path_index))
+    except:
+        pass
 
     print "> cryptobox.html"
     embed.embed(path_tmp_index, path_index, cfg_js)

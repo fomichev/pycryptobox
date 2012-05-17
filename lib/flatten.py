@@ -95,8 +95,10 @@ def flatten(lines, search_paths):
     tp = None
     tag = ''
     v = {}
+    no = 0
     while lines:
         line = lines.pop().strip()
+        no = no + 1
 
         if len(line) == 0:
             continue
@@ -119,7 +121,7 @@ def flatten(lines, search_paths):
             continue
 
         keyval = line.split('=')
-        if len(keyval) == 2:
+        if len(keyval) >= 2:
             keyval[0] = keyval[0].strip()
             keyval[1] = "=".join(keyval[1:]).strip()
 
@@ -127,15 +129,24 @@ def flatten(lines, search_paths):
             if hdoc != "":
                 value = ""
 
+                found = False
+                hno = no
                 while lines:
                     hline = lines.pop()
+                    no = no + 1
                     if hline.strip() == hdoc:
+                        found = True
                         break
                     value += hline + "\n"
+
+                if not found:
+                    raise Exception("Didn't find the end of here document started ad line " + str(hno))
 
                 v[keyval[0]] = value
             else:
                 v[keyval[0]] = keyval[1]
+        else:
+            raise Exception("Expected variable with value or new entry at line " + str(no) + "\nDid you forget to place : at the end of line?")
 
     if tp:
         logins.append(flatten_node(search_paths, tp, v, tag))

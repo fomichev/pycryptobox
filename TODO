@@ -1,7 +1,7 @@
 Optimizations:
 - use CryptoJS version 3 instead of 2.5 (need to figure out how to use AES correctly)
 - use external repositories when possible (jQuery, CryproJS)
-- use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small)
+- use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small) - try POST request to compress JS and if failed, use non-optimized
 
 Features:
 - add some validation for DB and include/
