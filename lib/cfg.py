@@ -36,6 +36,9 @@ path_db_mobile_html = prefix + "private/html/m.cryptobox.html"
 path_db_include = prefix + "private/include"
 path_tmp = prefix + "private/tmp"
 
+backup = [ path_db, path_db_hmac, path_db_html ]
+backup_file = prefix + "private/cryptobox.tar"
+
 path_include = os.getcwd() + "/include"
 path_html = os.getcwd() + "/html"
 

@@ -140,6 +140,11 @@ Usage
 
 	$ ./cbedit
 
+Whenever you edit cryptobox database, the backup file (`private/cryptobox.tar`)
+is created with the previous version of your database. So if some unexpected
+error happens, you can always restore your previous database contents from
+simple tar archive.
+
 - Change password (every couple of months)
 
 	$ ./cbpasswd
