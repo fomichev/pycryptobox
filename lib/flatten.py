@@ -121,7 +121,7 @@ def flatten(lines, search_paths):
         keyval = line.split('=')
         if len(keyval) == 2:
             keyval[0] = keyval[0].strip()
-            keyval[1] = keyval[1].strip()
+            keyval[1] = "=".join(keyval[1:]).strip()
 
             hdoc = here_doc(keyval[1])
             if hdoc != "":

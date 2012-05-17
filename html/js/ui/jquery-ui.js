@@ -102,8 +102,8 @@ $(document).ready(function() {
 
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
-			var map = unlock($("#input-password").val());
 		try {
+			var map = unlock($("#input-password").val());
 			$("#input-password").val("");
 
 			var tabs_list = '';
@@ -124,6 +124,7 @@ $(document).ready(function() {
 				autoHeight: false,
 				navigation: false,
 				active: false,
+				/* animated: false, */
 				collapsible: true
 			});
 			$('.expand').click(function() {
