@@ -4,6 +4,7 @@ Optimizations:
 - use https://developers.google.com/closure/compiler/ to compress js (should not yield much space because amount of internal js compared to external is reaaaaly small)
 
 Features:
+- fix possible issue when value in database contains = sign (will be split by it)
 - add some validation for DB and include/
 - add AES input vector support
 - add help and version information to all python tools

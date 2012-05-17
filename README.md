@@ -82,19 +82,6 @@ should set token field value to `@token`; that will lead to pop-up dialog
 box on login asking you to provide form data (you may have multiple tokens
 within forms).
 
-Extending / Adding new login (includes)
----------------------------------------
-
-... tell more about `include/` directory; what's stored there, in what format
-and how user should add data there ...
-
-I think it's pretty straightforward. You can use aforesaid bookmarklet on
-your target site. The only caveat is that it can have multiple forms on one
-page, so watch out and select the one you need. Afterwards, look through the
-JSON and place `$username` and `$password` into appropriate form fields (look
-for other logins JSON data in `include/Logins`, it will become clear from
-the example what to do).
-
 Required python modules
 =======================
 
@@ -157,56 +144,58 @@ Usage
 
 	$ ./cbhtml
 
-Used components
+Database format
 ===============
 
-Python
-------
+Your sensitive information is stored in the form of entries; there may be a
+number of entries, each describing particular login, bookmark, secure note or
+other information.
 
-- [PBKDF2](http://www.dlitz.net/software/python-pbkdf2/) - MIT
+Entry has the following structure (everything enclosed in [] is optional):
 
-- [AES](https://www.dlitz.net/software/pycrypto/) - Public Domain
+<entry type>[@<entry tag>]:
 
-- [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/) - Python
+	[variable1=value1]
 
-- [HMAC-MD5](http://docs.python.org/library/hmac.html) - Python
+	[variable2=value2]
 
-JavaScript
-----------
+	[variableN=valueN]
 
-- [PBKDF2, AES](https://code.google.com/p/crypto-js/) - New BSD License
+You don't need to quote anything; just put variable name on the left side of `=`
+sign and variable value on the right side of `=` sign without any quotes. If you
+want to have a multi line value, here document is supported (like in shell,
+Perl, etc). You just put `<<SEPARATOR` in place of value and all the lines
+from the next one until the line which contains only `SEPARATOR` is multi line
+value (you can use any characters sequence instead of `SEPARATOR`).
 
-	html/extern/CryptoJS (v3)
+Entry type is a relative path to a file inside the `include/` directory. And
+the first component in this path (until the first `/` of end of string) will
+form a tab in the HTML page. So, for example, if you have `Logins/google.com`
+and `Logins/yahoo.com`, there will be a `Logins` page in the HTML document
+containing two entries. If you have several `Notes` entries, they will
+be located on anther tab.
 
-	html/extern/cjs (v2.5)
+Each file in the `include/` directory is a JSON file which describes the
+format and layout of entry. Variables from the entry will be substituted with
+`$variableN` inside the JSON file and will form particular login/bookmark/etc.
+There is some special handling for the login entries, where it's expected to
+have `form` information with `$username` and `$password` variables.
+For ther other entries, there will be probably only `text` variable that will
+somehow format other variables from the entry.
 
-- [Random Seed](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
+Extending / Adding new login (includes)
+---------------------------------------
 
-	html/extern/seedrandom.js
-
-	html/extern/seedrandom.min.js (via http://closure-compiler.appspot.com/home)
-
-
-- [jQuery](http://jquery.com) - MIT
-
-	html/extern/jquery
-
-- [jQuery UI](http://jqueryui.com/download) - MIT
-
-	html/extern/jquery-ui (Dialog, Tabs, Accordion, Button)
-
-- [jQuery Mobile](http://jquerymobile.com) - MIT
-
-	html/extern/jquery-mobile
-
-- [Clippy](https://github.com/mojombo/clippy) - MIT
-
-	html/extern/clippy
-
-	private/html/clippy.swf
+I think it's pretty straightforward. You can use aforesaid bookmarklet on
+your target site. The only caveat is that it can have multiple forms on one
+page, so watch out and select the one you need (don't copy leading `[` and
+trailing `]`, JSON data should start with `{` and end with `}`). Afterwards,
+look through the JSON and place `$username` and `$password` into appropriate
+form fields (look for other logins JSON data in `include/Logins`, it will
+become clear from the example what to do).
 
 Database example
-================
+----------------
 
 	Logins/dropbox.com:
 		username=qwe@qwe.qwe
@@ -271,3 +260,51 @@ Works on (where it has been tested)
 - Safari 5
 
 - iPhone (iOS 5)
+
+Used components
+===============
+
+Python
+------
+
+- [PBKDF2](http://www.dlitz.net/software/python-pbkdf2/) - MIT
+
+- [AES](https://www.dlitz.net/software/pycrypto/) - Public Domain
+
+- [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/) - Python
+
+- [HMAC-MD5](http://docs.python.org/library/hmac.html) - Python
+
+JavaScript
+----------
+
+- [PBKDF2, AES](https://code.google.com/p/crypto-js/) - New BSD License
+
+	html/extern/CryptoJS (v3)
+
+	html/extern/cjs (v2.5)
+
+- [Random Seed](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
+
+	html/extern/seedrandom.js
+
+	html/extern/seedrandom.min.js (via http://closure-compiler.appspot.com/home)
+
+
+- [jQuery](http://jquery.com) - MIT
+
+	html/extern/jquery
+
+- [jQuery UI](http://jqueryui.com/download) - MIT
+
+	html/extern/jquery-ui (Dialog, Tabs, Accordion, Button)
+
+- [jQuery Mobile](http://jquerymobile.com) - MIT
+
+	html/extern/jquery-mobile
+
+- [Clippy](https://github.com/mojombo/clippy) - MIT
+
+	html/extern/clippy
+
+	private/html/clippy.swf
