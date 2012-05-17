@@ -292,8 +292,6 @@ JavaScript
 
 	html/extern/CryptoJS (v3)
 
-	html/extern/cjs (v2.5)
-
 - [Random Seed](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
 
 	html/extern/seedrandom.js

@@ -12,31 +12,31 @@ import sys
 import cfg
 
 check_hmac = False
+aes_mode = AES.MODE_CBC
 
-def add_padding(plaintext):
+def add_padding(s):
     """ Because cipher should be aligned to some text length, we need to
         add padding """
-    padding = (16 - len(plaintext) % 16) * " "
-    return plaintext + padding
+    return s + (cfg.aes_bs - len(s) % cfg.aes_bs) * chr(cfg.aes_bs - len(s) % cfg.aes_bs)
 
-def strip_padding(plaintext):
+def strip_padding(s):
     """ Reverse of add_padding """
-    return plaintext.rstrip()
+    return s[0:-ord(s[-1])]
 
 def enc(secret, plaintext):
     """ Encode plaintext using given secret (PBKDF2) """
     plaintext = add_padding(plaintext)
-    cipher = AES.new(secret, cfg.aes_mode, cfg.aes_iv.decode('hex'), segment_size=128)
+    cipher = AES.new(secret, aes_mode, cfg.aes_iv.decode('base64'), segment_size=128)
     return cipher.encrypt(plaintext).encode('base64')
 
 def dec(secret, ciphertext):
     """ Encode plaintext using given secret (PBKDF2) """
-    cipher = AES.new(secret, cfg.aes_mode, cfg.aes_iv.decode('hex'), segment_size=128)
+    cipher = AES.new(secret, aes_mode, cfg.aes_iv.decode('base64'), segment_size=128)
     return strip_padding(cipher.decrypt(ciphertext.decode('base64')))
 
 def derive_key(password):
     """ Derive PBKDF2 key from passphrase """
-    return PBKDF2(password, cfg.pbkdf2_salt.decode('hex'), cfg.pbkdf2_iterations).read(32) # 256-bit key
+    return PBKDF2(password, cfg.pbkdf2_salt.decode('base64'), cfg.pbkdf2_iterations).read(cfg.aes_bs) # 256-bit key
 
 def auth(secret, plaintext):
     """ Check integrity of plaintext via HMAC-MD5 """

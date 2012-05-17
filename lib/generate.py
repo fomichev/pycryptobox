@@ -16,13 +16,7 @@ def config(cipher):
 
     for v in cfg.js.keys():
         if type(cfg.js[v]) == type(int()):
-            if v == '_cfg_aesMode':
-                if cfg.js[v] == AES.MODE_CFB:
-                    res += "_cfg_aesMode = new Crypto.mode.CFB;"
-                else:
-                    raise Exception("Unknown AES mode")
-            else:
-                res += "%s = %s;" % (v, cfg.js[v])
+            res += "%s = %s;" % (v, cfg.js[v])
         elif type(cfg.js[v] == type(str())):
             if v == '_cfg_pages':
                 res += "%s = %s;" % (v, cfg.js[v])
