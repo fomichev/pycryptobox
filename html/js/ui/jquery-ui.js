@@ -15,21 +15,21 @@ function createLogin(id, name, address, form, username, password) {
 
 	var token = withToken(form);
 	if (token != "") {
-		r += '<a class="button-bookmark" href="' + address + '" target="_blank">Get token</a>';
-		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'>Log in</a>';
+		r += '<a class="button-bookmark" href="' + address + '" target="_blank"><?text_get_token?></a>';
+		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'><?text_log_in?></a>';
 	} else {
-		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>Log in</a>';
+		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'><?text_log_in?></a>';
 	}
 
-	r += '<a class="button-goto" href="' + address + '" target="_blank">Go to site</a>';
-	r += '<p>' + collapsible("Username", username) + '</p>';
-	r += '<p>' + collapsible("Password", password) + '</p>';
+	r += '<a class="button-goto" href="' + address + '" target="_blank"><?text_goto?></a>';
+	r += '<p>' + collapsible("<?text_username?>", username) + '</p>';
+	r += '<p>' + collapsible("<?text_password?>", password) + '</p>';
 
 	return accordionItem(title, r);
 }
 
 function viewCreatePageEntry(id, type, data) {
-	if (type == 'Logins')
+	if (type == 'login')
 		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
 	else
 		return accordionItem(data.name, addBr(data.text));
@@ -102,14 +102,18 @@ $(document).ready(function() {
 
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
-		try {
 			var map = unlock($("#input-password").val());
+		try {
 			$("#input-password").val("");
 
 			var tabs_list = '';
 			var tabs = "";
 			for (var key in map.page) {
-				tabs_list += '<li><a href="#div-' + key + '">' + key + '</a></li>';
+				var name = key;
+				if (_cfg_pages[key])
+					name = _cfg_pages[key];
+
+				tabs_list += '<li><a href="#div-' + key + '">' + name + '</a></li>';
 				tabs += '<div id="div-' + key +'" class="generated">' + map.page[key] + '</div>';
 			}
 
@@ -141,7 +145,7 @@ $(document).ready(function() {
 			$("#div-locked").hide();
 			$("#div-unlocked").fadeIn();
 		} catch(e) {
-			alert("Incorrect password! " + e);
+			alert("<?text_incorrect_password?> " + e);
 			return;
 		}
 	});

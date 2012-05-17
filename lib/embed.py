@@ -1,4 +1,5 @@
 #!/usr/bin/env pyhon
+# -*- coding: utf-8 -*-
 
 # embed js and css into index.html
 
@@ -11,12 +12,15 @@ def getimg(path):
     data = "".join(open(path, "rb").read().encode('base64').split("\n"))
     return "data:image/png;base64," + data
 
+def sethtmlvars(data):
+    for key in cfg.html.keys():
+        data = data.replace("<?" + key + "?>", cfg.html[key].decode('utf-8'))
+
+    return data
+
 def embed(index, output, cfg_js):
     data = open(index).read().decode('utf-8')
-
-    print "Set HTML variables"
-    for key in cfg.html.keys():
-        data = data.replace("<?" + key + "?>", cfg.html[key])
+    data = sethtmlvars(data)
 
     soup = BeautifulSoup(data)
 
@@ -56,6 +60,7 @@ def embed(index, output, cfg_js):
 
     print "Remove comments from scripts"
     scripts = re.compile(r'\s//.*$', re.MULTILINE).sub('', scripts)
+    scripts = sethtmlvars(scripts)
 
     tag = soup.new_tag("script", type="text/javascript")
     tag.string = scripts + cfg_js

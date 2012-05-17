@@ -2,7 +2,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-		<title>Cryptobox</title>
+		<title><?text_title?></title>
 		<link rel="stylesheet" type="text/css" href="../html/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../html/extern/jquery-ui/css/<?jquery_ui_theme?>/jquery-ui-1.8.20.custom.css" />
 
@@ -26,45 +26,43 @@
 		<script type="text/javascript" src="../html/js/ui/jquery-ui.js"></script>
 	</head>
 	<body>
-		<noscript>
-			Sorry, this thing heavily depends on JavaScript.
-		</noscript>
+		<noscript><?text_noscript?></noscript>
 
 		<div id="div-locked">
 			<form id="form-unlock">
-				<h1>Enter password to unlock</h1>
+				<h1><?text_enter_password?></h1>
 				<p><input id="input-password" type="password" /></p>
-				<p><button type="submit" id="button-unlock">Unlock</button></p>
+				<p><button type="submit" id="button-unlock"><?text_button_unlock?></button></p>
 			</form>
 		</div>
 
 		<div id="div-unlocked">
 			<div id="div-header">
-				<a class="button-bookmark" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();">Form bookmarklet</a>
-				<button id="button-generate-show">Generate password</button>
-				<button id="button-lock">Lock</button>
+				<a class="button-bookmark" href="javascript:javascript:(function(){_my_script=document.createElement('SCRIPT');_my_script.type='text/javascript';_my_script.src='<?path_bookmarklets?>form.js';document.getElementsByTagName('head')[0].appendChild(_my_script);})();"><?text_form_bookmarklet?></a>
+				<button id="button-generate-show"><?text_button_generate?></button>
+				<button id="button-lock"><?text_button_lock?></button>
 			</div>
 
 			<div id="div-tabs"></div>
 
-			<div id="div-generate" title="Generate password">
+			<div id="div-generate" title="<?text_title_generate?>">
 				<form>
-					<input type="text" id="input-password-length" value="16" size="4" />Length<br />
-					<input type="checkbox" id="input-include-num" checked />Include numbers<br />
-					<input type="checkbox" id="input-include-punc" checked />Include punctuation<br />
-					<input type="checkbox" id="input-include-uc" checked />Include upper case<br />
-					<input type="checkbox" id="input-pronounceable" />Make pronounceable<br />
-					<p>Generated password:</p>
+					<input type="text" id="input-password-length" value="16" size="4" /><?text_generate_length?><br />
+					<input type="checkbox" id="input-include-num" checked /><?text_generate_numbers?><br />
+					<input type="checkbox" id="input-include-punc" checked /><?text_generate_punctuation?><br />
+					<input type="checkbox" id="input-include-uc" checked /><?text_generate_upper_case?><br />
+					<input type="checkbox" id="input-pronounceable" /><?text_generate_pronounceable?><br />
+					<p><?text_generated?></p>
 					<p><input type="text" id="intput-generated-password" size="30" /></p>
 				</form>
 			</div>
 
-			<div id="div-token" title="Enter token">
+			<div id="div-token" title="<?text_title_token?>">
 				<input type="text" id="input-json" size="32" />
 			</div>
 
 			<div id="div-copyright" class="ui-widget">
-				<p><a href="https://github.com/fomichev/cryptobox">Cryptobox</a> v<?version?>, generated at <?date?></p>
+				<p><a href="https://github.com/fomichev/cryptobox"><?text_title?></a> <?version?>, <?text_created_at?> <?date?></p>
 			</div>
 		</div>
 	</body>

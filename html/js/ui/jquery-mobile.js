@@ -9,7 +9,7 @@ function page(id, header, data) {
 	t += '<div data-role="header">';
 	t += '<h1>' + header + '</h1>';
 	t += '<a data-rel="back" href="#">Back</a>';
-	t += '<a class="button-lock" href="#" data-icon="delete">Lock</a>';
+	t += '<a class="button-lock" href="#" data-icon="delete"><?text_button_lock?></a>';
 	t += '</div>';
 	t += '<div data-role="content">';
 	t += data;
@@ -28,18 +28,18 @@ function createLogin(id, name, address, form, username, password) {
 	if (withToken(form) == "") {
 		t += '<a href="#todo" onClick=';
 		t += '\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
-		t += 'data-role="button">Login</a>';
+		t += 'data-role="button"><?text_log_in?></a>';
 	}
 
-	t += '<a href="' + address + '" data-role="button">Go to site</a>';
-	t += collapsible("Show username", username);
-	t += collapsible("Show password", password);
+	t += '<a href="' + address + '" data-role="button"><?text_goto?></a>';
+	t += collapsible("<?text_username?>", username);
+	t += collapsible("<?text_password?>", password);
 
 	return page(id, title, t);
 }
 
 function viewCreatePageEntry(id, type, data) {
-	if (type == 'Logins')
+	if (type == 'login')
 		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
 	else {
 		if (data.mtext != undefined)
@@ -105,7 +105,7 @@ $(document).ready(function() {
 
 			lockTimeoutStart();
 		} catch(e) {
-			alert("Incorrect password! " + e);
+			alert("<?text_incorrect_password?> " + e);
 			return;
 		}
 

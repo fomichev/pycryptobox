@@ -77,7 +77,7 @@ button for token based sites, you'll be asked for this data. After you paste it
 and press 'OK' you'll be automatically logged in (using provided authenticity
 token and your username/password).
 
-When you're adding such form to the logins storage (`include/Logins`), you
+When you're adding such form to the logins storage (`include/login`), you
 should set token field value to `@token`; that will lead to pop-up dialog
 box on login asking you to provide form data (you may have multiple tokens
 within forms).
@@ -170,9 +170,10 @@ value (you can use any characters sequence instead of `SEPARATOR`).
 
 Entry type is a relative path to a file inside the `include/` directory. And
 the first component in this path (until the first `/` of end of string) will
-form a tab in the HTML page. So, for example, if you have `Logins/google.com`
-and `Logins/yahoo.com`, there will be a `Logins` page in the HTML document
-containing two entries. If you have several `Notes` entries, they will
+form a tab in the HTML page. So, for example, if you have `login/google.com`
+and `login/yahoo.com`, there will be a `Logins` page (or `login` if you don't
+have translation for this page) in the HTML document
+containing two entries. If you have several `note` entries, they will
 be located on anther tab.
 
 Each file in the `include/` directory is a JSON file which describes the
@@ -191,40 +192,40 @@ your target site. The only caveat is that it can have multiple forms on one
 page, so watch out and select the one you need (don't copy leading `[` and
 trailing `]`, JSON data should start with `{` and end with `}`). Afterwards,
 look through the JSON and place `$username` and `$password` into appropriate
-form fields (look for other logins JSON data in `include/Logins`, it will
+form fields (look for other logins JSON data in `include/login`, it will
 become clear from the example what to do).
 
 Database example
 ----------------
 
-	Logins/dropbox.com:
+	login/dropbox.com:
 		username=qwe@qwe.qwe
 		password=pwd
 
-	Logins/gmail.com:
+	login/gmail.com:
 		username=qwe@qwe.qwe
 		password=pwd
 
-	Cards:
+	card:
 		name=bank
 		cardholder=Jonh Smith
 		number=1234 5678 9012 3456
 		pin=1234
 		cvv=123
 
-	Notes:
+	note:
 		name=note
 		text=with body
 
-	Applications:
+	app:
 		name=Photoshop
 		key=secret
 
-	Bookmarks:
+	bookmark:
 		name=Google
 		url=http://google.com
 
-	Notes:
+	note:
 		name=Multiline Note
 		text=<<<YOUR_MARKER
 	line1
@@ -237,7 +238,7 @@ Import database
 
 No, there is probably no easy way to automate it (taking into account the
 number of existing formats); you have to create (or use pre-created) JSON
-form layout in the `include/Logins` directory (vid provided bookmarklet)
+form layout in the `include/login` directory (vid provided bookmarklet)
 and then add entry with your username/password to `private/cryptobox` manually.
 
 I'm not telling its impossible; I just see no need to implement it myself.

@@ -66,7 +66,7 @@ def flatten_node(search_paths, tp, v, tag):
 
         set_vars(jdata, v)
         clear_unset(jdata)
-        if jdata['type'] == 'Logins':
+        if jdata['type'] == 'login':
             jdata['vars'] = v
 
         if len(tag) == 0:

@@ -24,7 +24,10 @@ def config(cipher):
             else:
                 res += "%s = %s;" % (v, cfg.js[v])
         elif type(cfg.js[v] == type(str())):
-            res += "%s = \"%s\";" % (v, cfg.js[v])
+            if v == '_cfg_pages':
+                res += "%s = %s;" % (v, cfg.js[v])
+            else:
+                res += "%s = '%s';" % (v, cfg.js[v])
         else:
             raise Exception("Unknown type of JavaScript variable")
 

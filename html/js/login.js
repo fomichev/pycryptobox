@@ -48,7 +48,7 @@ function login(method, url, name, keys, values) {
 		return false;
 
 	var html = "";
-	html += "<html><head></head><body><form id='formid' method='" + method + "' action='";
+	html += "<html><head></head><body><?text_wait_for_login?><form id='formid' method='" + method + "' action='";
 	html +=url;
 	html += "'>";
 

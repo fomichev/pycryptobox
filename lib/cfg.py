@@ -2,8 +2,12 @@ import platform
 import os
 import datetime
 import subprocess
+import json
 
 from Crypto.Cipher import AES
+
+import lang.en as lang
+#import lang.ru as lang
 
 # Don't switch it! Your data will be exposed in private/tmp/
 debug = False
@@ -28,17 +32,18 @@ path_html = os.getcwd() + "/html"
 
 path_clippy = path_html + "/extern/clippy/build/clippy.swf"
 
-html = {}
+html = lang.text
 html['jquery_ui_theme'] = 'flick'
 html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
 html['version'] = '0.1'
-html['date'] = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
+html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
 
 js = {}
 js['_cfg_salt'] = pbkdf2_salt
 js['_cfg_lockTimeout'] = lock_timeout_minutes
 js['_cfg_pbkdb2Iterations'] = pbkdf2_iterations
 js['_cfg_aesMode'] = aes_mode
+js['_cfg_pages'] = json.dumps(lang.types)
 #js['_cfg_aesIv'] = aes_iv
 
 try:
