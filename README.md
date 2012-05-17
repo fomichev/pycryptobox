@@ -153,7 +153,7 @@ other information.
 
 Entry has the following structure (everything enclosed in [] is optional):
 
-<entry type>[@<entry tag>]:
+&lt;entry type&gt;[@&lt;entry tag&gt;]:
 
 	[variable1=value1]
 
