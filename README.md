@@ -22,7 +22,7 @@ in the plain text and exists in the HTML page only in the encrypted form.
 saves you from manually copy-pasting your passwords)
 * Really small amount of code. You can get through it probably within a hour
 or two (to feel good that your data is safe)
-* Works on every platform where you have browser (read everywhere)
+* Works on every platform where you have browser (everywhere)
 
 ## Guts
 

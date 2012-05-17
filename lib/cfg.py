@@ -43,7 +43,7 @@ js['_cfg_aesMode'] = aes_mode
 
 try:
     cs = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip()
-    html['version'] += '.' + cs
+    html['version'] += '-' + cs
 except:
     pass
 
