@@ -153,13 +153,13 @@ other information.
 
 Entry has the following structure (everything enclosed in [] is optional):
 
-&lt;entry type&gt;[@&lt;entry tag&gt;]:
+	<entry type>[@<entry tag>]:
 
-	[variable1=value1]
+		[variable1=value1]
 
-	[variable2=value2]
+		[variable2=value2]
 
-	[variableN=valueN]
+		[variableN=valueN]
 
 You don't need to quote anything; just put variable name on the left side of `=`
 sign and variable value on the right side of `=` sign without any quotes. If you
