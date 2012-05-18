@@ -24,6 +24,7 @@ text['text_username'] = 'Username'
 text['text_password'] = 'Password'
 text['text_incorrect_password'] = 'Incorrect password!'
 text['text_log_in'] = 'Log in'
+text['text_button_back'] = 'Back'
 
 types = {}
 types['login'] = 'Logins'

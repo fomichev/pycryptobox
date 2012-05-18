@@ -24,6 +24,7 @@ text['text_username'] = 'Имя пользователя'
 text['text_password'] = 'Пароль'
 text['text_incorrect_password'] = 'Неверный пароль!'
 text['text_log_in'] = 'Войти'
+text['text_button_back'] = 'Назад'
 
 types = {}
 types['login'] = 'Логины'
