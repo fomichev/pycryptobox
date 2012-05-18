@@ -5,17 +5,11 @@ import subprocess
 import os
 import getpass
 import argparse
-import tarfile
+import sys
 
 import lib.crypto
 import lib.cfg
 import lib.html
-
-def backup():
-    tar = tarfile.open(lib.cfg.backup_file, "w")
-    for name in lib.cfg.backup:
-        tar.add(name)
-    tar.close()
 
 if __name__ == "__main__":
 
@@ -40,15 +34,13 @@ if __name__ == "__main__":
     mtime_end = os.stat(file_name).st_mtime
 
     if mtime_begin != mtime_end:
-        # backup current database
-        if len(lib.cfg.backup) > 0:
-            try:
-                backup()
-            except:
-                ans = raw_input("Couldn't perform a backup, continue? [y|n]: ")
+        try:
+            lib.cfg.backup()
+        except:
+            ans = raw_input("Couldn't perform a backup, continue? [y|n]: ")
 
-                if not ans in ['Y', 'y']:
-                    sys.exit(0)
+            if not ans in ['Y', 'y']:
+                sys.exit(0)
 
         lib.crypto.enc_db(conf, password, file_name, lib.cfg.path_db, lib.cfg.path_db_hmac)
         lib.html.update(conf, password)

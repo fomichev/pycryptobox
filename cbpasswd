@@ -21,6 +21,14 @@ if __name__ == "__main__":
         print "Your passwords don't match!"
         sys.exit(0)
 
+    try:
+        lib.cfg.backup()
+    except:
+        ans = raw_input("Couldn't perform a backup, continue? [y|n]: ")
+
+        if not ans in ['Y', 'y']:
+            sys.exit(0)
+
     conf = lib.crypto.read_cfg(lib.cfg.path_cfg)
     plaintext = lib.crypto.dec_db(conf, password, lib.cfg.path_db, lib.cfg.path_db_hmac)
     lib.crypto.enc_plaintext(conf, new_password, plaintext, lib.cfg.path_db, lib.cfg.path_db_hmac)

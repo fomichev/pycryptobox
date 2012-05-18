@@ -3,7 +3,7 @@ import os
 import datetime
 import subprocess
 import json
-
+import tarfile
 import argparse
 
 import lang.en as lang
@@ -30,8 +30,8 @@ path_db_include = prefix + "include"
 path_tmp = prefix + "tmp"
 path_cfg = prefix + "cryptobox.cfg"
 
-backup = [ path_db, path_db_hmac, path_db_html ]
-backup_file = prefix + "cryptobox.tar"
+path_backup = prefix + "cryptobox.tar"
+backup_files = [ path_db, path_db_hmac, path_db_html, path_cfg ]
 
 path_include = os.getcwd() + "/include"
 path_html = os.getcwd() + "/html"
@@ -50,3 +50,10 @@ if platform.system() == 'Windows':
 #    editor = "c:/Program Files/Notepad++/notepad++.exe"
 else:
     editor = "vim"
+
+def backup():
+    if len(backup_files) > 0:
+        tar = tarfile.open(path_backup, "w")
+        for name in backup_files:
+            tar.add(name)
+        tar.close()
