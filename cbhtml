@@ -13,4 +13,5 @@ if __name__ == "__main__":
 
     password = getpass.getpass()
 
-    lib.html.update(password)
+    conf = lib.crypto.read_cfg(lib.cfg.path_cfg)
+    lib.html.update(conf, password)

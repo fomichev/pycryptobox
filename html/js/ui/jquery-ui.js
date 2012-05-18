@@ -110,8 +110,8 @@ $(document).ready(function() {
 			var tabs = "";
 			for (var key in map.page) {
 				var name = key;
-				if (_cfg_pages[key])
-					name = _cfg_pages[key];
+				if (cfg.page[key])
+					name = cfg.page[key];
 
 				tabs_list += '<li><a href="#div-' + key + '">' + name + '</a></li>';
 				tabs += '<div id="div-' + key +'" class="generated">' + map.page[key] + '</div>';

@@ -60,8 +60,7 @@ version; m.cryptobox.html - is a mobile one)
 If you're brave enough (or just want to understand what's going on under the
 hood), you can enable debug mode in the `lib/cfg.py` file; after that,
 all data from the aforementioned steps will be stored in the `private/tmp/`
-directory. You can also change cipher parameters (e.g. PBKDF2 salt) and
-entryped data file path in the `lib/cfg.py` file.
+directory.
 
 Bookmarklet
 -----------

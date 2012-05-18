@@ -26,4 +26,6 @@ if __name__ == "__main__":
         print "Your passwords don't match!"
         sys.exit(0)
 
-    lib.crypto.enc_plaintext(password, "# Lines started with # are comments", lib.cfg.path_db, lib.cfg.path_db_hmac)
+    lib.crypto.create_cfg(lib.cfg.path_cfg)
+    conf = lib.crypto.read_cfg(lib.cfg.path_cfg)
+    lib.crypto.enc_plaintext(conf, password, "# Lines started with # are comments", lib.cfg.path_db, lib.cfg.path_db_hmac)

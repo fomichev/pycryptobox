@@ -25,7 +25,8 @@ if __name__ == "__main__":
 
     password = getpass.getpass()
 
-    plaintext = lib.crypto.dec_db(password, lib.cfg.path_db, lib.cfg.path_db_hmac)
+    conf = lib.crypto.read_cfg(lib.cfg.path_cfg)
+    plaintext = lib.crypto.dec_db(conf, password, lib.cfg.path_db, lib.cfg.path_db_hmac)
 
     EDITOR = os.environ.get('EDITOR', lib.cfg.editor)
 
@@ -49,8 +50,8 @@ if __name__ == "__main__":
                 if not ans in ['Y', 'y']:
                     sys.exit(0)
 
-        lib.crypto.enc_db(password, file_name, lib.cfg.path_db, lib.cfg.path_db_hmac)
-        lib.html.update(password)
+        lib.crypto.enc_db(conf, password, file_name, lib.cfg.path_db, lib.cfg.path_db_hmac)
+        lib.html.update(conf, password)
     else:
         print "No update to database"
 

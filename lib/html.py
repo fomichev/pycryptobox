@@ -5,6 +5,7 @@
 import sys
 import os
 import shutil
+import json
 
 import crypto
 import flatten
@@ -12,7 +13,7 @@ import cfg
 import generate
 import embed
 
-def update(password):
+def update(conf, password):
     path_tmp_index = os.path.abspath(cfg.path_tmp + "/index.html")
     path_tmp_mobile_index = os.path.abspath(cfg.path_tmp + "/m.index.html")
 
@@ -24,14 +25,14 @@ def update(password):
     except:
         pass
 
-    key = crypto.derive_key(password)
-    db_plaintext = crypto.dec_db(password, cfg.path_db, cfg.path_db_hmac)
+    key = crypto.derive_key(conf, password)
+    db_plaintext = crypto.dec_db(conf, password, cfg.path_db, cfg.path_db_hmac)
 
     json_plaintext = flatten.flatten(db_plaintext.split("\n"), (cfg.path_include + "/", cfg.path_db_include + "/"))
     if cfg.debug:
         open(cfg.path_tmp + "/_json_plaintext", "w").write(json_plaintext)
 
-    aes_base64 = crypto.enc(key, json_plaintext)
+    aes_base64 = crypto.enc(conf, key, json_plaintext)
     if cfg.debug:
         open(cfg.path_tmp + "/_aes_base64", "w").write(aes_base64)
 
@@ -45,8 +46,12 @@ def update(password):
     m_index_html = generate.html(cfg.path_html + "/m.index.html")
     open(path_tmp_mobile_index, "w").write(m_index_html)
 
+    js = conf
+    js['lock_timeout_minutes'] = cfg.lock_timeout_minutes
+    js['page'] = cfg.lang.types
+    js['cipher'] = aes_base64_nonl
 
-    cfg_js = generate.config(aes_base64_nonl)
+    cfg_js = generate.config(js)
     if cfg.debug:
         open(cfg.path_tmp + "/cfg.js", "w").write(cfg_js)
 

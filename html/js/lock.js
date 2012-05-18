@@ -2,7 +2,7 @@ var lockTimeout;
 var lockTimeoutId;
 
 function lockTimeoutStart() {
-	lockTimeout = _cfg_lockTimeout;
+	lockTimeout = cfg.lock_timeout_minutes;
 	lockTimeoutId = window.setInterval(function() {
 		lockTimeout--;
 
@@ -12,7 +12,7 @@ function lockTimeoutStart() {
 }
 
 function lockTimeoutUpdate() {
-	lockTimeout = _cfg_lockTimeout;
+	lockTimeout = cfg.lock_timeout_minutes;
 }
 
 function lockTimeoutStop() {

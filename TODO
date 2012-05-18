@@ -4,7 +4,6 @@ Optimizations:
 
 Features:
 - add some validation for DB and include/
-- generate salt and iv upon database creation
 
 Noncritical features:
 - add .cryptoboxrc support

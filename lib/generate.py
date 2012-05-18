@@ -2,28 +2,13 @@
 
 # generate JavaScript files containing cipher setup and cipher text
 
+import json
 from Crypto.Cipher import AES
 
 import cfg
 
 def html(index):
-    res = ""
-    res += open(index, "r").read()
-    return res
+    return open(index, "r").read()
 
-def config(cipher):
-    res = ""
-
-    for v in cfg.js.keys():
-        if type(cfg.js[v]) == type(int()):
-            res += "%s = %s;" % (v, cfg.js[v])
-        elif type(cfg.js[v] == type(str())):
-            if v == '_cfg_pages':
-                res += "%s = %s;" % (v, cfg.js[v])
-            else:
-                res += "%s = '%s';" % (v, cfg.js[v])
-        else:
-            raise Exception("Unknown type of JavaScript variable")
-
-    res += "_cfg_cipher = \"%s\";" % (cipher)
-    return res
+def config(js):
+    return 'cfg = ' + json.dumps(js) + ';'

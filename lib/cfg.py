@@ -19,23 +19,19 @@ except:
 # Don't switch it! Your data will be exposed in private/tmp/
 debug = False
 
-pbkdf2_salt = "somesalt".encode('base64').replace("\n", "") # 64-bit
-pbkdf2_iterations = 1000
-aes_iv = "0123456890123456".encode('base64').replace("\n", "") # 128-bit
-aes_bs = 32
-
 lock_timeout_minutes = 5
 
-prefix = ""
-path_db = prefix + "private/cryptobox"
-path_db_hmac = prefix + "private/cryptobox.hmac"
-path_db_html = prefix + "private/html/cryptobox.html"
-path_db_mobile_html = prefix + "private/html/m.cryptobox.html"
-path_db_include = prefix + "private/include"
-path_tmp = prefix + "private/tmp"
+prefix = "private/"
+path_db = prefix + "cryptobox"
+path_db_hmac = prefix + "cryptobox.hmac"
+path_db_html = prefix + "html/cryptobox.html"
+path_db_mobile_html = prefix + "html/m.cryptobox.html"
+path_db_include = prefix + "include"
+path_tmp = prefix + "tmp"
+path_cfg = prefix + "cryptobox.cfg"
 
 backup = [ path_db, path_db_hmac, path_db_html ]
-backup_file = prefix + "private/cryptobox.tar"
+backup_file = prefix + "cryptobox.tar"
 
 path_include = os.getcwd() + "/include"
 path_html = os.getcwd() + "/html"
@@ -47,13 +43,6 @@ html['jquery_ui_theme'] = 'flick'
 html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
 html['version'] = version
 html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
-
-js = {}
-js['_cfg_salt'] = pbkdf2_salt
-js['_cfg_lockTimeout'] = lock_timeout_minutes
-js['_cfg_pbkdb2Iterations'] = pbkdf2_iterations
-js['_cfg_pages'] = json.dumps(lang.types)
-js['_cfg_aesIv'] = aes_iv
 
 if platform.system() == 'Windows':
     editor = "gvim"
