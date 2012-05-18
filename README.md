@@ -134,6 +134,10 @@ Usage
 
 	$ ./cbcreate
 
+Upon database creation, PBKDB2 salt and AES IV will be generated. That
+guarantees that even two databases with equal content will be encrypted to
+different cipher text.
+
 - Edit your database (it will also update html page at
 `private/html/cryptobox.html` and at `private/html/m.cryptobox.html`)
 
@@ -148,7 +152,12 @@ simple tar archive.
 
 	$ ./cbpasswd
 
-- Update HTML page (perform HTML page update without update to database - only for development)
+As in `cbedit` command, backup file will be created (or updated) whenever
+you change the password.
+
+- Update HTML page (perform HTML page update without update to database -
+only for development or if you want to change configuration and regenerate the
+HTML page)
 
 	$ ./cbhtml
 
