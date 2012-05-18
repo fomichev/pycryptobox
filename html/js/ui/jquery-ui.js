@@ -2,13 +2,17 @@ function accordionItem(header, body) {
 	return '<h3><a href="#">' + header + '</a></h3><div>' + body + '</div>';
 }
 
-function createLogin(id, name, address, form, username, password) {
+function createLogin(id, name, address, form, vars) {
 	var hocid = 0;
-	function collapsible(name, value) {
-		return '<div class="expand"><span style="float:left;" class="ui-icon ui-icon-circlesmall-plus"></span><a href="#" onClick="javascript:return false;"><strong>' + name + '</strong></a>&nbsp;' + copyToClipboard(value) + '</div><div>' + value + '</div>';
+	function collapsible(name, value, cp) {
+		var copy = '';
+		if (cp)
+			copy = copyToClipboard(value);
+
+		return '<div class="expand"><span style="float:left;" class="ui-icon ui-icon-circlesmall-plus"></span><a href="#" onClick="javascript:return false;"><strong>' + name + '</strong></a>&nbsp;' + copy + '</div><div>' + value + '</div>';
 	}
 
-	var title = name + " (" + username + ")"
+	var title = name + " (" + vars.username + ")"
 
 	var r = "";
 	var flat = flattenMap(form.fields);
@@ -22,15 +26,21 @@ function createLogin(id, name, address, form, username, password) {
 	}
 
 	r += '<a class="button-goto" href="' + address + '" target="_blank"><?text_goto?></a>';
-	r += '<p>' + collapsible("<?text_username?>", username) + '</p>';
-	r += '<p>' + collapsible("<?text_password?>", password) + '</p>';
+	r += '<p>' + collapsible("<?text_username?>", vars.username, true) + '</p>';
+	r += '<p>' + collapsible("<?text_password?>", vars.password, true) + '</p>';
+
+	if (vars.secret)
+		r += '<p>' + collapsible("<?text_secret?>", vars.secret, false) + '</p>';
+
+	if (vars.note)
+		r += '<p>' + collapsible("<?text_note?>", addBr(vars.note), false) + '</p>';
 
 	return accordionItem(title, r);
 }
 
 function viewCreatePageEntry(id, type, data) {
 	if (type == 'login')
-		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
+		return createLogin(id, data.name, data.address, data.form, data.vars);
 	else
 		return accordionItem(data.name, addBr(data.text));
 }
@@ -181,6 +191,22 @@ $(document).ready(function() {
 		} else {
 			$("#input-include-num").removeAttr("disabled");
 			$("#input-include-punc").removeAttr("disabled");
+		}
+	});
+
+	$("#input-filter").keyup(function() {
+		var text = $("#input-filter").val().toLowerCase();
+
+		if (text == "") {
+			$("h3.ui-accordion-header").show();
+		} else {
+			$("h3.ui-accordion-header").hide();
+			$("h3.ui-accordion-header").filter(function() {
+				if ($('a', this).html().toLowerCase().indexOf(text) >= 0)
+					return true;
+				else
+					return false;
+			}).show();
 		}
 	});
 });

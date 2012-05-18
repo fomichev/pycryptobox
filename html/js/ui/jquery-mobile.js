@@ -19,10 +19,10 @@ function page(id, header, data) {
 	return t;
 }
 
-function createLogin(id, name, address, form, username, password) {
+function createLogin(id, name, address, form, vars) {
 	var flat = flattenMap(form.fields);
 
-	var title = name + " (" + username + ")";
+	var title = name + " (" + vars.username + ")";
 	var t = '';
 
 	if (withToken(form) == "") {
@@ -32,15 +32,21 @@ function createLogin(id, name, address, form, username, password) {
 	}
 
 	t += '<a href="' + address + '" data-role="button"><?text_goto?></a>';
-	t += collapsible("<?text_username?>", username);
-	t += collapsible("<?text_password?>", password);
+	t += collapsible("<?text_username?>", vars.username);
+	t += collapsible("<?text_password?>", vars.password);
+
+	if (vars.secret)
+		r += '<p>' + collapsible("<?text_secret?>", vars.secret) + '</p>';
+
+	if (vars.note)
+		r += '<p>' + collapsible("<?text_note?>", addBr(vars.note)) + '</p>';
 
 	return page(id, title, t);
 }
 
 function viewCreatePageEntry(id, type, data) {
 	if (type == 'login')
-		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
+		return createLogin(id, data.name, data.address, data.form, vars);
 	else {
 		if (data.mtext != undefined)
 			return page(id, data.name, addBr(data.mtext));

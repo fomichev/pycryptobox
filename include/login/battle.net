@@ -1,0 +1,13 @@
+{
+	"name": "Battle.net",
+	"address": "http://battle.net/",
+	"form":
+	{
+		"action": "https://battle.net/",
+		"method": "post",
+		"fields":
+		{
+			"dummy": ""
+		}
+	}
+}
