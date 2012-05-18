@@ -20,6 +20,8 @@ def create_cfg(path_cfg):
     iv_len = 16 # 128 bit
     aes_bs = 32 # 256 bit == key length
     pbkdf2_iterations = 1000
+    version = 1 # format of the cryptobox; not seems to be changed but it's
+                # safe to have it
 
     salt = ''
     for i in range(0, salt_len):
@@ -34,7 +36,8 @@ def create_cfg(path_cfg):
              'pkbdf2_salt_len': salt_len,
              'aes_iv': iv.encode('base64').replace("\n", ""),
              'aes_bs': aes_bs,
-             'aes_iv_len': iv_len }
+             'aes_iv_len': iv_len,
+             'version': version }
 
     with open(path_cfg, "w") as f:
         f.write(json.dumps(conf, indent=4))

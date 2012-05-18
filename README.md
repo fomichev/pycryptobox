@@ -324,3 +324,85 @@ JavaScript
 	html/extern/clippy
 
 	private/html/clippy.swf
+
+Decrypt data without cryptobox
+==============================
+
+Even if you don't have cryptobox available, you may still fairly easy
+decrypt your data.
+
+Lets suppose, you have the following data encrypted:
+login/dropbox.com:
+	username=your_username
+	password=your_password
+
+With the following contents of `private/cryptobox.cfg` file:
+{
+    "aes_iv_len": 16,
+    "aes_iv": "BQKz5ydHbWORgnsiGioPmA==",
+    "pbkdf2_iterations": 1000,
+    "pbkdf2_salt": "hbSIS+lcfaw=",
+    "pkbdf2_salt_len": 8,
+    "version": 1,
+    "aes_bs": 32
+}
+
+You get the following cipher text:
+$ cat cryptobox
+uvNbq1JhyxSL8zESGLOyXIDbTzEo3Y4oDUq68SSmPuywdeECf+6gJ/k1Oa3+2G+032tGWSzsUJci
+bR3oZkGzXuYrH0sDj3iXfgZlZF9EnJkmT5AKLUc6CzCpmgAdS9QU
+
+Now, let's try to decrypt it (instruction provided for Linux)!
+
+Before you proceed, I want to warn you that the following commands are not
+safe! You will pass your AES key to the `openssl` utility via command line
+(and will also store your plaintext password in the file). So make it if
+you really need to get your data no matter what consequences may be.
+The following text is used just to demonstrate that your data could be
+easily decrypted using standard tools.
+
+Give me the key!
+----------------
+
+You have to take out the value of pbkdf2_salt field of config and convert
+it to hex econding:
+
+	$ echo "hbSIS+lcfaw=" | base64 -d | xxd -ps
+	85b4884be95c7dac
+
+Next, go and download a Perl script which implements PBKDF2 using OpenSSL:
+
+	$ wget http://www.ict.griffith.edu.au/anthony/software/pbkdf2.pl
+
+Store your password in `pwd` file and execute Perl script (where 1000 is the
+pbkdf2_iterations from config):
+
+	$ cat pwd
+	hi
+
+	$ perl pbkdf2.pl 85b4884be95c7dac 1000 < pwd > result
+
+	$ cat result
+	4d5ac3cda6e77d5ee53a79f392fb1111c490249ead61932cf07adb1e4963d0eb19014e3ff87e8c97e098348148696782
+
+And because we are interested only if first 32 bytes, we need to cut the rest
+(the number 64 in the following command is 32 * 2 because each byte in hex
+encoding is represented by two characters)
+
+	$ cat result | cut -b1-64 > secret
+	$ cat secret
+	4d5ac3cda6e77d5ee53a79f392fb1111c490249ead61932cf07adb1e4963d0eb
+
+Decrypt my data
+---------------
+
+Now, we have a key, the only thing we need to do is to convert initialization
+vector (aes_iv) to hex and call openssl, let's do it:
+
+	$ echo "BQKz5ydHbWORgnsiGioPmA==" | base64 -d | xxd -ps
+	0502b3e727476d6391827b221a2a0f98
+
+	$ openssl enc -d -aes-256-cbc -K 4d5ac3cda6e77d5ee53a79f392fb1111c490249ead61932cf07adb1e4963d0eb -iv 0502b3e727476d6391827b221a2a0f98 -base64 -in cryptobox -out plaintext
+
+Congradulations, plaintext contains decrypted content of your cyptobox. Now,
+it's better to remove all temporary files and clean `bash` history.
