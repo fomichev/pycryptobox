@@ -1,13 +1,16 @@
 {
+	"type":"login",
 	"name": "Battle.net",
-	"address": "http://battle.net/",
+	"address": "https://eu.battle.net/login/en-us/?ref=https%3A%2F%2Feu.battle.net%2Faccount%2Fmanagement%2F&app=bam&cr=true",
 	"form":
 	{
-		"action": "https://battle.net/",
+		"action": "https://eu.battle.net/login/en-us/?ref=https://eu.battle.net/account/management/&app=bam&cr=true",
 		"method": "post",
 		"fields":
 		{
-			"dummy": ""
+			"accountName": "$username",
+			"password": "$password",
+			"persistLogin": "off"
 		}
 	}
 }

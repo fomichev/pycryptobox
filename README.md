@@ -210,7 +210,10 @@ page, so watch out and select the one you need (don't copy leading `[` and
 trailing `]`, JSON data should start with `{` and end with `}`). Afterwards,
 look through the JSON and place `$username` and `$password` into appropriate
 form fields (look for other logins JSON data in `include/login`, it will
-become clear from the example what to do).
+become clear from the example what to do). Better yet, you can fill in the
+form in the browser with `$username` and `$password` and run the bookmarklet;
+this way, you don't need to dig into the JSON and find out were to put
+these marks, they will already be in place.
 
 Database example
 ----------------

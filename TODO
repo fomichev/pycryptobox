@@ -4,6 +4,12 @@ Optimizations:
 
 Features:
 - add some validation for DB and include/
+- add support for broken logins (add broken field) - don't allow one-click login
+- add support for aliases
+- make default length of password generate dialog adjustable via config
+- generate new salt and iv on password change?
+- add setup.py (easy_install or pip)
+- add support for @token in form.action
 
 Noncritical features:
 - add .cryptoboxrc support

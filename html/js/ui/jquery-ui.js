@@ -155,6 +155,8 @@ $(document).ready(function() {
 
 			$("#div-locked").hide();
 			$("#div-unlocked").fadeIn();
+
+			$("#input-filter").focus();
 		} catch(e) {
 			alert("<?text_incorrect_password?> " + e);
 			return;
