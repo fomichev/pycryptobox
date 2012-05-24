@@ -10,6 +10,7 @@ Features:
 - generate new salt and iv on password change?
 - add setup.py (easy_install or pip)
 - add support for @token in form.action
+- improve autolock feature
 
 Noncritical features:
 - add .cryptoboxrc support

@@ -280,6 +280,8 @@ Works on (where it has been tested)
 
 - Safari 5
 
+- Chrome Beta (Android 4)
+
 - iPhone (iOS 5)
 
 Used components

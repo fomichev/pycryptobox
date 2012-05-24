@@ -36,17 +36,17 @@ function createLogin(id, name, address, form, vars) {
 	t += collapsible("<?text_password?>", vars.password);
 
 	if (vars.secret)
-		r += '<p>' + collapsible("<?text_secret?>", vars.secret) + '</p>';
+		t += '<p>' + collapsible("<?text_secret?>", vars.secret) + '</p>';
 
 	if (vars.note)
-		r += '<p>' + collapsible("<?text_note?>", addBr(vars.note)) + '</p>';
+		t += '<p>' + collapsible("<?text_note?>", addBr(vars.note)) + '</p>';
 
 	return page(id, title, t);
 }
 
 function viewCreatePageEntry(id, type, data) {
 	if (type == 'login')
-		return createLogin(id, data.name, data.address, data.form, vars);
+		return createLogin(id, data.name, data.address, data.form, data.vars);
 	else {
 		if (data.mtext != undefined)
 			return page(id, data.name, addBr(data.mtext));
