@@ -84,6 +84,8 @@ within forms).
 Required python modules
 =======================
 
+Python version 2.6 or 2.7 required!
+
 If your operation system of choice is Windows (sigh), then it's required to
 have the following path in your PATH environment variable -
 `c:\Python26\Scripts\` (assuming default python installation).

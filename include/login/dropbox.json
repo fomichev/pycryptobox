@@ -1,0 +1,18 @@
+{
+	"type": "webform",
+	"name": "Dropbox",
+	"address": "dropbox.com",
+
+	"form":
+	{
+		"action": "https://www.dropbox.com/login",
+		"method": "post",
+		"fields":
+		{
+			"login_email": "$username",
+			"login_password": "$password",
+			"remember_me": "1",
+			"cont": "/home"
+		}
+	}
+}
