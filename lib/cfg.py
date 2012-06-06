@@ -57,6 +57,8 @@ def init(args):
         log.e("Could not load user config!")
         sys.exit(1)
 
+    path['cryptobox'] = os.getcwd()
+
     path['db_cipher'] = user['path']['db'] + "/cryptobox"
 
     path['db_hmac'] = path['db_cipher'] + ".hmac"
@@ -67,8 +69,8 @@ def init(args):
 
     path['tmp'] = user['path']['db'] + "/tmp"
     path['backup'] = user['path']['db'] + "/cryptobox.tar"
-    path['include'] = os.getcwd() + "/include"
-    path['html'] = os.getcwd() + "/html"
+    path['include'] = path['cryptobox'] + "/include"
+    path['html'] = path['cryptobox'] + "/html"
     path['clippy'] = path['html'] + "/extern/clippy/build/clippy.swf"
 
     html['jquery_ui_theme'] = user['ui']['jquery_ui_theme']

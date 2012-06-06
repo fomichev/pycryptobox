@@ -42,10 +42,10 @@ def update(db_conf, password):
     if cfg.debug:
         open(cfg.path['tmp'] + "/_aes_base64_nonl", "w").write(aes_base64_nonl)
 
-    index_html = generate.html(cfg.path['html'] + "/index.html")
+    index_html = generate.html(cfg.path['html'] + "/desktop/index.html")
     open(path_tmp_index, "w").write(index_html)
 
-    m_index_html = generate.html(cfg.path['html'] + "/m.index.html")
+    m_index_html = generate.html(cfg.path['html'] + "/mobile/index.html")
     open(path_tmp_mobile_index, "w").write(m_index_html)
 
     js = db_conf
