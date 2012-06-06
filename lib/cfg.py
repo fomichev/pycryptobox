@@ -22,7 +22,7 @@ verbose = 0
 lock_timeout_minutes = 5
 prefix = "private/"
 
-path = []
+path = {}
 path['db'] = prefix + "cryptobox"
 path['db_hmac'] = prefix + "cryptobox.hmac"
 path['db_html'] = prefix + "html/cryptobox.html"

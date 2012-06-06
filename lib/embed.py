@@ -69,6 +69,5 @@ def embed(index, output, cfg_js):
 
     soup.head.insert(2, tag)
 
-    result = soup.prettify(formatter=None)
-
-    open(output, "w").write(result.encode('utf-8'))
+    result = soup.encode(formatter=None)
+    open(output, "w").write(result)

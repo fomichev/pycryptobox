@@ -100,9 +100,7 @@ def flatten(lines, search_paths):
 
         j.append(flatten_node(search_paths, tp, v))
 
-    padding = "                " # JS decrypt eats fist 16 symbols (AES iv)
-
     if cfg.debug:
-        return padding + json.dumps(j, indent=4)
+        return json.dumps(j, indent=4)
     else:
-        return padding + json.dumps(j)
+        return json.dumps(j)

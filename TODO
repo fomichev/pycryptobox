@@ -1,18 +1,16 @@
 Optimizations:
-- use external repositories when possible (jQuery, CryproJS)
+- use external repositories when possible (jQuery, CryproJS) to keep up with
+  updates
 - use https://developers.google.com/closure/compiler/ to compress js (should
   not yield much space because amount of internal js compared to external is
-  reaaaaly small) - try POST request to compress JS and if failed, use non-optimized
+  reaaaaly small) - try POST request to compress JS and if failed, use
+  non-optimized
 
 Features:
 - use init file for configuration
 - add some validation for DB and include/
 - add light version (l.cryptobox.html) which should not include any js (jquery,
   etc) besides crypto stuff
-- check whether we still (because of new cryptojs version) need to add padding
-  to json in flatten.py
-- add some way (tool?) to explore include/ directory - some thing that will
-  help user to understand which variables are required for particular entry type
 
 Noncritical features:
 - add .cryptoboxrc support (lib/user_cfg.py)
@@ -20,3 +18,5 @@ Noncritical features:
 Someday:
 - simplify usage of token based authentication (maybe find another way around
   this crappy forms?!)
+- add some way (tool?) to explore include/ directory - some thing that will
+  help user to understand which variables are required for particular entry type
