@@ -11,6 +11,13 @@ Features:
 - add some validation for DB and include/
 - add light version (l.cryptobox.html) which should not include any js (jquery,
   etc) besides crypto stuff
+- add support for broken logins (add broken field) - don't allow one-click login
+- add support for aliases
+- make default length of password generate dialog adjustable via config
+- generate new salt and iv on password change?
+- add setup.py (easy_install or pip)
+- add support for @token in form.action
+- improve autolock feature
 
 Noncritical features:
 - add .cryptoboxrc support (lib/user_cfg.py)

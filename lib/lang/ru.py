@@ -22,8 +22,11 @@ text['text_get_token'] = 'Получить токен'
 text['text_goto'] = 'Перейти на сайт'
 text['text_username'] = 'Имя пользователя'
 text['text_password'] = 'Пароль'
+text['text_secret'] = 'Секретный вопрос'
+text['text_note'] = 'Заметки'
 text['text_incorrect_password'] = 'Неверный пароль!'
 text['text_log_in'] = 'Войти'
+text['text_button_back'] = 'Назад'
 
 types = {}
 types['login'] = 'Логины'

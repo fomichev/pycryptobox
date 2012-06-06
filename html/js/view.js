@@ -25,6 +25,9 @@ function addBr(text) {
 function withToken(form) {
 	var tokens = "";
 
+	if (form.action == '@token')
+		return "__form_action__";
+
 	for (var key in form.fields) {
 		var value = form.fields[key];
 

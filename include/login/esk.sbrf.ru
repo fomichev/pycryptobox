@@ -1,6 +1,7 @@
 {
 	"name": "Сбербанк",
 	"address": "https://esk.sbrf.ru/esClient/_logon/LogonContent.aspx",
+	"broken": "1",
 	"form":
 	{
 		"action": "https://esk.sbrf.ru/esClient/_logon/LogonContent.aspx",

@@ -8,7 +8,7 @@ function page(id, header, data) {
 	t += '<div data-role="page" id="' + id + '" class="generated">';
 	t += '<div data-role="header">';
 	t += '<h1>' + header + '</h1>';
-	t += '<a data-rel="back" href="#">Back</a>';
+	t += '<a data-rel="back" href="#"><?text_button_back?></a>';
 	t += '<a class="button-lock" href="#" data-icon="delete"><?text_button_lock?></a>';
 	t += '</div>';
 	t += '<div data-role="content">';
@@ -19,10 +19,10 @@ function page(id, header, data) {
 	return t;
 }
 
-function createLogin(id, name, address, form, username, password) {
+function createLogin(id, name, address, form, vars) {
 	var flat = flattenMap(form.fields);
 
-	var title = name + " (" + username + ")";
+	var title = name + " (" + vars.username + ")";
 	var t = '';
 
 	if (withToken(form) == "") {
@@ -32,15 +32,21 @@ function createLogin(id, name, address, form, username, password) {
 	}
 
 	t += '<a href="' + address + '" data-role="button"><?text_goto?></a>';
-	t += collapsible("<?text_username?>", username);
-	t += collapsible("<?text_password?>", password);
+	t += collapsible("<?text_username?>", vars.username);
+	t += collapsible("<?text_password?>", vars.password);
+
+	if (vars.secret)
+		t += '<p>' + collapsible("<?text_secret?>", vars.secret) + '</p>';
+
+	if (vars.note)
+		t += '<p>' + collapsible("<?text_note?>", addBr(vars.note)) + '</p>';
 
 	return page(id, title, t);
 }
 
 function viewCreatePageEntry(id, type, data) {
 	if (type == 'login')
-		return createLogin(id, data.name, data.address, data.form, data.vars.username, data.vars.password);
+		return createLogin(id, data.name, data.address, data.form, data.vars);
 	else {
 		if (data.mtext != undefined)
 			return page(id, data.name, addBr(data.mtext));
@@ -75,13 +81,22 @@ function viewWrapList(text) {
 }
 
 function lock() {
-	lockTimeoutStop();
-
-	$(".generated").remove();
-	$.mobile.changePage("#login", "slideup");
+	$.mobile.changePage("#div-locked", "slideup");
 
 	$("#input-password").focus();
 }
+
+$(document).bind("pagebeforehide", function(event, data) {
+	try {
+		to = data.nextPage[0].id;
+		if (to == 'div-locked') {
+			lockTimeoutStop();
+
+			$(".generated").remove();
+		}
+	} catch(e) { }
+});
+
 $(document).ready(function() {
 	$("#form-unlock").submit(function(event) {
 		event.preventDefault();
@@ -90,30 +105,44 @@ $(document).ready(function() {
 			var map = unlock($("#input-password").val());
 			$("#input-password").val("");
 
-			for (var key in map.list) {
-				var pages_list = '';
-				var pages = "";
-				for (var key in map.page) {
-					pages_list += '<li><a href="#' + key + '">' + key + '</a></li>'
-					pages += page(key, key, map.list[key]);
-					pages += map.page[key];
-				}
+			var pages_list = '';
+			var pages = "";
 
-				$("#ul-pages-list").html(pages_list);
-				$("body").append(pages);
+			for (var key in map.page) {
+				var name = key;
+				if (cfg.page[key])
+					name = cfg.page[key];
+
+				pages_list += '<li><a href="#' + key + '">' + name + '</a></li>'
+				pages += page(key, name, map.list[key]);
+				pages += map.page[key];
 			}
 
+			var main_page = '';
+			main_page += '<div data-role="page" id="div-main">';
+			main_page += '<div data-role="header">';
+			main_page += '<h1><?text_title?></h1>';
+			main_page += '<a data-rel="back" href="#" data-icon="arrow-l"><?text_button_back?></a>';
+			main_page += '<a class="button-lock" href="#" data-icon="delete"><?text_button_lock?></a>';
+			main_page += '</div>';
+			main_page += '<div data-role="content">';
+			main_page += '<ul id="ul-pages-list" data-role="listview" data-inset="true"></ul>';
+			main_page += '</div>';
+			main_page += '</div>';
+			$("#div-main").remove();
+			$("body").append(main_page);
+
+			$("#ul-pages-list").html(pages_list);
+			$("body").append(pages);
+			$(".button-lock").click(function () { lock(); });
+
 			lockTimeoutStart();
+
+			$.mobile.changePage("#div-main");
 		} catch(e) {
 			alert("<?text_incorrect_password?> " + e);
 			return;
 		}
-
-		$.mobile.changePage("#main", "slideup");
-	});
-
-	$(".button-lock").click(function () {
-		lock();
 	});
 
 	$("#input-password").focus();
