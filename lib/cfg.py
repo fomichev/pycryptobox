@@ -10,43 +10,39 @@ import sys
 import lang.en as lang
 #import lang.ru as lang
 
-version = '0.1'
+version = '0.2'
 try:
     cs = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip()
     version += '-' + cs
 except:
     pass
 
-# Don't switch it! Your data will be exposed in private/tmp/
-debug = False
-
+debug = False # Don't switch it! Your data will be exposed in private/tmp/
 verbose = 0
-
 lock_timeout_minutes = 5
-
 prefix = "private/"
-path_db = prefix + "cryptobox"
-path_db_hmac = prefix + "cryptobox.hmac"
-path_db_html = prefix + "html/cryptobox.html"
-path_db_mobile_html = prefix + "html/m.cryptobox.html"
-path_db_include = prefix + "include"
-path_tmp = prefix + "tmp"
-path_cfg = prefix + "cryptobox.cfg"
 
-path_backup = prefix + "cryptobox.tar"
-backup_files = [ path_db, path_db_hmac, path_db_html, path_cfg ]
-
-path_private = os.getcwd() + "/" + prefix
-path_include = os.getcwd() + "/include"
-path_html = os.getcwd() + "/html"
-
-path_clippy = path_html + "/extern/clippy/build/clippy.swf"
+path = []
+path['db'] = prefix + "cryptobox"
+path['db_hmac'] = prefix + "cryptobox.hmac"
+path['db_html'] = prefix + "html/cryptobox.html"
+path['db_mobile_html'] = prefix + "html/m.cryptobox.html"
+path['db_include'] = prefix + "include"
+path['tmp'] = prefix + "tmp"
+path['cfg'] = prefix + "cryptobox.cfg"
+path['backup'] = prefix + "cryptobox.tar"
+path['private'] = os.getcwd() + "/" + prefix
+path['include'] = os.getcwd() + "/include"
+path['html'] = os.getcwd() + "/html"
+path['clippy'] = path['html'] + "/extern/clippy/build/clippy.swf"
 
 html = lang.text
 html['jquery_ui_theme'] = 'flick'
 html['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
 html['version'] = version
 html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
+
+backup_files = [ path['db'], path['db_hmac'], path['db_html'], path['cfg'] ]
 
 if platform.system() == 'Windows':
     editor = "gvim"
@@ -67,7 +63,7 @@ def init(args):
 
 def backup():
     if len(backup_files) > 0:
-        tar = tarfile.open(path_backup, "w")
+        tar = tarfile.open(path['backup'], "w")
         for name in backup_files:
             try:
                 tar.add(name)

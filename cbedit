@@ -20,8 +20,8 @@ if __name__ == "__main__":
 
     password = getpass.getpass()
 
-    conf = crypto.read_cfg(cfg.path_cfg)
-    plaintext = crypto.dec_db(conf, password, cfg.path_db, cfg.path_db_hmac)
+    conf = crypto.read_cfg(cfg.path['cfg'])
+    plaintext = crypto.dec_db(conf, password, cfg.path['db'], cfg.path['db_hmac'])
 
     EDITOR = os.environ.get('EDITOR', cfg.editor)
 
@@ -43,7 +43,7 @@ if __name__ == "__main__":
             if not ans in ['Y', 'y']:
                 sys.exit(0)
 
-        crypto.enc_db(conf, password, file_name, cfg.path_db, cfg.path_db_hmac)
+        crypto.enc_db(conf, password, file_name, cfg.path['db'], cfg.path['db_hmac'])
         html.update(conf, password)
     else:
         log.p("No update to database")

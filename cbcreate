@@ -16,12 +16,12 @@ if __name__ == "__main__":
     cfg.init(parser.parse_args())
 
     try:
-        os.mkdir(cfg.path_private + "/")
+        os.mkdir(cfg.path['private'] + "/")
     except:
         pass
 
-    if os.path.exists(cfg.path_db):
-        ans = log.yn("File '%s' already exists, do you want to overwrite it?" % cfg.path_db)
+    if os.path.exists(cfg.path['db']):
+        ans = log.yn("File '%s' already exists, do you want to overwrite it?" % cfg.path['db'])
 
         if not ans in ['Y', 'y']:
             sys.exit(0)
@@ -33,6 +33,6 @@ if __name__ == "__main__":
         log.e("Your passwords don't match!")
         sys.exit(0)
 
-    crypto.create_cfg(cfg.path_cfg)
-    conf = crypto.read_cfg(cfg.path_cfg)
-    crypto.enc_plaintext(conf, password, "# Lines started with # are comments", cfg.path_db, cfg.path_db_hmac)
+    crypto.create_cfg(cfg.path['cfg'])
+    conf = crypto.read_cfg(cfg.path['cfg'])
+    crypto.enc_plaintext(conf, password, "# Lines started with # are comments", cfg.path['db'], cfg.path['db_hmac'])

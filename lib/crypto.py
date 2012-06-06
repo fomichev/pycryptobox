@@ -17,7 +17,7 @@ import log
 
 check_hmac = False
 
-def create_cfg(path_cfg):
+def create_cfg(p):
     salt_len = 8 # 64 bit
     iv_len = 16 # 128 bit
     aes_bs = 32 # 256 bit == key length
@@ -38,11 +38,11 @@ def create_cfg(path_cfg):
              'aes_bs': aes_bs,
              'aes_iv_len': iv_len }
 
-    with open(path_cfg, "w") as f:
+    with open(p, "w") as f:
         f.write(json.dumps(conf, indent=4))
 
-def read_cfg(path_cfg):
-    with open(path_cfg, "r") as f:
+def read_cfg(p):
+    with open(p, "r") as f:
         return json.loads(f.read())
 
 def add_padding(conf, s):
