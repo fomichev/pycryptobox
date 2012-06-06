@@ -1,5 +1,5 @@
 {
 	"name": "$name",
-	"text": "<a class=\"button-goto\" href=\"$url\" target=\"_blank\">Go to site</a><p>$comment</p>",
-	"mtext": "<a href=\"$url\" data-role=\"button\">Go to site</a><p>$comment</p>"
+	"text": "<a class=\"button-goto\" href=\"$url\" target=\"_blank\">Go to site</a>${comment?<p>$comment</p>}",
+	"mtext": "<a href=\"$url\" data-role=\"button\">Go to site</a>${comment?<p>$comment</p>}"
 }

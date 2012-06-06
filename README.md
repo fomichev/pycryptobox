@@ -314,6 +314,7 @@ possible variables:
 	jquery_ui_theme = <use different jquery-ui theme>
 	path_bookmark = <base path to the bookmarklets>
 	editor = <full path to your editor>
+	lang = <select language; currently supported are en and ru>
 
 	[security]
 	lock_timeout_minutes = <web site lock timeout in minutes>

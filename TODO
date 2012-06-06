@@ -7,7 +7,6 @@ Optimizations:
   non-optimized
 
 Features:
-- make possible to select language via .cryptoboxrc
 - add some validation for DB and include/
 - add light version (l.cryptobox.html) which should not include any js (jquery,
   etc) besides crypto stuff

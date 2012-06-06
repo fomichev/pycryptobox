@@ -8,9 +8,6 @@ import argparse
 import sys
 import ConfigParser
 
-import lang.en as lang
-#import lang.ru as lang
-
 import log
 
 version = '0.2'
@@ -27,13 +24,16 @@ verbose = 0
 
 user= {}
 path = {}
-html = lang.text
+html = {}
+lang = None
 backup_files = []
 
 def init(args):
     global verbose
     global user
     global path
+    global lang
+    global html
     global backup_files
 
     v = vars(args)
@@ -73,6 +73,11 @@ def init(args):
     path['html'] = path['cryptobox'] + "/html"
     path['clippy'] = path['html'] + "/extern/clippy/build/clippy.swf"
 
+
+    _lang = __import__('lang.' + user['ui']['lang'], globals(), locals(), [], -1)
+    lang = getattr(_lang, user['ui']['lang'])
+
+    html = lang.text
     html['jquery_ui_theme'] = user['ui']['jquery_ui_theme']
     html['path_bookmarklets'] = user['ui']['path_bookmarklets']
     html['version'] = version
@@ -113,6 +118,7 @@ def read_user_conf(p):
     get_option(c, cp, 'ui', 'jquery_ui_theme')
     get_option(c, cp, 'ui', 'path_bookmarklets')
     get_option(c, cp, 'ui', 'editor')
+    get_option(c, cp, 'ui', 'lang')
 
     get_option(c, cp, 'security', 'lock_timeout_minutes')
     get_option(c, cp, 'security', 'default_password_length')
@@ -124,6 +130,7 @@ def default_user_conf():
 
     c['path']['db'] = os.getcwd() + "/private/"
 
+    c['ui']['lang'] = 'en'
     c['ui']['jquery_ui_theme'] = 'flick'
     c['ui']['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
     if platform.system() == 'Windows':
