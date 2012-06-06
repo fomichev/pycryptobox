@@ -17,7 +17,8 @@ Features:
 - generate new salt and iv on password change?
 - add setup.py (easy_install or pip)
 - add support for @token in form.action
-- improve autolock feature
+- improve autolock feature (don't use mouse move event)
+- update 'Decrypt data without cryptobox' in README.md (convert example to INI)
 
 Noncritical features:
 - add .cryptoboxrc support (lib/user_cfg.py)

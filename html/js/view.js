@@ -69,7 +69,7 @@ function flattenMap(map) {
 }
 
 function unlock(pwd) {
-	var text = decrypt(pwd, cfg.pbkdf2_salt, cfg.cipher, cfg.pbkdf2_iterations, cfg.aes_iv);
+	var text = decrypt(pwd, cfg.pbkdf2.salt, cfg.cipher, cfg.pbkdf2.iterations, cfg.aes.iv);
 	var data = eval(text);
 	var map = {};
 

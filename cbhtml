@@ -15,5 +15,5 @@ if __name__ == "__main__":
 
     password = getpass.getpass()
 
-    conf = crypto.read_cfg(cfg.path['cfg'])
-    html.update(conf, password)
+    db_conf = crypto.read_db_conf(cfg.path['db_conf'])
+    html.update(db_conf, password)

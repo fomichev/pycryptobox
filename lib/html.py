@@ -15,7 +15,7 @@ import embed
 import cfg
 import log
 
-def update(conf, password):
+def update(db_conf, password):
     path_tmp_index = os.path.abspath(cfg.path['tmp'] + "/index.html")
     path_tmp_mobile_index = os.path.abspath(cfg.path['tmp'] + "/m.index.html")
 
@@ -27,14 +27,14 @@ def update(conf, password):
     except:
         pass
 
-    key = crypto.derive_key(conf, password)
-    db_plaintext = crypto.dec_db(conf, password, cfg.path['db'], cfg.path['db_hmac'])
+    key = crypto.derive_key(db_conf, password)
+    db_plaintext = crypto.dec_db(db_conf, password, cfg.path['db'], cfg.path['db_hmac'])
 
     json_plaintext = flatten.flatten(db_plaintext.split("\n"), (cfg.path['include'] + "/", cfg.path['db_include'] + "/"))
     if cfg.debug:
         open(cfg.path['tmp'] + "/_json_plaintext", "w").write(json_plaintext)
 
-    aes_base64 = crypto.enc(conf, key, json_plaintext)
+    aes_base64 = crypto.enc(db_conf, key, json_plaintext)
     if cfg.debug:
         open(cfg.path['tmp'] + "/_aes_base64", "w").write(aes_base64)
 
@@ -48,7 +48,7 @@ def update(conf, password):
     m_index_html = generate.html(cfg.path['html'] + "/m.index.html")
     open(path_tmp_mobile_index, "w").write(m_index_html)
 
-    js = conf
+    js = db_conf
     js['lock_timeout_minutes'] = cfg.lock_timeout_minutes
     js['page'] = cfg.lang.types
     js['cipher'] = aes_base64_nonl

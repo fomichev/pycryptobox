@@ -84,14 +84,14 @@ def flatten(lines, search_paths):
     j = []
     j.append({ "type" : "magic", "value": "270389" })
 
-    conf = ConfigParser.ConfigParser()
-    conf.readfp(io.StringIO("\n".join(lines)))
+    db = ConfigParser.ConfigParser()
+    db.readfp(io.StringIO("\n".join(lines)))
 
-    for section in conf.sections():
+    for section in db.sections():
         tp = section.split()[0]
         name = " ".join(section.split()[1:])
 
-        v = dict(conf.items(section))
+        v = dict(db.items(section))
         v['name'] = name
         v['username'] = name
 
