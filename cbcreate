@@ -13,6 +13,11 @@ if __name__ == "__main__":
     parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + lib.cfg.version)
     parser.parse_args()
 
+    try:
+        os.mkdir(lib.cfg.path_private + "/")
+    except:
+        pass
+
     if os.path.exists(lib.cfg.path_db):
         ans = raw_input("File '%s' already exists, do you want to overwrite it? [y|n]: " % lib.cfg.path_db)
 

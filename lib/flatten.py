@@ -6,6 +6,8 @@
 import json
 import cgi
 import re
+import io
+import ConfigParser
 
 import cfg
 
@@ -46,7 +48,7 @@ def set_vars(obj, v):
         for i in obj:
             set_vars(i, v);
 
-def flatten_node(search_paths, tp, v, tag):
+def flatten_node(search_paths, tp, v):
     for path in search_paths:
         try:
             data = open(path + tp, "r").read().decode('utf-8')
@@ -69,92 +71,38 @@ def flatten_node(search_paths, tp, v, tag):
         if jdata['type'] == 'login':
             jdata['vars'] = v
 
-        if len(tag) == 0:
+        if len(v['tag']) == 0:
             jdata['tag'] = '__default__'
         else:
-            jdata['tag'] = tag
+            jdata['tag'] = v['tag']
 
         return jdata
 
     raise Exception("Not found entry type '%s'" % tp)
 
-def here_doc(val):
-    try:
-        if val[0] == '<' and val[1] == '<':
-            return val[2:]
-    except:
-        return ""
-
-    return ""
-
 def flatten(lines, search_paths):
-    logins = []
-    logins.append({ "type" : "magic", "value": "270389" })
-    lines.reverse()
+    j = []
+    j.append({ "type" : "magic", "value": "270389" })
 
-    tp = None
-    tag = ''
-    v = {}
-    no = 0
-    while lines:
-        line = lines.pop().strip()
-        no = no + 1
+    conf = ConfigParser.ConfigParser()
+    conf.readfp(io.StringIO("\n".join(lines)))
 
-        if len(line) == 0:
-            continue
+    for section in conf.sections():
+        tp = section.split()[0]
+        name = " ".join(section.split()[1:])
 
-        if line[0] == '#':
-            continue
+        v = dict(conf.items(section))
+        v['name'] = name
+        v['username'] = name
 
-        if line[len(line) - 1] == ':':
-            if tp:
-                logins.append(flatten_node(search_paths, tp, v, tag))
-                v = {}
+        if not 'tag' in v:
+            v['tag'] = '__default__'
 
-            tp = line[:-1]
-            try:
-                tag = tp.split('@')[1].strip()
-                tp = tp.split('@')[0].strip()
-            except:
-                tag = ''
+        j.append(flatten_node(search_paths, tp, v))
 
-            continue
-
-        keyval = line.split('=')
-        if len(keyval) >= 2:
-            keyval[0] = keyval[0].strip()
-            keyval[1] = "=".join(keyval[1:]).strip()
-
-            hdoc = here_doc(keyval[1])
-            if hdoc != "":
-                value = ""
-
-                found = False
-                hno = no
-                while lines:
-                    hline = lines.pop()
-                    no = no + 1
-                    if hline.strip() == hdoc:
-                        found = True
-                        break
-                    value += hline + "\n"
-
-                if not found:
-                    raise Exception("Didn't find the end of here document started ad line " + str(hno))
-
-                v[keyval[0]] = value
-            else:
-                v[keyval[0]] = keyval[1]
-        else:
-            raise Exception("Expected variable with value or new entry at line " + str(no) + "\nDid you forget to place : at the end of line?")
-
-    if tp:
-        logins.append(flatten_node(search_paths, tp, v, tag))
-        tp = None
-
-    padding = "                " # somehow JS decrypt eats fist 16 symbols
+    padding = "                " # JS decrypt eats fist 16 symbols (AES iv)
 
     if cfg.debug:
-        return padding + json.dumps(logins, indent=4)
+        return padding + json.dumps(j, indent=4)
     else:
-        return padding + json.dumps(logins)
+        return padding + json.dumps(j)

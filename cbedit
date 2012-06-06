@@ -12,7 +12,6 @@ import lib.cfg
 import lib.html
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(description='Edit cryptobox database')
     parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + lib.cfg.version)
     parser.parse_args()
@@ -24,7 +23,7 @@ if __name__ == "__main__":
 
     EDITOR = os.environ.get('EDITOR', lib.cfg.editor)
 
-    with tempfile.NamedTemporaryFile(delete=False) as f:
+    with tempfile.NamedTemporaryFile(suffix='.ini', delete=False) as f:
         file_name = f.name
         f.write(plaintext.encode('utf-8'))
         f.flush()

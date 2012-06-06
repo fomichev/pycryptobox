@@ -22,9 +22,9 @@ Features
 * One-click login for sites without authenticity tokens (read more below)
 * More-than-one-click login for sites with authenticity tokens (that still
 saves you from manually copy-pasting your passwords)
-* Really small amount of code. You can get through it probably within a hour
-or two (to feel good that your data is safe)
-* Works on every platform where you have browser (everywhere)
+* Really small amount of code. You can get through it probably within an hour
+or two (to ensure that your data is safe)
+* Works on every platform with modern browser (everywhere)
 
 Guts
 ----
@@ -34,8 +34,9 @@ encrypted via [AES](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard);
 key length is 256 bits and it is derived from your password using
 [PBKDF2](http://en.wikipedia.org/wiki/Pbkdf2)
 (consult your lawyer about whether it's considered crime in your country).
-To check the integrity of the database, python code uses [HMAC-MD5](http://en.wikipedia.org/wiki/HMAC), while HTML page relies on specific magic field value in the
-JSON data.
+To check the integrity of the database, python code uses
+[HMAC-MD5](http://en.wikipedia.org/wiki/HMAC), while HTML page relies on
+specific magic field value in the JSON data.
 
 When `cbedit` generates HTML, it asks your password, decrypts
 `private/cryptbox` file and merges it with JSON
@@ -47,7 +48,7 @@ plain text.
 
 The steps `cbedit` does are:
 
-* Reads `private/cryptobox` and decrypts it
+* Reads `private/cryptobox` and decrypts it in memory
 * For each type of entry in this file, reads appropriate JSON file from
 `include/` and merges it with entry's variables (username, password, etc)
 * Merges all JSON entries into one string and encrypts it with AES
@@ -66,9 +67,10 @@ Bookmarklet
 -----------
 
 Some sites use authenticity token which they place into the HTML you get;
-the login form along the username and password fields contains hidden field
+the login form along with username and password fields contains hidden field
 with authenticity token. So it's no longer possible to use one-click login
-feature with such sites. But there is a solution!
+feature with such sites (where one-click login feature is simple post request
+with known username and password). But there is a solution!
 
 There is a bookmarklet that you can run on a login page; it will parse the form
 data and will let you copy it in JSON format. Then, when you press 'Log in'
@@ -166,26 +168,30 @@ HTML page)
 Database format
 ===============
 
+Window INI-like file format is used for database (on Linux it normally has
+.conf extension). More information with examples can be found in the
+[appropriate python page](http://docs.python.org/library/configparser.html).
+
 Your sensitive information is stored in the form of entries; there may be a
 number of entries, each describing particular login, bookmark, secure note or
 other information.
 
 Entry has the following structure (everything enclosed in [] is optional):
 
-	<entry type>[@<entry tag>]:
+	[<entry type>  <entry name>]
+		tag=<tag>
 
-		[variable1=value1]
+		<variable1>=<value1>
 
-		[variable2=value2]
+		<variableN>=<valueN>
 
-		[variableN=valueN]
+		<multiline>:<line1>
+		            <line2>
 
 You don't need to quote anything; just put variable name on the left side of `=`
 sign and variable value on the right side of `=` sign without any quotes. If you
-want to have a multi line value, here document is supported (like in shell,
-Perl, etc). You just put `<<SEPARATOR` in place of value and all the lines
-from the next one until the line which contains only `SEPARATOR` is multi line
-value (you can use any characters sequence instead of `SEPARATOR`).
+want to have a multi line value, use colon (:) to delimit variable name from
+value and follow the example above.
 
 Entry type is a relative path to a file inside the `include/` directory. And
 the first component in this path (until the first `/` of end of string) will
@@ -203,6 +209,15 @@ have `form` information with `$username` and `$password` variables.
 For ther other entries, there will be probably only `text` variable that will
 somehow format other variables from the entry.
 
+Entry name has special meaning for login entry type: it should contain your
+username. For the other entry types, entry name is just the caption of
+the entry.
+
+Tag variable will let you 'merge' several entries into a block (they will
+be placed close to each other on the HTML page). You don't have to
+use tag variable, it's usage is optional (and intended to help you with
+the clutter).
+
 Extending / Adding new login (includes)
 ---------------------------------------
 
@@ -217,47 +232,38 @@ become clear from the example what to do).
 Database example
 ----------------
 
-	login/dropbox.com:
-		username=qwe@qwe.qwe
-		password=pwd
+	[login/dropbox.com qwe@qwe.qwe]
+	password=pwd
 
-	login/gmail.com:
-		username=qwe@qwe.qwe
-		password=pwd
+	[login/gmail.com qwe@qwe.qwe]
+	password=pwd
 
-	card:
-		name=bank
-		cardholder=Jonh Smith
-		number=1234 5678 9012 3456
-		pin=1234
-		cvv=123
+	[card bank]
+	cardholder=Jonh Smith
+	number=1234 5678 9012 3456
+	pin=1234
+	cvv=123
 
-	note:
-		name=note
-		text=with body
+	[note note]
+	text=with body
 
-	app:
-		name=Photoshop
-		key=secret
+	[app Photoshop]
+	key=secret
 
-	bookmark:
-		name=Google
-		url=http://google.com
+	[bookmark Google]
+	url=http://google.com
+	comment=Google search
 
-	note:
-		name=Multiline Note
-		text=<<<YOUR_MARKER
-	line1
+	[note Multiline Note]
+	text:line1
+	     line2
 
-	line2
-	YOUR_MARKER
-
-Import database
----------------
+Import database for other password managers
+-------------------------------------------
 
 No, there is probably no easy way to automate it (taking into account the
 number of existing formats); you have to create (or use pre-created) JSON
-form layout in the `include/login` directory (vid provided bookmarklet)
+form layout in the `include/login` directory (via provided bookmarklet)
 and then add entry with your username/password to `private/cryptobox` manually.
 
 I'm not telling its impossible; I just see no need to implement it myself.
@@ -265,9 +271,10 @@ I'm not telling its impossible; I just see no need to implement it myself.
 Export database
 ---------------
 
-No, there is no reasons to switch from cryptobox :-) But if you have strong
+No, there are no reasons to switch from cryptobox :-) But if you have strong
 reasons, you can always implement `private/cryptobox` parser yourself; the
-format is very easy to parse and all routines that decrypt data are waiting
+format is pretty simple to parse (there are probably available implementations
+for languages other that Python) and all routines that decrypt data are waiting
 for you in the `lib/` directory.
 
 Works on (where it has been tested)

@@ -33,6 +33,7 @@ path_cfg = prefix + "cryptobox.cfg"
 path_backup = prefix + "cryptobox.tar"
 backup_files = [ path_db, path_db_hmac, path_db_html, path_cfg ]
 
+path_private = os.getcwd() + "/" + prefix
 path_include = os.getcwd() + "/include"
 path_html = os.getcwd() + "/html"
 
@@ -55,5 +56,8 @@ def backup():
     if len(backup_files) > 0:
         tar = tarfile.open(path_backup, "w")
         for name in backup_files:
-            tar.add(name)
+            try:
+                tar.add(name)
+            except:
+                print "WARNING: couldn't add %s file to backup!" % name
         tar.close()
