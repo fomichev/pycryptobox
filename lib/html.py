@@ -9,9 +9,11 @@ import json
 
 import crypto
 import flatten
-import cfg
 import generate
 import embed
+
+import cfg
+import log
 
 def update(conf, password):
     path_tmp_index = os.path.abspath(cfg.path_tmp + "/index.html")
@@ -63,12 +65,12 @@ def update(conf, password):
     except:
         pass
 
-    print "> cryptobox.html"
+    log.v("> cryptobox.html")
     embed.embed(path_tmp_index, path_index, cfg_js)
-    print "Copy clippy.swf"
+    log.v("Copy clippy.swf")
     shutil.copyfile(cfg.path_clippy, os.path.dirname(path_index) + "/clippy.swf")
 
-    print "> m.cryptobox.html"
+    log.v("> m.cryptobox.html")
     embed.embed(path_tmp_mobile_index, path_mobile_index, cfg_js)
 
     if cfg.debug == False:

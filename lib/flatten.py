@@ -10,6 +10,7 @@ import io
 import ConfigParser
 
 import cfg
+import log
 
 re_subst = re.compile(r'\$\{([^\}]*)\?([^}]*)\}')
 
@@ -53,11 +54,10 @@ def flatten_node(search_paths, tp, v):
         try:
             data = open(path + tp, "r").read().decode('utf-8')
         except:
-            if cfg.debug:
-                print "Tried " + path + tp
+            log.d("Tried " + path + tp)
             continue
 
-        print "Read " + path + tp
+        log.v("Read " + path + tp)
 #        data = cgi.escape(data)
         try:
             jdata = json.loads(data)

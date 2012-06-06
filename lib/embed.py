@@ -6,7 +6,9 @@
 from bs4 import BeautifulSoup, Tag
 import os
 import re
+
 import cfg
+import log
 
 def getimg(path):
     data = "".join(open(path, "rb").read().encode('base64').split("\n"))
@@ -24,12 +26,12 @@ def embed(index, output, cfg_js):
 
     soup = BeautifulSoup(data)
 
-    print "Embed stylesheets"
+    log.v("Embed stylesheets")
     stylesheets = ""
     for s in soup.find_all("link", rel="stylesheet"):
         contents = open(s['href']).read()
 
-        print "Embed images in " + s['href']
+        log.v("Embed images in " + s['href'])
         urls_re = re.compile(r'url\(([^)]*)\)*')
         urls = [url.group(1) for url in urls_re.finditer(contents)]
 
@@ -44,21 +46,21 @@ def embed(index, output, cfg_js):
 
     soup.head.insert(1, tag)
 
-    print "Embed scripts"
+    log.v("Embed scripts")
     scripts = ""
     for s in soup.find_all("script", type="text/javascript"):
         try:
-            print "Embed " + s['src']
+            log.v("Embed " + s['src'])
             scripts += open(s['src']).read().decode('utf-8')
         except:
             try:
                 scripts += s.string
             except:
-                print "! Script or tag seem to be empty"
+                log.w("Script %s or tag seem to be empty" % s['src'])
 
         s.replace_with("")
 
-    print "Remove comments from scripts"
+    log.v("Remove comments from scripts")
     scripts = re.compile(r'\s//.*$', re.MULTILINE).sub('', scripts)
     scripts = sethtmlvars(scripts)
 

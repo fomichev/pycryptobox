@@ -13,6 +13,7 @@ Features:
   to json in flatten.py
 - add some way (tool?) to explore include/ directory - some thing that will
   help user to understand which variables are required for particular entry type
+- all cfg.path_xxx to cfg.path[xxx]
 
 Noncritical features:
 - add .cryptoboxrc support

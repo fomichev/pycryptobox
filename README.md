@@ -218,6 +218,8 @@ be placed close to each other on the HTML page). You don't have to
 use tag variable, it's usage is optional (and intended to help you with
 the clutter).
 
+Comments are started with `#` and ended at the end of the line.
+
 Extending / Adding new login (includes)
 ---------------------------------------
 

@@ -5,6 +5,7 @@ import subprocess
 import json
 import tarfile
 import argparse
+import sys
 
 import lang.en as lang
 #import lang.ru as lang
@@ -18,6 +19,8 @@ except:
 
 # Don't switch it! Your data will be exposed in private/tmp/
 debug = False
+
+verbose = 0
 
 lock_timeout_minutes = 5
 
@@ -52,6 +55,16 @@ if platform.system() == 'Windows':
 else:
     editor = "vim"
 
+def init(args):
+    global verbose
+
+    v = vars(args)
+
+    if 'verbose' in v:
+        verbose = v['verbose']
+
+    return v
+
 def backup():
     if len(backup_files) > 0:
         tar = tarfile.open(path_backup, "w")
@@ -59,5 +72,5 @@ def backup():
             try:
                 tar.add(name)
             except:
-                print "WARNING: couldn't add %s file to backup!" % name
+                log.w("Couldn't add %s file to backup!" % name)
         tar.close()

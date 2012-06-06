@@ -9,9 +9,11 @@ import os
 import binascii
 import hmac, hashlib
 import sys
-import cfg
 import json
 import random
+
+import cfg
+import log
 
 check_hmac = False
 
@@ -82,13 +84,13 @@ def enc_plaintext(conf, password, plaintext, aes_path, hmac_path):
 
 def enc_db(conf, password, path, aes_path, hmac_path):
     """ Used to encrypt temporary created file (cbedit) """
-    print "Encode %s into %s and %s" % (path, aes_path, hmac_path)
+    log.v("Encode %s into %s and %s" % (path, aes_path, hmac_path))
 
     plaintext = open(path, "rb").read().decode('utf-8').rstrip()
     enc_plaintext(conf, password, plaintext, aes_path, hmac_path)
 
 def dec_db(conf, password, aes_path, hmac_path):
-    print "Decode %s and %s" % (aes_path, hmac_path)
+    log.v("Decode %s and %s" % (aes_path, hmac_path))
 
     cipher = open(aes_path, "rb").read().rstrip()
     key = derive_key(conf, password)
@@ -100,7 +102,11 @@ def dec_db(conf, password, aes_path, hmac_path):
 
     if check_hmac:
         if (hmac != orig_hmac):
-            print 'Incorrect password!'
-            sys.exit(0)
+            log.e('Incorrect password!')
+            sys.exit(1)
 
-    return plaintext.decode('utf-8')
+    try:
+        return plaintext.decode('utf-8')
+    except:
+        log.e('Incorrect password!')
+        sys.exit(1)

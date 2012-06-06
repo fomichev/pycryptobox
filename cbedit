@@ -7,21 +7,23 @@ import getpass
 import argparse
 import sys
 
-import lib.crypto
-import lib.cfg
-import lib.html
+import lib.crypto as crypto
+import lib.cfg as cfg
+import lib.html as html
+import lib.log as log
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Edit cryptobox database')
-    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + lib.cfg.version)
-    parser.parse_args()
+    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
+    parser.add_argument('-V', '--verbose', action='count')
+    cfg.init(parser.parse_args())
 
     password = getpass.getpass()
 
-    conf = lib.crypto.read_cfg(lib.cfg.path_cfg)
-    plaintext = lib.crypto.dec_db(conf, password, lib.cfg.path_db, lib.cfg.path_db_hmac)
+    conf = crypto.read_cfg(cfg.path_cfg)
+    plaintext = crypto.dec_db(conf, password, cfg.path_db, cfg.path_db_hmac)
 
-    EDITOR = os.environ.get('EDITOR', lib.cfg.editor)
+    EDITOR = os.environ.get('EDITOR', cfg.editor)
 
     with tempfile.NamedTemporaryFile(suffix='.ini', delete=False) as f:
         file_name = f.name
@@ -34,16 +36,16 @@ if __name__ == "__main__":
 
     if mtime_begin != mtime_end:
         try:
-            lib.cfg.backup()
+            cfg.backup()
         except:
-            ans = raw_input("Couldn't perform a backup, continue? [y|n]: ")
+            ans = log.yn("Couldn't perform a backup, continue?")
 
             if not ans in ['Y', 'y']:
                 sys.exit(0)
 
-        lib.crypto.enc_db(conf, password, file_name, lib.cfg.path_db, lib.cfg.path_db_hmac)
-        lib.html.update(conf, password)
+        crypto.enc_db(conf, password, file_name, cfg.path_db, cfg.path_db_hmac)
+        html.update(conf, password)
     else:
-        print "No update to database"
+        log.p("No update to database")
 
     os.remove(file_name)

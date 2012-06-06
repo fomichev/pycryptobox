@@ -5,21 +5,23 @@ import argparse
 import sys
 import os
 
-import lib.crypto
-import lib.cfg
+import lib.crypto as crypto
+import lib.cfg as cfg
+import lib.log as log
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Create empty cryptobox database')
-    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + lib.cfg.version)
-    parser.parse_args()
+    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
+    parser.add_argument('-V', '--verbose', action='count')
+    cfg.init(parser.parse_args())
 
     try:
-        os.mkdir(lib.cfg.path_private + "/")
+        os.mkdir(cfg.path_private + "/")
     except:
         pass
 
-    if os.path.exists(lib.cfg.path_db):
-        ans = raw_input("File '%s' already exists, do you want to overwrite it? [y|n]: " % lib.cfg.path_db)
+    if os.path.exists(cfg.path_db):
+        ans = log.yn("File '%s' already exists, do you want to overwrite it?" % cfg.path_db)
 
         if not ans in ['Y', 'y']:
             sys.exit(0)
@@ -28,9 +30,9 @@ if __name__ == "__main__":
     password2 = getpass.getpass('Retype password: ')
 
     if password != password2:
-        print "Your passwords don't match!"
+        log.e("Your passwords don't match!")
         sys.exit(0)
 
-    lib.crypto.create_cfg(lib.cfg.path_cfg)
-    conf = lib.crypto.read_cfg(lib.cfg.path_cfg)
-    lib.crypto.enc_plaintext(conf, password, "# Lines started with # are comments", lib.cfg.path_db, lib.cfg.path_db_hmac)
+    crypto.create_cfg(cfg.path_cfg)
+    conf = crypto.read_cfg(cfg.path_cfg)
+    crypto.enc_plaintext(conf, password, "# Lines started with # are comments", cfg.path_db, cfg.path_db_hmac)
