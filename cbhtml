@@ -10,7 +10,8 @@ import lib.cfg as cfg
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Update HTML pages')
     parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
-    parser.add_argument('-V', '--verbose', action='count')
+    parser.add_argument('-V', '--verbose', action='count', help='enable verbose mode')
+    parser.add_argument('-c', '--config', action='store', help='use specified config')
     cfg.init(parser.parse_args())
 
     password = getpass.getpass()

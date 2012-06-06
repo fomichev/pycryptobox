@@ -12,16 +12,17 @@ import lib.log as log
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Create empty cryptobox database')
     parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
-    parser.add_argument('-V', '--verbose', action='count')
+    parser.add_argument('-V', '--verbose', action='count', help='enable verbose mode')
+    parser.add_argument('-c', '--config', action='store', help='use specified config')
     cfg.init(parser.parse_args())
 
     try:
-        os.mkdir(cfg.path['private'] + "/")
+        os.mkdir(cfg.user['path']['db'] + "/")
     except:
         pass
 
-    if os.path.exists(cfg.path['db']):
-        ans = log.yn("File '%s' already exists, do you want to overwrite it?" % cfg.path['db'])
+    if os.path.exists(cfg.path['db_cipher']):
+        ans = log.yn("File '%s' already exists, do you want to overwrite it?" % cfg.path['db_cipher'])
 
         if not ans in ['Y', 'y']:
             sys.exit(0)
@@ -35,4 +36,4 @@ if __name__ == "__main__":
 
     crypto.create_db_conf(cfg.path['db_conf'])
     db_conf = crypto.read_db_conf(cfg.path['db_conf'])
-    crypto.enc_plaintext(db_conf, password, "# Lines started with # are comments", cfg.path['db'], cfg.path['db_hmac'])
+    crypto.enc_plaintext(db_conf, password, "# Lines started with # are comments", cfg.path['db_cipher'], cfg.path['db_hmac'])

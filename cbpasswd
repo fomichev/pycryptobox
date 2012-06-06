@@ -11,7 +11,8 @@ import lib.log as log
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Change master password')
     parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
-    parser.add_argument('-V', '--verbose', action='count')
+    parser.add_argument('-V', '--verbose', action='count', help='enable verbose mode')
+    parser.add_argument('-c', '--config', action='store', help='use specified config')
     cfg.init(parser.parse_args())
 
     password = getpass.getpass('Current password: ')
@@ -32,5 +33,5 @@ if __name__ == "__main__":
             sys.exit(0)
 
     db_conf = crypto.read_db_conf(cfg.path['db_conf'])
-    plaintext = crypto.dec_db(db_conf, password, cfg.path['db'], cfg.path['db_hmac'])
-    crypto.enc_plaintext(db_conf, new_password, plaintext, cfg.path['db'], cfg.path['db_hmac'])
+    plaintext = crypto.dec_db(db_conf, password, cfg.path['db_cipher'], cfg.path['db_hmac'])
+    crypto.enc_plaintext(db_conf, new_password, plaintext, cfg.path['db_cipher'], cfg.path['db_hmac'])

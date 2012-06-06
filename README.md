@@ -295,6 +295,33 @@ Works on (where it has been tested)
 
 - iPhone (iOS 5)
 
+Configuration
+=============
+You can configure cryptobox via configuration file called `.cryptoboxrc`.
+When you run any of the cryptobox commands, it first searches for the
+`.cryptoboxrc` file in the current directory, then it tries to find this
+file in your home directory, and if it didn't find any configuration, it
+will use the default one. You can also pass configuration file path to
+the tools via `-c` command line option.
+
+Configuration file is also simple INI-like file with the following
+possible variables:
+
+	[path]
+	db = <path to cryptobox database directory>
+
+	[ui]
+	jquery_ui_theme = <use different jquery-ui theme>
+	path_bookmark = <base path to the bookmarklets>
+	editor = <full path to your editor>
+
+	[security]
+	lock_timeout_minutes = <web site lock timeout in minutes>
+	default_password_lentrh = <default password length in generate dialog>
+
+All the options are optional. You can dig default values in
+the `lib/cfg.py` file.
+
 Used components
 ===============
 

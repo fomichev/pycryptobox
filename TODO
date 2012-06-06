@@ -20,9 +20,6 @@ Features:
 - improve autolock feature (don't use mouse move event)
 - update 'Decrypt data without cryptobox' in README.md (convert example to INI)
 
-Noncritical features:
-- add .cryptoboxrc support (lib/user_cfg.py)
-
 Someday:
 - simplify usage of token based authentication (maybe find another way around
   this crappy forms?!)

@@ -28,7 +28,7 @@ def update(db_conf, password):
         pass
 
     key = crypto.derive_key(db_conf, password)
-    db_plaintext = crypto.dec_db(db_conf, password, cfg.path['db'], cfg.path['db_hmac'])
+    db_plaintext = crypto.dec_db(db_conf, password, cfg.path['db_cipher'], cfg.path['db_hmac'])
 
     json_plaintext = flatten.flatten(db_plaintext.split("\n"), (cfg.path['include'] + "/", cfg.path['db_include'] + "/"))
     if cfg.debug:
@@ -49,7 +49,7 @@ def update(db_conf, password):
     open(path_tmp_mobile_index, "w").write(m_index_html)
 
     js = db_conf
-    js['lock_timeout_minutes'] = cfg.lock_timeout_minutes
+    js['lock_timeout_minutes'] = cfg.user['security']['lock_timeout_minutes']
     js['page'] = cfg.lang.types
     js['cipher'] = aes_base64_nonl
 
