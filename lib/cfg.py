@@ -19,7 +19,7 @@ try:
 except:
     pass
 
-debug = True # Be aware that your data will be exposed in private/tmp/
+debug = False # Be aware that your data will be exposed in private/tmp/
 verbose = 0
 
 user= {}
@@ -27,6 +27,14 @@ path = {}
 html = {}
 lang = None
 backup_files = []
+
+def from_user_config(dest, user, section, name, default):
+    if section in user and user[section] != None:
+        if name in user[section] and user[section][name] != None:
+            dest[name] = user[section][name]
+            return
+
+    dest[name] = default
 
 def init(args):
     global verbose
@@ -53,7 +61,6 @@ def init(args):
                 except:
                     user = default_user_conf()
     except Exception as e:
-        print e
         log.e("Could not load user config!")
         sys.exit(1)
 
@@ -65,7 +72,10 @@ def init(args):
     path['db_conf'] = path['db_cipher'] + ".conf"
     path['db_html'] = user['path']['db'] + "/html/cryptobox.html"
     path['db_mobile_html'] = user['path']['db'] + "/html/m.cryptobox.html"
-    path['db_bookmarklet'] = user['path']['db'] + "/bookmarklet.js"
+
+    from_user_config(path, user, 'path', 'db_bookmarklet_login', user['path']['db'] + "/bookmarklet/login.js")
+    from_user_config(path, user, 'path', 'db_bookmarklet_form', user['path']['db'] + "/bookmarklet/form.js")
+
     path['db_include'] = user['path']['db'] + "/include"
 
     path['tmp'] = user['path']['db'] + "/tmp"
@@ -73,7 +83,6 @@ def init(args):
     path['include'] = path['cryptobox'] + "/include"
     path['html'] = path['cryptobox'] + "/html"
     path['clippy'] = path['html'] + "/extern/clippy/build/clippy.swf"
-
 
     _lang = __import__('lang.' + user['ui']['lang'], globals(), locals(), [], -1)
     lang = getattr(_lang, user['ui']['lang'])
@@ -118,10 +127,10 @@ def read_user_conf(p):
 
     c = default_user_conf()
     get_option(c, cp, 'path', 'db')
+    get_option(c, cp, 'path', 'db_bookmarklet_login')
+    get_option(c, cp, 'path', 'db_bookmarklet_form')
 
     get_option(c, cp, 'ui', 'jquery_ui_theme')
-    get_option(c, cp, 'ui', 'path_form_bookmarklet')
-    get_option(c, cp, 'ui', 'path_login_bookmarklet')
     get_option(c, cp, 'ui', 'editor')
     get_option(c, cp, 'ui', 'lang')
 

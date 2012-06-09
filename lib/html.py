@@ -35,7 +35,19 @@ def encrypted_json(suffix, js, db_plaintext, key, db_conf, tp=None):
 
     return cfg_js
 
-def bookmarket(db_plaintext, key, db_conf):
+def bookmarket_form(db_plaintext, key, db_conf):
+    include = (
+            "../html/js/bookmarklet/common.js",
+            "../html/js/bookmarklet/form.js",
+            )
+
+    scripts = ""
+    for s in include:
+        scripts += open(s).read().decode('utf-8')
+
+    return scripts
+
+def bookmarket_login(db_plaintext, key, db_conf):
     include = (
             "../html/extern/CryptoJS/components/core-min.js",
             "../html/extern/CryptoJS/components/enc-base64-min.js",
@@ -45,9 +57,10 @@ def bookmarket(db_plaintext, key, db_conf):
             "../html/extern/CryptoJS/components/hmac-min.js",
             "../html/extern/CryptoJS/components/pbkdf2-min.js",
 
+            "../html/js/bookmarklet/common.js",
             "../html/js/crypto.js",
             "../html/js/login.js",
-            "../bookmarklet/login.js",
+            "../html/js/bookmarklet/login.js",
             )
 
     js = db_conf.copy()
@@ -67,7 +80,8 @@ def update(db_conf, password):
 
     path_index = os.path.abspath(cfg.path['db_html'])
     path_mobile_index = os.path.abspath(cfg.path['db_mobile_html'])
-    path_bookmarklet = os.path.abspath(cfg.path['db_bookmarklet'])
+    path_bookmarklet_login = os.path.abspath(cfg.path['db_bookmarklet_login'])
+    path_bookmarklet_form = os.path.abspath(cfg.path['db_bookmarklet_form'])
 
     try:
         os.mkdir(cfg.path['tmp'] + "/")
@@ -97,6 +111,21 @@ def update(db_conf, password):
     except:
         pass
 
+    try:
+        os.mkdir(os.path.dirname(path_mobile_index))
+    except:
+        pass
+
+    try:
+        os.mkdir(os.path.dirname(path_bookmarklet_login))
+    except:
+        pass
+
+    try:
+        os.mkdir(os.path.dirname(path_bookmarklet_form))
+    except:
+        pass
+
     log.v("> cryptobox.html")
     embed.embed(path_tmp_index, path_index, cfg_js)
     log.v("Copy clippy.swf")
@@ -105,8 +134,11 @@ def update(db_conf, password):
     log.v("> m.cryptobox.html")
     embed.embed(path_tmp_mobile_index, path_mobile_index, cfg_js)
 
-    log.v("> bookmarklet.js")
-    open(path_bookmarklet, "w").write(bookmarket(db_plaintext, key, db_conf))
+    log.v("> bookmarklet/login.js")
+    open(path_bookmarklet_login, "w").write(bookmarket_login(db_plaintext, key, db_conf))
+
+    log.v("> bookmarklet/form.js")
+    open(path_bookmarklet_form, "w").write(bookmarket_form(db_plaintext, key, db_conf))
 
     if cfg.debug == False:
         os.chdir(saved_cwd)

@@ -79,6 +79,10 @@ should set token field value to `@token`; that will lead to pop-up dialog
 box on login asking you to provide form data (you may have multiple tokens
 within forms).
 
+TODO: Describe how to get this bookmark; also describe login bookmark.
+
+	javascript:(function(){s=document.createElement('SCRIPT');s.type='text/javascript';s.src='https://<BOOKMARKLET_PATH>';document.getElementsByTagName('head')[0].appendChild(s);})();
+
 Required python modules
 =======================
 Python version 2.6 or 2.7 required!
@@ -283,10 +287,11 @@ possible variables:
 
 	[path]
 	db = <path to cryptobox database directory>
+	db_bookmarklet_login = <where to store login bookmarklet>
+	db_bookmarklet_form = <where to store form bookmarklet>
 
 	[ui]
 	jquery_ui_theme = <use different jquery-ui theme>
-	path_form_bookmarklet = <path to the form bookmarklet>
 	editor = <full path to your editor>
 	lang = <select language; currently supported are en and ru>
 

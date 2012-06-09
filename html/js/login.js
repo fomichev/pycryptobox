@@ -79,9 +79,7 @@ function login(withNewWindow, method, url, name, keys, values) {
 	}
 
 	var html = "";
-	html += "<html><head></head><body><?text_wait_for_login?><form id='formid' method='" + method + "' action='";
-	html +=url;
-	html += "'>";
+	html += "<html><head></head><body><?text_wait_for_login?><form id='formid' method='" + method + "' action='" + url + "'>";
 
 	if (keys && values && (keys.length == values.length))
 		for (var i=0; i < keys.length; i++)
@@ -93,40 +91,4 @@ function login(withNewWindow, method, url, name, keys, values) {
 
 	newWindow.document.write(html);
 	return newWindow;
-}
-
-/* TODO: copied from bookmarklet/form.js; need to remove duplicity */
-function getFormsJson() {
-	var address = document.URL;
-	var name = document.title;
-	var text = "";
-
-	for (var i = 0; i < document.forms.length; i++) {
-		var form = document.forms[i];
-
-		var form_elements =  "";
-		for (var j = 0; j < form.elements.length; j++) {
-			var el = form.elements[j];
-
-			if (el.name == "")
-				continue;
-
-			if (form_elements == "")
-				form_elements = '\t\t\t"' + el.name + '": "' + el.value + '"';
-			else
-				form_elements += ',\n\t\t\t"' + el.name + '": "' + el.value + '"';
-		}
-
-		var form_text = '\t\t"action": "' + form.action + '",\n\t\t"method": "' + form.method + '",\n\t\t"fields":\n\t\t{\n' + form_elements + '\n\t\t}';
-
-		if (text == "")
-			text += '[\n';
-		else
-			text += ',\n';
-		text += '{\n\t"type":"login",\n\t"name": "' + name + '",\n\t"address": "' + address + '",\n\t"form":\n\t{\n' + form_text + '\n\t}\n}\n';
-	}
-
-	text += "]";
-
-	return text;
 }
