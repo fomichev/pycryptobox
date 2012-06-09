@@ -80,7 +80,7 @@ def flatten_node(search_paths, tp, v):
 
     raise Exception("Not found entry type '%s'" % tp)
 
-def flatten(lines, search_paths):
+def flatten(lines, search_paths, filter_tp=None):
     j = []
     j.append({ "type" : "magic", "value": "270389" })
 
@@ -89,6 +89,10 @@ def flatten(lines, search_paths):
 
     for section in db.sections():
         tp = section.split()[0]
+        if filter_tp:
+            if tp.split('/')[0] != filter_tp:
+                continue
+
         name = " ".join(section.split()[1:])
 
         v = dict(db.items(section))

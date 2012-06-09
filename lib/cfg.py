@@ -19,7 +19,7 @@ try:
 except:
     pass
 
-debug = False # Be aware that your data will be exposed in private/tmp/
+debug = True # Be aware that your data will be exposed in private/tmp/
 verbose = 0
 
 user= {}
@@ -65,6 +65,7 @@ def init(args):
     path['db_conf'] = path['db_cipher'] + ".conf"
     path['db_html'] = user['path']['db'] + "/html/cryptobox.html"
     path['db_mobile_html'] = user['path']['db'] + "/html/m.cryptobox.html"
+    path['db_bookmarklet'] = user['path']['db'] + "/bookmarklet.js"
     path['db_include'] = user['path']['db'] + "/include"
 
     path['tmp'] = user['path']['db'] + "/tmp"
@@ -79,7 +80,8 @@ def init(args):
 
     html = lang.text
     html['jquery_ui_theme'] = user['ui']['jquery_ui_theme']
-    html['path_bookmarklets'] = user['ui']['path_bookmarklets']
+    html['path_form_bookmarklet'] = user['ui']['path_form_bookmarklet']
+    html['path_login_bookmarklet'] = user['ui']['path_login_bookmarklet']
     html['version'] = version
     html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
     html['default_password_length'] = str(user['security']['default_password_length'])
@@ -89,15 +91,17 @@ def init(args):
     return v
 
 def backup():
-    if len(backup_files) > 0:
-        tar = tarfile.open(path['backup'], "w")
-        for name in backup_files:
-            try:
-                tar.add(name)
-            except:
-                log.w("Couldn't add %s file to backup!" % name)
+    if len(backup_files) <= 0:
+        return
 
-        tar.close()
+    tar = tarfile.open(path['backup'], "w")
+    for name in backup_files:
+        try:
+            tar.add(name)
+        except:
+            log.w("Couldn't add %s file to backup!" % name)
+
+    tar.close()
 
 def get_option(c, cp, sect, opt, integer=False):
     if cp.has_option(sect, opt):
@@ -116,7 +120,8 @@ def read_user_conf(p):
     get_option(c, cp, 'path', 'db')
 
     get_option(c, cp, 'ui', 'jquery_ui_theme')
-    get_option(c, cp, 'ui', 'path_bookmarklets')
+    get_option(c, cp, 'ui', 'path_form_bookmarklet')
+    get_option(c, cp, 'ui', 'path_login_bookmarklet')
     get_option(c, cp, 'ui', 'editor')
     get_option(c, cp, 'ui', 'lang')
 
@@ -132,7 +137,8 @@ def default_user_conf():
 
     c['ui']['lang'] = 'en'
     c['ui']['jquery_ui_theme'] = 'flick'
-    c['ui']['path_bookmarklets'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/"
+    c['ui']['path_form_bookmarklet'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/form.js"
+    c['ui']['path_login_bookmarklet'] = "#"
     if platform.system() == 'Windows':
         # editor = "c:/Program Files/Sublime Text 2/sublime_text.exe"
         # editor = "c:/Program Files/Notepad++/notepad++.exe"

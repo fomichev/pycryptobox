@@ -6,6 +6,7 @@ text['text_noscript'] = 'Извините, но без JavaScript\'а ничег
 text['text_enter_password'] = 'Введите пароль'
 text['text_button_unlock'] = 'Разблокировать'
 text['text_form_bookmarklet'] = 'Cryptobox букмарклет'
+text['text_login_bookmarklet'] = 'Cryptobox логин'
 text['text_button_generate'] = 'Создать пароль'
 text['text_button_lock'] = 'Заблокировать'
 text['text_title_generate'] = 'Создать пароль'

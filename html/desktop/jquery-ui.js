@@ -20,9 +20,9 @@ function createLogin(id, name, address, form, vars) {
 	var token = withToken(form);
 	if (token != "") {
 		r += '<a class="button-bookmark" href="' + address + '" target="_blank"><?text_get_token?></a>';
-		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken("' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'><?text_log_in?></a>';
+		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken(true, "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'><?text_log_in?></a>';
 	} else {
-		r += '<a class="button-login" href="#" onClick=\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'><?text_log_in?></a>';
+		r += '<a class="button-login" href="#" onClick=\'javascript:login(true, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'><?text_log_in?></a>';
 	}
 
 	r += '<a class="button-goto" href="' + address + '" target="_blank"><?text_goto?></a>';
@@ -99,6 +99,36 @@ function dialogGenerateSubmit() {
 		$("#input-include-punc").is(":checked"),
 		$("#input-include-uc").is(":checked"),
 		$("#input-pronounceable").is(":checked")));
+}
+
+function dialogLoginSubmit(url, name, keys, values, tokens) {
+	var formJson = $("#input-json").val();
+
+	if (!formJson || formJson == "")
+		return;
+
+	$("#input-json").val("");
+	$("#div-token").dialog('close');
+
+	loginWithTokenData(url, name, keys, values, formJson);
+}
+
+function loginWithToken(url, name, keys, values, tokens) {
+	$("#div-token").dialog({
+		height: 140,
+		width: 280,
+		modal: true,
+		buttons: {
+			"Login": function() { dialogLoginSubmit(url, name, keys, values, tokens); },
+			"Cancel": function() { $(this).dialog('close'); }
+		}
+	});
+
+	$("#div-token").keydown(function(event) {
+		if (event.keyCode == $.ui.keyCode.ENTER) {
+			dialogLoginSubmit(url, name, keys, values, tokens);
+		}
+	});
 }
 
 $(document).ready(function() {

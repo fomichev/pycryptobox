@@ -1,6 +1,5 @@
 Overview
 ========
-
 Cryptobox is a bunch of python scripts that will help you manage your
 passwords database and other sensitive data. The idea is simple: there is
 some encrypted file (`private/cryptobox`) where sensitive information is
@@ -16,7 +15,6 @@ in the plain text and exists in the HTML page only in the encrypted form.
 
 Features
 --------
-
 * Secure storage of sensitive information
 * Desktop and mobile HTML pages for ease of use
 * One-click login for sites without authenticity tokens (read more below)
@@ -28,7 +26,6 @@ or two (to ensure that your data is safe)
 
 Guts
 ----
-
 All information is stored in the `private/cryptobox` file,
 encrypted via [AES](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard);
 key length is 256 bits and it is derived from your password using
@@ -65,7 +62,6 @@ directory.
 
 Bookmarklet
 -----------
-
 Some sites use authenticity token which they place into the HTML you get;
 the login form along with username and password fields contains hidden field
 with authenticity token. So it's no longer possible to use one-click login
@@ -85,7 +81,6 @@ within forms).
 
 Required python modules
 =======================
-
 Python version 2.6 or 2.7 required!
 
 If your operation system of choice is Windows (sigh), then it's required to
@@ -114,25 +109,21 @@ have the following path in your PATH environment variable -
 
 Installation on Windows
 -----------------------
-
 Get python 2.6 and install all required modules from the previous section.
 Also don't forget to add `c:\Python26\Scripts\` to your PATH environment
 variable.
 
 Installation on Mac OS X
 ------------------------
-
 Use `brew` to get python 2.7 and then install required modules.
 
 Installation on Linux
 ---------------------
-
 Chances are, you'll already have python 2.6 or 2.7 on a Linux machine;
 so just install the required modules.
 
 Usage
 =====
-
 - Create database (creates empty `private/cryptobox` and
 `private/cryptobox.hmac`)
 
@@ -167,7 +158,6 @@ HTML page)
 
 Database format
 ===============
-
 Window INI-like file format is used for database (on Linux it normally has
 .conf extension). More information with examples can be found in the
 [appropriate python page](http://docs.python.org/library/configparser.html).
@@ -222,7 +212,6 @@ Comments are started with `#` and ended at the end of the line.
 
 Extending / Adding new login (includes)
 ---------------------------------------
-
 I think it's pretty straightforward. You can use aforesaid bookmarklet on
 your target site. The only caveat is that it can have multiple forms on one
 page, so watch out and select the one you need (don't copy leading `[` and
@@ -265,7 +254,6 @@ Database example
 
 Import database for other password managers
 -------------------------------------------
-
 No, there is probably no easy way to automate it (taking into account the
 number of existing formats); you have to create (or use pre-created) JSON
 form layout in the `include/login` directory (via provided bookmarklet)
@@ -275,25 +263,11 @@ I'm not telling its impossible; I just see no need to implement it myself.
 
 Export database
 ---------------
-
 No, there are no reasons to switch from cryptobox :-) But if you have strong
 reasons, you can always implement `private/cryptobox` parser yourself; the
 format is pretty simple to parse (there are probably available implementations
 for languages other that Python) and all routines that decrypt data are waiting
 for you in the `lib/` directory.
-
-Works on (where it has been tested)
-===================================
-
-- Chrome 18, 19
-
-- Firefox 11, 12
-
-- Safari 5
-
-- Chrome Beta (Android 4)
-
-- iPhone (iOS 5)
 
 Configuration
 =============
@@ -312,7 +286,7 @@ possible variables:
 
 	[ui]
 	jquery_ui_theme = <use different jquery-ui theme>
-	path_bookmark = <base path to the bookmarklets>
+	path_form_bookmarklet = <path to the form bookmarklet>
 	editor = <full path to your editor>
 	lang = <select language; currently supported are en and ru>
 
@@ -323,12 +297,23 @@ possible variables:
 All the options are optional. You can dig default values in
 the `lib/cfg.py` file.
 
+Works on (where it has been tested)
+===================================
+- Chrome 18, 19
+
+- Firefox 11, 12
+
+- Safari 5
+
+- Chrome Beta (Android 4)
+
+- iPhone (iOS 5)
+
 Used components
 ===============
 
 Python
 ------
-
 - [PBKDF2](http://www.dlitz.net/software/python-pbkdf2/) - MIT
 
 - [AES](https://www.dlitz.net/software/pycrypto/) - Public Domain
@@ -339,17 +324,15 @@ Python
 
 JavaScript
 ----------
-
 - [PBKDF2, AES](https://code.google.com/p/crypto-js/) - New BSD License
 
-	html/extern/CryptoJS (v3)
+	html/extern/CryptoJS
 
 - [Random Seed](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
 
 	html/extern/seedrandom.js
 
 	html/extern/seedrandom.min.js (via http://closure-compiler.appspot.com/home)
-
 
 - [jQuery](http://jquery.com) - MIT
 
@@ -371,30 +354,32 @@ JavaScript
 
 Decrypt data without cryptobox
 ==============================
-
 Even if you don't have cryptobox available, you may still fairly easy
 decrypt your data.
 
 Lets suppose, you have the following data encrypted:
-login/dropbox.com:
-	username=your_username
-	password=your_password
+
+	login/dropbox.com:
+		username=your_username
+		password=your_password
 
 With the following contents of `private/cryptobox.cfg` file:
-{
-    "aes_iv_len": 16,
-    "aes_iv": "BQKz5ydHbWORgnsiGioPmA==",
-    "pbkdf2_iterations": 1000,
-    "pbkdf2_salt": "hbSIS+lcfaw=",
-    "pkbdf2_salt_len": 8,
-    "version": 1,
-    "aes_bs": 32
-}
+
+	{
+	    "aes_iv_len": 16,
+	    "aes_iv": "BQKz5ydHbWORgnsiGioPmA==",
+	    "pbkdf2_iterations": 1000,
+	    "pbkdf2_salt": "hbSIS+lcfaw=",
+	    "pkbdf2_salt_len": 8,
+	    "version": 1,
+	    "aes_bs": 32
+	}
 
 You get the following cipher text:
-$ cat cryptobox
-uvNbq1JhyxSL8zESGLOyXIDbTzEo3Y4oDUq68SSmPuywdeECf+6gJ/k1Oa3+2G+032tGWSzsUJci
-bR3oZkGzXuYrH0sDj3iXfgZlZF9EnJkmT5AKLUc6CzCpmgAdS9QU
+
+	$ cat cryptobox
+	uvNbq1JhyxSL8zESGLOyXIDbTzEo3Y4oDUq68SSmPuywdeECf+6gJ/k1Oa3+2G+032tGWSzsUJci
+	bR3oZkGzXuYrH0sDj3iXfgZlZF9EnJkmT5AKLUc6CzCpmgAdS9QU
 
 Now, let's try to decrypt it (instruction provided for Linux)!
 
@@ -407,7 +392,6 @@ easily decrypted using standard tools.
 
 Give me the key!
 ----------------
-
 You have to take out the value of pbkdf2_salt field of config and convert
 it to hex econding:
 
@@ -439,7 +423,6 @@ encoding is represented by two characters)
 
 Decrypt my data
 ---------------
-
 Now, we have a key, the only thing we need to do is to convert initialization
 vector (aes_iv) to hex and call openssl, let's do it:
 

@@ -7,12 +7,19 @@ Optimizations:
   non-optimized
 
 Features:
+- one-click login bookmarklet (when you go to site and click this, you'll be logged in)
+
+- make form bookmarklet appear in the same popup box as login bookmarklet
+- add 'help' or 'bookmarklets' button instead of two bookmarklets which will
+  show dialog with bookmarklets
+- add favorites feature (place favorites on a distinct page)
+- hide tag names when using filter
+- fix backup (absolute paths; should be relative)
 - add some validation for DB and include/
 - add light version (l.cryptobox.html) which should not include any js (jquery,
   etc) besides crypto stuff
 - add support for broken logins (add broken field) - don't allow one-click login
 - add support for aliases
-- make default length of password generate dialog adjustable via config
 - generate new salt and iv on password change?
 - add setup.py (easy_install or pip)
 - add support for @token in form.action

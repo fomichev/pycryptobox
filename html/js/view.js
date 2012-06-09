@@ -22,52 +22,6 @@ function addBr(text) {
 		return "";
 }
 
-function withToken(form) {
-	var tokens = "";
-
-	if (form.action == '@token')
-		return "__form_action__";
-
-	for (var key in form.fields) {
-		var value = form.fields[key];
-
-		if (value == "@token") {
-			if (tokens == "")
-				tokens = '"' + key + '"';
-			else
-				tokens += ', "' + key + '"';
-		}
-	}
-
-	return tokens;
-}
-
-function flattenMap(map) {
-	var k = "";
-	var v = "";
-
-	for (var key in map) {
-		if (map[key] == "@token")
-			continue;
-
-		if (k == "") {
-			k = "new Array(\"" + key +"\"";
-			v = "new Array(\"" + map[key] +"\"";
-		} else {
-			k += ", \"" + key +"\"";
-			v += ", \"" + map[key] +"\"";
-		}
-	}
-	k += ")"
-	v += ")"
-
-	var r = {};
-	r.k = k;
-	r.v = v;
-
-	return r;
-}
-
 function unlock(pwd) {
 	var text = decrypt(pwd, cfg.pbkdf2.salt, cfg.cipher, cfg.pbkdf2.iterations, cfg.aes.iv);
 	var data = eval(text);

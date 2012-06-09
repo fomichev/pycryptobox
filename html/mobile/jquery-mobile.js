@@ -27,7 +27,7 @@ function createLogin(id, name, address, form, vars) {
 
 	if (withToken(form) == "") {
 		t += '<a href="#todo" onClick=';
-		t += '\'javascript:login("' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
+		t += '\'javascript:login(false, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
 		t += 'data-role="button"><?text_log_in?></a>';
 	}
 
