@@ -73,7 +73,7 @@ def init(args):
     path['db_html'] = user['path']['db'] + "/html/cryptobox.html"
     path['db_mobile_html'] = user['path']['db'] + "/html/m.cryptobox.html"
 
-    from_user_config(path, user, 'path', 'db_bookmarklet_login', user['path']['db'] + "/bookmarklet/login.js")
+    from_user_config(path, user, 'path', 'db_bookmarklet_fill', user['path']['db'] + "/bookmarklet/fill.js")
     from_user_config(path, user, 'path', 'db_bookmarklet_form', user['path']['db'] + "/bookmarklet/form.js")
 
     path['db_include'] = user['path']['db'] + "/include"
@@ -90,7 +90,7 @@ def init(args):
     html = lang.text
     html['jquery_ui_theme'] = user['ui']['jquery_ui_theme']
     html['path_form_bookmarklet'] = user['ui']['path_form_bookmarklet']
-    html['path_login_bookmarklet'] = user['ui']['path_login_bookmarklet']
+    html['path_fill_bookmarklet'] = user['ui']['path_fill_bookmarklet']
     html['version'] = version
     html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
     html['default_password_length'] = str(user['security']['default_password_length'])
@@ -127,7 +127,7 @@ def read_user_conf(p):
 
     c = default_user_conf()
     get_option(c, cp, 'path', 'db')
-    get_option(c, cp, 'path', 'db_bookmarklet_login')
+    get_option(c, cp, 'path', 'db_bookmarklet_fill')
     get_option(c, cp, 'path', 'db_bookmarklet_form')
 
     get_option(c, cp, 'ui', 'jquery_ui_theme')
@@ -147,10 +147,10 @@ def default_user_conf():
     c['ui']['lang'] = 'en'
     c['ui']['jquery_ui_theme'] = 'flick'
     c['ui']['path_form_bookmarklet'] = "https://raw.github.com/fomichev/cryptobox/master/bookmarklet/form.js"
-    c['ui']['path_login_bookmarklet'] = "#"
+    c['ui']['path_fill_bookmarklet'] = "#"
     if platform.system() == 'Windows':
-        # editor = "c:/Program Files/Sublime Text 2/sublime_text.exe"
-        # editor = "c:/Program Files/Notepad++/notepad++.exe"
+        # c['ui']['editor'] = "c:/Program Files/Sublime Text 2/sublime_text.exe"
+        # c['ui']['editor'] = "c:/Program Files/Notepad++/notepad++.exe"
         c['ui']['editor'] = "gvim"
     else:
         c['ui']['editor'] = "vim"

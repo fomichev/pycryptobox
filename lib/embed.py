@@ -26,7 +26,7 @@ def embed(index, output, cfg_js):
 
     soup = BeautifulSoup(data)
 
-    log.v("Embed stylesheets")
+    log.v("Embed stylesheets:")
     stylesheets = ""
     for s in soup.find_all("link", rel="stylesheet"):
         contents = open(s['href']).read()
@@ -46,7 +46,7 @@ def embed(index, output, cfg_js):
 
     soup.head.insert(1, tag)
 
-    log.v("Embed scripts")
+    log.v("Embed scripts:")
     scripts = ""
     for s in soup.find_all("script", type="text/javascript"):
         try:

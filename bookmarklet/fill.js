@@ -3,33 +3,25 @@ function sitename(t) {
 }
 
 function formToLink(name, vars, form) {
-	var r = "";
-	var flat = flattenMap(form.fields);
-
 	var divStyle = 'style="border: 0 none; border-radius: 6px; background-color: #111; padding: 10px; margin: 5px; text-align: left;"';
 	var aStyle = 'style="color: #fff; font-size: 18px; text-decoration: none;"';
 
-	var token = withToken(form);
-	if (token != "") {
-		r += '<div ' + divStyle + '><a ' + aStyle + ' href="#" onClick=\'javascript:loginWithTokenData(false, "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', ' + getFormsJson() + '); return false;\'>' + vars.username + '</a></div>';
-	} else {
-		r += '<div ' + divStyle + '><a ' + aStyle + ' href="#" onClick=\'javascript:login(false, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>' + vars.username + '</a></div>';
-	}
-
-	return r;
+	return '<div ' + divStyle + '><a ' + aStyle + ' href="#" onClick=\'javascript:' +
+		'formFill(' + JSON.stringify(form) + ');' +
+		'return false;\'>' + vars.username + '</a></div>';
 }
 
-function formLogin(form) {
-	var flat = flattenMap(form.fields);
-	var keys = eval(flat.k);
-	var values = eval(flat.v);
+function formFill(form) {
+	var nodes = document.querySelectorAll("input[type=text], input[type=password]");
+	for (var i = 0; i < nodes.length; i++) {
+		var value = null;
 
-	var token = withToken(form);
-	if (token != "") {
-		token = eval('new Array(' + token + ')');
-		loginWithTokenData(false, form.action, name, keys, values, getFormsJson());
-	} else {
-		login(false, form.method, form.action,  name, keys, values);
+		for (var field in form.fields)
+			if (field == nodes[i].attributes['name'].value)
+				value = form.fields[field];
+
+		if (value)
+			nodes[i].value = value;
 	}
 }
 
@@ -47,7 +39,6 @@ function unlock(pwd, caption) {
 			continue;
 		}
 
-//		var address = sitename("http://dropbox.com/asdfadfqw");
 		var address = sitename(document.URL);
 		var action = sitename(el.form.action);
 
@@ -55,13 +46,12 @@ function unlock(pwd, caption) {
 			matched.push(el);
 	}
 
-
 	if (matched.length == 0) {
 		caption.innerHTML = 'No logins found!';
 		window.setTimeout(function () { document.body.click(); }, 1000)
 	} else if (matched.length == 1) {
 		caption.innerHTML = 'Logging in...';
-		formLogin(matched[0].form);
+		formFill(matched[0].form);
 	} else {
 		var r = ''
 		for (var i = 0; i < matched.length; i++) {

@@ -7,8 +7,6 @@ Optimizations:
   non-optimized
 
 Features:
-- one-click login bookmarklet (when you go to site and click this, you'll be logged in)
-
 - make form bookmarklet appear in the same popup box as login bookmarklet
 - add 'help' or 'bookmarklets' button instead of two bookmarklets which will
   show dialog with bookmarklets

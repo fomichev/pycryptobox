@@ -37,8 +37,8 @@ def encrypted_json(suffix, js, db_plaintext, key, db_conf, tp=None):
 
 def bookmarket_form(db_plaintext, key, db_conf):
     include = (
-            "../html/js/bookmarklet/common.js",
-            "../html/js/bookmarklet/form.js",
+            "../bookmarklet/lib/common.js",
+            "../bookmarklet/form.js",
             )
 
     scripts = ""
@@ -47,7 +47,7 @@ def bookmarket_form(db_plaintext, key, db_conf):
 
     return scripts
 
-def bookmarket_login(db_plaintext, key, db_conf):
+def bookmarket_fill(db_plaintext, key, db_conf):
     include = (
             "../html/extern/CryptoJS/components/core-min.js",
             "../html/extern/CryptoJS/components/enc-base64-min.js",
@@ -57,10 +57,10 @@ def bookmarket_login(db_plaintext, key, db_conf):
             "../html/extern/CryptoJS/components/hmac-min.js",
             "../html/extern/CryptoJS/components/pbkdf2-min.js",
 
-            "../html/js/bookmarklet/common.js",
+            "../bookmarklet/lib/common.js",
             "../html/js/crypto.js",
             "../html/js/login.js",
-            "../html/js/bookmarklet/login.js",
+            "../bookmarklet/fill.js",
             )
 
     js = db_conf.copy()
@@ -80,7 +80,7 @@ def update(db_conf, password):
 
     path_index = os.path.abspath(cfg.path['db_html'])
     path_mobile_index = os.path.abspath(cfg.path['db_mobile_html'])
-    path_bookmarklet_login = os.path.abspath(cfg.path['db_bookmarklet_login'])
+    path_bookmarklet_fill = os.path.abspath(cfg.path['db_bookmarklet_fill'])
     path_bookmarklet_form = os.path.abspath(cfg.path['db_bookmarklet_form'])
 
     try:
@@ -117,7 +117,7 @@ def update(db_conf, password):
         pass
 
     try:
-        os.mkdir(os.path.dirname(path_bookmarklet_login))
+        os.mkdir(os.path.dirname(path_bookmarklet_fill))
     except:
         pass
 
@@ -134,11 +134,13 @@ def update(db_conf, password):
     log.v("> m.cryptobox.html")
     embed.embed(path_tmp_mobile_index, path_mobile_index, cfg_js)
 
-    log.v("> bookmarklet/login.js")
-    open(path_bookmarklet_login, "w").write(bookmarket_login(db_plaintext, key, db_conf))
+    log.v("> bookmarklet/fill.js")
+    open(path_bookmarklet_fill, "w").write(bookmarket_fill(db_plaintext, key, db_conf))
+    log.v("Save to " + path_bookmarklet_fill)
 
     log.v("> bookmarklet/form.js")
     open(path_bookmarklet_form, "w").write(bookmarket_form(db_plaintext, key, db_conf))
+    log.v("Save to " + path_bookmarklet_form)
 
     if cfg.debug == False:
         os.chdir(saved_cwd)
