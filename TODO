@@ -7,6 +7,7 @@ Optimizations:
   non-optimized
 
 Features:
+- add hidden=yes feature to hide unused login entries from HTML
 - add favorites feature (place favorites on a distinct page)
 - fix backup (absolute paths; should be relative)
 - add some validation for DB and include/
@@ -23,6 +24,7 @@ Features:
 - update 'Decrypt data without cryptobox' in README.md (convert example to INI)
   revise README.me and add other missing information
 - add identity include (name, address, phone, etc)
+- fix form bookmarklet for deviantart.com
 
 Someday:
 - add some way (tool?) to explore include/ directory - some thing that will
