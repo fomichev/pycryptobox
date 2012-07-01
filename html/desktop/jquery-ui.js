@@ -51,7 +51,7 @@ function viewCreateListEntry(id, type, data) {
 
 function viewWrapPageTag(tag, text) {
 	if (tag != '__default__')
-		tag = '<h4>' + tag + '</h4>';
+		tag = '<h4 class="tag-header">' + tag + '</h4>';
 	else
 		tag = '';
 
@@ -231,8 +231,10 @@ $(document).ready(function() {
 
 		if (text == "") {
 			$("h3.ui-accordion-header").show();
+			$("h4.tag-header").show();
 		} else {
 			$("h3.ui-accordion-header").hide();
+			$("h4.tag-header").hide();
 			$("h3.ui-accordion-header").filter(function() {
 				if ($('a', this).html().toLowerCase().indexOf(text) >= 0)
 					return true;
