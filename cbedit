@@ -45,8 +45,9 @@ if __name__ == "__main__":
                 sys.exit(0)
 
         crypto.enc_db(db_conf, password, file_name, cfg.path['db_cipher'], cfg.path['db_hmac'])
+        os.remove(file_name)
+
         html.update(db_conf, password)
     else:
         log.p("No update to database")
 
-    os.remove(file_name)
