@@ -1,4 +1,4 @@
 {
 	"name": "$name",
-	"text": "Cardholder=$cardholder\nNumber=$number\nCVV2=$cvv2\nPIN=$pin"
+	"text": "${cardholder?<p>Cardholder: $cardholder</p>} ${number?<p>Number: $number</p>} ${type?<p>Type: $type</p>} ${cvv?<p>CVV: $cvv</p>} ${pin?<p>PIN: $pin</p>} ${secret?<p>Secret word: $secret}${issue?<p>Issue date: $issue</p>} ${expiry?<p>Expiry date: $expiry</p>} ${url?<p>Website: <a href='$url'>$url</a></p>} ${phone?<p>Phone: $phone</p>}"
 }

@@ -54,7 +54,7 @@ def flatten_node(search_paths, tp, v):
         try:
             data = open(path + tp, "r").read().decode('utf-8')
         except:
-            log.d("Tried " + path + tp)
+            log.v("Tried " + path + tp)
             continue
 
         log.v("Read " + path + tp)

@@ -11,7 +11,7 @@
 			"password": "$password",
 			"referrer": "https://www.xmarks.com/",
 			"append": "",
-			"token": "MTMzNjg2MzM1MS40Ny2haOHLiEmT6WcDSlCUn8nwObhyHJFhguWhAssW84mgHw==",
+			"token": "@token",
 			"passwordhash": ""
 		}
 	}

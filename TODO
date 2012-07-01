@@ -24,7 +24,7 @@ Features:
 - update 'Decrypt data without cryptobox' in README.md (convert example to INI)
   revise README.me and add other missing information
 - add identity include (name, address, phone, etc)
-- fix form bookmarklet for deviantart.com
+- fix form bookmarklet for deviantart.com, lastpass.com
 
 Someday:
 - add some way (tool?) to explore include/ directory - some thing that will

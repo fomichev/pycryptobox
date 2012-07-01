@@ -1,0 +1,4 @@
+{
+	"name": "$name",
+	"text": "${firstname?<p>First name: $firstname</p>} ${initial?<p>Initial: $initial</p>} ${lastname?<p>Last name: $lastname</p>} ${birth?<p>Birth date$birth</p>} ${company?<p>Company: $company</p>} ${job?<p>Job title: $job</p>} ${country?<p>Country: $country</p>} ${state?<p>State/Province: $state</p>} ${address1?<p>Address line 1: $address1</p>} ${address2?<p>Address line 2: $address2</p>} ${city?<p>City: $city</p>} ${zip?<p>Zip/postal code: $zip</p>} ${phone?<p>Phone: $phone</p>} ${passport?<p>Passport: $passport</p>}"
+}

@@ -49,10 +49,10 @@ if __name__ == "__main__":
         crypto.enc_db(db_conf, password, file_name, cfg.path['db_cipher'], cfg.path['db_hmac'])
         os.remove(file_name)
 
-        if 'edit_only' in vars(args):
+
+        if 'edit_only' in vars(args) and vars(args)['edit_only'] != None:
             sys.exit(0)
 
         html.update(db_conf, password)
     else:
         log.p("No update to database")
-
