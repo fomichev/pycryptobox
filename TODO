@@ -7,7 +7,6 @@ Optimizations:
   non-optimized
 
 Features:
-- add hidden=yes feature to hide unused login entries from HTML
 - add favorites feature (place favorites on a distinct page)
 - fix backup (absolute paths; should be relative)
 - add some validation for DB and include/

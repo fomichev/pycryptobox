@@ -102,6 +102,9 @@ def flatten(lines, search_paths, filter_tp=None):
         if not 'tag' in v:
             v['tag'] = '__default__'
 
+        if 'hidden' in v and v['hidden'] == 'yes':
+            continue
+
         j.append(flatten_node(search_paths, tp, v))
 
     if cfg.debug:
