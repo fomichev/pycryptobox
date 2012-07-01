@@ -16,8 +16,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Edit cryptobox database')
     parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
     parser.add_argument('-V', '--verbose', action='count', help='enable verbose mode')
+    parser.add_argument('-e', '--edit-only', action='count', help='don\'t update HTML and bookmarklets')
     parser.add_argument('-c', '--config', action='store', help='use specified config')
-    cfg.init(parser.parse_args())
+    args = parser.parse_args()
+    cfg.init(args)
 
     password = getpass.getpass()
 
@@ -46,6 +48,9 @@ if __name__ == "__main__":
 
         crypto.enc_db(db_conf, password, file_name, cfg.path['db_cipher'], cfg.path['db_hmac'])
         os.remove(file_name)
+
+        if 'edit_only' in vars(args):
+            sys.exit(0)
 
         html.update(db_conf, password)
     else:
