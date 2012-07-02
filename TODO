@@ -7,23 +7,25 @@ Optimizations:
   non-optimized
 
 Features:
-- add favorites feature (place favorites on a distinct page)
+- add language support to bookmarklets
+- fix identity and card includes
 - fix backup (absolute paths; should be relative)
+  also include include/ and bookmarklet/ to backup
 - add some validation for DB and include/
-- add light version (l.cryptobox.html) which should not include any js (jquery,
-  etc) besides crypto stuff
 - add support for broken logins (add broken field) - don't allow one-click login
   and rename to something more clear
 - add support for aliases (alias=login/xyz login/qwe login/asd - will generate
   3 additional entries in HTML)
 - generate new salt and iv on password change?
 - add setup.py (easy_install or pip)
-- add support for @token in form.action - low prio
 - improve autolock feature (don't use mouse move event)
-- update 'Decrypt data without cryptobox' in README.md (convert example to INI)
-  revise README.me and add other missing information
-- add identity include (name, address, phone, etc)
+- revise README.me and add other missing information
+
+Low priority:
 - fix form bookmarklet for deviantart.com, lastpass.com
+- fix login issue in safari
+- add support for @token in form.action
+- save cryptobox.json and then embed it in the HTML
 
 Someday:
 - add some way (tool?) to explore include/ directory - some thing that will

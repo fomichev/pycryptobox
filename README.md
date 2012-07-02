@@ -162,7 +162,7 @@ HTML page)
 
 Database format
 ===============
-Window INI-like file format is used for database (on Linux it normally has
+Windows INI-like file format is used for database (on Linux it normally has
 .conf extension). More information with examples can be found in the
 [appropriate python page](http://docs.python.org/library/configparser.html).
 
@@ -174,6 +174,8 @@ Entry has the following structure (everything enclosed in [] is optional):
 
 	[<entry type>  <entry name>]
 		tag=<tag>
+
+		[hidden=yes]
 
 		<variable1>=<value1>
 
@@ -211,6 +213,8 @@ Tag variable will let you 'merge' several entries into a block (they will
 be placed close to each other on the HTML page). You don't have to
 use tag variable, it's usage is optional (and intended to help you with
 the clutter).
+
+You can use `hidden=yes` to remove some entries from the final HTML page.
 
 Comments are started with `#` and ended at the end of the line.
 
@@ -364,27 +368,29 @@ decrypt your data.
 
 Lets suppose, you have the following data encrypted:
 
-	login/dropbox.com:
-		username=your_username
-		password=your_password
+	[login/dropbox.com your_username]
+	password=your_password
 
-With the following contents of `private/cryptobox.cfg` file:
+With the following contents of `cryptobox.conf` file:
 
-	{
-	    "aes_iv_len": 16,
-	    "aes_iv": "BQKz5ydHbWORgnsiGioPmA==",
-	    "pbkdf2_iterations": 1000,
-	    "pbkdf2_salt": "hbSIS+lcfaw=",
-	    "pkbdf2_salt_len": 8,
-	    "version": 1,
-	    "aes_bs": 32
-	}
+	[pbkdf2]
+	salt_len = 8
+	salt = vyvhYAqR0Os=
+	iterations = 1000
+
+	[aes]
+	iv_len = 16
+	bs = 32
+	iv = O/fqt3VeY4laxfn1B7OyHQ==
+
+	[cryptobox]
+	format_version = 2
 
 You get the following cipher text:
 
 	$ cat cryptobox
-	uvNbq1JhyxSL8zESGLOyXIDbTzEo3Y4oDUq68SSmPuywdeECf+6gJ/k1Oa3+2G+032tGWSzsUJci
-	bR3oZkGzXuYrH0sDj3iXfgZlZF9EnJkmT5AKLUc6CzCpmgAdS9QU
+	JhDP/N2YSG54jHmJgqPqVcWRCh6VoRMqaxq3SzEoFdUwdwm9wIm9ec8DSzTf7NiNEeHTEYZsNjAp
+	wSuPGIiTkA==
 
 Now, let's try to decrypt it (instruction provided for Linux)!
 
@@ -397,26 +403,26 @@ easily decrypted using standard tools.
 
 Give me the key!
 ----------------
-You have to take out the value of pbkdf2_salt field of config and convert
-it to hex econding:
+You have to take out the value of pbkdf2.salt field of config and convert
+it to hex enconding:
 
-	$ echo "hbSIS+lcfaw=" | base64 -d | xxd -ps
-	85b4884be95c7dac
+	$ echo "vyvhYAqR0Os=" | base64 -d | xxd -ps
+	bf2be1600a91d0eb
 
 Next, go and download a Perl script which implements PBKDF2 using OpenSSL:
 
 	$ wget http://www.ict.griffith.edu.au/anthony/software/pbkdf2.pl
 
 Store your password in `pwd` file and execute Perl script (where 1000 is the
-pbkdf2_iterations from config):
+pbkdf2.iterations from config):
 
 	$ cat pwd
 	hi
 
-	$ perl pbkdf2.pl 85b4884be95c7dac 1000 < pwd > result
+	$ perl pbkdf2.pl bf2be1600a91d0eb 1000 < pwd > result
 
 	$ cat result
-	4d5ac3cda6e77d5ee53a79f392fb1111c490249ead61932cf07adb1e4963d0eb19014e3ff87e8c97e098348148696782
+	0bd89afa21176ec9943aa5ae6a146b58a17901e50e8e6b0ab66fc12c7e094d9df7f3405ab410f4bf431e0bb560495e87
 
 And because we are interested only if first 32 bytes, we need to cut the rest
 (the number 64 in the following command is 32 * 2 because each byte in hex
@@ -424,17 +430,21 @@ encoding is represented by two characters)
 
 	$ cat result | cut -b1-64 > secret
 	$ cat secret
-	4d5ac3cda6e77d5ee53a79f392fb1111c490249ead61932cf07adb1e4963d0eb
+	0bd89afa21176ec9943aa5ae6a146b58a17901e50e8e6b0ab66fc12c7e094d9d
 
 Decrypt my data
 ---------------
 Now, we have a key, the only thing we need to do is to convert initialization
-vector (aes_iv) to hex and call openssl, let's do it:
+vector (aes.iv) to hex and call openssl, let's do it:
 
-	$ echo "BQKz5ydHbWORgnsiGioPmA==" | base64 -d | xxd -ps
-	0502b3e727476d6391827b221a2a0f98
+	$ echo "O/fqt3VeY4laxfn1B7OyHQ==" | base64 -d | xxd -ps
+	3bf7eab7755e63895ac5f9f507b3b21d
 
-	$ openssl enc -d -aes-256-cbc -K 4d5ac3cda6e77d5ee53a79f392fb1111c490249ead61932cf07adb1e4963d0eb -iv 0502b3e727476d6391827b221a2a0f98 -base64 -in cryptobox -out plaintext
+	$ openssl enc -d -aes-256-cbc -K 0bd89afa21176ec9943aa5ae6a146b58a17901e50e8e6b0ab66fc12c7e094d9d -iv 3bf7eab7755e63895ac5f9f507b3b21d -base64 -in cryptobox -out plaintext
 
-Congradulations, plaintext contains decrypted content of your cyptobox. Now,
+	$ cat plaintext
+	[login/dropbox.com your_username]
+	password=your_password$
+
+Congratulations, plaintext contains decrypted content of your cryptobox. Now,
 it's better to remove all temporary files and clean `bash` history.
