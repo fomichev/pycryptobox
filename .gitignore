@@ -1,7 +1,8 @@
 .DS_Store
 
 tmp/
-private/
+private*/
+*rc
 
 *.pyc
 MANIFEST

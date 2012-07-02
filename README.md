@@ -333,29 +333,29 @@ Python
 
 JavaScript
 ----------
-- [PBKDF2, AES](https://code.google.com/p/crypto-js/) - New BSD License
+- [CryptoJS 3.0.1](https://code.google.com/p/crypto-js/) - New BSD License
 
 	html/extern/CryptoJS
 
-- [Random Seed](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
+- [Random Seed 2.0](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
 
 	html/extern/seedrandom.js
 
 	html/extern/seedrandom.min.js (via http://closure-compiler.appspot.com/home)
 
-- [jQuery](http://jquery.com) - MIT
+- [jQuery 1.7.2](http://jquery.com) - MIT
 
 	html/extern/jquery
 
-- [jQuery UI](http://jqueryui.com/download) - MIT
+- [jQuery UI 1.8.20](http://jqueryui.com/download) - MIT
 
 	html/extern/jquery-ui (Dialog, Tabs, Accordion, Button)
 
-- [jQuery Mobile](http://jquerymobile.com) - MIT
+- [jQuery Mobile 1.1.0](http://jquerymobile.com) - MIT
 
 	html/extern/jquery-mobile
 
-- [Clippy](https://github.com/mojombo/clippy) - MIT
+- [Clippy 7329b72360](https://github.com/mojombo/clippy) - MIT
 
 	html/extern/clippy
 

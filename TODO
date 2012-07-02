@@ -30,3 +30,7 @@ Low priority:
 Someday:
 - add some way (tool?) to explore include/ directory - some thing that will
   help user to understand which variables are required for particular entry type
+
+Extern:
+- update CryptoJS to 3.0.2
+- update jquery-ui to 1.8.21
