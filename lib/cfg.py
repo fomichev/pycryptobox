@@ -95,7 +95,7 @@ def init(args):
     html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
     html['default_password_length'] = str(user['security']['default_password_length'])
 
-    backup_files = [ path['db_cipher'], path['db_hmac'], path['db_html'], path['db_conf'] ]
+    backup_files = [ path['db_cipher'], path['db_hmac'], path['db_html'], path['db_conf'], path['db_html'], path['clippy'] ]
 
     return v
 
@@ -103,12 +103,20 @@ def backup():
     if len(backup_files) <= 0:
         return
 
+    saved_cwd = os.getcwd()
     tar = tarfile.open(path['backup'], "w")
-    for name in backup_files:
+    for p in backup_files:
+        abspath = os.path.abspath(p)
+
+        print 'backup ' + abspath
+
         try:
-            tar.add(name)
+            os.chdir(os.path.dirname(abspath))
+            tar.add(os.path.basename(abspath))
         except:
-            log.w("Couldn't add %s file to backup!" % name)
+            log.w("Couldn't add %s file to backup!" % abspath)
+
+    os.chdir(saved_cwd)
 
     tar.close()
 

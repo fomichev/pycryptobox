@@ -7,8 +7,6 @@ Optimizations:
   non-optimized
 
 Bugfixes:
-- fix backup (absolute paths; should be relative)
-  also include include/ and bookmarklet/ to backup
 - generate json only once to make 'WARNING! Not found entry type' appear only
   once
 
