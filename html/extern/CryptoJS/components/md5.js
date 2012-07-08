@@ -1,5 +1,5 @@
 /*
-CryptoJS v3.0.1
+CryptoJS v3.0.2
 code.google.com/p/crypto-js
 (c) 2009-2012 by Jeff Mott. All rights reserved.
 code.google.com/p/crypto-js/wiki/License
@@ -27,10 +27,7 @@ code.google.com/p/crypto-js/wiki/License
      */
     var MD5 = C_algo.MD5 = Hasher.extend({
         _doReset: function () {
-            this._hash = WordArray.create([
-                0x67452301, 0xefcdab89,
-                0x98badcfe, 0x10325476
-            ]);
+            this._hash = WordArray.create([0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476]);
         },
 
         _doProcessBlock: function (M, offset) {
@@ -40,6 +37,7 @@ code.google.com/p/crypto-js/wiki/License
                 var offset_i = offset + i;
                 var M_offset_i = M[offset_i];
 
+                // Swap
                 M[offset_i] = (
                     (((M_offset_i << 8)  | (M_offset_i >>> 24)) & 0x00ff00ff) |
                     (((M_offset_i << 24) | (M_offset_i >>> 8))  & 0xff00ff00)
@@ -114,6 +112,7 @@ code.google.com/p/crypto-js/wiki/License
                 // Shortcut
                 var H_i = H[i];
 
+                // Swap
                 H[i] = (((H_i << 8)  | (H_i >>> 24)) & 0x00ff00ff) |
                        (((H_i << 24) | (H_i >>> 8))  & 0xff00ff00);
             }

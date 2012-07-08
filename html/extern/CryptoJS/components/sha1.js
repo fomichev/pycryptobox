@@ -1,5 +1,5 @@
 /*
-CryptoJS v3.0.1
+CryptoJS v3.0.2
 code.google.com/p/crypto-js
 (c) 2009-2012 by Jeff Mott. All rights reserved.
 code.google.com/p/crypto-js/wiki/License
@@ -20,11 +20,7 @@ code.google.com/p/crypto-js/wiki/License
      */
     var SHA1 = C_algo.SHA1 = Hasher.extend({
         _doReset: function () {
-            this._hash = WordArray.create([
-                0x67452301, 0xefcdab89,
-                0x98badcfe, 0x10325476,
-                0xc3d2e1f0
-            ]);
+            this._hash = WordArray.create([0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476, 0xc3d2e1f0]);
         },
 
         _doProcessBlock: function (M, offset) {

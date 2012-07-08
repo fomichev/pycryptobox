@@ -335,7 +335,7 @@ Python
 
 JavaScript
 ----------
-- [CryptoJS 3.0.1](https://code.google.com/p/crypto-js/) - New BSD License
+- [CryptoJS 3.0.2](https://code.google.com/p/crypto-js/) - New BSD License
 
 	html/extern/CryptoJS
 

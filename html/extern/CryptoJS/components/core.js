@@ -1,5 +1,5 @@
 /*
-CryptoJS v3.0.1
+CryptoJS v3.0.2
 code.google.com/p/crypto-js
 (c) 2009-2012 by Jeff Mott. All rights reserved.
 code.google.com/p/crypto-js/wiki/License
@@ -112,6 +112,9 @@ var CryptoJS = CryptoJS || (function (Math, undefined) {
                 }
 
                 // IE won't copy toString using the loop above
+                // Other non-enumerable properties are:
+                //   hasOwnProperty, isPrototypeOf, propertyIsEnumerable,
+                //   toLocaleString, valueOf
                 if (properties.hasOwnProperty('toString')) {
                     this.toString = properties.toString;
                 }
@@ -446,7 +449,6 @@ var CryptoJS = CryptoJS || (function (Math, undefined) {
 
     /**
      * Abstract buffered block algorithm template.
-     *
      * The property blockSize must be implemented in a concrete subtype.
      *
      * @property {number} _minBufferSize The number of blocks that should be kept unprocessed in the buffer. Default: 0
@@ -488,19 +490,18 @@ var CryptoJS = CryptoJS || (function (Math, undefined) {
 
         /**
          * Processes available data blocks.
+         * This method invokes _doProcessBlock(dataWords, offset), which must be implemented by a concrete subtype.
          *
-         * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
+         * @param {boolean} flush Whether all blocks and partial blocks should be processed.
          *
-         * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
-         *
-         * @return {WordArray} The processed data.
+         * @return {WordArray} The data after processing.
          *
          * @example
          *
          *     var processedData = bufferedBlockAlgorithm._process();
          *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
          */
-        _process: function (doFlush) {
+        _process: function (flush) {
             // Shortcuts
             var data = this._data;
             var dataWords = data.words;
@@ -510,7 +511,7 @@ var CryptoJS = CryptoJS || (function (Math, undefined) {
 
             // Count blocks ready
             var nBlocksReady = dataSigBytes / blockSizeBytes;
-            if (doFlush) {
+            if (flush) {
                 // Round up to include partial blocks
                 nBlocksReady = Math.ceil(nBlocksReady);
             } else {

@@ -24,6 +24,3 @@ Low priority:
 - fix form bookmarklet for deviantart.com, lastpass.com
 - add support for @token in form.action
 - add comments to all items under include/ describing required variables
-
-Extern:
-- update CryptoJS to 3.0.2
