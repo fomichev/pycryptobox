@@ -15,19 +15,21 @@ import log
 re_subst = re.compile(r'\$\{([^\}]*)\?([^}]*)\}')
 
 def clear_unset(obj):
-    if type(obj) == type(dict()):
+    if type(obj) == dict:
         for k in obj.keys():
-            if type(obj[k]) == type(dict()):
+            if type(obj[k]) == dict:
                 clear_unset(obj[k])
-            elif type(obj[k]) == type(list()):
+            elif type(obj[k]) == list:
                 clear_unset(obj[k])
+            elif type(obj[k]) == bool or type(obj[k]) == int:
+                pass
             else:
                 r = re_subst.search(obj[k])
                 while r:
                     obj[k] = obj[k].replace(r.group(0), "")
                     r = re_subst.search(obj[k])
 
-    elif type(obj) == type(list()):
+    elif type(obj) == list:
         for i in obj:
             clear_unset(i, v);
 
@@ -40,6 +42,9 @@ def set_vars(obj, v):
                 set_vars(obj[k], v)
             else:
                 for vk in v.keys():
+                    if type(obj[k]) != str:
+                        continue
+
                     rexp = re.compile(r'\$\{(' + vk + ')\?([^}]*)\}')
                     r = rexp.search(obj[k])
 
@@ -94,9 +99,6 @@ def flatten_node(search_paths, tp, v):
         jdata['name'] = '/'.join(tp.split('/')[1:])
         jdata['address'] = 'http://' + jdata['name']
         jdata['form'] = {}
-        jdata['form']['action'] = '#'
-        jdata['form']['method'] = 'get'
-        jdata['form']['fields'] = []
 
         return jdata
     else:

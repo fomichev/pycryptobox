@@ -2,9 +2,9 @@
 	"type":"login",
 	"name": "Appiny",
 	"address": "http://appiny.ru/",
-	"broken": "1",
 	"form":
 	{
+		"broken": true,
 		"action": "http://appiny.ru/",
 		"method": "post",
 		"fields":

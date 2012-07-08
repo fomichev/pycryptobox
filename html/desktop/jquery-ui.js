@@ -15,14 +15,17 @@ function createLogin(id, name, address, form, vars) {
 	var title = name + " (" + vars.name + ")"
 
 	var r = "";
-	var flat = flattenMap(form.fields);
 
-	var token = withToken(form);
-	if (token != "") {
-		r += '<a class="button-bookmark" href="' + address + '" target="_blank"><?text_get_token?></a>';
-		r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken(true, "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'><?text_log_in?></a>';
-	} else {
-		r += '<a class="button-login" href="#" onClick=\'javascript:login(true, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'><?text_log_in?></a>';
+	if (!loginBroken(form)) {
+		var flat = flattenMap(form.fields);
+
+		var token = withToken(form);
+		if (token != "") {
+			r += '<a class="button-bookmark" href="' + address + '" target="_blank"><?text_get_token?></a>';
+			r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken(true, "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'><?text_log_in?></a>';
+		} else {
+			r += '<a class="button-login" href="#" onClick=\'javascript:login(true, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'><?text_log_in?></a>';
+		}
 	}
 
 	r += '<a class="button-goto" href="' + address + '" target="_blank"><?text_goto?></a>';

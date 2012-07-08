@@ -13,8 +13,6 @@ Bugfixes:
 Features:
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
 - add some validation for DB and include/
-- add support for broken logins (add broken field) - don't allow one-click login
-  and rename to something more clear
 - add support for aliases (alias=login/xyz login/qwe login/asd - will generate
   3 additional entries in HTML)
 - generate new salt and iv on password change?

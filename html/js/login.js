@@ -1,3 +1,10 @@
+function loginBroken(form) {
+	if (form.broken == true)
+		return true;
+
+	return false;
+}
+
 function withToken(form) {
 	var tokens = "";
 

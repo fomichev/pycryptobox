@@ -450,3 +450,8 @@ vector (aes.iv) to hex and call openssl, let's do it:
 
 Congratulations, plaintext contains decrypted content of your cryptobox. Now,
 it's better to remove all temporary files and clean `bash` history.
+
+TODO: describe the following features
+=====================================
+- broken logins
+- comments in include/ JSON

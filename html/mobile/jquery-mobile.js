@@ -25,10 +25,12 @@ function createLogin(id, name, address, form, vars) {
 	var title = name + " (" + vars.name + ")";
 	var t = '';
 
-	if (withToken(form) == "") {
-		t += '<a href="#todo" onClick=';
-		t += '\'javascript:login(false, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
-		t += 'data-role="button"><?text_log_in?></a>';
+	if (!loginBroken(form)) {
+		if (withToken(form) == "") {
+			t += '<a href="#todo" onClick=';
+			t += '\'javascript:login(false, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
+			t += 'data-role="button"><?text_log_in?></a>';
+		}
 	}
 
 	t += '<a href="' + address + '" data-role="button"><?text_goto?></a>';

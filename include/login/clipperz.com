@@ -2,9 +2,9 @@
 	"type":"login",
 	"name": "Clipperz",
 	"address": "https://www.clipperz.com/beta/",
-	"broken": "1",
 	"form":
 	{
+		"broken": true,
 		"action": "",
 		"method": "get",
 		"fields":

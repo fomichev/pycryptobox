@@ -2,9 +2,9 @@
 	"type":"login",
 	"name": "Bookmate",
 	"address": "http://bookmate.com/login?return_to=%2F",
-	"broken": "1",
 	"form":
 	{
+		"broken": true,
 		"action": "http://bookmate.com/login",
 		"method": "post",
 		"fields":

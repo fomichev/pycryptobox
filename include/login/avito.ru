@@ -2,9 +2,9 @@
 	"type":"login",
 	"name": "AVITO.ru",
 	"address": "http://www.avito.ru/profile",
-	"broken": "1",
 	"form":
 	{
+		"broken": true,
 		"action": "http://www.avito.ru/profile",
 		"method": "post",
 		"fields":

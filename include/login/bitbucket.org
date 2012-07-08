@@ -2,9 +2,9 @@
 	"type":"login",
 	"name": "Bitbucket",
 	"address": "https://bitbucket.org/account/signin/?next=/",
-	"broken": "1",
 	"form":
 	{
+		"broken": true,
 		"action": "https://bitbucket.org/account/signin/",
 		"method": "post",
 		"fields":

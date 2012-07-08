@@ -4,6 +4,7 @@
 	"address": "https://esk.sbrf.ru/esClient/_Logon/Logon.aspx?ReturnUrl=%2fesclient%2fDefault.aspx",
 	"form":
 	{
+		"broken": true,
 		"action": "https://esk.sbrf.ru/esClient/_Logon/Logon.aspx?ReturnUrl=%2fesclient%2fDefault.aspx",
 		"method": "post",
 		"fields":
