@@ -91,23 +91,23 @@ If your operation system of choice is Windows (sigh), then it's required to
 have the following path in your PATH environment variable -
 `c:\Python26\Scripts\` (assuming default python installation).
 
-- Install pip
+* Install pip
 
 	$ easy_install pip
 
-- Install [PBKDF2](https://www.dlitz.net/software/python-pbkdf2/)
+* Install [PBKDF2](https://www.dlitz.net/software/python-pbkdf2/)
 
 	$ pip install pbkdf2
 
-- Install [PyCrypto](https://www.dlitz.net/software/pycrypto/)
+* Install [PyCrypto](https://www.dlitz.net/software/pycrypto/)
 
 	$ pip install pycrypto
 
-- Install [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
+* Install [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
 
 	$ pip install beautifulsoup4
 
-- Install argparse (only for Python < 2.7)
+* Install argparse (only for Python < 2.7)
 
 	$ pip install argparse
 
@@ -128,7 +128,7 @@ so just install the required modules.
 
 Usage
 =====
-- Create database (creates empty `private/cryptobox` and
+* Create database (creates empty `private/cryptobox` and
 `private/cryptobox.hmac`)
 
 	$ ./cbcreate
@@ -137,7 +137,7 @@ Upon database creation, PBKDB2 salt and AES IV will be generated. That
 guarantees that even two databases with equal content will be encrypted to
 different cipher text.
 
-- Edit your database (it will also update html page at
+* Edit your database (it will also update html page at
 `private/html/cryptobox.html` and at `private/html/m.cryptobox.html`)
 
 	$ ./cbedit
@@ -147,14 +147,14 @@ is created with the previous version of your database. So if some unexpected
 error happens, you can always restore your previous database contents from
 simple tar archive.
 
-- Change password (every couple of months)
+* Change password (every couple of months)
 
 	$ ./cbpasswd
 
 As in `cbedit` command, backup file will be created (or updated) whenever
 you change the password.
 
-- Update HTML page (perform HTML page update without update to database -
+* Update HTML page (perform HTML page update without update to database -
 only for development or if you want to change configuration and regenerate the
 HTML page)
 
@@ -310,54 +310,54 @@ the `lib/cfg.py` file.
 
 Works on (where it has been tested)
 ===================================
-- Chrome 18, 19
+* Chrome 18, 19, 20
 
-- Firefox 11, 12
+* Firefox 11, 12
 
-- Safari 5
+* Safari 5
 
-- Chrome Beta (Android 4)
+* Chrome Beta (Android 4)
 
-- iPhone (iOS 5)
+* iPhone (iOS 5)
 
 Used components
 ===============
 
 Python
 ------
-- [PBKDF2](http://www.dlitz.net/software/python-pbkdf2/) - MIT
+* [PBKDF2](http://www.dlitz.net/software/python-pbkdf2/) - MIT
 
-- [AES](https://www.dlitz.net/software/pycrypto/) - Public Domain
+* [AES](https://www.dlitz.net/software/pycrypto/) - Public Domain
 
-- [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/) - Python
+* [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/) - Python
 
-- [HMAC-MD5](http://docs.python.org/library/hmac.html) - Python
+* [HMAC-MD5](http://docs.python.org/library/hmac.html) - Python
 
 JavaScript
 ----------
-- [CryptoJS 3.0.2](https://code.google.com/p/crypto-js/) - New BSD License
+* [CryptoJS 3.0.2](https://code.google.com/p/crypto-js/) - New BSD License
 
 	html/extern/CryptoJS
 
-- [Random Seed 2.0](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
+* [Random Seed 2.0](http://davidbau.com/archives/2010/01/30/random_seeds_coded_hints_and_quintillions.html) - BSD
 
 	html/extern/seedrandom.js
 
 	html/extern/seedrandom.min.js (via http://closure-compiler.appspot.com/home)
 
-- [jQuery 1.7.2](http://jquery.com) - MIT
+* [jQuery 1.7.2](http://jquery.com) - MIT
 
 	html/extern/jquery
 
-- [jQuery UI 1.8.21](http://jqueryui.com/download) - MIT
+* [jQuery UI 1.8.21](http://jqueryui.com/download) - MIT
 
 	html/extern/jquery-ui (Dialog, Tabs, Accordion, Button, Flick theme)
 
-- [jQuery Mobile 1.1.0](http://jquerymobile.com) - MIT
+* [jQuery Mobile 1.1.0](http://jquerymobile.com) - MIT
 
 	html/extern/jquery-mobile
 
-- [Clippy 7329b72360](https://github.com/mojombo/clippy) - MIT
+* [Clippy 7329b72360](https://github.com/mojombo/clippy) - MIT
 
 	html/extern/clippy
 
@@ -453,6 +453,6 @@ it's better to remove all temporary files and clean `bash` history.
 
 TODO: describe the following features
 =====================================
-- broken logins
-- comments in include/ JSON
-- cryptobox.json
+* broken logins
+* comments in include/ JSON
+* cryptobox.json
