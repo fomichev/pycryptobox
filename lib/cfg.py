@@ -108,8 +108,6 @@ def backup():
     for p in backup_files:
         abspath = os.path.abspath(p)
 
-        print 'backup ' + abspath
-
         try:
             os.chdir(os.path.dirname(abspath))
             tar.add(os.path.basename(abspath))

@@ -42,7 +42,7 @@ def set_vars(obj, v):
                 set_vars(obj[k], v)
             else:
                 for vk in v.keys():
-                    if type(obj[k]) != str:
+                    if type(obj[k]) != str and type(obj[k]) != unicode:
                         continue
 
                     rexp = re.compile(r'\$\{(' + vk + ')\?([^}]*)\}')
