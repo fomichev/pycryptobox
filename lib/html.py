@@ -49,7 +49,7 @@ def bookmarket_form(db_plaintext, key, db_conf):
     for s in include:
         scripts += open(s).read().decode('utf-8')
 
-    return scripts
+    return embed.sethtmlvars(scripts)
 
 def bookmarket_fill(db_plaintext, key, db_conf):
     include = (
@@ -73,7 +73,7 @@ def bookmarket_fill(db_plaintext, key, db_conf):
     for s in include:
         scripts += open(s).read().decode('utf-8')
 
-    return scripts
+    return embed.sethtmlvars(scripts)
 
 def generate_html(index):
     return open(index, "r").read()

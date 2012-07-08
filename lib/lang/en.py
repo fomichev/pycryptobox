@@ -3,7 +3,7 @@
 text = {}
 text['text_title'] = 'Cryptobox'
 text['text_noscript'] = 'Sorry, this thing heavily depends on JavaScript.'
-text['text_enter_password'] = 'Enter password to unlock'
+text['text_enter_password'] = 'Enter password'
 text['text_button_unlock'] = 'Unlock'
 text['text_form_bookmarklet'] = 'Cryptobox bookmarklet'
 text['text_login_bookmarklet'] = 'Cryptobox login'
@@ -28,6 +28,8 @@ text['text_note'] = 'Notes'
 text['text_incorrect_password'] = 'Incorrect password!'
 text['text_log_in'] = 'Log in'
 text['text_button_back'] = 'Back'
+text['text_login_not_found'] = 'No logins found!'
+text['text_select_login'] = 'Select login'
 
 types = {}
 types['login'] = 'Logins'

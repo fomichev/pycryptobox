@@ -28,6 +28,8 @@ text['text_note'] = 'Заметки'
 text['text_incorrect_password'] = 'Неверный пароль!'
 text['text_log_in'] = 'Войти'
 text['text_button_back'] = 'Назад'
+text['text_login_not_found'] = 'Логин не найден!'
+text['text_select_login'] = 'Выберите логин'
 
 types = {}
 types['login'] = 'Логины'

@@ -34,7 +34,7 @@ function unlock(pwd, caption) {
 		var el = data[i];
 		if (el.type == "magic") {
 			if (el.value != "270389")
-				throw("Invalid password!");
+				throw("<?text_incorrect_password?>");
 
 			continue;
 		}
@@ -47,10 +47,10 @@ function unlock(pwd, caption) {
 	}
 
 	if (matched.length == 0) {
-		caption.innerHTML = 'No logins found!';
+		caption.innerHTML = '<?text_login_not_found?>';
 		window.setTimeout(function () { document.body.click(); }, 1000)
 	} else if (matched.length == 1) {
-		caption.innerHTML = 'Logging in...';
+		caption.innerHTML = '<?text_wait_for_login?>';
 		formFill(matched[0].form);
 	} else {
 		var r = ''
@@ -59,7 +59,7 @@ function unlock(pwd, caption) {
 			r += formToLink(el.name, el.vars, el.form);
 		}
 
-		caption.innerHTML = 'Select login' + r;
+		caption.innerHTML = '<?text_select_login?>' + r;
 	}
 }
 
@@ -67,7 +67,7 @@ var div = document.createElement('div');
 div.style.textAlign = 'center';
 
 var caption = document.createElement('h1');
-caption.appendChild(document.createTextNode('Enter password'));
+caption.appendChild(document.createTextNode('<?text_enter_password?>'));
 div.appendChild(caption);
 
 var form = document.createElement('form');
@@ -81,7 +81,7 @@ var buttonUnlock = document.createElement('input');
 buttonUnlock.type = "submit";
 buttonUnlock.style.border = "1px solid #006";
 buttonUnlock.style.fontSize = '14px';
-buttonUnlock.value = "Unlock";
+buttonUnlock.value = "<?text_button_unlock?>";
 
 var buttonDiv = document.createElement('div');
 buttonDiv.style.marginTop = '20px';
@@ -97,7 +97,6 @@ form.onsubmit = function() {
 
 		unlock(input.value, caption);
 	} catch(e) {
-//		caption.innerHTML = 'Invalid password';
 		caption.innerHTML = e;
 
 		window.setTimeout(function () { document.body.click(); }, 1000);
