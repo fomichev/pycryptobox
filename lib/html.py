@@ -15,11 +15,7 @@ import cfg
 import log
 
 def encrypted_json(suffix, js, db_plaintext, key, db_conf, tp=None):
-    db_include = cfg.path['db_include'] + '/'
-    if 'saved_cwd' in db_conf and db_include[0] != '/':
-        db_include = db_conf['saved_cwd'] + '/' + db_include
-
-    json_plaintext = flatten.flatten(db_plaintext.split("\n"), (cfg.path['include'] + "/", db_include), tp)
+    json_plaintext = flatten.flatten(db_plaintext.split("\n"), (cfg.path['include'] + "/", cfg.path['db_include']), tp)
     if cfg.debug:
         open(cfg.path['tmp'] + "/1_json_plaintext_" + suffix, "w").write(json_plaintext)
 
@@ -34,8 +30,7 @@ def encrypted_json(suffix, js, db_plaintext, key, db_conf, tp=None):
     js['cipher'] = aes_base64_nonl
 
     cfg_js = 'cfg = ' + json.dumps(js) + ';'
-    if cfg.debug:
-        open(cfg.path['tmp'] + "/4_cfg_" + suffix + ".js", "w").write(cfg_js)
+    open(cfg.path['db_json'], "w").write(json.dumps(js))
 
     return cfg_js
 
@@ -108,7 +103,6 @@ def update(db_conf, password):
     cfg_js = encrypted_json("html", js, db_plaintext, key, db_conf)
 
     saved_cwd = os.getcwd()
-    db_conf['saved_cwd'] = saved_cwd
     os.chdir(cfg.path['html'])
 
     try:

@@ -455,3 +455,4 @@ TODO: describe the following features
 =====================================
 - broken logins
 - comments in include/ JSON
+- cryptobox.json

@@ -66,17 +66,18 @@ def init(args):
 
     path['cryptobox'] = os.getcwd()
 
-    path['db_cipher'] = user['path']['db'] + "/cryptobox"
+    path['db_cipher'] = os.path.abspath(user['path']['db'] + "/cryptobox")
 
     path['db_hmac'] = path['db_cipher'] + ".hmac"
     path['db_conf'] = path['db_cipher'] + ".conf"
+    path['db_json'] = path['db_cipher'] + ".json"
     path['db_html'] = user['path']['db'] + "/html/cryptobox.html"
     path['db_mobile_html'] = user['path']['db'] + "/html/m.cryptobox.html"
 
     from_user_config(path, user, 'path', 'db_bookmarklet_fill', user['path']['db'] + "/bookmarklet/fill.js")
     from_user_config(path, user, 'path', 'db_bookmarklet_form', user['path']['db'] + "/bookmarklet/form.js")
 
-    path['db_include'] = user['path']['db'] + "/include"
+    path['db_include'] = os.path.abspath(user['path']['db'] + "/include") + '/'
 
     path['tmp'] = user['path']['db'] + "/tmp"
     path['backup'] = user['path']['db'] + "/cryptobox.tar"
@@ -95,7 +96,7 @@ def init(args):
     html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
     html['default_password_length'] = str(user['security']['default_password_length'])
 
-    backup_files = [ path['db_cipher'], path['db_hmac'], path['db_html'], path['db_conf'], path['db_html'], path['clippy'] ]
+    backup_files = [ path['db_cipher'], path['db_hmac'], path['db_html'], path['db_conf'], path['db_json'], path['db_html'], path['clippy'] ]
 
     return v
 

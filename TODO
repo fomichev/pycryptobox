@@ -23,8 +23,6 @@ Features:
 Low priority:
 - fix form bookmarklet for deviantart.com, lastpass.com
 - add support for @token in form.action
-- save cryptobox.json and then embed it in the HTML - this way, we can
-  create another clients which can use this JSON
 - add comments to all items under include/ describing required variables
 
 Extern:
