@@ -233,6 +233,7 @@ $(document).ready(function() {
 			$("h3.ui-accordion-header").show();
 			$("h4.tag-header").show();
 		} else {
+			$(".accordion").accordion('activate', false);
 			$("h3.ui-accordion-header").hide();
 			$("h4.tag-header").hide();
 			$("h3.ui-accordion-header").filter(function() {

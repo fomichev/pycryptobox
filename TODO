@@ -7,8 +7,6 @@ Optimizations:
   non-optimized
 
 Bugfixes:
-- fix filter: when some of sheets is open, it's not hidden when filter is
-  changed
 
 Features:
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
