@@ -30,10 +30,7 @@ Low priority:
 - add support for @token in form.action
 - save cryptobox.json and then embed it in the HTML - this way, we can
   create another clients which can use this JSON
-
-Someday:
-- add some way (tool?) to explore include/ directory - some thing that will
-  help user to understand which variables are required for particular entry type
+- add comments to all items under include/ describing required variables
 
 Extern:
 - update CryptoJS to 3.0.2

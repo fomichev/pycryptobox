@@ -1,3 +1,18 @@
+# Supported variables:
+# - firstname
+# - initial
+# - lastname
+# - birth
+# - company
+# - job
+# - country
+# - state
+# - address1
+# - address2
+# - city
+# - zip
+# - phone
+# - passport
 {
 	"name": "$name",
 	"text": "${firstname?<p><strong>First name:</strong> $firstname</p>} ${initial?<p><strong>Initial:</strong> $initial</p>} ${lastname?<p><strong>Last name:</strong> $lastname</p>} ${birth?<p><strong>Birth date:</strong> $birth</p>} ${company?<p><strong>Company:</strong> $company</p>} ${job?<p><strong>Job title:</strong> $job</p>} ${country?<p><strong>Country:</strong> $country</p>} ${state?<p><strong>State/Province:</strong> $state</p>} ${address1?<p><strong>Address line 1:</strong> $address1</p>} ${address2?<p><strong>Address line 2:</strong> $address2</p>} ${city?<p><strong>City:</strong> $city</p>} ${zip?<p><strong>Zip/postal code:</strong> $zip</p>} ${phone?<p><strong>Phone:</strong> $phone</p>} ${passport?<p><strong>Passport:</strong> $passport</p>}"

@@ -51,6 +51,9 @@ def set_vars(obj, v):
         for i in obj:
             set_vars(i, v);
 
+def remove_comments(data):
+    return re.sub(r'^\s*#.*$', '', data, flags=re.MULTILINE)
+
 def flatten_node(search_paths, tp, v):
     for path in search_paths:
         try:
@@ -61,6 +64,8 @@ def flatten_node(search_paths, tp, v):
 
         log.v("Read " + path + tp)
 #        data = cgi.escape(data)
+        data = remove_comments(data)
+
         try:
             jdata = json.loads(data)
         except Exception as e:
