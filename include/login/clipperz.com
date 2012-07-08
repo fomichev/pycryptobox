@@ -9,7 +9,7 @@
 		"method": "get",
 		"fields":
 		{
-			"username": "$username",
+			"username": "$name",
 			"passphrase": "$password"
 		}
 	}

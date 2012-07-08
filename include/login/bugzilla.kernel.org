@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"Bugzilla_login": "$username",
+			"Bugzilla_login": "$name",
 			"Bugzilla_password": "$password",
 			"Bugzilla_restrictlogin": "on",
 			"GoAheadAndLogIn": "Login"

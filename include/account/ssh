@@ -1,0 +1,4 @@
+{
+	"name": "$name",
+	"text": "Username: $username\nPassword: $password"
+}

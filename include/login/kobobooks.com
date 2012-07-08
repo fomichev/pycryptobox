@@ -11,7 +11,7 @@
 			"SignInCreateMode": "1",
 			"SignInCreateMode": "2",
 			"UseKoboAuthentication": "True",
-			"UserIdentifier": "$username",
+			"UserIdentifier": "$name",
 			"Password": "$password",
 			"createSubmit": "Continue"
 		}

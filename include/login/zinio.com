@@ -10,7 +10,7 @@
 		{
 			"_dyncharset": "UTF-8",
 			"_dynSessConf": "5408764597036918482",
-			"/atg/userprofiling/ProfileFormHandler.value.login": "$username",
+			"/atg/userprofiling/ProfileFormHandler.value.login": "$name",
 			"_D:/atg/userprofiling/ProfileFormHandler.value.login": " ",
 			"/atg/userprofiling/ProfileFormHandler.value.password": "$password",
 			"_D:/atg/userprofiling/ProfileFormHandler.value.password": " ",

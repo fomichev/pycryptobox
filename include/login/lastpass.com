@@ -20,7 +20,7 @@
 			"uuid": "",
 			"sesameotp": "",
 			"iterations": "1",
-			"email": "$username",
+			"email": "$name",
 			"password": "$password",
 			"rememberemail": "off"
 		}

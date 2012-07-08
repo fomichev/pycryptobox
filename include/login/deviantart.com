@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"ref": "",
-			"username": "$username",
+			"username": "$name",
 			"password": "$password",
 			"remember_me": "1",
 			"action": "Login"

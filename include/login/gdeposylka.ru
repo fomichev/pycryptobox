@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"token": "@token",
-			"username": "$username",
+			"username": "$name",
 			"password": "$password",
 			"sid": ""
 		}

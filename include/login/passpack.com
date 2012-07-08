@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"suno093354860576801": "$username",
+			"suno093354860576801": "$name",
 			"sdue093354860576801": "$password",
 			"stacCheck": "on"
 		}

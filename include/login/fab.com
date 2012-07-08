@@ -8,7 +8,7 @@
 		"fields":
 		{
 			"utf8": "✓",
-			"user[un_or_email]": "$username",
+			"user[un_or_email]": "$name",
 			"user[password]": "$password",
 			"user[form_type]": "login",
 			"user[referrer_url]": "",

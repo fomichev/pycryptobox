@@ -21,7 +21,7 @@
 			"checkedDomains": "youtube",
 			"timeStmp": "",
 			"secTok": "",
-			"Email": "$username",
+			"Email": "$name",
 			"Passwd": "$password",
 			"signIn": "Sign in",
 			"PersistentCookie": "yes",

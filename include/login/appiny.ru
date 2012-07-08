@@ -9,7 +9,7 @@
 		"method": "post",
 		"fields":
 		{
-			"LoginForm[email]": "$username",
+			"LoginForm[email]": "$name",
 			"LoginForm[password]": "$password",
 			"LoginForm[rememberMe]": "0"
 		}

@@ -8,7 +8,7 @@
 		"fields":
 		{
 			"authenticity_token": "@token",
-			"login": "$username",
+			"login": "$name",
 			"password": "$password",
 			"commit": "Log in"
 		}

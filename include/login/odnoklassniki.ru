@@ -10,7 +10,7 @@
 		{
 			"st.redirect": "",
 			"st.posted": "set",
-			"st.email": "$username",
+			"st.email": "$name",
 			"st.password": "$password",
 			"st.remember": "on",
 			"st.fJS": "enabled",

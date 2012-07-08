@@ -11,7 +11,7 @@
 			"session-start": "1341161889776",
 			"Domain": "",
 			"user_locale": "en_US",
-			"LoginName": "$username",
+			"LoginName": "$name",
 			"Password": "$password"
 		}
 	}

@@ -7,7 +7,7 @@
 		"method": "post",
 		"fields":
 		{
-			"username": "$username",
+			"username": "$name",
 			"password": "$password",
 			"referrer": "https://www.xmarks.com/",
 			"append": "",

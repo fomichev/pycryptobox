@@ -22,7 +22,7 @@ function page(id, header, data) {
 function createLogin(id, name, address, form, vars) {
 	var flat = flattenMap(form.fields);
 
-	var title = name + " (" + vars.username + ")";
+	var title = name + " (" + vars.name + ")";
 	var t = '';
 
 	if (withToken(form) == "") {
@@ -32,7 +32,7 @@ function createLogin(id, name, address, form, vars) {
 	}
 
 	t += '<a href="' + address + '" data-role="button"><?text_goto?></a>';
-	t += collapsible("<?text_username?>", vars.username);
+	t += collapsible("<?text_username?>", vars.name);
 	t += collapsible("<?text_password?>", vars.password);
 
 	if (vars.secret)

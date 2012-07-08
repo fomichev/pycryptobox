@@ -10,7 +10,7 @@
 		{
 			"submitted": "true",
 			"auth.logon": "do",
-			"auth.name": "$username",
+			"auth.name": "$name",
 			"auth.passwd": "$password",
 			"auth.persistent": "1"
 		}

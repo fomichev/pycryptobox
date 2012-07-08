@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"frmIndex": "frmIndex6b22881762ec8568b70acd458ea32014",
-			"eldanh": "$username",
+			"eldanh": "$name",
 			"pwrd": "$password",
 			"public_pc__orig": "Y",
 			"public_pc": "Y",

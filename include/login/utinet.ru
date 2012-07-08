@@ -13,7 +13,7 @@
 			"phones[0][Type]": "ph_m",
 			"phones[0][CountryCode]": "7",
 			"phones[0][AreaCode]": "$area",
-			"phones[0][Number]": "$username",
+			"phones[0][Number]": "$name",
 			"phones[0][Comment]": "",
 			"captcha": "",
 			"password": "$password",

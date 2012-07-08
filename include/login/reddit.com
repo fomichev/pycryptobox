@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"op": "login-main",
-			"user": "$username",
+			"user": "$name",
 			"passwd": "$password",
 			"rem": "on"
 		}

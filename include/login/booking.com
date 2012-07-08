@@ -10,7 +10,7 @@
 		{
 			"op": "login",
 			"tmpl": "profile/home",
-			"username": "$username",
+			"username": "$name",
 			"password": "$password"
 		}
 	}

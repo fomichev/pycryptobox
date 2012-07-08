@@ -10,7 +10,7 @@
 		{
 			"utf8": "✓",
 			"authenticity_token": "@token",
-			"email": "$username",
+			"email": "$name",
 			"password": "$password",
 			"identity_url": "Click to Sign In",
 			"remember_me": "1"

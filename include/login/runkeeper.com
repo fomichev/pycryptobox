@@ -11,7 +11,7 @@
 			"_eventName": "login",
 			"redirectUrl": "",
 			"submit": "",
-			"email": "$username",
+			"email": "$name",
 			"password": "$password",
 			"_sourcePage": "DX14I7Mj-C1PS4-gnBkDvGIAWFUlYF9h",
 			"__fp": "-TIeVk-xuOU="

@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"ctl00$ctl00$BaseContentPlaceHolder$EnterContentPlaceHolder$tbLogin": "$username",
+			"ctl00$ctl00$BaseContentPlaceHolder$EnterContentPlaceHolder$tbLogin": "$name",
 			"ctl00$ctl00$BaseContentPlaceHolder$EnterContentPlaceHolder$tbPassword": "$password"
 		}
 	}

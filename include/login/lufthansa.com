@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"userid": "$username",
+			"userid": "$name",
 			"password": "$password",
 			"loginType": "loginLayer",
 			"portalId": "LH",

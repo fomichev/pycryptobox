@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"name": "$username",
+			"name": "$name",
 			"pass": "$password",
 			"form_id": "user_login"
 		}

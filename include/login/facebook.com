@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"lsd": "AVpaXg_I",
-			"email": "$username",
+			"email": "$name",
 			"pass": "$password",
 			"persistent": "1",
 			"default_persistent": "0",

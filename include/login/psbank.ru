@@ -11,7 +11,7 @@
 			"__EVENTARGUMENT": "",
 			"__VIEWSTATE": "@token",
 			"__VIEWSTATEENCRYPTED": "",
-			"ctl00$right$RightPanelLogin$vtcUserName": "$username",
+			"ctl00$right$RightPanelLogin$vtcUserName": "$name",
 			"ctl00$right$RightPanelLogin$vtcPassword": "$password",
 			"ctl00$right$RightPanelLogin$btnLogin": "Войти"
 		}

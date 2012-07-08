@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"feed_id": "$username",
+			"feed_id": "$name",
 			"password": "$password",
 			"form_check": "@token"
 		}

@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"login_email": "$username",
+			"login_email": "$name",
 			"login_password": "$password",
 			"target_page": "0",
 			"submit.x": "Log In",

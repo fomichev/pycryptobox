@@ -10,7 +10,7 @@
 		{
 			"authenticity_token": "@token",
 			"redirect": "",
-			"user[email]": "$username",
+			"user[email]": "$name",
 			"user[password]": "$password",
 			"login": "Log In"
 		}

@@ -11,7 +11,7 @@
 			"process": "login",
 			"lru": "http://www.zazzle.com/",
 			"tosmsg": "True",
-			"login_username": "$username",
+			"login_username": "$name",
 			"login_password": "$password"
 		}
 	}

@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"remember": "0",
-			"id_user": "$username",
+			"id_user": "$name",
 			"password": "$password"
 		}
 	}

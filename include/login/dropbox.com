@@ -7,7 +7,7 @@
 		"method": "post",
 		"fields":
 		{
-			"login_email": "$username",
+			"login_email": "$name",
 			"login_password": "$password",
 			"remember_me": "on",
 			"cont": "/home"

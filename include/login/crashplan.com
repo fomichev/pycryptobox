@@ -12,7 +12,7 @@
 			"onSuccess": "/loginSuccess.vtl",
 			"onFailure": "/account/login.vtl",
 			"onCancel": "",
-			"loginForm.username": "$username",
+			"loginForm.username": "$name",
 			"loginForm.password": "$password",
 			"loginForm.remember": "false"
 		}

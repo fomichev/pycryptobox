@@ -9,7 +9,7 @@
 		"method": "post",
 		"fields":
 		{
-			"login": "$username",
+			"login": "$name",
 			"password": "$password",
 			"quick_expire": "on",
 			"submit": "logon"

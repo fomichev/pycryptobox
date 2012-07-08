@@ -12,7 +12,7 @@
 			"_forwardName": "",
 			"_resetBreadCrumbs": "",
 			"_expandStatus": "",
-			"userName": "$username",
+			"userName": "$name",
 			"password": "$password",
 			"ecareAction": "login"
 		}

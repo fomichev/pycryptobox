@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"retpath": "http%3A%2F%2Fmail.yandex.ru%2F",
-			"login": "$username",
+			"login": "$name",
 			"passwd": "$password",
 			"twoweeks": "yes",
 			"timestamp": ""

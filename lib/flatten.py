@@ -78,7 +78,22 @@ def flatten_node(search_paths, tp, v):
 
         return jdata
 
-    raise Exception("Not found entry type '%s'" % tp)
+    if tp.split('/')[0] == 'login':
+        log.w("Not found entry type '%s'" % tp)
+        jdata = {}
+        jdata['vars'] = v
+        jdata['tag'] = '__default__'
+        jdata['type'] = 'login'
+        jdata['name'] = '/'.join(tp.split('/')[1:])
+        jdata['address'] = 'http://' + jdata['name']
+        jdata['form'] = {}
+        jdata['form']['action'] = '#'
+        jdata['form']['method'] = 'get'
+        jdata['form']['fields'] = []
+
+        return jdata
+    else:
+        raise Exception("Not found entry type '%s'" % tp)
 
 def flatten(lines, search_paths, filter_tp=None):
     j = []
@@ -97,7 +112,6 @@ def flatten(lines, search_paths, filter_tp=None):
 
         v = dict(db.items(section))
         v['name'] = name
-        v['username'] = name
 
         if not 'tag' in v:
             v['tag'] = '__default__'

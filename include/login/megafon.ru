@@ -12,7 +12,7 @@
 			"CHANNEL": "WWW",
 			"P_ISOC_ID": "",
 			"PREFIX": "",
-			"LOGIN": "$username",
+			"LOGIN": "$name",
 			"PASSWD": "$password"
 		}
 	}

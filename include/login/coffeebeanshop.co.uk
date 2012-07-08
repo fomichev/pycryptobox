@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"formid": "@token",
-			"email_address": "$username",
+			"email_address": "$name",
 			"password": "$password"
 		}
 	}

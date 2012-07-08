@@ -12,7 +12,7 @@ function createLogin(id, name, address, form, vars) {
 		return '<div class="expand"><span style="float:left;" class="ui-icon ui-icon-circlesmall-plus"></span><a href="#" onClick="javascript:return false;"><strong>' + name + '</strong></a>&nbsp;' + copy + '</div><div>' + value + '</div>';
 	}
 
-	var title = name + " (" + vars.username + ")"
+	var title = name + " (" + vars.name + ")"
 
 	var r = "";
 	var flat = flattenMap(form.fields);
@@ -26,7 +26,7 @@ function createLogin(id, name, address, form, vars) {
 	}
 
 	r += '<a class="button-goto" href="' + address + '" target="_blank"><?text_goto?></a>';
-	r += '<p>' + collapsible("<?text_username?>", vars.username, true) + '</p>';
+	r += '<p>' + collapsible("<?text_username?>", vars.name, true) + '</p>';
 	r += '<p>' + collapsible("<?text_password?>", vars.password, true) + '</p>';
 
 	if (vars.secret)

@@ -175,7 +175,7 @@ Entry has the following structure (everything enclosed in [] is optional):
 	[<entry type>  <entry name>]
 		tag=<tag>
 
-		[hidden=yes]
+		hidden=yes
 
 		<variable1>=<value1>
 
@@ -201,8 +201,8 @@ Each file in the `include/` directory is a JSON file which describes the
 format and layout of entry. Variables from the entry will be substituted with
 `$variableN` inside the JSON file and will form particular login/bookmark/etc.
 There is some special handling for the login entries, where it's expected to
-have `form` information with `$username` and `$password` variables.
-For ther other entries, there will be probably only `text` variable that will
+have `form` information with `$name` and `$password` variables.
+For the other entries, there will be probably only `text` variable that will
 somehow format other variables from the entry.
 
 Entry name has special meaning for login entry type: it should contain your
@@ -214,7 +214,9 @@ be placed close to each other on the HTML page). You don't have to
 use tag variable, it's usage is optional (and intended to help you with
 the clutter).
 
-You can use `hidden=yes` to remove some entries from the final HTML page.
+You can use `hidden=yes` to remove some entries from the final HTML page (this
+is handy for the entries you want to keep and be able to access at some point
+but don't want it to clutter your HTML).
 
 Comments are started with `#` and ended at the end of the line.
 
@@ -224,10 +226,10 @@ I think it's pretty straightforward. You can use aforesaid bookmarklet on
 your target site. The only caveat is that it can have multiple forms on one
 page, so watch out and select the one you need (don't copy leading `[` and
 trailing `]`, JSON data should start with `{` and end with `}`). Afterwards,
-look through the JSON and place `$username` and `$password` into appropriate
+look through the JSON and place `$name` and `$password` into appropriate
 form fields (look for other logins JSON data in `include/login`, it will
 become clear from the example what to do). Better yet, you can fill in the
-form in the browser with `$username` and `$password` and run the bookmarklet;
+form in the browser with `$name` and `$password` and run the bookmarklet;
 this way, you don't need to dig into the JSON and find out were to put
 these marks, they will already be in place.
 
@@ -286,7 +288,7 @@ file in your home directory, and if it didn't find any configuration, it
 will use the default one. You can also pass configuration file path to
 the tools via `-c` command line option.
 
-Configuration file is also simple INI-like file with the following
+Configuration file is simple INI-like file with the following
 possible variables:
 
 	[path]

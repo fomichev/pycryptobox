@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"source_app": "",
-			"session_key": "$username",
+			"session_key": "$name",
 			"session_password": "$password",
 			"signin": "Sign In",
 			"session_redirect": "",

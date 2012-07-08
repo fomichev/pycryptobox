@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"0.29.145.1.1": "",
-			"theAccountName": "$username",
+			"theAccountName": "$name",
 			"theAccountPW": "$password",
 			"signInHyperLink": "Sign in",
 			"theTypeValue": "",

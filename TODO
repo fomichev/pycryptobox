@@ -6,7 +6,12 @@ Optimizations:
   reaaaaly small) - try POST request to compress JS and if failed, use
   non-optimized
 
+Bugfixes:
+- fix filter: when some of sheets is open, it's not hidden when filter is
+  changed
+
 Features:
+- add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
 - add language support to bookmarklets
 - fix identity and card includes
 - fix backup (absolute paths; should be relative)
@@ -25,7 +30,8 @@ Low priority:
 - fix form bookmarklet for deviantart.com, lastpass.com
 - fix login issue in safari
 - add support for @token in form.action
-- save cryptobox.json and then embed it in the HTML
+- save cryptobox.json and then embed it in the HTML - this way, we can
+  create another clients which can use this JSON
 
 Someday:
 - add some way (tool?) to explore include/ directory - some thing that will

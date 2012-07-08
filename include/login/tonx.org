@@ -10,7 +10,7 @@
 		{
 			"utf8": "✓",
 			"authenticity_token": "@token",
-			"user_session[email]": "$username",
+			"user_session[email]": "$name",
 			"user_session[password]": "$password"
 		}
 	}

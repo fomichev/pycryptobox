@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"user[email]": "$username",
+			"user[email]": "$name",
 			"user[password]": "$password"
 		}
 	}

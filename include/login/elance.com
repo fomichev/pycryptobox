@@ -13,7 +13,7 @@
 			"redirect": "",
 			"login_type": "",
 			"token": "@token",
-			"lnm": "$username",
+			"lnm": "$name",
 			"pwd": "$password",
 			"keepmesignin": "on"
 		}

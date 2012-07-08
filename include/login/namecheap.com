@@ -14,7 +14,7 @@
 			"LoginPassword": "",
 			"hidden_LoginPassword": "",
 			"domain": "",
-			"LoginUserName": "$username",
+			"LoginUserName": "$name",
 			"LoginPassword": "$password",
 			"ctl00$ctl00$ctl00$ctl00$base_content$web_base_content$home_content$page_content_left$ctl00$LoginButton": "Login »",
 			"hidden_LoginPassword": "",
