@@ -9,6 +9,8 @@ Optimizations:
 Bugfixes:
 - fix backup (absolute paths; should be relative)
   also include include/ and bookmarklet/ to backup
+- generate json only once to make 'WARNING! Not found entry type' appear only
+  once
 
 Features:
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
