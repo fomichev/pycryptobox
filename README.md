@@ -349,9 +349,9 @@ JavaScript
 
 	html/extern/jquery
 
-- [jQuery UI 1.8.20](http://jqueryui.com/download) - MIT
+- [jQuery UI 1.8.21](http://jqueryui.com/download) - MIT
 
-	html/extern/jquery-ui (Dialog, Tabs, Accordion, Button)
+	html/extern/jquery-ui (Dialog, Tabs, Accordion, Button, Flick theme)
 
 - [jQuery Mobile 1.1.0](http://jquerymobile.com) - MIT
 
