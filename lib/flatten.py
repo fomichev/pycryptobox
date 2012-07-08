@@ -40,7 +40,9 @@ def set_vars(obj, v):
                 set_vars(obj[k], v)
             else:
                 for vk in v.keys():
-                    r = re_subst.search(obj[k])
+                    rexp = re.compile(r'\$\{(' + vk + ')\?([^}]*)\}')
+                    r = rexp.search(obj[k])
+
                     if r and r.group(1) == vk:
                         obj[k] = obj[k].replace(r.group(0), r.group(2))
 

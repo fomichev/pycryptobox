@@ -7,13 +7,11 @@ Optimizations:
   non-optimized
 
 Bugfixes:
+- fix backup (absolute paths; should be relative)
+  also include include/ and bookmarklet/ to backup
 
 Features:
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
-- add language support to bookmarklets
-- fix identity and card includes
-- fix backup (absolute paths; should be relative)
-  also include include/ and bookmarklet/ to backup
 - add some validation for DB and include/
 - add support for broken logins (add broken field) - don't allow one-click login
   and rename to something more clear
