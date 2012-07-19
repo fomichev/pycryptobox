@@ -10,7 +10,7 @@
 		{
 			"__EVENTTARGET": "",
 			"__EVENTARGUMENT": "",
-			"__VIEWSTATE": "@token",
+			"__VIEWSTATE": "__token__",
 			"ctl00$ctl00$tbSbmt": "",
 			"ctl00$ctl00$BaseContentPlaceHolder$EnterContentPlaceHolder$tbLogin": "@name@",
 			"ctl00$ctl00$BaseContentPlaceHolder$EnterContentPlaceHolder$tbPassword": "@password@",

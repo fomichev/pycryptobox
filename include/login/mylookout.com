@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"authenticity_token": "@token",
+			"authenticity_token": "__token__",
 			"redirect": "",
 			"user[email]": "@name@",
 			"user[password]": "@password@",

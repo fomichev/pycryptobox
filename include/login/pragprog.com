@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"utf8": "✓",
-			"authenticity_token": "@token",
+			"authenticity_token": "__token__",
 			"email": "@name@",
 			"password": "@password@",
 			"identity_url": "Click to Sign In",

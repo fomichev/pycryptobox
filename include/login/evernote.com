@@ -13,8 +13,8 @@
 			"rememberMe": "true",
 			"targetUrl": "",
 			"login": "Sign in",
-			"_sourcePage": "@token",
-			"__fp": "@token"
+			"_sourcePage": "__token__",
+			"__fp": "__token__"
 		}
 	}
 }

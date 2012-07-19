@@ -11,7 +11,7 @@
 			"username": "@name@",
 			"password": "@password@",
 			"submit": "Log in",
-			"multiform": "@token"
+			"multiform": "__token__"
 		}
 	}
 }

@@ -10,7 +10,7 @@
 		{
 			"feed_id": "@name@",
 			"password": "@password@",
-			"form_check": "@token"
+			"form_check": "__token__"
 		}
 	}
 }

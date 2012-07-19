@@ -13,7 +13,7 @@
 			"dont_expire": "on",
 			"sign-in": "Sign in",
 			"return_to": "http://dashboard.opendns.com/",
-			"formtoken": "@token"
+			"formtoken": "__token__"
 		}
 	}
 }

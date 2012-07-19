@@ -4,7 +4,7 @@
 	"address": "https://appleid.apple.com/cgi-bin/WebObjects/MyAppleId.woa/131/wa/directToSignIn?wosid=8BEW7xlvojhmv1LbtHulOw&localang=en_US",
 	"form":
 	{
-		"action": "@token",
+		"action": "__token__",
 		"method": "post",
 		"fields":
 		{
@@ -14,7 +14,7 @@
 			"signInHyperLink": "Sign in",
 			"theTypeValue": "",
 			"Nojive": "",
-			"wosid": "@token"
+			"wosid": "__token__"
 		}
 	}
 }

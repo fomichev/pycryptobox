@@ -13,7 +13,7 @@
 			"remember_me": "0",
 			"scribe_log": "",
 			"redirect_after_login": "",
-			"authenticity_token": "@token"
+			"authenticity_token": "__token__"
 		}
 	}
 }

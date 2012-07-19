@@ -12,7 +12,7 @@
 			"crypted": "",
 			"redirect": "",
 			"login_type": "",
-			"token": "@token",
+			"token": "__token__",
 			"lnm": "@name@",
 			"pwd": "@password@",
 			"keepmesignin": "on"

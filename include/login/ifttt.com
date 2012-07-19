@@ -9,7 +9,7 @@
 		"fields":
 		{
 			"utf8": "✓",
-			"authenticity_token": "@token",
+			"authenticity_token": "__token__",
 			"login": "@name@",
 			"password": "@password@",
 			"remember_me": "1",

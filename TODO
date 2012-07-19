@@ -12,7 +12,6 @@ Bugfixes:
 - improve autolock feature (don't use mouse move event)
 
 Features:
-- @token -> __token__
 - eval -> jQuery.parseJSON
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
 - add some validation for DB and include/
@@ -25,7 +24,7 @@ Features:
 
 Low priority:
 - fix form bookmarklet for deviantart.com, lastpass.com
-- add support for @token in form.action
+- add support for __token__ in form.action
 - add comments to all items under include/ describing required variables
 
 Refactor:

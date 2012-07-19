@@ -75,7 +75,7 @@ and press 'OK' you'll be automatically logged in (using provided authenticity
 token and your username/password).
 
 When you're adding such form to the logins storage (`include/login`), you
-should set token field value to `@token`; that will lead to pop-up dialog
+should set token field value to `__token__`; that will lead to pop-up dialog
 box on login asking you to provide form data (you may have multiple tokens
 within forms).
 

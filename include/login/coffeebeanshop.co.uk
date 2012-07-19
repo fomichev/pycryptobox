@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"formid": "@token",
+			"formid": "__token__",
 			"email_address": "@name@",
 			"password": "@password@"
 		}

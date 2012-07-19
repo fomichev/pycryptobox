@@ -10,10 +10,10 @@
 		{
 			"email": "@name@",
 			"password": "@password@",
-			"appActionToken": "@token",
+			"appActionToken": "__token__",
 			"appAction": "audibleAction",
 			"rdpath": "",
-			"metadata1": "@token"
+			"metadata1": "__token__"
 		}
 	}
 }

@@ -10,8 +10,8 @@
 		{
 			"__EVENTTARGET": "",
 			"__EVENTARGUMENT": "",
-			"__VIEWSTATE": "@token",
-			"__EVENTVALIDATION": "@token",
+			"__VIEWSTATE": "__token__",
+			"__EVENTVALIDATION": "__token__",
 			"ctl00$content$OrderNumber": "",
 			"ctl00$content$EMail": "",
 			"ctl00$content$Actions": "rbTrackStatus",

@@ -8,7 +8,7 @@
 		"method": "post",
 		"fields":
 		{
-			"authenticity_token": "@token",
+			"authenticity_token": "__token__",
 			"email": "@name@",
 			"password": "@password@",
 			"remember_me": "1",

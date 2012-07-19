@@ -8,13 +8,13 @@ function loginBroken(form) {
 function withToken(form) {
 	var tokens = "";
 
-	if (form.action == '@token')
+	if (form.action == '__token__')
 		return "__form_action__";
 
 	for (var key in form.fields) {
 		var value = form.fields[key];
 
-		if (value == "@token") {
+		if (value == "__token__") {
 			if (tokens == "")
 				tokens = '"' + key + '"';
 			else
@@ -30,7 +30,7 @@ function flattenMap(map) {
 	var v = "";
 
 	for (var key in map) {
-		if (map[key] == "@token")
+		if (map[key] == "__token__")
 			continue;
 
 		if (k == "") {

@@ -10,7 +10,7 @@
 		"fields":
 		{
 			"utf8": "✓",
-			"authenticity_token": "@token",
+			"authenticity_token": "__token__",
 			"user_session[login]": "@name@",
 			"user_session[password]": "$passworf",
 			"not_remember_me": "1"

@@ -9,7 +9,7 @@
 		{
 			"__EVENTTARGET": "",
 			"__EVENTARGUMENT": "",
-			"__VIEWSTATE": "@token",
+			"__VIEWSTATE": "__token__",
 			"__VIEWSTATEENCRYPTED": "",
 			"ctl00$right$RightPanelLogin$vtcUserName": "@name@",
 			"ctl00$right$RightPanelLogin$vtcPassword": "@password@",

@@ -9,22 +9,22 @@
 		"method": "post",
 		"fields":
 		{
-			"appActionToken": "@token",
+			"appActionToken": "__token__",
 			"appAction": "SIGNIN",
-			"openid.pape.max_auth_age": "@token",
-			"openid.ns": "@token",
-			"openid.ns.pape": "@token",
-			"pageId": "@token",
-			"openid.identity": "@token",
-			"openid.claimed_id": "@token",
-			"openid.mode": "@token",
-			"openid.assoc_handle": "@token",
-			"openid.return_to": "@token",
+			"openid.pape.max_auth_age": "__token__",
+			"openid.ns": "__token__",
+			"openid.ns.pape": "__token__",
+			"pageId": "__token__",
+			"openid.identity": "__token__",
+			"openid.claimed_id": "__token__",
+			"openid.mode": "__token__",
+			"openid.assoc_handle": "__token__",
+			"openid.return_to": "__token__",
 			"email": "",
 			"create": "1",
 			"create": "0",
 			"password": "",
-			"metadata1": "@token"
+			"metadata1": "__token__"
 		}
 	}
 }

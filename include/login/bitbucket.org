@@ -9,7 +9,7 @@
 		"method": "post",
 		"fields":
 		{
-			"csrfmiddlewaretoken": "@token",
+			"csrfmiddlewaretoken": "__token__",
 			"next": "/",
 			"username": "@name@",
 			"password": "@password@",

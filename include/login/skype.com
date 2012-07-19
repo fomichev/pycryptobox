@@ -8,14 +8,14 @@
 		"method": "post",
 		"fields":
 		{
-			"pie": "@token",
-			"etm": "@token",
+			"pie": "__token__",
+			"etm": "__token__",
 			"js_time": "",
-			"timezone_field": "@token",
+			"timezone_field": "__token__",
 			"username": "@name@",
 			"password": "@password@",
-			"blackbox": "@token",
-			"session_token": "@token"
+			"blackbox": "__token__",
+			"session_token": "__token__"
 		}
 	}
 }
