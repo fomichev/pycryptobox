@@ -34,5 +34,4 @@ Refactor:
   merge everything under cfg.defines (or another appropriate name)
 - refactor everything else because it became a mess
 - remove versions from jquery and jquery-ui files to ease version change
-- consider switching to https://github.com/bitwiseshiftleft/sjcl
-- remove `cbhtml` and use `cbedit -u` instead
+- consider switching to https://github.com/bitwiseshiftleft/sjcl (can we save some space? does it work faster?)

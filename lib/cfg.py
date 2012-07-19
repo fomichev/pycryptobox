@@ -20,7 +20,7 @@ except:
     pass
 
 debug = False # Be aware that your data will be exposed in private/tmp/
-verbose = 0
+verbose = False
 
 user= {}
 path = {}

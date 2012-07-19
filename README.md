@@ -150,12 +150,6 @@ simple tar archive.
 As in `cbedit` command, backup file will be created (or updated) whenever
 you change the password.
 
-* Update HTML page (perform HTML page update without update to database -
-only for development or if you want to change configuration and regenerate the
-HTML page)
-
-	$ ./cbhtml
-
 Database format
 ===============
 Windows INI-like file format is used for database (on Linux it normally has
