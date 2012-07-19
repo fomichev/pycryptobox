@@ -1,4 +1,4 @@
-#include lib/common.js
+#include @root@/bookmarklet/lib/common.js
 
 var ta = document.createElement('textarea');
 ta.style.width = '100%';

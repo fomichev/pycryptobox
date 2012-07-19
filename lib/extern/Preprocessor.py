@@ -67,7 +67,7 @@ class Preprocessor:
                        'filter': 0,
                        'unfilter': 0,
                        'include': 0,
-                       'include_literal': 0,
+                       'includeliter': 0,
                        'includesubst': 0,
                        'error': 0}.iteritems():
       self.cmds[cmd] = (level, getattr(self, 'do_' + cmd))
@@ -451,7 +451,7 @@ class Preprocessor:
     self.writtenLines = oldWrittenLines
     self.context['LINE'] = oldLine
     self.context['DIRECTORY'] = oldDir
-  def do_include_literal(self, args, filters=True):
+  def do_includeliter(self, args, filters=True):
     self.do_include(args, filters, True)
   def do_includesubst(self, args):
     args = self.filter_substitution(args)

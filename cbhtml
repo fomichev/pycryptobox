@@ -3,8 +3,8 @@
 import getpass
 import argparse
 
-import lib.html as html
-import lib.crypto as crypto
+from lib.generate import generate_all
+from lib.crypto import read_db_conf
 import lib.cfg as cfg
 
 if __name__ == "__main__":
@@ -16,5 +16,5 @@ if __name__ == "__main__":
 
     password = getpass.getpass()
 
-    db_conf = crypto.read_db_conf(cfg.path['db_conf'])
-    html.update(db_conf, password)
+    db_conf = read_db_conf(cfg.path['db_conf'], cfg.format_version)
+    generate_all(db_conf, password)

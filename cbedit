@@ -8,8 +8,8 @@ import argparse
 import sys
 
 import lib.crypto as crypto
+from lib.generate import generate_all
 import lib.cfg as cfg
-import lib.html as html
 import lib.log as log
 
 if __name__ == "__main__":
@@ -23,7 +23,7 @@ if __name__ == "__main__":
 
     password = getpass.getpass()
 
-    db_conf = crypto.read_db_conf(cfg.path['db_conf'])
+    db_conf = crypto.read_db_conf(cfg.path['db_conf'], cfg.format_version)
     plaintext = crypto.dec_db(db_conf, password, cfg.path['db_cipher'], cfg.path['db_hmac'])
 
     EDITOR = os.environ.get('EDITOR', cfg.user['ui']['editor'])
@@ -58,4 +58,4 @@ if __name__ == "__main__":
     if 'edit_only' in vars(args) and vars(args)['edit_only'] != None:
         sys.exit(0)
 
-    html.update(db_conf, password)
+    generate_all(db_conf, password)

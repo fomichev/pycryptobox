@@ -2,18 +2,18 @@ var cfg =
 #include @db_json@
 ;
 
-#include ../html/extern/CryptoJS/components/core-min.js
-#include ../html/extern/CryptoJS/components/enc-base64-min.js
-#include ../html/extern/CryptoJS/components/cipher-core-min.js
-#include ../html/extern/CryptoJS/components/aes-min.js
-#include ../html/extern/CryptoJS/components/sha1-min.js
-#include ../html/extern/CryptoJS/components/hmac-min.js
-#include ../html/extern/CryptoJS/components/pbkdf2-min.js
+#include @root@/html/extern/CryptoJS/components/core-min.js
+#include @root@/html/extern/CryptoJS/components/enc-base64-min.js
+#include @root@/html/extern/CryptoJS/components/cipher-core-min.js
+#include @root@/html/extern/CryptoJS/components/aes-min.js
+#include @root@/html/extern/CryptoJS/components/sha1-min.js
+#include @root@/html/extern/CryptoJS/components/hmac-min.js
+#include @root@/html/extern/CryptoJS/components/pbkdf2-min.js
 
-#include lib/common.js
-#include ../html/js/fill.js
-#include ../html/js/crypto.js
-#include ../html/js/login.js
+#include @root@/bookmarklet/lib/common.js
+#include @root@/html/js/fill.js
+#include @root@/html/js/crypto.js
+#include @root@/html/js/login.js
 
 function unlock(pwd, caption) {
 	var text = decrypt(pwd, cfg.pbkdf2.salt, cfg.cipher, cfg.pbkdf2.iterations, cfg.aes.iv);

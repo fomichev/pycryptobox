@@ -1,4 +1,4 @@
-# custom c-style preprocessor
+# Custom c-style preprocessor
 
 import os
 from cStringIO import StringIO

@@ -34,6 +34,6 @@ if __name__ == "__main__":
         log.e("Your passwords don't match!")
         sys.exit(0)
 
-    crypto.create_db_conf(cfg.path['db_conf'])
-    db_conf = crypto.read_db_conf(cfg.path['db_conf'])
+    crypto.create_db_conf(cfg.path['db_conf'], cfg.format_version)
+    db_conf = crypto.read_db_conf(cfg.path['db_conf'], cfg.format_version)
     crypto.enc_plaintext(db_conf, password, "# Lines started with # are comments", cfg.path['db_cipher'], cfg.path['db_hmac'])

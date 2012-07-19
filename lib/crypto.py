@@ -1,4 +1,4 @@
-# PBKDF2 & AES related stuff
+# PBKDF2, AES & HMAC related stuff
 
 from Crypto.Cipher import AES
 from pbkdf2 import PBKDF2
@@ -11,12 +11,11 @@ import json
 import random
 import ConfigParser
 
-import cfg
 import log
 
-check_hmac = False
+check_hmac = True
 
-def create_db_conf(p):
+def create_db_conf(p, format_version):
     pbkdf2_salt_len = 8 # 64 bit
     pbkdf2_iterations = 1000
     aes_iv_len = 16 # 128 bit
@@ -33,7 +32,7 @@ def create_db_conf(p):
     c = ConfigParser.ConfigParser()
 
     c.add_section("cryptobox");
-    c.set('cryptobox', 'format_version', cfg.format_version)
+    c.set('cryptobox', 'format_version', format_version)
 
     c.add_section("pbkdf2");
     c.set('pbkdf2', 'salt', pbkdf2_salt.encode('base64').replace("\n", ""))
@@ -48,11 +47,11 @@ def create_db_conf(p):
     with open(p, 'wb') as f:
         c.write(f)
 
-def read_db_conf(p):
+def read_db_conf(p, format_version):
     c = ConfigParser.ConfigParser()
     c.read(p)
 
-    if c.getint('cryptobox', 'format_version') != cfg.format_version:
+    if c.getint('cryptobox', 'format_version') != format_version:
         log.e("Incompatible database format!")
         sys.exis(1)
 

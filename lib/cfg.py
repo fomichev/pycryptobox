@@ -73,7 +73,7 @@ def init(args):
     path['db_hmac'] = path['db_cipher'] + ".hmac"
     path['db_conf'] = path['db_cipher'] + ".conf"
     path['db_json'] = path['db_cipher'] + ".json"
-    path['db_html'] = user['path']['db'] + "/html/cryptobox.html"
+    path['db_html'] = os.path.abspath(user['path']['db'] + "/html/cryptobox.html")
     path['db_mobile_html'] = user['path']['db'] + "/html/m.cryptobox.html"
     path['db_chrome'] = user['path']['db'] + "/chrome"
     path['db_chrome_cfg'] = user['path']['db'] + "/chrome/cfg.js"
@@ -87,6 +87,7 @@ def init(args):
     path['backup'] = user['path']['db'] + "/cryptobox.tar"
     path['include'] = path['root'] + "/include"
     path['html'] = path['root'] + "/html"
+    path['bookmarklet'] = path['root'] + "/bookmarklet"
     path['chrome'] = path['root'] + "/html/chrome"
     path['clippy'] = path['html'] + "/extern/clippy/build/clippy.swf"
 

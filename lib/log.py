@@ -1,3 +1,5 @@
+# Custom logging system
+
 import cfg
 
 def d(s):
