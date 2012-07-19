@@ -46,6 +46,9 @@ def init(args):
     global defines
     global backup_files
 
+    if debug:
+        log.w("DEBUGGING ENABLED! YOUR DATA MAY BE EXPOSED!")
+
     v = vars(args)
 
     if 'verbose' in v:

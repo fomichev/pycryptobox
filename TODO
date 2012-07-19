@@ -13,7 +13,6 @@ Bugfixes:
 
 Features:
 - @token -> __token__
-- print warning on console when debug is true
 - eval -> jQuery.parseJSON
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
 - add some validation for DB and include/
