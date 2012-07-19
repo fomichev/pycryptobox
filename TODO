@@ -9,18 +9,31 @@ Optimizations:
 Bugfixes:
 - generate json only once to make 'WARNING! Not found entry type' appear only
   once
+- improve autolock feature (don't use mouse move event)
 
 Features:
+- @token -> __token__
+- print warning on console when debug is true
+- eval -> jQuery.parseJSON
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
 - add some validation for DB and include/
 - add support for aliases (alias=login/xyz login/qwe login/asd - will generate
   3 additional entries in HTML)
-- generate new salt and iv on password change?
+- generate new salt and iv on password change (or even on every `cbedit` update;
+  in this case may even save hmac in cryptobox.conf)?
 - add setup.py (easy_install or pip)
-- improve autolock feature (don't use mouse move event)
 - revise README.me and add other missing information
 
 Low priority:
 - fix form bookmarklet for deviantart.com, lastpass.com
 - add support for @token in form.action
 - add comments to all items under include/ describing required variables
+
+Refactor:
+- configuration (read from user config, merge with builtin, etc)
+  remove various paths from configuration (at least bookmarks)
+  merge everything under cfg.defines (or another appropriate name)
+- refactor everything else because it became a mess
+- remove versions from jquery and jquery-ui files to ease version change
+- consider switching to https://github.com/bitwiseshiftleft/sjcl
+- remove `cbhtml` and use `cbedit -u` instead

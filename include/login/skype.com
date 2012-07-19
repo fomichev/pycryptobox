@@ -12,8 +12,8 @@
 			"etm": "@token",
 			"js_time": "",
 			"timezone_field": "@token",
-			"username": "$name",
-			"password": "$password",
+			"username": "@name@",
+			"password": "@password@",
 			"blackbox": "@token",
 			"session_token": "@token"
 		}

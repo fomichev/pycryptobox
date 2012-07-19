@@ -7,8 +7,8 @@
 		"method": "post",
 		"fields":
 		{
-			"username": "$name",
-			"password": "$password",
+			"username": "@name@",
+			"password": "@password@",
 			"referrer": "https://www.xmarks.com/",
 			"append": "",
 			"token": "@token",

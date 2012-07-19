@@ -1,29 +1,19 @@
-function sitename(t) {
-	return t.replace(/[^/]+\/\/([^/]+).+/, '$1').replace(/^www./, '');
-}
+var cfg =
+#include @db_json@
+;
 
-function formToLink(name, vars, form) {
-	var divStyle = 'style="border: 0 none; border-radius: 6px; background-color: #111; padding: 10px; margin: 5px; text-align: left;"';
-	var aStyle = 'style="color: #fff; font-size: 18px; text-decoration: none;"';
+#include ../html/extern/CryptoJS/components/core-min.js
+#include ../html/extern/CryptoJS/components/enc-base64-min.js
+#include ../html/extern/CryptoJS/components/cipher-core-min.js
+#include ../html/extern/CryptoJS/components/aes-min.js
+#include ../html/extern/CryptoJS/components/sha1-min.js
+#include ../html/extern/CryptoJS/components/hmac-min.js
+#include ../html/extern/CryptoJS/components/pbkdf2-min.js
 
-	return '<div ' + divStyle + '><a ' + aStyle + ' href="#" onClick=\'javascript:' +
-		'formFill(' + JSON.stringify(form) + ');' +
-		'return false;\'>' + vars.username + '</a></div>';
-}
-
-function formFill(form) {
-	var nodes = document.querySelectorAll("input[type=text], input[type=password]");
-	for (var i = 0; i < nodes.length; i++) {
-		var value = null;
-
-		for (var field in form.fields)
-			if (field == nodes[i].attributes['name'].value)
-				value = form.fields[field];
-
-		if (value)
-			nodes[i].value = value;
-	}
-}
+#include lib/common.js
+#include ../html/js/fill.js
+#include ../html/js/crypto.js
+#include ../html/js/login.js
 
 function unlock(pwd, caption) {
 	var text = decrypt(pwd, cfg.pbkdf2.salt, cfg.cipher, cfg.pbkdf2.iterations, cfg.aes.iv);
@@ -34,7 +24,7 @@ function unlock(pwd, caption) {
 		var el = data[i];
 		if (el.type == "magic") {
 			if (el.value != "270389")
-				throw("<?text_incorrect_password?>");
+				throw("@text_incorrect_password@");
 
 			continue;
 		}
@@ -47,10 +37,10 @@ function unlock(pwd, caption) {
 	}
 
 	if (matched.length == 0) {
-		caption.innerHTML = '<?text_login_not_found?>';
+		caption.innerHTML = '@text_login_not_found@';
 		window.setTimeout(function () { document.body.click(); }, 1000)
 	} else if (matched.length == 1) {
-		caption.innerHTML = '<?text_wait_for_login?>';
+		caption.innerHTML = '@text_wait_for_login@';
 		formFill(matched[0].form);
 	} else {
 		var r = ''
@@ -59,7 +49,7 @@ function unlock(pwd, caption) {
 			r += formToLink(el.name, el.vars, el.form);
 		}
 
-		caption.innerHTML = '<?text_select_login?>' + r;
+		caption.innerHTML = '@text_select_login@' + r;
 	}
 }
 
@@ -67,7 +57,7 @@ var div = document.createElement('div');
 div.style.textAlign = 'center';
 
 var caption = document.createElement('h1');
-caption.appendChild(document.createTextNode('<?text_enter_password?>'));
+caption.appendChild(document.createTextNode('@text_enter_password@'));
 div.appendChild(caption);
 
 var form = document.createElement('form');
@@ -81,7 +71,7 @@ var buttonUnlock = document.createElement('input');
 buttonUnlock.type = "submit";
 buttonUnlock.style.border = "1px solid #006";
 buttonUnlock.style.fontSize = '14px';
-buttonUnlock.value = "<?text_button_unlock?>";
+buttonUnlock.value = "@text_button_unlock@";
 
 var buttonDiv = document.createElement('div');
 buttonDiv.style.marginTop = '20px';

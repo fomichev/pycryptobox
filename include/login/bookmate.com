@@ -11,7 +11,7 @@
 		{
 			"utf8": "✓",
 			"authenticity_token": "@token",
-			"user_session[login]": "$name",
+			"user_session[login]": "@name@",
 			"user_session[password]": "$passworf",
 			"not_remember_me": "1"
 		}

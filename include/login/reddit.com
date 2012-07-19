@@ -9,8 +9,8 @@
 		"fields":
 		{
 			"op": "login-main",
-			"user": "$name",
-			"passwd": "$password",
+			"user": "@name@",
+			"passwd": "@password@",
 			"rem": "on"
 		}
 	}

@@ -1,3 +1,5 @@
+#include lib/common.js
+
 var ta = document.createElement('textarea');
 ta.style.width = '100%';
 ta.style.height = '100%';

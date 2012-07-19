@@ -8,8 +8,8 @@
 		"method": "post",
 		"fields":
 		{
-			"login_email": "$name",
-			"login_password": "$password",
+			"login_email": "@name@",
+			"login_password": "@password@",
 			"target_page": "0",
 			"submit.x": "Log In",
 			"form_charset": "UTF-8",

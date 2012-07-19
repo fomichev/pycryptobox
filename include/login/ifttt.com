@@ -10,8 +10,8 @@
 		{
 			"utf8": "✓",
 			"authenticity_token": "@token",
-			"login": "$name",
-			"password": "$password",
+			"login": "@name@",
+			"password": "@password@",
 			"remember_me": "1",
 			"commit": "Sign in"
 		}

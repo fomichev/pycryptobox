@@ -10,8 +10,8 @@
 		{
 			"a_todo": "login_check",
 			"todo": "login",
-			"login": "$name",
-			"password": "$password",
+			"login": "@name@",
+			"password": "@password@",
 			"remember": "off"
 		}
 	}

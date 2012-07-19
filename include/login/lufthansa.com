@@ -8,8 +8,8 @@
 		"method": "post",
 		"fields":
 		{
-			"userid": "$name",
-			"password": "$password",
+			"userid": "@name@",
+			"password": "@password@",
 			"loginType": "loginLayer",
 			"portalId": "LH",
 			"siteId": "RU",

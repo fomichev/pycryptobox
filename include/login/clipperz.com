@@ -9,8 +9,8 @@
 		"method": "get",
 		"fields":
 		{
-			"username": "$name",
-			"passphrase": "$password"
+			"username": "@name@",
+			"passphrase": "@password@"
 		}
 	}
 }

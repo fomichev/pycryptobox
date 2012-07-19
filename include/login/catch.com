@@ -9,8 +9,8 @@
 		"fields":
 		{
 			"fromForm": "true",
-			"email": "$name",
-			"password": "$password",
+			"email": "@name@",
+			"password": "@password@",
 			"keep": "on"
 		}
 	}

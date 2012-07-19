@@ -33,8 +33,8 @@
 			"rtmData": "@token",
 			"bUrlPrfx": "@token",
 			"kgct": "",
-			"userid": "$name",
-			"pass": "$password",
+			"userid": "@name@",
+			"pass": "@password@",
 			"keepMeSignInOption": "1"
 		}
 	}

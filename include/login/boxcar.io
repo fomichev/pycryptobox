@@ -8,8 +8,8 @@
 		"method": "post",
 		"fields":
 		{
-			"session[email]": "$name",
-			"session[password]": "$password",
+			"session[email]": "@name@",
+			"session[password]": "@password@",
 			"session[remember_token]": "0",
 			"commit": "Sign In"
 		}

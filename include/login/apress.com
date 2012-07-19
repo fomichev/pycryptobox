@@ -8,8 +8,8 @@
 		"method": "post",
 		"fields":
 		{
-			"login[username]": "$name",
-			"login[password]": "$password",
+			"login[username]": "@name@",
+			"login[password]": "@password@",
 			"send": ""
 		}
 	}

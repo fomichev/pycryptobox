@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # PBKDF2 & AES related stuff
 
 from Crypto.Cipher import AES

@@ -21,22 +21,22 @@ function createLogin(id, name, address, form, vars) {
 
 		var token = withToken(form);
 		if (token != "") {
-			r += '<a class="button-bookmark" href="' + address + '" target="_blank"><?text_get_token?></a>';
-			r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken(true, "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'><?text_log_in?></a>';
+			r += '<a class="button-bookmark" href="' + address + '" target="_blank">@text_get_token@</a>';
+			r += '<a class="button-login" href="#" onClick=\'javascript:loginWithToken(true, "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + ', new Array(' + token + ')); return false;\'>@text_log_in@</a>';
 		} else {
-			r += '<a class="button-login" href="#" onClick=\'javascript:login(true, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'><?text_log_in?></a>';
+			r += '<a class="button-login" href="#" onClick=\'javascript:login(true, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'>@text_log_in@</a>';
 		}
 	}
 
-	r += '<a class="button-goto" href="' + address + '" target="_blank"><?text_goto?></a>';
-	r += '<p>' + collapsible("<?text_username?>", vars.name, true) + '</p>';
-	r += '<p>' + collapsible("<?text_password?>", vars.password, true) + '</p>';
+	r += '<a class="button-goto" href="' + address + '" target="_blank">@text_goto@</a>';
+	r += '<p>' + collapsible("@text_username@", vars.name, true) + '</p>';
+	r += '<p>' + collapsible("@text_password@", vars.password, true) + '</p>';
 
 	if (vars.secret)
-		r += '<p>' + collapsible("<?text_secret?>", vars.secret, false) + '</p>';
+		r += '<p>' + collapsible("@text_secret@", vars.secret, false) + '</p>';
 
 	if (vars.note)
-		r += '<p>' + collapsible("<?text_note?>", addBr(vars.note), false) + '</p>';
+		r += '<p>' + collapsible("@text_note@", addBr(vars.note), false) + '</p>';
 
 	return accordionItem(title, r);
 }
@@ -191,7 +191,7 @@ $(document).ready(function() {
 
 			$("#input-filter").focus();
 		} catch(e) {
-			alert("<?text_incorrect_password?> " + e);
+			alert("@text_incorrect_password@ " + e);
 			return;
 		}
 	});

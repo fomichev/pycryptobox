@@ -86,14 +86,14 @@ function login(withNewWindow, method, url, name, keys, values) {
 	}
 
 	var html = "";
-	html += "<html><head></head><body><?text_wait_for_login?><form id='formid' method='" + method + "' action='" + url + "'>";
+	html += "<html><head></head><body>@text_wait_for_login@<form id='formid' method='" + method + "' action='" + url + "'>";
 
 	if (keys && values && (keys.length == values.length))
 		for (var i=0; i < keys.length; i++)
 			html += "<input type='hidden' name='" + keys[i] + "' value='" + values[i] + "'/>";
 			html += "</form><script type='text/javascript'>document.getElementById('formid').submit()</s";
-			/* &lt;/script&gt; screws everything up after embedding,
-			 * so split it into multiple lines */
+#			&lt;/script&gt; screws everything up after embedding,
+#			so split it into multiple lines
 			html += "cript></body></html>";
 
 	newWindow.document.write(html);

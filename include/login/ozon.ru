@@ -9,8 +9,8 @@
 		"fields":
 		{
 			"LoginGroup": "HasAccountRadio",
-			"Login": "$name",
-			"Password": "$password",
+			"Login": "@name@",
+			"Password": "@password@",
 			"CapabilityAgree": "on",
 			"LoginGroup": "NewUserRadio"
 		}

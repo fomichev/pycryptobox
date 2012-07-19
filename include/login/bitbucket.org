@@ -11,8 +11,8 @@
 		{
 			"csrfmiddlewaretoken": "@token",
 			"next": "/",
-			"username": "$name",
-			"password": "$password",
+			"username": "@name@",
+			"password": "@password@",
 			"submit": "Log in"
 		}
 	}

@@ -10,7 +10,7 @@ import ConfigParser
 
 import log
 
-version = '0.2'
+version = '0.3'
 format_version = 2
 
 try:
@@ -25,6 +25,7 @@ verbose = 0
 user= {}
 path = {}
 html = {}
+defines = {}
 lang = None
 backup_files = []
 
@@ -42,6 +43,7 @@ def init(args):
     global path
     global lang
     global html
+    global defines
     global backup_files
 
     v = vars(args)
@@ -64,7 +66,7 @@ def init(args):
         log.e("Could not load user config!")
         sys.exit(1)
 
-    path['cryptobox'] = os.getcwd()
+    path['root'] = os.getcwd()
 
     path['db_cipher'] = os.path.abspath(user['path']['db'] + "/cryptobox")
 
@@ -73,6 +75,8 @@ def init(args):
     path['db_json'] = path['db_cipher'] + ".json"
     path['db_html'] = user['path']['db'] + "/html/cryptobox.html"
     path['db_mobile_html'] = user['path']['db'] + "/html/m.cryptobox.html"
+    path['db_chrome'] = user['path']['db'] + "/chrome"
+    path['db_chrome_cfg'] = user['path']['db'] + "/chrome/cfg.js"
 
     from_user_config(path, user, 'path', 'db_bookmarklet_fill', user['path']['db'] + "/bookmarklet/fill.js")
     from_user_config(path, user, 'path', 'db_bookmarklet_form', user['path']['db'] + "/bookmarklet/form.js")
@@ -81,8 +85,9 @@ def init(args):
 
     path['tmp'] = user['path']['db'] + "/tmp"
     path['backup'] = user['path']['db'] + "/cryptobox.tar"
-    path['include'] = path['cryptobox'] + "/include"
-    path['html'] = path['cryptobox'] + "/html"
+    path['include'] = path['root'] + "/include"
+    path['html'] = path['root'] + "/html"
+    path['chrome'] = path['root'] + "/html/chrome"
     path['clippy'] = path['html'] + "/extern/clippy/build/clippy.swf"
 
     _lang = __import__('lang.' + user['ui']['lang'], globals(), locals(), [], -1)
@@ -95,6 +100,12 @@ def init(args):
     html['version'] = version
     html['date'] = datetime.datetime.now().strftime("%H:%M %d.%m.%Y")
     html['default_password_length'] = str(user['security']['default_password_length'])
+
+    path['jquery_ui_css_images'] = os.path.abspath(path['html'] + '/extern/jquery-ui/css/' + html['jquery_ui_theme'])
+    path['jquery_mobile_css_images'] = os.path.abspath(path['html'] + '/extern/jquery-mobile/')
+
+    defines.update(path)
+    defines.update(html)
 
     backup_files = [ path['db_cipher'], path['db_hmac'], path['db_html'], path['db_conf'], path['db_json'], path['db_html'], path['clippy'] ]
 

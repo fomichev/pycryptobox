@@ -8,8 +8,8 @@
 		"method": "post",
 		"fields":
 		{
-			"username": "$name",
-			"password": "$password",
+			"username": "@name@",
+			"password": "@password@",
 			"submit": "Log in",
 			"multiform": "@token"
 		}

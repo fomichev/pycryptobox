@@ -1,4 +1,8 @@
+#ifdef smtp
+#define html_smtp <strong>SMTP:</strong> @smtp@
+#endif
+
 {
-	"name": "$name",
-	"text": "<strong>Hostname:</strong> $hostname\n${smtp?<strong>SMTP:</strong> $smtp\n}<strong>Username:</strong> $username\n<strong>Password:</strong> $password"
+	"name": "@name@",
+	"text": "<strong>Hostname:</strong> @hostname@\n@html_smtp@<strong>Username:</strong> @username@\n<strong>Password:</strong> @password@"
 }

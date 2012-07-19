@@ -7,8 +7,8 @@
 		"method": "post",
 		"fields":
 		{
-			"login_email": "$name",
-			"login_password": "$password",
+			"login_email": "@name@",
+			"login_password": "@password@",
 			"remember_me": "on",
 			"cont": "/home"
 		}

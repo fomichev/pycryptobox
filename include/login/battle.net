@@ -8,8 +8,8 @@
 		"method": "post",
 		"fields":
 		{
-			"accountName": "$name",
-			"password": "$password",
+			"accountName": "@name@",
+			"password": "@password@",
 			"persistLogin": "off"
 		}
 	}

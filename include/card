@@ -1,4 +1,44 @@
+#ifdef cardholder
+#define html_cardholder <p><strong>Cardholder:</strong> @cardholder@</p>
+#endif
+
+#ifdef number
+#define html_number <p><strong>Number:</strong> @number@</p>
+#endif
+
+#ifdef type
+#define html_type <p><strong>Type:</strong> @type@</p>
+#endif
+
+#ifdef cvv
+#define html_cvv <p><strong>CVV:</strong> @cvv@</p>
+#endif
+
+#ifdef pin
+#define html_pin <p><strong>PIN:</strong> @pin@</p>
+#endif
+
+#ifdef secret
+#define html_secret <p><strong>Secret word:</strong> @secret@</p>
+#endif
+
+#ifdef issue
+#define html_issue <p><strong>Issue date:</strong> @issue</p>
+#endif
+
+#ifdef expiry
+#define html_expiry <p><strong>Expiry date:</strong> @expiry@</p>
+#endif
+
+#ifdef url
+#define html_url <p><strong>Website:</strong> <a href='@url@'>@url@</a></p>
+#endif
+
+#ifdef phone
+#define html_phone <p><strong>Phone:</strong> @phone@</p>
+#endif
+
 {
-	"name": "$name",
-	"text": "${cardholder?<p><strong>Cardholder:</strong> $cardholder</p>} ${number?<p><strong>Number:</strong> $number</p>} ${type?<p><strong>Type:</strong> $type</p>} ${cvv?<p><strong>CVV:</strong> $cvv</p>} ${pin?<p><strong>PIN:</strong> $pin</p>} ${secret?<p><strong>Secret word:</strong> $secret}${issue?<p><strong>Issue date:</strong> $issue</p>} ${expiry?<p><strong>Expiry date:</strong> $expiry</p>} ${url?<p><strong>Website:</strong> <a href='$url'>$url</a></p>} ${phone?<p><strong>Phone:</strong> $phone</p>}"
+	"name": "@name@",
+	"text": "@html_cardholder@@html_number@@html_type@@html_cvv@@html_pin@@html_secret@@html_issue@@html_expiry@@html_url@@html_phone@"
 }

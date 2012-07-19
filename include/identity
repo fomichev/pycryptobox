@@ -13,7 +13,64 @@
 # - zip
 # - phone
 # - passport
+
+#ifdef firstname
+#define html_firstname <p><strong>First name:</strong> @firstname@</p>
+#endif
+
+#ifdef initial
+#define html_initial <p><strong>Initial:</strong> @initial@</p>
+#endif
+
+#ifdef lastname
+#define html_lastname <p><strong>Last name:</strong> @lastname@</p>
+#endif
+
+#ifdef birth
+#define html_birth <p><strong>Birth date:</strong> @birth@</p>
+#endif
+
+#ifdef company
+#define html_company <p><strong>Company:</strong> @company@</p>
+#endif
+
+#ifdef job
+#define html_job <p><strong>Job title:</strong> @job@</p>
+#endif
+
+#ifdef country
+#define html_country <p><strong>Country:</strong> @country@</p>
+#endif
+
+#ifdef state
+#define html_state <p><strong>State/Province:</strong> @state@</p>
+#endif
+
+#ifdef address1
+#define html_address1 <p><strong>Address line 1:</strong> @address1@</p>
+#endif
+
+#ifdef address2
+#define html_address2 <p><strong>Address line 2:</strong> @address2@</p>
+#endif
+
+#ifdef city
+#define html_city <p><strong>City:</strong> @city@</p>
+#endif
+
+#ifdef zip
+#define html_zip <p><strong>Zip/postal code:</strong> @zip@</p>
+#endif
+
+#ifdef phone
+#define html_phone <p><strong>Phone:</strong> @phone@</p>
+#endif
+
+#ifdef passport
+#define html_passport <p><strong>Passport:</strong> @passport@</p>
+#endif
+
 {
-	"name": "$name",
-	"text": "${firstname?<p><strong>First name:</strong> $firstname</p>} ${initial?<p><strong>Initial:</strong> $initial</p>} ${lastname?<p><strong>Last name:</strong> $lastname</p>} ${birth?<p><strong>Birth date:</strong> $birth</p>} ${company?<p><strong>Company:</strong> $company</p>} ${job?<p><strong>Job title:</strong> $job</p>} ${country?<p><strong>Country:</strong> $country</p>} ${state?<p><strong>State/Province:</strong> $state</p>} ${address1?<p><strong>Address line 1:</strong> $address1</p>} ${address2?<p><strong>Address line 2:</strong> $address2</p>} ${city?<p><strong>City:</strong> $city</p>} ${zip?<p><strong>Zip/postal code:</strong> $zip</p>} ${phone?<p><strong>Phone:</strong> $phone</p>} ${passport?<p><strong>Passport:</strong> $passport</p>}"
+	"name": "@name@",
+	"text": "@html_firstname@@html_initial@@html_lastname@@html_birth@@html_company@@html_job@@html_country@@html_state@@html_address1@@html_address2@@html_city@@html_zip@@html_phone@@html_passport@"
 }

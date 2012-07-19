@@ -8,8 +8,8 @@
 		"method": "post",
 		"fields":
 		{
-			"email": "$name",
-			"password": "$password",
+			"email": "@name@",
+			"password": "@password@",
 			"appActionToken": "@token",
 			"appAction": "audibleAction",
 			"rdpath": "",

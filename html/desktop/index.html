@@ -2,68 +2,75 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-		<title><?text_title?></title>
-		<link rel="stylesheet" type="text/css" href="../html/desktop/style.css" />
-		<link rel="stylesheet" type="text/css" href="../html/extern/jquery-ui/css/<?jquery_ui_theme?>/jquery-ui-1.8.21.custom.css" />
+		<title>@text_title@</title>
+		<style media="screen" type="text/css">
+#include_literal ../../html/desktop/style.css
+#include_literal ../../html/extern/jquery-ui/css/@jquery_ui_theme@/jquery-ui-1.8.21.custom.css
+		</style>
+		<script type="text/javascript">
+#include ../../html/extern/jquery/jquery-1.7.2.min.js
+#include ../../html/extern/jquery-ui/js/jquery-ui-1.8.21.custom.min.js
 
-		<script type="text/javascript" src="../html/extern/jquery/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="../html/extern/jquery-ui/js/jquery-ui-1.8.21.custom.min.js"></script>
+var cfg =
+#include @db_json@
+;
+#include ../../html/js/login.js
+#include ../../html/js/login.js
+#include ../../html/js/view.js
+#include ../../html/js/password.js
+#include ../../html/js/crypto.js
+#include ../../html/js/lock.js
+#include ../../html/desktop/jquery-ui.js
 
-		<script type="text/javascript" src="../html/extern/seedrandom.min.js"></script>
+#include ../../html/extern/seedrandom.min.js
 
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/core-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/enc-base64-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/cipher-core-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/aes-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/sha1-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/hmac-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/pbkdf2-min.js"></script>
-
-		<script type="text/javascript" src="../html/js/login.js"></script>
-		<script type="text/javascript" src="../html/js/view.js"></script>
-		<script type="text/javascript" src="../html/js/password.js"></script>
-		<script type="text/javascript" src="../html/js/crypto.js"></script>
-		<script type="text/javascript" src="../html/js/lock.js"></script>
-		<script type="text/javascript" src="../html/desktop/jquery-ui.js"></script>
+#include ../../html/extern/CryptoJS/components/core-min.js
+#include ../../html/extern/CryptoJS/components/enc-base64-min.js
+#include ../../html/extern/CryptoJS/components/cipher-core-min.js
+#include ../../html/extern/CryptoJS/components/aes-min.js
+#include ../../html/extern/CryptoJS/components/sha1-min.js
+#include ../../html/extern/CryptoJS/components/hmac-min.js
+#include ../../html/extern/CryptoJS/components/pbkdf2-min.js
+		</script>
 	</head>
 	<body>
-		<noscript><?text_noscript?></noscript>
+		<noscript>@text_noscript@</noscript>
 
 		<div id="div-locked">
 			<form id="form-unlock">
-				<h1><?text_enter_password?></h1>
+				<h1>@text_enter_password@</h1>
 				<p><input id="input-password" type="password" /></p>
-				<p><button type="submit" id="button-unlock"><?text_button_unlock?></button></p>
+				<p><button type="submit" id="button-unlock">@text_button_unlock@</button></p>
 			</form>
 		</div>
 
 		<div id="div-unlocked">
 			<div id="div-header">
 				<span><input type="text" id="input-filter" /></span>
-				<button id="button-generate-show"><?text_button_generate?></button>
-				<button id="button-lock"><?text_button_lock?></button>
+				<button id="button-generate-show">@text_button_generate@</button>
+				<button id="button-lock">@text_button_lock@</button>
 			</div>
 
 			<div id="div-tabs"></div>
 
-			<div id="div-generate" title="<?text_title_generate?>">
+			<div id="div-generate" title="@text_title_generate@">
 				<form>
-					<input type="text" id="input-password-length" value="<?default_password_length?>" size="4" /><?text_generate_length?><br />
-					<input type="checkbox" id="input-include-num" checked /><?text_generate_numbers?><br />
-					<input type="checkbox" id="input-include-punc" checked /><?text_generate_punctuation?><br />
-					<input type="checkbox" id="input-include-uc" checked /><?text_generate_upper_case?><br />
-					<input type="checkbox" id="input-pronounceable" /><?text_generate_pronounceable?><br />
-					<p><?text_generated?></p>
+					<input type="text" id="input-password-length" value="@default_password_length@" size="4" />@text_generate_length@<br />
+					<input type="checkbox" id="input-include-num" checked />@text_generate_numbers@<br />
+					<input type="checkbox" id="input-include-punc" checked />@text_generate_punctuation@<br />
+					<input type="checkbox" id="input-include-uc" checked />@text_generate_upper_case@<br />
+					<input type="checkbox" id="input-pronounceable" />@text_generate_pronounceable@<br />
+					<p>@text_generated@</p>
 					<p><input type="text" id="intput-generated-password" size="30" /></p>
 				</form>
 			</div>
 
-			<div id="div-token" title="<?text_title_token?>">
+			<div id="div-token" title="@text_title_token@">
 				<input type="text" id="input-json" size="32" />
 			</div>
 		</div>
 		<div id="div-copyright" class="ui-widget">
-			<p><a href="https://github.com/fomichev/cryptobox"><?text_title?> <?version?></a>, <?text_created_at?> <?date?></p>
+			<p><a href="https://github.com/fomichev/cryptobox">@text_title@ @version@</a>, @text_created_at@ @date@</p>
 		</div>
 	</body>
 </html>

@@ -103,10 +103,6 @@ have the following path in your PATH environment variable -
 
 	$ pip install pycrypto
 
-* Install [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
-
-	$ pip install beautifulsoup4
-
 * Install argparse (only for Python < 2.7)
 
 	$ pip install argparse
@@ -199,9 +195,9 @@ be located on anther tab.
 
 Each file in the `include/` directory is a JSON file which describes the
 format and layout of entry. Variables from the entry will be substituted with
-`$variableN` inside the JSON file and will form particular login/bookmark/etc.
+`@variableN@` inside the JSON file and will form particular login/bookmark/etc.
 There is some special handling for the login entries, where it's expected to
-have `form` information with `$name` and `$password` variables.
+have `form` information with `@name@` and `@password@` variables.
 For the other entries, there will be probably only `text` variable that will
 somehow format other variables from the entry.
 
@@ -226,10 +222,10 @@ I think it's pretty straightforward. You can use aforesaid bookmarklet on
 your target site. The only caveat is that it can have multiple forms on one
 page, so watch out and select the one you need (don't copy leading `[` and
 trailing `]`, JSON data should start with `{` and end with `}`). Afterwards,
-look through the JSON and place `$name` and `$password` into appropriate
+look through the JSON and place `@name@` and `@password@` into appropriate
 form fields (look for other logins JSON data in `include/login`, it will
 become clear from the example what to do). Better yet, you can fill in the
-form in the browser with `$name` and `$password` and run the bookmarklet;
+form in the browser with `@name@` and `@password@` and run the bookmarklet;
 this way, you don't need to dig into the JSON and find out were to put
 these marks, they will already be in place.
 
@@ -329,9 +325,13 @@ Python
 
 * [AES](https://www.dlitz.net/software/pycrypto/) - Public Domain
 
-* [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/) - Python
-
 * [HMAC-MD5](http://docs.python.org/library/hmac.html) - Python
+
+* [Mozilla preprocessor](http://mxr.mozilla.org/mozilla-central/source/config/) - Mozilla Public License 2
+
+	lib/extern/Expression.py f4157e8c4107
+
+	lib/extern/Preprocessor.py 13ea641e1b5a
 
 JavaScript
 ----------

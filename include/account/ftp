@@ -1,4 +1,4 @@
 {
-	"name": "$name",
-	"text": "<strong>Hostname:</strong> $hostname\n<strong>Username:</strong> $username\n<strong>Password:</strong> $password"
+	"name": "@name@",
+	"text": "<strong>Hostname:</strong> @hostname@\n<strong>Username:</strong> @username@\n<strong>Password:</strong> @password@"
 }

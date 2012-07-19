@@ -1,5 +1,9 @@
+#ifdef comment
+#define html_comment <p>@comment@</p>
+#endif
+
 {
-	"name": "$name",
-	"text": "<a class=\"button-goto\" href=\"$url\" target=\"_blank\">Go to site</a>${comment?<p>$comment</p>}",
-	"mtext": "<a href=\"$url\" data-role=\"button\">Go to site</a>${comment?<p>$comment</p>}"
+	"name": "@name@",
+	"text": "<a class=\"button-goto\" href=\"@url@\" target=\"_blank\">Go to site</a>@html_comment@}",
+	"mtext": "<a href=\"@url@\" data-role=\"button\">Go to site</a>@html_comment@}"
 }

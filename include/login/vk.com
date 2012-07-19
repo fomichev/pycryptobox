@@ -17,8 +17,8 @@
 			"from_host": "vk.com",
 			"from_protocol": "http",
 			"ip_h": "9a65fa6d28ba1bd980",
-			"email": "$name",
-			"pass": "$password"
+			"email": "@name@",
+			"pass": "@password@"
 		}
 	}
 }

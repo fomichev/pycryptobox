@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 # Concatenate all pieces into one HTML page
 
 import sys
@@ -8,14 +6,15 @@ import shutil
 import json
 
 import crypto
-import flatten
+from db2json import db2json
 import embed
+from preprocessor import pp
 
 import cfg
 import log
 
 def encrypted_json(suffix, js, db_plaintext, key, db_conf, tp=None):
-    json_plaintext = flatten.flatten(db_plaintext.split("\n"), (cfg.path['include'] + "/", cfg.path['db_include']), tp)
+    json_plaintext = db2json(db_plaintext.split("\n"), (cfg.path['include'] + "/", cfg.path['db_include']), tp)
     if cfg.debug:
         open(cfg.path['tmp'] + "/1_json_plaintext_" + suffix, "w").write(json_plaintext)
 
@@ -35,40 +34,48 @@ def encrypted_json(suffix, js, db_plaintext, key, db_conf, tp=None):
     return cfg_js
 
 def bookmarket_form(db_plaintext, key, db_conf):
-    include = (
-            "../bookmarklet/lib/common.js",
-            "../bookmarklet/form.js",
-            )
-
-    scripts = ""
-    for s in include:
-        scripts += open(s).read().decode('utf-8')
-
-    return embed.sethtmlvars(scripts)
+    return pp('../bookmarklet/form.js', cfg.defines)
 
 def bookmarket_fill(db_plaintext, key, db_conf):
-    include = (
-            "../html/extern/CryptoJS/components/core-min.js",
-            "../html/extern/CryptoJS/components/enc-base64-min.js",
-            "../html/extern/CryptoJS/components/cipher-core-min.js",
-            "../html/extern/CryptoJS/components/aes-min.js",
-            "../html/extern/CryptoJS/components/sha1-min.js",
-            "../html/extern/CryptoJS/components/hmac-min.js",
-            "../html/extern/CryptoJS/components/pbkdf2-min.js",
+    return pp('../bookmarklet/fill.js' , cfg.defines)
 
-            "../bookmarklet/lib/common.js",
-            "../html/js/crypto.js",
-            "../html/js/login.js",
-            "../bookmarklet/fill.js",
-            )
-
-    js = db_conf.copy()
-
-    scripts = encrypted_json("bookmarklet", js, db_plaintext, key, db_conf, tp="login")
-    for s in include:
-        scripts += open(s).read().decode('utf-8')
-
-    return embed.sethtmlvars(scripts)
+#def chrome_extension(db_plaintext, key, db_conf):
+#    include = (
+#            "../html/chrome/icon.png",
+#            "../html/chrome/manifest.json",
+#            "../html/chrome/popup.html",
+#            "../html/chrome/popup.js",
+#            "../html/chrome/content.js",
+#            "../html/chrome/background.js",
+#
+#            "../html/js/crypto.js",
+#            "../html/js/login.js",
+#            "../html/js/lock.js",
+#            "../html/js/fill.js",
+#            "../html/extern/jquery/jquery-1.7.2.min.js",
+#
+#            "../html/extern/CryptoJS/components/core-min.js",
+#            "../html/extern/CryptoJS/components/enc-base64-min.js",
+#            "../html/extern/CryptoJS/components/cipher-core-min.js",
+#            "../html/extern/CryptoJS/components/aes-min.js",
+#            "../html/extern/CryptoJS/components/sha1-min.js",
+#            "../html/extern/CryptoJS/components/hmac-min.js",
+#            "../html/extern/CryptoJS/components/pbkdf2-min.js",
+#            )
+#
+#    js = db_conf.copy()
+#    j = encrypted_json("bookmarklet", js, db_plaintext, key, db_conf, tp="login")
+#
+#    path_chrome_cfg = os.path.abspath(cfg.path['db_chrome_cfg'])
+#    open(path_chrome_cfg, "w").write(j)
+#
+#    try:
+#        os.mkdir(cfg.path['db_chrome'])
+#    except:
+#        pass
+#
+#    for f in include:
+#        shutil.copyfile(f, cfg.path['db_chrome'] + '/' + os.path.basename(f))
 
 def generate_html(index):
     return open(index, "r").read()
@@ -126,20 +133,25 @@ def update(db_conf, password):
         pass
 
     log.v("> cryptobox.html")
-    embed.embed(path_tmp_index, path_index, cfg_js)
+    embed.embed(path_tmp_index, path_index, cfg_js, cfg.path['jquery_ui_css_images'])
     log.v("Copy clippy.swf")
     shutil.copyfile(cfg.path['clippy'], os.path.dirname(path_index) + "/clippy.swf")
 
     log.v("> m.cryptobox.html")
-    embed.embed(path_tmp_mobile_index, path_mobile_index, cfg_js)
+    embed.embed(path_tmp_mobile_index, path_mobile_index, cfg_js, cfg.path['jquery_mobile_css_images'])
 
     log.v("> bookmarklet/fill.js")
     open(path_bookmarklet_fill, "w").write(bookmarket_fill(db_plaintext, key, db_conf))
     log.v("Save to " + path_bookmarklet_fill)
 
     log.v("> bookmarklet/form.js")
+
+
     open(path_bookmarklet_form, "w").write(bookmarket_form(db_plaintext, key, db_conf))
     log.v("Save to " + path_bookmarklet_form)
+
+#    log.v("> chrome extension")
+#    chrome_extension(db_plaintext, key, db_conf)
 
     if cfg.debug == False:
         os.chdir(saved_cwd)

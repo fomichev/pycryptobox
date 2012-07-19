@@ -9,8 +9,8 @@
 		"fields":
 		{
 			"serviceID": "199r2a1fk7",
-			"inputUserID": "$name",
-			"inputPassword": "$password",
+			"inputUserID": "@name@",
+			"inputPassword": "@password@",
 			"remIdCheck": "on"
 		}
 	}

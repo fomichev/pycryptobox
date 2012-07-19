@@ -2,39 +2,47 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<title><?text_title?></title>
+		<title>@text_title@</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<link rel="stylesheet" type="text/css" href="../html/extern/jquery-mobile/jquery.mobile-1.1.0.css" />
+		<style media="screen" type="text/css">
+#include_literal ../../html/extern/jquery-mobile/jquery.mobile-1.1.0.css
+		</style>
 
-		<script type="text/javascript" src="../html/extern/jquery/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="../html/extern/jquery-mobile/jquery.mobile-1.1.0.min.js"></script>
+		<script type="text/javascript">
+#include ../../html/extern/jquery/jquery-1.7.2.min.js
+#include ../../html/extern/jquery-mobile/jquery.mobile-1.1.0.min.js
 
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/core-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/enc-base64-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/cipher-core-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/aes-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/sha1-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/hmac-min.js"></script>
-		<script type="text/javascript" src="../html/extern/CryptoJS/components/pbkdf2-min.js"></script>
+#include ../../html/extern/CryptoJS/components/core-min.js
+#include ../../html/extern/CryptoJS/components/enc-base64-min.js
+#include ../../html/extern/CryptoJS/components/cipher-core-min.js
+#include ../../html/extern/CryptoJS/components/aes-min.js
+#include ../../html/extern/CryptoJS/components/sha1-min.js
+#include ../../html/extern/CryptoJS/components/hmac-min.js
+#include ../../html/extern/CryptoJS/components/pbkdf2-min.js
 
-		<script type="text/javascript" src="../html/js/login.js"></script>
-		<script type="text/javascript" src="../html/js/view.js"></script>
-		<script type="text/javascript" src="../html/js/crypto.js"></script>
-		<script type="text/javascript" src="../html/js/lock.js"></script>
-		<script type="text/javascript" src="../html/mobile/jquery-mobile.js"></script>
+var cfg =
+#include @db_json@
+;
+
+#include ../../html/js/login.js
+#include ../../html/js/view.js
+#include ../../html/js/crypto.js
+#include ../../html/js/lock.js
+#include ../../html/mobile/jquery-mobile.js
+		</script>
 	</head>
 	<body>
 		<div data-role="dialog" id="div-locked">
 			<div data-role="header">
-				<h1><?text_title?></h1>
+				<h1>@text_title@</h1>
 			</div>
 
 			<div data-role="content">
 				<form id="form-unlock" action="#div-main" method="get" data-ajax="false">
-					<label for="input-password"><?text_enter_password?></label>
+					<label for="input-password">@text_enter_password@</label>
 					<input type="password" id="input-password" value="" />
-					<input type="submit" value="<?text_button_unlock?>" />
+					<input type="submit" value="@text_button_unlock@" />
 				</form>
 			</div>
 		</div>

@@ -9,8 +9,8 @@
 		"fields":
 		{
 			"csrfmiddlewaretoken": "@token",
-			"email": "$name",
-			"password": "$password",
+			"email": "@name@",
+			"password": "@password@",
 			"continue": ""
 		}
 	}

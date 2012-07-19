@@ -9,8 +9,8 @@
 		"method": "post",
 		"fields":
 		{
-			"login": "$name",
-			"password": "$password",
+			"login": "@name@",
+			"password": "@password@",
 			"quick_expire": "on",
 			"submit": "logon"
 		}
