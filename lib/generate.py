@@ -1,4 +1,6 @@
-# Generate HTML, bookmarklets, extensions, etc
+"""
+Generate HTML, bookmarklets, extensions, etc
+"""
 
 import sys
 import os
@@ -15,7 +17,10 @@ import cfg
 import log
 
 def db2json(db_lines, search_paths, filter_tp=None):
-    """ merge username and password information from private database with appropriate JSON template """
+    """
+    Merge username and password information from private database with
+    appropriate JSON template
+    """
     def __handle_node(search_paths, tp, v):
         for path in search_paths:
             f = path + '/' + tp
@@ -89,7 +94,9 @@ def db2json(db_lines, search_paths, filter_tp=None):
         return json.dumps(j)
 
 def embed_html(path, defines, css_images_root):
-    """ preprocess HTML and embed CSS images """
+    """
+    Preprocess HTML and embed CSS images
+    """
     def __embed_css_images(text, css_images_root):
         def __getimg(path):
             data = "".join(open(path, "rb").read().encode('base64').split("\n"))
@@ -109,6 +116,9 @@ def embed_html(path, defines, css_images_root):
     return data
 
 def mkdir(paths):
+    """
+    Stupid mkdir wrapper to bypass exceptions
+    """
     if type(paths) != list:
         paths = [ paths ]
 
@@ -119,6 +129,9 @@ def mkdir(paths):
             log.v("Couldn't create directory %s (%s)" % (p, e))
 
 def encrypt_json(db_plaintext, key, db_conf, search_paths, debug=False):
+    """
+    Create encrypted JSON database from plain text database
+    """
     json_plaintext = db2json(db_plaintext.split("\n"), search_paths)
     aes_base64 = crypto.enc(db_conf, key, json_plaintext)
     aes_base64_nonl = "".join(aes_base64.split("\n"))
@@ -197,6 +210,9 @@ def generate_chrome_extension():
 #        shutil.copyfile(f, cfg.path['db_chrome'] + '/' + os.path.basename(f))
 
 def generate_all(db_conf, password):
+    """
+    Generate all files (on database update)
+    """
     mkdir(cfg.path['tmp'])
 
     key = crypto.derive_key(db_conf, password)

@@ -1,4 +1,6 @@
-# PBKDF2, AES & HMAC related stuff
+"""
+Everything de/encryption related (PBKDF2, AES, HMAC)
+"""
 
 from Crypto.Cipher import AES
 from pbkdf2 import PBKDF2
@@ -15,7 +17,10 @@ import log
 
 check_hmac = True
 
-def create_db_conf(p, format_version):
+def create_db_conf(path, format_version):
+    """
+    Create new database configuration
+    """
     pbkdf2_salt_len = 8 # 64 bit
     pbkdf2_iterations = 1000
     aes_iv_len = 16 # 128 bit
@@ -44,12 +49,15 @@ def create_db_conf(p, format_version):
     c.set('aes', 'iv_len', aes_iv_len)
     c.set('aes', 'bs', aes_bs)
 
-    with open(p, 'wb') as f:
+    with open(path, 'wb') as f:
         c.write(f)
 
-def read_db_conf(p, format_version):
+def read_db_conf(path, format_version):
+    """
+    Read database configuration from file
+    """
     c = ConfigParser.ConfigParser()
-    c.read(p)
+    c.read(path)
 
     if c.getint('cryptobox', 'format_version') != format_version:
         log.e("Incompatible database format!")
@@ -67,51 +75,70 @@ def read_db_conf(p, format_version):
 
     return { 'pbkdf2': pbkdf2_conf, 'aes': aes_conf }
 
-def add_padding(db_conf, s):
-    """ Because cipher should be aligned to some text length, we need to
-        add padding """
-    return s + (db_conf['aes']['bs'] - len(s) % db_conf['aes']['bs']) * chr(db_conf['aes']['bs'] - len(s) % db_conf['aes']['bs'])
+def add_padding(s, aes_blocksize):
+    """
+    Because cipher should be aligned to block length,
+    we need to add padding
+    """
+    return s + (aes_blocksize - len(s) % aes_blocksize) * \
+            chr(aes_blocksize - len(s) % aes_blocksize)
 
 def strip_padding(s):
-    """ Reverse of add_padding """
+    """
+    Remove padding
+    """
     return s[0:-ord(s[-1])]
 
-def enc(db_conf, secret, plaintext):
-    """ Encode plaintext using given secret (PBKDF2) """
-    plaintext = add_padding(db_conf, plaintext)
-    cipher = AES.new(secret, AES.MODE_CBC, db_conf['aes']['iv'].decode('base64'), segment_size=128)
+def enc(db_conf, key, plaintext):
+    """
+    Encode plaintext using given key (PBKDF2)
+    """
+    plaintext = add_padding(plaintext, db_conf['aes']['bs'])
+    cipher = AES.new(key, AES.MODE_CBC, db_conf['aes']['iv'].decode('base64'), segment_size=128)
     return cipher.encrypt(plaintext).encode('base64')
 
-def dec(db_conf, secret, ciphertext):
-    """ Encode plaintext using given secret (PBKDF2) """
-    cipher = AES.new(secret, AES.MODE_CBC, db_conf['aes']['iv'].decode('base64'), segment_size=128)
+def dec(db_conf, key, ciphertext):
+    """
+    Decode cipher using given key (PBKDF2)
+    """
+    cipher = AES.new(key, AES.MODE_CBC, db_conf['aes']['iv'].decode('base64'), segment_size=128)
     return strip_padding(cipher.decrypt(ciphertext.decode('base64')))
 
 def derive_key(db_conf, password):
-    """ Derive PBKDF2 key from passphrase """
+    """
+    Derive PBKDF2 key for AES from password
+    """
     return PBKDF2(password, db_conf['pbkdf2']['salt'].decode('base64'), db_conf['pbkdf2']['iterations']).read(db_conf['aes']['bs'])
 
-def auth(secret, plaintext):
-    """ Check integrity of plaintext via HMAC-MD5 """
-    return hmac.new(key=secret, msg=plaintext, digestmod=hashlib.md5).hexdigest()
+def auth(key, plaintext):
+    """
+    Check integrity of plaintext via HMAC-MD5
+    """
+    return hmac.new(key=key, msg=plaintext, digestmod=hashlib.md5).hexdigest()
 
 def enc_plaintext(db_conf, password, plaintext, aes_path, hmac_path):
+    """
+    Derive key from password, encode plaintext and save it to aes_path/hmac_path
+    """
+    plaintext_utf8 = plaintext.encode('utf-8')
     key = derive_key(db_conf, password)
 
-    out_hmac = open(hmac_path, "wb")
-    out_hmac.write(auth(key, plaintext.encode('utf-8')))
-
-    out_aes = open(aes_path, "wb")
-    out_aes.write(enc(db_conf, key, plaintext.encode('utf-8')))
+    open(hmac_path, "wb").write(auth(key, plaintext_utf8))
+    open(aes_path, "wb").write(enc(db_conf, key, plaintext_utf8))
 
 def enc_db(db_conf, password, path, aes_path, hmac_path):
-    """ Used to encrypt temporary created file (cbedit) """
+    """
+    enc_plaintext analogue but with file as input
+    """
     log.v("Encode %s into %s and %s" % (path, aes_path, hmac_path))
 
     plaintext = open(path, "rb").read().decode('utf-8').rstrip()
     enc_plaintext(db_conf, password, plaintext, aes_path, hmac_path)
 
 def dec_db(db_conf, password, aes_path, hmac_path):
+    """
+    Decipher database from aes_path
+    """
     log.v("Decode %s and %s" % (aes_path, hmac_path))
 
     cipher = open(aes_path, "rb").read().rstrip()

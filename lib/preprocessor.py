@@ -1,4 +1,6 @@
-# Custom c-style preprocessor
+"""
+Custom c-style-like preprocessor
+"""
 
 import os
 from cStringIO import StringIO
@@ -7,6 +9,9 @@ import re
 from extern.Preprocessor import Preprocessor
 
 def pp(filename, defines = {}, remove_lf=True, fatal=False):
+    """
+    Preprocess given file using provided defines
+    """
     p = Preprocessor()
     p.context.update(defines)
     p.setLineEndings('lf')

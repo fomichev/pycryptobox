@@ -1,3 +1,7 @@
+"""
+This module is responsible for handling user config
+"""
+
 import platform
 import os
 import datetime
