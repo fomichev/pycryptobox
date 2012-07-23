@@ -12,13 +12,14 @@ Bugfixes:
 - improve autolock feature (don't use mouse move event)
 
 Features:
+- don't manually add vars.name and vars.password (make them explicit in JSON)
 - eval -> jQuery.parseJSON
+- generate new salt and iv on password change (or even on every `cbedit` update;
+  in this case may even save hmac in cryptobox.conf)?
 - add chrome extension (https://code.google.com/chrome/extensions/getstarted.html) which may be used in the developer mode
 - add some validation for DB and include/
 - add support for aliases (alias=login/xyz login/qwe login/asd - will generate
   3 additional entries in HTML)
-- generate new salt and iv on password change (or even on every `cbedit` update;
-  in this case may even save hmac in cryptobox.conf)?
 - add setup.py (easy_install or pip)
 - revise README.me and add other missing information
 
@@ -31,6 +32,7 @@ Refactor:
 - configuration (read from user config, merge with builtin, etc)
   remove various paths from configuration (at least bookmarks)
   merge everything under cfg.defines (or another appropriate name)
+  * delete db_bookmarklet_login/_form
 - refactor everything else because it became a mess
 - remove versions from jquery and jquery-ui files to ease version change
 - consider switching to https://github.com/bitwiseshiftleft/sjcl (can we save some space? does it work faster?)

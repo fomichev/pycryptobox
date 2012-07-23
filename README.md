@@ -60,8 +60,8 @@ hood), you can enable debug mode in the `lib/cfg.py` file; after that,
 all data from the aforementioned steps will be stored in the `private/tmp/`
 directory.
 
-Bookmarklet
------------
+Form bookmarklet
+----------------
 Some sites use authenticity token which they place into the HTML you get;
 the login form along with username and password fields contains hidden field
 with authenticity token. So it's no longer possible to use one-click login
@@ -82,6 +82,10 @@ within forms).
 TODO: Describe how to get this bookmark; also describe login bookmark.
 
 	javascript:(function(){s=document.createElement('SCRIPT');s.type='text/javascript';s.src='https://<BOOKMARKLET_PATH>';document.getElementsByTagName('head')[0].appendChild(s);})();
+
+Fill bookmarklet
+----------------
+T.b.d
 
 Required python modules
 =======================
@@ -160,19 +164,19 @@ Your sensitive information is stored in the form of entries; there may be a
 number of entries, each describing particular login, bookmark, secure note or
 other information.
 
-Entry has the following structure (everything enclosed in [] is optional):
+Entry has the following structure:
 
 	[<entry type>  <entry name>]
-		tag=<tag>
+	tag=<tag>
 
-		hidden=yes
+	hidden=yes
 
-		<variable1>=<value1>
+	<variable1>=<value1>
 
-		<variableN>=<valueN>
+	<variableN>=<valueN>
 
-		<multiline>:<line1>
-		            <line2>
+	<multiline>:<line1>
+	            <line2>
 
 You don't need to quote anything; just put variable name on the left side of `=`
 sign and variable value on the right side of `=` sign without any quotes. If you
@@ -182,10 +186,11 @@ value and follow the example above.
 Entry type is a relative path to a file inside the `include/` directory. And
 the first component in this path (until the first `/` of end of string) will
 form a tab in the HTML page. So, for example, if you have `login/google.com`
-and `login/yahoo.com`, there will be a `Logins` page (or `login` if you don't
-have translation for this page) in the HTML document
+and `login/yahoo.com`, there will be a `login` page (or `Logins` because of
+pre-defined translations) in the HTML document
 containing two entries. If you have several `note` entries, they will
-be located on anther tab.
+be located on anther tab. Be aware that you can't have two entries with the
+same `entry type` and `entry name`!
 
 Each file in the `include/` directory is a JSON file which describes the
 format and layout of entry. Variables from the entry will be substituted with
@@ -212,8 +217,8 @@ Comments are started with `#` and ended at the end of the line.
 
 Extending / Adding new login (includes)
 ---------------------------------------
-I think it's pretty straightforward. You can use aforesaid bookmarklet on
-your target site. The only caveat is that it can have multiple forms on one
+I think it's pretty straightforward. You can use aforesaid `form` bookmarklet
+on your target site. The only caveat is that it can have multiple forms on one
 page, so watch out and select the one you need (don't copy leading `[` and
 trailing `]`, JSON data should start with `{` and end with `}`). Afterwards,
 look through the JSON and place `@name@` and `@password@` into appropriate
@@ -252,8 +257,8 @@ Database example
 	text:line1
 	     line2
 
-Import database for other password managers
--------------------------------------------
+Import database from other password managers
+--------------------------------------------
 No, there is probably no easy way to automate it (taking into account the
 number of existing formats); you have to create (or use pre-created) JSON
 form layout in the `include/login` directory (via provided bookmarklet)
@@ -293,7 +298,7 @@ possible variables:
 
 	[security]
 	lock_timeout_minutes = <web site lock timeout in minutes>
-	default_password_lentrh = <default password length in generate dialog>
+	default_password_length = <default password length in generate dialog>
 
 All the options are optional. You can dig default values in
 the `lib/cfg.py` file.
