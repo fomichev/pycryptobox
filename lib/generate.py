@@ -86,6 +86,9 @@ def db2json(db_lines, search_paths, filter_tp=None):
         if 'hidden' in v and v['hidden'] == 'yes':
             continue
 
+        for key in v.keys():
+            v[key] = json.dumps(v[key])[1:-1]
+
         j.append(__handle_node(search_paths, tp, v))
 
     if cfg.debug:

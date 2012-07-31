@@ -12,6 +12,7 @@ Bugfixes:
 - improve autolock feature (don't use mouse move event)
 
 Features:
+- lib/lang/xyz.py types -> page
 - don't manually add vars.name and vars.password (make them explicit in JSON)
 - eval -> jQuery.parseJSON
 - generate new salt and iv on password change (or even on every `cbedit` update;
