@@ -21,7 +21,7 @@ function onUnlock(tab, data) {
 		var el = data[i];
 		if (el.type == "magic") {
 			if (el.value != "270389")
-				throw("?text_incorrect_password?");
+				throw("@text.incorrect_password@");
 
 			continue;
 		}

@@ -9,11 +9,12 @@ import json
 import ConfigParser
 import io
 import re
+import tarfile
 
 import crypto
 from preprocessor import pp
 
-import cfg
+import config
 import log
 
 def db2json(db_lines, search_paths, filter_tp=None):
@@ -91,7 +92,7 @@ def db2json(db_lines, search_paths, filter_tp=None):
 
         j.append(__handle_node(search_paths, tp, v))
 
-    if cfg.debug:
+    if config.debug:
         return json.dumps(j, indent=4)
     else:
         return json.dumps(j)
@@ -131,7 +132,7 @@ def mkdir(paths):
         except Exception as e:
             log.v("Couldn't create directory %s (%s)" % (p, e))
 
-def encrypt_json(db_plaintext, key, db_conf, search_paths, debug=False):
+def encrypt_json(db_plaintext, key, db_conf, search_paths, tmp_path='', debug=False):
     """
     Create encrypted JSON database from plain text database
     """
@@ -140,9 +141,8 @@ def encrypt_json(db_plaintext, key, db_conf, search_paths, debug=False):
     aes_base64_nonl = "".join(aes_base64.split("\n"))
 
     if debug:
-        open(cfg.path['tmp'] + "/1_json_plaintext", "w").write(json_plaintext)
-        open(cfg.path['tmp'] + "/2_aes_base64", "w").write(aes_base64)
-        open(cfg.path['tmp'] + "/3_aes_base64_nonl", "w").write(aes_base64_nonl)
+        open(tmp_path + "/1_json_plaintext", "w").write(json_plaintext)
+        open(tmp_path + "/2_aes_base64", "w").write(aes_base64)
 
     return aes_base64_nonl
 
@@ -150,23 +150,23 @@ def generate_cryptobox_json(js, o):
     log.v("> cryptobox.json")
     open(o, "w").write(json.dumps(js))
 
-def generate_html(i, o):
+def generate_html(i, o, defines):
     log.v("> cryptobox.html")
     mkdir(os.path.dirname(o))
-    open(o, "w").write(embed_html(i, cfg.defines, cfg.path['jquery_ui_css_images']))
+    open(o, "w").write(embed_html(i, defines, defines['path.jquery_ui_css_images']))
 
     log.v(">> Copy clippy.swf")
-    shutil.copyfile(cfg.path['clippy'], os.path.dirname(o) + "/clippy.swf")
+    shutil.copyfile(defines['path.clippy'], os.path.dirname(o) + "/clippy.swf")
 
-def generate_mhtml(i, o):
+def generate_mhtml(i, o, defines):
     log.v("> m.cryptobox.html")
     mkdir(os.path.dirname(o))
-    open(o, "w").write(embed_html(i, cfg.defines, cfg.path['jquery_mobile_css_images']))
+    open(o, "w").write(embed_html(i, defines, defines['path.jquery_mobile_css_images']))
 
-def generate_bookmarklet(i, o):
+def generate_bookmarklet(i, o, defines):
     log.v("> bookmarklet/%s" % os.path.dirname(i))
     mkdir(os.path.dirname(o))
-    open(o, "w").write(pp(i , cfg.defines))
+    open(o, "w").write(pp(i , defines))
     log.v(">> Save to " + o)
 
 def generate_chrome_extension():
@@ -201,39 +201,65 @@ def generate_chrome_extension():
 #    js = db_conf.copy()
 #    j = encrypted_json(js, db_plaintext, key, db_conf, tp="login")
 #
-#    path_chrome_cfg = os.path.abspath(cfg.path['db_chrome_cfg'])
+#    path_chrome_cfg = os.path.abspath(defines['path.db_chrome_cfg'])
 #    open(path_chrome_cfg, "w").write(j)
 #
 #    try:
-#        os.mkdir(cfg.path['db_chrome'])
+#        os.mkdir(defines['path.db_chrome'])
 #    except:
 #        pass
 #
 #    for f in include:
-#        shutil.copyfile(f, cfg.path['db_chrome'] + '/' + os.path.basename(f))
+#        shutil.copyfile(f, defines['path.db_chrome'] + '/' + os.path.basename(f))
 
-def generate_all(db_conf, password):
+def generate_all(db_conf, password, defines):
     """
     Generate all files (on database update)
     """
-    mkdir(cfg.path['tmp'])
+    mkdir(defines['path.tmp'])
+
+    if config.debug:
+        open(defines['path.tmp'] + "/0_defines", "w").write(str(defines))
 
     key = crypto.derive_key(db_conf, password)
-    db_plaintext = crypto.dec_db(db_conf, password, cfg.path['db_cipher'], cfg.path['db_hmac'])
+    db_plaintext = crypto.dec_db(db_conf, password, defines['path.db_cipher'], defines['path.db_hmac'])
 
     js = db_conf.copy()
-    js['lock_timeout_minutes'] = cfg.user['security']['lock_timeout_minutes']
-    js['page'] = cfg.lang.types
+    js['lock_timeout_minutes'] = defines['ui.lock_timeout_minutes']
+    js['page'] = dict()
+    for k in defines.keys():
+        if k[0:5] == 'page.':
+            js['page'][k[5:]] = defines[k]
     js['cipher'] = encrypt_json(db_plaintext, key, db_conf,
-                                (cfg.path['include'], cfg.path['db_include']),
-                                debug=cfg.debug)
+                                (defines['path.include'], defines['path.db_include']),
+                                tmp_path=defines['path.tmp'],
+                                debug=config.debug)
 
-    generate_cryptobox_json(js, cfg.path['db_json'])
-    generate_html(cfg.path['html'] + "/desktop/index.html", cfg.path['db_html'])
-    generate_mhtml(cfg.path['html'] + "/mobile/index.html", cfg.path['db_mobile_html'])
-    generate_bookmarklet(cfg.path['bookmarklet'] + "/fill.js", cfg.path['db_bookmarklet_fill'])
-    generate_bookmarklet(cfg.path['bookmarklet'] + "/form.js", cfg.path['db_bookmarklet_form'])
+    generate_cryptobox_json(js, defines['path.db_json'])
+    generate_html(defines['path.html'] + "/desktop/index.html", defines['path.db_html'], defines)
+    generate_mhtml(defines['path.html'] + "/mobile/index.html", defines['path.db_mobile_html'], defines)
+    generate_bookmarklet(defines['path.bookmarklet'] + "/fill.js", defines['path.db_bookmarklet_fill'], defines)
+    generate_bookmarklet(defines['path.bookmarklet'] + "/form.js", defines['path.db_bookmarklet_form'], defines)
     generate_chrome_extension()
 
-    if cfg.debug == False:
-        shutil.rmtree(cfg.path['tmp'])
+    if config.debug == False:
+        shutil.rmtree(defines['path.tmp'])
+
+def backup(path, backup_files):
+    if len(backup_files) <= 0:
+        return
+
+    saved_cwd = os.getcwd()
+    tar = tarfile.open(path, "w")
+    for p in backup_files:
+        abspath = os.path.abspath(p)
+
+        try:
+            os.chdir(os.path.dirname(abspath))
+            tar.add(os.path.basename(abspath))
+        except:
+            log.w("Couldn't add %s file to backup!" % abspath)
+
+    os.chdir(saved_cwd)
+
+    tar.close()

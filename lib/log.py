@@ -2,20 +2,20 @@
 Custom small logging system
 """
 
-import cfg
+import config
 
 def d(s):
     """
     Debug printout (intended only for development!)
     """
-    if cfg.debug:
+    if config.debug:
         print s
 
 def v(s):
     """
     Verbose printout
     """
-    if cfg.verbose:
+    if config.verbose:
         print s
 
 def w(s):
@@ -34,7 +34,7 @@ def p(s):
     """
     Wrapper around print (to be consistent with other routines in this module
     """
-    print p
+    print s
 
 def yn(s):
     """

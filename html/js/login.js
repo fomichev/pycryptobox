@@ -86,7 +86,7 @@ function login(withNewWindow, method, url, name, keys, values) {
 	}
 
 	var html = "";
-	html += "<html><head></head><body>@text_wait_for_login@<form id='formid' method='" + method + "' action='" + url + "'>";
+	html += "<html><head></head><body>@text.wait_for_login@<form id='formid' method='" + method + "' action='" + url + "'>";
 
 	if (keys && values && (keys.length == values.length))
 		for (var i=0; i < keys.length; i++)

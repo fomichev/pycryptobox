@@ -5,24 +5,24 @@ import argparse
 import sys
 import os
 
+import lib.config as config
 import lib.crypto as crypto
-import lib.cfg as cfg
 import lib.log as log
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Create empty cryptobox database')
-    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
+    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + config.version)
     parser.add_argument('-V', '--verbose', action='store_true', help='enable verbose mode')
     parser.add_argument('-c', '--config', action='store', help='use specified config')
-    cfg.init(parser.parse_args())
+    defines = config.read(parser.parse_args())
 
     try:
-        os.mkdir(cfg.user['path']['db'] + "/")
+        os.mkdir(defines['path.db'])
     except:
         pass
 
-    if os.path.exists(cfg.path['db_cipher']):
-        ans = log.yn("File '%s' already exists, do you want to overwrite it?" % cfg.path['db_cipher'])
+    if os.path.exists(defines['path.db_cipher']):
+        ans = log.yn("File '%s' already exists, do you want to overwrite it?" % defines['path.db_cipher'])
 
         if not ans in ['Y', 'y']:
             sys.exit(0)
@@ -34,6 +34,6 @@ if __name__ == "__main__":
         log.e("Your passwords don't match!")
         sys.exit(0)
 
-    crypto.create_db_conf(cfg.path['db_conf'], cfg.format_version)
-    db_conf = crypto.read_db_conf(cfg.path['db_conf'], cfg.format_version)
-    crypto.enc_plaintext(db_conf, password, "# Lines started with # are comments", cfg.path['db_cipher'], cfg.path['db_hmac'])
+    crypto.create_db_conf(defines['path.db_conf'], config.format_version)
+    db_conf = crypto.read_db_conf(defines['path.db_conf'], config.format_version)
+    crypto.enc_plaintext(db_conf, password, "# Lines started with # are comments", defines['path.db_cipher'], defines['path.db_hmac'])

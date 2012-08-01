@@ -7,16 +7,16 @@ import getpass
 import argparse
 import sys
 
+import lib.config as config
 import lib.crypto as crypto
-from lib.generate import generate_all
-import lib.cfg as cfg
+from lib.generate import generate_all, backup
 import lib.log as log
 
-def edit(f):
-    EDITOR = os.environ.get('EDITOR', cfg.user['ui']['editor'])
+def edit(f, editor, backup_path, backup_files):
+    EDITOR = os.environ.get('EDITOR', editor)
 
     mtime_begin = os.stat(file_name).st_mtime
-    subprocess.call([EDITOR, "--", file_name])
+    subprocess.call([EDITOR, file_name])
     mtime_end = os.stat(file_name).st_mtime
 
     if mtime_begin == mtime_end:
@@ -24,33 +24,30 @@ def edit(f):
         sys.exit(0)
 
     try:
-        cfg.backup()
+        backup(backup_path, backup_files)
     except:
         ans = log.yn("Couldn't perform a backup, continue?")
 
         if not ans in ['Y', 'y']:
             sys.exit(0)
 
-    crypto.enc_db(db_conf, password, file_name, cfg.path['db_cipher'], cfg.path['db_hmac'])
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Edit cryptobox database')
-    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + cfg.version)
+    parser.add_argument('-v', '--version', action='version', version='Cryptobox ' + config.version)
     parser.add_argument('-V', '--verbose', action='store_true', help='enable verbose mode')
     parser.add_argument('-e', '--edit-only', action='store_true', help='don\'t update HTML and bookmarklets')
     parser.add_argument('-u', '--update-only', action='store_true', help='just update HTML and bookmarklets')
     parser.add_argument('-c', '--config', action='store', help='use specified config')
-    args = parser.parse_args()
-    cfg.init(args)
+    defines = config.read(parser.parse_args())
 
+    args = vars(parser.parse_args())
     password = getpass.getpass()
 
-    db_conf = crypto.read_db_conf(cfg.path['db_conf'], cfg.format_version)
-    plaintext = crypto.dec_db(db_conf, password, cfg.path['db_cipher'], cfg.path['db_hmac'])
+    db_conf = crypto.read_db_conf(defines['path.db_conf'], config.format_version)
+    plaintext = crypto.dec_db(db_conf, password, defines['path.db_cipher'], defines['path.db_hmac'])
 
-    if 'update_only' in vars(args) and vars(args)['update_only'] == True:
-        generate_all(db_conf, password)
+    if 'update_only' in args and args['update_only'] == True:
+        generate_all(db_conf, password, defines)
         sys.exit(0)
 
     try:
@@ -59,11 +56,12 @@ if __name__ == "__main__":
             f.write(plaintext.encode('utf-8'))
             f.flush()
 
-        edit(f)
+        edit(f, defines['ui.editor'], defines['backup.path'], defines['backup.files'])
+        crypto.enc_db(db_conf, password, file_name, defines['path.db_cipher'], defines['path.db_hmac'])
     finally:
         os.remove(file_name)
 
-    if 'edit_only' in vars(args) and vars(args)['edit_only'] == True:
+    if 'edit_only' in args and args['edit_only'] == True:
         sys.exit(0)
 
-    generate_all(db_conf, password)
+    generate_all(db_conf, password, defines)

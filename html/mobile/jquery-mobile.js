@@ -8,8 +8,8 @@ function page(id, header, data) {
 	t += '<div data-role="page" id="' + id + '" class="generated">';
 	t += '<div data-role="header">';
 	t += '<h1>' + header + '</h1>';
-	t += '<a data-rel="back" href="#">@text_button_back@</a>';
-	t += '<a class="button-lock" href="#" data-icon="delete">@text_button_lock@</a>';
+	t += '<a data-rel="back" href="#">@text.button_back@</a>';
+	t += '<a class="button-lock" href="#" data-icon="delete">@text.button_lock@</a>';
 	t += '</div>';
 	t += '<div data-role="content">';
 	t += data;
@@ -29,19 +29,19 @@ function createLogin(id, name, address, form, vars) {
 		if (withToken(form) == "") {
 			t += '<a href="#todo" onClick=';
 			t += '\'javascript:login(false, "' + form.method + '", "' + form.action + '", "' + name + '", ' + flat.k + ', ' + flat.v + '); return false;\'';
-			t += 'data-role="button">@text_log_in@</a>';
+			t += 'data-role="button">@text.log_in@</a>';
 		}
 	}
 
-	t += '<a href="' + address + '" data-role="button">@text_goto@</a>';
-	t += collapsible("@text_username@", vars.name);
-	t += collapsible("@text_password@", vars.password);
+	t += '<a href="' + address + '" data-role="button">@text.goto@</a>';
+	t += collapsible("@text.username@", vars.name);
+	t += collapsible("@text.password@", vars.password);
 
 	if (vars.secret)
-		t += '<p>' + collapsible("@text_secret@", vars.secret) + '</p>';
+		t += '<p>' + collapsible("@text.secret@", vars.secret) + '</p>';
 
 	if (vars.note)
-		t += '<p>' + collapsible("@text_note@", addBr(vars.note)) + '</p>';
+		t += '<p>' + collapsible("@text.note@", addBr(vars.note)) + '</p>';
 
 	return page(id, title, t);
 }
@@ -123,9 +123,9 @@ $(document).ready(function() {
 			var main_page = '';
 			main_page += '<div data-role="page" id="div-main">';
 			main_page += '<div data-role="header">';
-			main_page += '<h1>@text_title@</h1>';
-			main_page += '<a data-rel="back" href="#" data-icon="arrow-l">@text_button_back@</a>';
-			main_page += '<a class="button-lock" href="#" data-icon="delete">@text_button_lock@</a>';
+			main_page += '<h1>@text.title@</h1>';
+			main_page += '<a data-rel="back" href="#" data-icon="arrow-l">@text.button_back@</a>';
+			main_page += '<a class="button-lock" href="#" data-icon="delete">@text.button_lock@</a>';
 			main_page += '</div>';
 			main_page += '<div data-role="content">';
 			main_page += '<ul id="ul-pages-list" data-role="listview" data-inset="true"></ul>';
@@ -142,7 +142,7 @@ $(document).ready(function() {
 
 			$.mobile.changePage("#div-main");
 		} catch(e) {
-			alert("@text_incorrect_password@ " + e);
+			alert("@text.incorrect_password@ " + e);
 			return;
 		}
 	});

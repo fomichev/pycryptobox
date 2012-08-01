@@ -74,7 +74,7 @@ class Preprocessor:
     self.out = sys.stdout
     self.setMarker('#')
     self.LE = '\n'
-    self.varsubst = re.compile('@(?P<VAR>\w+)@', re.U)
+    self.varsubst = re.compile('@(?P<VAR>\w+\.*\w*)@', re.U)
   
   def warnUnused(self, file):
     if self.actionLevel == 0:

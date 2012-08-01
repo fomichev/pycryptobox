@@ -2,47 +2,47 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-		<title>@text_title@</title>
+		<title>@text.title@</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<style media="screen" type="text/css">
-#includeliter @root@/html/extern/jquery-mobile/jquery.mobile-1.1.0.css
+#includeliter @path.root@/html/extern/jquery-mobile/jquery.mobile-1.1.0.css
 		</style>
 
 		<script type="text/javascript">
-#include @root@/html/extern/jquery/jquery-1.7.2.min.js
-#include @root@/html/extern/jquery-mobile/jquery.mobile-1.1.0.min.js
+#includeliter @path.root@/html/extern/jquery/jquery-1.7.2.min.js
+#includeliter @path.root@/html/extern/jquery-mobile/jquery.mobile-1.1.0.min.js
 
-#include @root@/html/extern/CryptoJS/components/core-min.js
-#include @root@/html/extern/CryptoJS/components/enc-base64-min.js
-#include @root@/html/extern/CryptoJS/components/cipher-core-min.js
-#include @root@/html/extern/CryptoJS/components/aes-min.js
-#include @root@/html/extern/CryptoJS/components/sha1-min.js
-#include @root@/html/extern/CryptoJS/components/hmac-min.js
-#include @root@/html/extern/CryptoJS/components/pbkdf2-min.js
+#includeliter @path.root@/html/extern/CryptoJS/components/core-min.js
+#includeliter @path.root@/html/extern/CryptoJS/components/enc-base64-min.js
+#includeliter @path.root@/html/extern/CryptoJS/components/cipher-core-min.js
+#includeliter @path.root@/html/extern/CryptoJS/components/aes-min.js
+#includeliter @path.root@/html/extern/CryptoJS/components/sha1-min.js
+#includeliter @path.root@/html/extern/CryptoJS/components/hmac-min.js
+#includeliter @path.root@/html/extern/CryptoJS/components/pbkdf2-min.js
 
 var cfg =
-#include @db_json@
+#include @path.db_json@
 ;
 
-#include @root@/html/js/login.js
-#include @root@/html/js/view.js
-#include @root@/html/js/crypto.js
-#include @root@/html/js/lock.js
-#include @root@/html/mobile/jquery-mobile.js
+#include @path.root@/html/js/login.js
+#include @path.root@/html/js/view.js
+#include @path.root@/html/js/crypto.js
+#include @path.root@/html/js/lock.js
+#include @path.root@/html/mobile/jquery-mobile.js
 		</script>
 	</head>
 	<body>
 		<div data-role="dialog" id="div-locked">
 			<div data-role="header">
-				<h1>@text_title@</h1>
+				<h1>@text.title@</h1>
 			</div>
 
 			<div data-role="content">
 				<form id="form-unlock" action="#div-main" method="get" data-ajax="false">
-					<label for="input-password">@text_enter_password@</label>
+					<label for="input-password">@text.enter_password@</label>
 					<input type="password" id="input-password" value="" />
-					<input type="submit" value="@text_button_unlock@" />
+					<input type="submit" value="@text.button_unlock@" />
 				</form>
 			</div>
 		</div>

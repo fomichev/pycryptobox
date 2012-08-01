@@ -4,6 +4,6 @@
 
 {
 	"name": "@name@",
-	"text": "<a class=\"button-goto\" href=\"@url@\" target=\"_blank\">Go to site</a>@html_comment@}",
-	"mtext": "<a href=\"@url@\" data-role=\"button\">Go to site</a>@html_comment@}"
+	"text": "<a class=\"button-goto\" href=\"@url@\" target=\"_blank\">Go to site</a>@html_comment@",
+	"mtext": "<a href=\"@url@\" data-role=\"button\">Go to site</a>@html_comment@"
 }

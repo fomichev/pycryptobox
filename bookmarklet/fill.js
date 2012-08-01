@@ -1,19 +1,19 @@
 var cfg =
-#include @db_json@
+#include @path.db_json@
 ;
 
-#include @root@/html/extern/CryptoJS/components/core-min.js
-#include @root@/html/extern/CryptoJS/components/enc-base64-min.js
-#include @root@/html/extern/CryptoJS/components/cipher-core-min.js
-#include @root@/html/extern/CryptoJS/components/aes-min.js
-#include @root@/html/extern/CryptoJS/components/sha1-min.js
-#include @root@/html/extern/CryptoJS/components/hmac-min.js
-#include @root@/html/extern/CryptoJS/components/pbkdf2-min.js
+#include @path.root@/html/extern/CryptoJS/components/core-min.js
+#include @path.root@/html/extern/CryptoJS/components/enc-base64-min.js
+#include @path.root@/html/extern/CryptoJS/components/cipher-core-min.js
+#include @path.root@/html/extern/CryptoJS/components/aes-min.js
+#include @path.root@/html/extern/CryptoJS/components/sha1-min.js
+#include @path.root@/html/extern/CryptoJS/components/hmac-min.js
+#include @path.root@/html/extern/CryptoJS/components/pbkdf2-min.js
 
-#include @root@/bookmarklet/lib/common.js
-#include @root@/html/js/fill.js
-#include @root@/html/js/crypto.js
-#include @root@/html/js/login.js
+#include @path.root@/bookmarklet/lib/common.js
+#include @path.root@/html/js/fill.js
+#include @path.root@/html/js/crypto.js
+#include @path.root@/html/js/login.js
 
 function unlock(pwd, caption) {
 	var text = decrypt(pwd, cfg.pbkdf2.salt, cfg.cipher, cfg.pbkdf2.iterations, cfg.aes.iv);
@@ -24,7 +24,7 @@ function unlock(pwd, caption) {
 		var el = data[i];
 		if (el.type == "magic") {
 			if (el.value != "270389")
-				throw("@text_incorrect_password@");
+				throw("@text.incorrect_password@");
 
 			continue;
 		}
@@ -37,10 +37,10 @@ function unlock(pwd, caption) {
 	}
 
 	if (matched.length == 0) {
-		caption.innerHTML = '@text_login_not_found@';
+		caption.innerHTML = '@text.login_not_found@';
 		window.setTimeout(function () { document.body.click(); }, 1000)
 	} else if (matched.length == 1) {
-		caption.innerHTML = '@text_wait_for_login@';
+		caption.innerHTML = '@text.wait_for_login@';
 		formFill(matched[0].form);
 	} else {
 		var r = ''
@@ -49,7 +49,7 @@ function unlock(pwd, caption) {
 			r += formToLink(el.name, el.vars, el.form);
 		}
 
-		caption.innerHTML = '@text_select_login@' + r;
+		caption.innerHTML = '@text.select_login@' + r;
 	}
 }
 
@@ -57,7 +57,7 @@ var div = document.createElement('div');
 div.style.textAlign = 'center';
 
 var caption = document.createElement('h1');
-caption.appendChild(document.createTextNode('@text_enter_password@'));
+caption.appendChild(document.createTextNode('@text.enter_password@'));
 div.appendChild(caption);
 
 var form = document.createElement('form');
@@ -71,7 +71,7 @@ var buttonUnlock = document.createElement('input');
 buttonUnlock.type = "submit";
 buttonUnlock.style.border = "1px solid #006";
 buttonUnlock.style.fontSize = '14px';
-buttonUnlock.value = "@text_button_unlock@";
+buttonUnlock.value = "@text.button_unlock@";
 
 var buttonDiv = document.createElement('div');
 buttonDiv.style.marginTop = '20px';
