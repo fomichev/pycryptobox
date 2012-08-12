@@ -6,6 +6,7 @@ import ConfigParser
 import datetime
 import os
 import platform
+import sys
 
 import log
 
@@ -66,7 +67,7 @@ def read_user_config(c):
 
     config_value(d, c, 'path.db_cipher', d['path.db'] + '/cryptobox')
     config_value(d, c, 'path.db_conf', d['path.db_cipher'] + '.conf')
-    config_value(d, c, 'path.db_json', d['path.db_cipher'] + '.json')
+    config_value(d, c, 'path.db_json', os.path.abspath(d['path.db_cipher'] + '.json'))
     config_value(d, c, 'path.db_hmac', d['path.db_cipher'] + '.hmac') ############################################### TEMP
     config_value(d, c, 'path.db_html', d['path.db'] + '/html/cryptobox.html')
     config_value(d, c, 'path.db_mobile_html', d['path.db'] + '/html/m.cryptobox.html')
@@ -134,19 +135,20 @@ def read(args):
     try:
         if 'config' in v and v['config'] != None:
             f = open(v['config'])
-            cp.readfp(f)
+            user_config_parser.readfp(f)
         else:
             try:
                 f = open('.cryptoboxrc')
-                cp.readfp(f)
+                user_config_parser.readfp(f)
             except:
                 try:
                     f = open('~/.cryptoboxrc')
-                    cp.readfp(f)
+                    user_config_parser.readfp(f)
                 except:
                     pass
     except Exception as e:
         log.e("Could not load user config!")
+        log.e(str(e))
         sys.exit(1)
 
     return read_user_config(user_config_parser)

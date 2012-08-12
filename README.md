@@ -28,8 +28,9 @@ Guts
 ----
 All information is stored in the `private/cryptobox` file,
 encrypted via [AES](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard);
-key length is 256 bits and it is derived from your password using
-[PBKDF2](http://en.wikipedia.org/wiki/Pbkdf2)
+key length is 256 bits and it is derived from your master password (recommend
+way to generate it - [Diceware](http://world.std.com/~reinhold/diceware.html))
+using [PBKDF2](http://en.wikipedia.org/wiki/Pbkdf2)
 (consult your lawyer about whether it's considered crime in your country).
 To check the integrity of the database, python code uses
 [HMAC-MD5](http://en.wikipedia.org/wiki/HMAC), while HTML page relies on
@@ -52,11 +53,11 @@ The steps `cbedit` does are:
 * Embeds this encrypted data into pre-baked HTML page (look at `html/` for
 more details)
 * Embeds JavaScript and CSS (along with images) into HTML page and stores it
-under `private/cryptobox/html` directory (cryptobox.html - is a desktop
+under `private/html` directory (cryptobox.html - is a desktop
 version; m.cryptobox.html - is a mobile one)
 
 If you're brave enough (or just want to understand what's going on under the
-hood), you can enable debug mode in the `lib/cfg.py` file; after that,
+hood), you can enable debug mode in the `lib/config.py` file; after that,
 all data from the aforementioned steps will be stored in the `private/tmp/`
 directory.
 
